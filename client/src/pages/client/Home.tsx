@@ -3,7 +3,6 @@ import ResponsiveNavbar from '../../features/client/components/ResponsiveNavbar'
 import CarouselHeader from '../../features/client/components/CarouselHeader';
 import ImageGrid from '../../features/client/components/ImageGrid';
 import NewsContainer from '../../features/client/components/NewsContainer';
-import Logo from '../../features/client/components/Logo';
 import Services from '../../features/client/components/Services';
 import Help from '../../features/client/components/Help';
 import Join from '../../features/client/components/Join';

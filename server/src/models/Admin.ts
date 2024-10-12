@@ -7,7 +7,7 @@ export class Admin extends Model {
   public email!: string;
   public password!: string;
   public isVerified!: boolean;
-  public verificationCode!: string;
+  public verificationCode!: string|null;
 }
 
 Admin.init(

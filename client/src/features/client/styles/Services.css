@@ -7,7 +7,7 @@
   }
 }
 .red-text{
-    color:  rgb(121, 16, 16);;
+    color: var(--red);;
 }
 .service-font{
     font-weight: lighter;

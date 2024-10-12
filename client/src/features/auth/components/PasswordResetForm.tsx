@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const PasswordReset: React.FC = () => {
+const PasswordResetForm: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
@@ -45,3 +45,4 @@ const PasswordReset: React.FC = () => {
     </Form>
   )
 }
+export default PasswordResetForm

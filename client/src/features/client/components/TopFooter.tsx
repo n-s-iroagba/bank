@@ -25,10 +25,10 @@ const TopFooter: React.FC = () => {
                     {/* Div 1 */}
                     <Col xs={12} md={4} className="text-center mb-4 mb-md-0">
                         <div className="footer-div1 d-flex justify-content-center flex-wrap">
-                            <a href="#" className="footer-link">Link 1</a>
-                            <a href="#" className="footer-link">Link 2</a>
-                            <a href="#" className="footer-link">Link 3</a>
-                            <a href="#" className="footer-link">Link 4</a>
+                            <a href={'/home'} className="footer-link">Link 1</a>
+                            <a href={'/home'} className="footer-link">Link 2</a>
+                            <a href={'/home'} className="footer-link">Link 3</a>
+                            <a href={'/home'} className="footer-link">Link 4</a>
                         </div>
                     </Col>
 

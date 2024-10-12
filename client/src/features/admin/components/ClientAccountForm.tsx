@@ -20,8 +20,8 @@ const ClientAccountForm: React.FC<ClientAccountFormProps> = ({ onAccountCreated 
     createClientAccount({
       username, password, fixedDepositAmount, checkingAccountAmount,
       numberOfTransfers,
-      transferStartDate: '',
-      transferEndDate: ''
+      transferStartDate,
+      transferEndDate,
     });
     onAccountCreated();
   };
@@ -46,15 +46,26 @@ const ClientAccountForm: React.FC<ClientAccountFormProps> = ({ onAccountCreated 
       </Form.Group>
       <Form.Group controlId="checkingAccountAmount">
         <Form.Label>Number of Transfers</Form.Label>
-        <Form.Control type="number" value={checkingAccountAmount} onChange={(e) => setCheckingAccountAmount(+e.target.value)} required />
+        <Form.Control type="number" value={numberOfTransfers} onChange={(e) => setNumberOfTransfers(e.target.value as unknown as number)} required />
       </Form.Group>
-      <Form.Group controlId="checkingAccountAmount">
+      <Form.Group controlId="transferStartDate">
+        <Form.Label>Transfer Start Date</Form.Label>
+        <Form.Control
+          type="date"
+          value={transferStartDate}
+          onChange={(e) => setTransferStartDate(e.target.value)}
+          required
+        />
+      </Form.Group>
+      
+      <Form.Group controlId="transferEndDate">
         <Form.Label>Transfer End Date</Form.Label>
-        <Form.Control type="number" value={checkingAccountAmount} onChange={(e) => setCheckingAccountAmount(+e.target.value)} required />
-      </Form.Group>
-      <Form.Group controlId="checkingAccountAmount">
-        <Form.Label>Transfer start Date</Form.Label>
-        <Form.Control type="number" value={checkingAccountAmount} onChange={(e) => setCheckingAccountAmount(+e.target.value)} required />
+        <Form.Control
+          type="date"
+          value={transferEndDate}
+          onChange={(e) => setTransferEndDate(e.target.value)}
+          required
+        />
       </Form.Group>
       <Button type="submit">Create Account</Button>
     </Form>
