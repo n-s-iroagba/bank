@@ -1,0 +1,38 @@
+/* Container for the image and overlay content */
+.join-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Adjust this value based on your layout */
+    margin: 0 auto; /* Center the container */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Styling for the image */
+.join-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Overlay content: Text and button on top of the image */
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text and button */
+    text-align: center;
+    color: white;
+}
+
+.overlay-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.overlay-content .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
