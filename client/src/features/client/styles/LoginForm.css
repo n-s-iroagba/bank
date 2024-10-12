@@ -1,0 +1,47 @@
+.form-input {
+    border: 2px solid rgb(168, 162, 162);
+    border-top-right-radius: 50px;
+    border-top-left-radius:50px ;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.form{
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 0%;
+    @media (max-width: 768px) {
+        padding-left: 20%;
+    padding-right: 200%;
+    }
+}
+.line-container {
+    width: 100%; /* Container takes full width */
+    padding: 10px; /* Optional: Add some padding */
+  }
+  
+  .gray-line {
+    border: none; /* Remove default border */
+    border-top: 2px solid rgb(29, 27, 27); /* Set the line thickness and color */
+    width: 100%; /* Make the line take full width of the container */
+    margin: 0; /* Optional: remove default margin */
+  }
+  
+  .link-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    gap: 7px; /* Set the gap between flex items */
+  
+  }
+  
+  .link-container a, .link-container p {
+    margin: 0; /* Reset default margins */
+    font-size: small;
+    font-weight: 450;
+    color: rgb(67, 67, 120);
+  }
+  
+
+  
+  
+  
+  

@@ -1,0 +1,11 @@
+.button-radius{
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border: 0;
+}
+
+.button-width{
+    width:150px;
+}

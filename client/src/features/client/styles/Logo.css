@@ -1,0 +1,10 @@
+.logo {
+    width: 25vw; /* Adjust this size as needed */
+  }
+  
+  /* Logo width for small screens (below 768px) */
+  @media (max-width: 768px) {
+    .logo {
+      width: 50vw; /* Smaller size for mobile */
+    }
+  }
