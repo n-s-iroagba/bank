@@ -9,10 +9,10 @@
   .news-item {
  
     margin-right: 10px; /* Spacing between news items */
-    border-left: 5px solid blue; /* Left border color */
-    border-top:5px solid blue;
-    border-right: 5px solid red; /* Right border color */
-    border-bottom: 5px solid red;
+    border-left: 5px solid var(--blue);/* Left border color */
+    border-top:5px solid var(--blue) ;
+    border-right: 5px solid var(--red); /* Right border color */
+    border-bottom: 5px solid var(--red) ;
     padding: 10px; /* Add padding inside the news item */
     background-color: white; /* Background color */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */

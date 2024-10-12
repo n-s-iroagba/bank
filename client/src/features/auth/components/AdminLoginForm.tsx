@@ -1,8 +1,8 @@
 // src/components/LoginForm.tsx
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../styles/LoginForm.css'
-import '../styles/GeneralStyles.css'
+import '../../client/styles/LoginForm.css'
+import'../../client/styles/GeneralStyles.css'
 
 const LoginForm: React.FC = () => {
   return (

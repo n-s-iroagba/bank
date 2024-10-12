@@ -1,9 +1,11 @@
 import React from 'react'
+import AdminLoginForm from '../../features/auth/components/AdminLoginForm'
 
 
 const AdminLogin:React.FC = () =>{
     return <>
-    Admin Login
+    <AdminLoginForm/>
     </>
 
 }
+export default AdminLogin

@@ -1,5 +1,5 @@
 // /src/services/adminService.ts
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 import { Admin } from '../models/Admin';
 import { sendVerificationEmail, sendResetPasswordEmail } from './mailService';
@@ -19,6 +19,8 @@ export const createAdmin = async (username: string, password: string, email: str
   });
 
   const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+  newAdmin.verificationCode = verificationCode;
+  await newAdmin.save();
   sendVerificationEmail(email, verificationCode);
 
   return newAdmin;
@@ -27,11 +29,12 @@ export const createAdmin = async (username: string, password: string, email: str
 export const verifyAdminEmail = async (username: string, code: string) => {
   const admin = await Admin.findOne({ where: { username } });
   if (!admin) {
-    throw new Error('Invalid admin');
-  }
+    throw new Error('Invalid admin')
+}
 
-  if (code === '123456') { // Mocked for example purposes
+  if (code === admin.verificationCode) { // Mocked for example purposes
     admin.isVerified = true;
+    admin.verificationCode = null
     await admin.save();
   } else {
     throw new Error('Invalid verification code');

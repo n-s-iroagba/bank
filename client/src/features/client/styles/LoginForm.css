@@ -37,7 +37,7 @@
     margin: 0; /* Reset default margins */
     font-size: small;
     font-weight: 450;
-    color: rgb(67, 67, 120);
+    color: var(--link-blue)
   }
   
 
