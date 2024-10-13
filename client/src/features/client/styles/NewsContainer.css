@@ -1,10 +1,16 @@
 /* src/components/NewsContainer.css */
 .news-container {
-
-    flex-wrap: nowrap; /* Prevent wrapping of news items */
-    overflow-x: auto; /* Enable horizontal scrolling */
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto;/* Enable horizontal scrolling */
+    padding: 2rem;
 
   }
+
+.news-container::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
   
   .news-item {
  
@@ -16,6 +22,17 @@
     padding: 10px; /* Add padding inside the news item */
     background-color: white; /* Background color */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+  }
+  .news-image{
+    width: 100%;
+    object-fit: cover;
+  }
+  .link{
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .blue-text{
+    color: var(--blue);
   }
   
 

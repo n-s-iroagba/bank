@@ -10,6 +10,10 @@
     color: var(--red);;
 }
 .service-font{
-    font-weight: lighter;
+    font-weight:400;
     font-size: large;
+
+}
+.link{
+    color: var(--link-blue);
 }

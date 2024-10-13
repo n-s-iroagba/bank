@@ -2,7 +2,6 @@
 .join-container {
     position: relative;
     width: 100%;
-    max-width: 800px; /* Adjust this value based on your layout */
     margin: 0 auto; /* Center the container */
     border-radius: 10px;
     overflow: hidden;
@@ -19,7 +18,7 @@
 .overlay-content {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 60%;
     transform: translate(-50%, -50%); /* Center the text and button */
     text-align: center;
     color: white;
@@ -35,4 +34,7 @@
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
+}
+.button{
+    border: 2px solid white;
 }

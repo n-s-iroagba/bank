@@ -1,0 +1,24 @@
+/* .help container */
+.help {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%;
+    scroll-snap-type: x mandatory; /* Snap horizontally and force scroll stop */
+    
+    /* Hide scrollbar */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  }
+  
+  .help::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+  /* Each help item */
+  .help-item {
+    flex: 0 0 auto; /* Maintain the item width */
+    position: relative;
+    scroll-snap-align: center; /* Center the item on scroll snap */
+  }
+  

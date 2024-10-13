@@ -6,6 +6,13 @@
     border: 0;
 }
 
+.sm-button-width{
+    width:100px;
+}
+.bg-blue{
+    background-color: var(--blue);
+}
 .button-width{
     width:150px;
+    height: 45px;
 }

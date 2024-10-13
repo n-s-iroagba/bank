@@ -3,8 +3,10 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../styles/LoginForm.css'
 import '../styles/GeneralStyles.css'
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <Form className='bg-light form py-3
     '>
@@ -18,7 +20,7 @@ const LoginForm: React.FC = () => {
         <Form.Control className='form-input' type="password" placeholder="Password" />
       </Form.Group>
       <br/>
-      <Button className='button-radius bg-red w-100' type="submit">
+      <Button onClick={()=>navigate('/dashboard')} className='button-radius bg-red w-100' type="submit">
         Login
       </Button>
       <div className="line-container">

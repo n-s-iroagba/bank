@@ -1,44 +1,59 @@
+/* Form input styles */
 .form-input {
-    border: 2px solid rgb(168, 162, 162);
-    border-top-right-radius: 50px;
-    border-top-left-radius:50px ;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+  border: 2px solid rgb(168, 162, 162);
+  border-radius: 50px; /* Simplified border-radius for all corners */
 }
-.form{
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-top: 0%;
-    @media (max-width: 768px) {
-        padding-left: 20%;
-    padding-right: 200%;
-    }
+
+/* Form container styles */
+.form {
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 0;
+  width: 100%;
+
+  @media (max-width: 768px) {
+      padding-left: 5%; /* Adjust for smaller screens */
+      padding-right: 5%; /* Adjust for smaller screens */
+  }
 }
+
+/* Line container for separating content */
 .line-container {
-    width: 100%; /* Container takes full width */
-    padding: 10px; /* Optional: Add some padding */
+  width: 100%; /* Container takes full width */
+  padding: 10px 0; /* Add vertical padding */
+}
+
+.gray-line {
+  border: none; /* Remove default border */
+  border-top: 2px solid rgb(29, 27, 27); /* Set line thickness and color */
+  width: 100%; /* Full width */
+  margin: 0; /* Remove default margin */
+}
+
+/* Flex container for links */
+.link-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: 7px; /* Set gap between items */
+  justify-content: center; /* Center items */
+}
+
+/* Links and text */
+.link-container a, .link-container p {
+  margin: 0; /* Reset margins */
+  font-size: small;
+  font-weight: 450;
+  color: var(--link-blue); /* Use a CSS variable for link color */
+}
+
+/* Additional media query for better layout on very small screens */
+@media (max-width: 576px) {
+  .form {
+      padding-left: 3%; /* More compact padding */
+      padding-right: 3%;
   }
-  
-  .gray-line {
-    border: none; /* Remove default border */
-    border-top: 2px solid rgb(29, 27, 27); /* Set the line thickness and color */
-    width: 100%; /* Make the line take full width of the container */
-    margin: 0; /* Optional: remove default margin */
-  }
-  
-  .link-container {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-    gap: 7px; /* Set the gap between flex items */
-  
-  }
-  
-  .link-container a, .link-container p {
-    margin: 0; /* Reset default margins */
-    font-size: small;
-    font-weight: 450;
-    color: var(--link-blue)
-  }
+}
+
   
 
   

@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/GeneralButtonStyles.css'
 import '../styles/GeneralStyles.css'
 import '../styles/ResponsiveNavbar.css'
+import '../styles/Logo.css'
 import Logo from './Logo';
+import aggLogo from '../assets/agg-icon-circle.svg'
+import { useNavigate } from 'react-router-dom';
 const ResponsiveNavbar: React.FC = () => {
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
+  const navigate = useNavigate()
+
+  const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 768); 
+  };
+
+  useEffect(() => {
+      
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+         
+          window.removeEventListener('resize', handleResize);
+      };
+  }, []);
   return (
-    <>
+    <div className={`${!isLargeScreen?'':'sticky-top'}`}>
     <Logo/>
     <Navbar className='d-flex justify-content-center' expand="lg" >
 
@@ -29,13 +48,17 @@ const ResponsiveNavbar: React.FC = () => {
       </div>
 
       {/* Login Button visible on small and medium screens */}
-      <div className="d-lg-none ">
-        <Button className='button-radius bg-red button-width'  href="login">
+      <div className="d-lg-none mb-4 d-flex">
+      <Button className='button-radius bg-blue sm-button-width me-2'  href="login">
+          Join
+        </Button>
+        <Button onClick={()=>navigate('/login')} className='button-radius bg-red sm-button-width me-2'  href="login">
           Login
         </Button>
+        <img className="agg-logo" src={aggLogo} alt="Scrolled Logo" />
       </div>
     </Navbar>
-    </>
+    </div>
   );
 };
 

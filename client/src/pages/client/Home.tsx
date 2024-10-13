@@ -7,6 +7,7 @@ import Services from '../../features/client/components/Services';
 import Help from '../../features/client/components/Help';
 import Join from '../../features/client/components/Join';
 import TopFooter from '../../features/client/components/TopFooter';
+import Footer from '../../features/client/components/Footer';
 
 
 
@@ -27,6 +28,7 @@ const Home:React.FC = ()=>{
 
         <Join/>
         <TopFooter/>
+        <Footer/>
         
         </>
     )
