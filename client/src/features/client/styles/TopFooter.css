@@ -1,26 +1,19 @@
-.news-container {
-    margin: 20px 0;
+.footer-logo{
+  width: 20%;
+  padding-right: 2rem;
+}
+.footer-link{
+  width: 20%;
+}
+.link-grey{
+  color: grey;
+}
+.footer-logo1{
+  width: 50%;
+  padding-right: 0.5rem;
+  @media (max-width: 767px) {
+    width: 15%;
+    padding-right: 0;
+   
   }
-  
-  .news-item {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .news-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .news-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .news-date,
-  .news-original-date {
-    font-size: 0.9rem;
-    color: gray;
-  }
-  
+}

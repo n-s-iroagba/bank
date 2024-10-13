@@ -1,38 +1,50 @@
-/* src/components/ImageGrid.css */
 .image-grid {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    width: 100%;
-    height: 15rem; /* Full height on large screens */
-  }
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  width: 100%;
+  height: 15rem; /* Full height on large screens */
   
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.image-grid::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+.image-item {
+  flex: 0 0 auto; /* Allow items to maintain their width */
+  width: 33%; /* Each item takes 25% of the container width */
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire div */
+  
+}
+
+.overlay {
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  right: 0;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  
+  /* Underline the overlay text */
+  text-decoration: underline;
+}
+
+/* Styles for small and medium screens */
+@media (max-width: 992px) {
   .image-item {
-    flex: 0 0 auto; /* Allow items to maintain their width */
-    width: 25%; /* Each item takes 25% of the container width */
-    position: relative;
+    width: 100%; /* Each item takes full width on small screens */
   }
-  
-  .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cover the entire div */
-  }
-  
-  .overlay {
-    position: absolute;
-    bottom: 10%;
-    left: 0;
-    right: 0;
-    color: white;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  /* Styles for small and medium screens */
-  @media (max-width: 992px) {
-    .image-item {
-      width: 100%; /* Each item takes full width on small screens */
-    }
-  }
-  
+}

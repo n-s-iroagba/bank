@@ -3,6 +3,10 @@ import logo from '../assets/greater-texas-cu-logo.svg';
 import scrolledLogo from '../assets/greater-texas-cu-icon.svg';
 import aggLogo from '../assets/agg-icon-circle.svg'
 import '../styles/Logo.css';
+import '../styles/GeneralButtonStyles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 const Logo = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -30,17 +34,18 @@ const Logo = () => {
     }, []);
 
     return (
-        <div className="bg-light d-flex justify-content-center py-3">
-            { isLargeScreen ? (
-                <div>
-                <div>
-                 <img className="logo" src={aggLogo} alt="Scrolled Logo" />
-                 <p>a</p>
-                 </div>
-                {isScrolled?<img className="logo" src={scrolledLogo} alt="Scrolled Logo" />:<img className="logo" src={logo} alt="Default Logo" />}
-                <button>join</button>
+        <div className={`${!isLargeScreen?'d-flex justify-content-center':''} bg-light py-3`}>
+            {isLargeScreen ? (
+                <div className='d-flex justify-content-between px-5'>
+                    <div className='d-flex align-items-center'>
+                        <img className="agg-logo me-3" src={aggLogo} alt="Scrolled Logo" />
+                        <br/>
+                        <FontAwesomeIcon icon={faSearch}/>
+                    </div>
+                    {isScrolled ? <img className="scroll-logo" src={scrolledLogo} alt="Scrolled Logo" /> : <img className="logo" src={logo} alt="Default Logo" />}
+                    <button className='button-radius button-width bg-blue text-light'>join</button>
                 </div>
-               
+
             ) : (
                 <img className="logo" src={logo} alt="Default Logo" />
             )}

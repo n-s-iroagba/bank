@@ -1,0 +1,38 @@
+.footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(59, 57, 57); /* Grey background */
+    padding: 20px 0;
+  }
+  
+  .footer-item {
+   
+    border-right: 1px solid #ccc; /* Right border */
+  }
+  
+  .footer-item:last-child {
+    border-right: none; /* Remove the right border for the last item */
+  }
+  
+  @media (max-width: 767px) {
+    .footer-item {
+      border-right: none; 
+    }
+    .footer{
+        position: unset;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .footer-item {
+      text-align: left;
+    }
+  }
+  
+  .small-font{
+    font-size: small;
+  }
+.footer-item p{
+    text-decoration: underline;
+}

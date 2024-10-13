@@ -47,11 +47,11 @@ const Services: React.FC = () => {
           <Col key={index} xs={12} md={6} lg={4} className="mb-4 text-center">
             <Image src={service.src} alt={service.alt} fluid />
             <p>{service.text}</p>
-            <p className="mt-2 bg-danger mb-1 red-text service-font">
+            <p className="mt-2 mb-1 red-text service-font">
               <strong>{service.percentage}% {service.percentageText}</strong>
               {'*'}
             </p>
-            <a className='' href={'/home'}>
+            <a className='link' href={'/home'}>
               Learn More
             </a>
           </Col>

@@ -1,15 +1,36 @@
 import React from 'react';
 import '../styles/NewsContainer.css'; // Import the CSS file
+import image1 from '../assets/IMG_72672 -2.jpg'
+import image2 from '../assets/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
+import image3 from '../assets/IMG_7526 - cropped.jpg'
+import image4 from '../assets/IMG_7550 -2.jpg'
+import image5 from '../assets/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
+
 import { Col, Row } from 'react-bootstrap';
 
 const NewsContainer: React.FC = () => {
   const newsItems = [
-    { title: 'Company A launches new product', image: 'https://via.placeholder.com/150' },
-    { title: 'Company B wins prestigious award',  image: 'https://via.placeholder.com/150' },
-    { title: 'Company C expands to new markets', image: 'https://via.placeholder.com/150' },
-    { title: 'Company D reports record profits', image: 'https://via.placeholder.com/150' },
-    { title: 'Company E partners with startup', image: 'https://via.placeholder.com/150' },
-    { title: 'Company F initiates sustainability program', image: 'https://via.placeholder.com/150' },
+    { title: 'Amanda Yates Tapped as AVC Payment and Product Management at Great Texas Credit Union', 
+      text:`Amanda Yates is the latest addition to the payment team,
+      joining the team at Great Texas Credit Union`,
+      image:image1 },
+    { title: 'Habitat for humanity works with Local Credit Unions to Build fifth house that Credit Unions Built',
+      text:`An executive assistant with Austin Independent School District will soon be the owner of the House that Credit Unions Built,
+       a collaborative building project with Habitat for Humanity.`,
+      image: image2  },
+
+    { title: 'Christiana Gonazales Promoted to Branch Manager of Credit Union', image: image3,
+      text:`Gonzales began her career with Greater Texas in 2010 as a member contact service representative working out of the credit union’s Austin Airport location.`
+     },
+    { title: 'Tyler Rogers promoted to oversee Greater Texas San Antonio Branch', 
+      text:`Rogers, who joined Greater Texas in 2016, was promoted from Head Teller at the branch to its manager,
+       taking on the tasks of branch operations, member relations, and personnel management.`,
+      image: image4  },
+    { title: 'Greater Texas Employees support Kids whose sibilings are Battling Cancer',
+      text:`Through its Greater Good initiative, a dozen credit union employees volunteered to help ensure campers received a positive sendoff to Camp Grey Dove, 
+      which is offered for free through Any Baby Can.`,
+      image: image5  },
+  
     // Add more items as needed
   ];
 
@@ -21,15 +42,27 @@ const NewsContainer: React.FC = () => {
   };
 
   return (
+    <>
+    <div className='px-3'>
+  <h3 className='blue-text mt-5 mb-2 w-100'>What's happening?</h3>
+  </div>
     <Row className="news-container">
+  
       {newsItems.map((news, index) => (
         <Col xs={12} md={6} lg={4} key={index} className="news-item">
+            
           <img src={news.image} alt={news.title} className="news-image" />
-          <p className="news-date">{getDynamicDate(index)}</p> 
-          <h3 className="news-title">{news.title}</h3>
+          <p className="text-start">{getDynamicDate(index)}</p> 
+      
+          <h3 className="text-start">{news.title}</h3>
+          <p className="text-start mb-2">{news.text}</p>
+          <p className="text-start link">READ FULL ARTICLE</p>
+          
+
         </Col>
       ))}
     </Row>
+    </>
   );
 };
 
