@@ -1,0 +1,66 @@
+.accounts-list {
+    padding:1.5rem 1.5rem;
+    background-color: #f8f9fa; /* Light background */
+  }
+  .accounts-list div{
+    @media (max-width: 767px) {
+      font-size: small;
+      }
+  }
+  .account-item {
+    border-bottom: 1px solid #ccc; /* Light border between account items */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text */
+  }
+  
+  .account-item:hover {
+    background-color: #f1f1f1; /* Light hover effect */
+  }
+  
+  .account-info {
+    text-align: left;
+  }
+  
+  .account-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333; /* Account name color */
+  }
+  
+  .account-number {
+    font-size: 0.875rem;
+    color: #777; /* Grey color for the account number */
+  }
+  
+  .balance-info {
+    text-align: right;
+  }
+  
+  .balance-section {
+    margin-bottom: 10px;
+  }
+  
+  .balance-label {
+    font-size: 0.875rem;
+    color: #777; /* Grey color for balance labels */
+  }
+  
+  .balance-amount {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333; /* Amount color */
+  }
+  
+  /* Styles for the selected item */
+  .account-item.selected {
+    background-color: var(--red);
+    color: white; /* White text for selected item */
+  }
+  
+  .account-item.selected .account-name,
+  .account-item.selected .account-number,
+  .account-item.selected .balance-label,
+  .account-item.selected .balance-amount {
+    color: white; /* Change text to white when selected */
+  }
+  

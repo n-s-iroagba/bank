@@ -23,11 +23,11 @@ const LoginForm: React.FC = () => {
       <Button onClick={()=>navigate('/dashboard')} className='button-radius bg-red w-100' type="submit">
         Login
       </Button>
-      <div className="line-container">
+      <div className="line-container mt-4">
   <hr className="gray-line"/>
 </div>
 
-<div className="link-container">
+<div className="link-container ">
   <a href="/home">Enroll</a>
   <p>|</p>
   <a href="/home">Forgot User Name</a>

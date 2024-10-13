@@ -39,7 +39,7 @@ const TransfersList: React.FC = () => {
   }, {});
 
   return (
-    <ListGroup>
+    <ListGroup className='w-100'>
       {Object.entries(groupedTransfers).map(([date, transfers]) => (
         <div key={date}>
           <h5>{date}</h5>
