@@ -1,0 +1,8 @@
+.option-listing {
+  @media (min-width: 767px) {
+      position: absolute; /* Absolute positioning allows you to control its placement */
+      width: 50%;        /* Set the width to 50% */
+      right: 40%;         /* Move it 50% to the right, relative to its parent container */
+      transform: translateX(50%); /* Further translate it to center properly, preventing overflow */
+  }
+}

@@ -1,0 +1,37 @@
+.drawer {
+    width: 33vw;
+    background-color: #f8f9fa;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%); /* Initially hidden */
+    @media (max-width: 767px) {
+     
+      width: 50vw;        /* Set the width to 50% */
+      
+  }
+  }
+  
+  .drawer.visible {
+    transform: translateX(0); /* Slide in when visible */
+  }
+  
+  .drawer.hidden {
+    transform: translateX(-100%); /* Slide out when hidden */
+  }
+  
+  .list-group-item {
+    cursor: pointer;
+  }
+  
+  .list-group-item:hover {
+    background-color: #e9ecef;
+  }
+
+  .active-item{
+    background-color: var(--blue);
+    color:white
+  }
+  

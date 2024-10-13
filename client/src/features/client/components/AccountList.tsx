@@ -1,21 +1,54 @@
-// src/types/Account.ts
-// src/App.tsx or any other component
-import React from 'react';
-import { Container } from 'react-bootstrap'
-import AccountBalance from './AccountItem';
+import React, { useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import '../styles/AccountList.css';
 
-const App: React.FC = () => {
-  const token = 'your-auth-token'; // Replace with the actual token logic
-  const accountId = 1; // Replace with the actual account ID
+interface Account {
+  name: string;
+  number: string;
+  availableAmount: string;
+  currentAmount: string;
+}
+
+interface AccountsListProps {
+  accounts: Account[];
+}
+
+const AccountsList: React.FC<AccountsListProps> = ({ accounts }) => {
+  const [selectedAccount, setSelectedAccount] = useState<number | null>(0);
+
+  const handleAccountClick = (index: number) => {
+    setSelectedAccount(index === selectedAccount ? null : index); // Toggle selection
+  };
 
   return (
-    <Container>
-      <h1>Account Information</h1>
-      <AccountBalance token={token} accountId={accountId} />
-    </Container>
+    <div className="accounts-list">
+      {accounts.map((account, index) => (
+        <Row
+          key={index}
+          className={`account-item pt-2 ${selectedAccount === index ? 'selected' : ''}`}
+          onClick={() => handleAccountClick(index)}
+        >
+          <Col xs={6} className="account-info  d-flex flex-column justify-content-center mx-0">
+            <div className="account-name">{account.name}</div>
+            <div className="account-number">{account.number}</div>
+          </Col>
+          <Col xs={6} className="balance-info">
+            <div className="balance-section">
+              <span className="balance-label">Available</span>
+              <div className="balance-amount">{account.availableAmount}</div>
+            </div>
+            <div className="balance-section">
+              <span className="balance-label">Current</span>
+              <div className="balance-amount">{account.currentAmount}</div>
+            </div>
+          </Col>
+        </Row>
+      ))}
+    </div>
   );
 };
 
-export default App;
+export default AccountsList;
+
 
   

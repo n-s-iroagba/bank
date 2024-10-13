@@ -15,21 +15,21 @@ const useTransfers = () => {
   const [error, setError] = useState<string | null>(null);
   const token = 'a'
   useEffect(() => {
-    // const loadTransfers = async () => {
-    //   setLoading(true);
-    //   setError(null); // Reset error state
+    const loadTransfers = async () => {
+      setLoading(true);
+      setError(null); // Reset error state
 
-    //   try {
-    //     const data = await fetchTransactions(token);
-    //     setTransfers(data);
-    //   } catch (err) {
-    //     setError('Error fetching transfers');
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
+      try {
+        const data = await fetchTransactions(token);
+        setTransfers(data as Transfer[]);
+      } catch (err) {
+        setError('Error fetching transfers');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // loadTransfers();
+    loadTransfers();
     setLoading(false)
     const dummyData: Transfer[] = [
         { id: 1, amount: -100, date: '2022-01-01', description: 'Transfer 1' },
