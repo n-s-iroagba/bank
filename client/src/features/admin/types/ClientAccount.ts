@@ -1,5 +1,7 @@
 // /types/ClientAccount.ts
 export interface Transfer {
+    date: any;
+    description: string;
     id: number;
     transferDate: string;  
     amount: number;

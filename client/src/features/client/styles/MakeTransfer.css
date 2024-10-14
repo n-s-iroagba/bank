@@ -1,0 +1,32 @@
+/* MakeTransfers.css */
+
+.sharp-input {
+    border-radius: 0; 
+    border: 1px solid rgb(83, 80, 80);
+    background-color:rgb(250, 242, 242);
+    box-shadow: none;
+    width: 100%;
+    text-align: start;
+  }
+  
+  .dropdown-list {
+    position: absolute;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 0; /* Ensure dropdowns also have sharp corners */
+  }
+  
+  /* Optional: Style for the button if needed */
+  button {
+    border-radius: 0; /* Sharp corners for the button */
+  }
+  /* MakeTransfers.css */
+.dropdown-toggle::after{
+  color: var(--blue);
+  
+
+}
+.dropdown{
+  width: 100%;
+}

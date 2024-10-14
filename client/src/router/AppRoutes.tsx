@@ -9,6 +9,7 @@ import EmailVerification from '../pages/admin/EmailVerification';
 import PasswordRequest from '../pages/admin/PasswordRequest';
 import PasswordReset from '../pages/admin/PasswordReset';
 import AdminDashboard from '../pages/admin/AdminDashboard';
+import Transfer from '../pages/client/Transfer';
 
 
 const AppRoutes: React.FC = () => {
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/transfer" element={<Transfer/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />

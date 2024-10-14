@@ -21,7 +21,9 @@ const AddTransferForm: React.FC<AddTransferFormProps> = ({ clientId, onTransferA
       transferDate: new Date().toISOString(),
       amount,
       recipientName,
-      recipientAccountNumber
+      recipientAccountNumber,
+      date: undefined,
+      description: ''
     };
     addTransfer(clientId, newTransfer);
     onTransferAdded();
