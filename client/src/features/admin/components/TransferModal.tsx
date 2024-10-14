@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, ListGroup, Spinner, Alert } from 'react-bootstrap';
-import { Transfer } from '../../client/components/TransferList';
+import { Transfer } from '../types/ClientAccount';
+
 
 
 interface Props {

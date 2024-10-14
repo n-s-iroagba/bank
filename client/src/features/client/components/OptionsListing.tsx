@@ -1,21 +1,23 @@
 import React from 'react';
-
 import TransferList from './TransferList';
 import '../styles/OptionsListing.css'
 import AccountList from './AccountList';
+import { Alert } from 'react-bootstrap';
 
 interface OptionListingProps {
   selectedOption: string;
-  toggleDrawer: () => void;
+  blocked:any
+  setSelectOption:any
 }
 const dummyAccounts = [
   {
+    id:1,
     name: 'Savings Account',
     number: '1234567890',
     availableAmount: '$5,000.00',
     currentAmount: '$10,000.00',
   },
-  {
+  {id:2,
     name: 'Checking Account',
     number: '0987654321',
     availableAmount: '$2,500.00',
@@ -25,15 +27,15 @@ const dummyAccounts = [
 
 
 
-const OptionListingComponent: React.FC<OptionListingProps> = ({ selectedOption, toggleDrawer }) => {
+const OptionListingComponent: React.FC<OptionListingProps> = ({ selectedOption, blocked,setSelectOption }) => {
   const renderContent = () => {
     switch (selectedOption) {
       case 'Accounts':
-        return <AccountList accounts={dummyAccounts} />;
+        return <AccountList blocked = {blocked} accounts={dummyAccounts} setSelectedOption={setSelectOption} />;
       case 'Transfer':
-        return <TransferList />;
+        return <TransferList blocked={blocked} />;
       default:
-        return <AccountList accounts={dummyAccounts} />;
+        return <Alert variant='danger' className='mx-2 mt-5'>Access to this action has been restricted by the credit union, kindly contact the support team.</Alert>
     }
   };
 
