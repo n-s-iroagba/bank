@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, Alert } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import TransferButton from './TransferButton';
 
 interface Transfer {
@@ -10,11 +10,7 @@ interface Transfer {
   status: string;
 }
 
-interface TransferListProps {
-  blocked: React.RefObject<boolean>;
-}
-
-const TransferList: React.FC<TransferListProps> = ({ blocked }) => {
+const TransferList: React.FC = () => {
   const transfers: Transfer[] = [
     {
       date: '2024-10-10',
@@ -40,9 +36,7 @@ const TransferList: React.FC<TransferListProps> = ({ blocked }) => {
   ];
   return (
     <div>
-      {blocked.current ? (
-        <Alert variant="warning">You are blocked</Alert>
-      ) : (
+    
         <>
           <TransferButton/>
           <ListGroup>
@@ -65,7 +59,7 @@ const TransferList: React.FC<TransferListProps> = ({ blocked }) => {
             ))}
           </ListGroup>
         </>
-      )}
+   
     </div>
   );
 };

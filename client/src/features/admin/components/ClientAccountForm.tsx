@@ -14,6 +14,7 @@ const ClientAccountForm: React.FC<ClientAccountFormProps> = ({ onAccountCreated 
   const [transferStartDate, setTransferStartDate] = useState('');
   const [transferEndDate, setTransferEndDate] = useState('');
   const [numberOfTransfers, setNumberOfTransfers] = useState(0);
+  const [termDepositTenure, setTermDepositTenure] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +41,11 @@ const ClientAccountForm: React.FC<ClientAccountFormProps> = ({ onAccountCreated 
         <Form.Label>Fixed Deposit Amount</Form.Label>
         <Form.Control type="number" value={fixedDepositAmount} onChange={(e) => setFixedDepositAmount(+e.target.value)} required />
       </Form.Group>
+      <Form.Group controlId="numberOfTransfers">
+        <Form.Label>Tenure in days</Form.Label>
+        <Form.Control type="number" value={termDepositTenure} onChange={(e) => setTermDepositTenure(+e.target.value)} required />
+      </Form.Group>
+      <div className='checkAccountFormSection'>
       <Form.Group controlId="checkingAccountAmount">
         <Form.Label>Checking Account Amount</Form.Label>
         <Form.Control type="number" value={checkingAccountAmount} onChange={(e) => setCheckingAccountAmount(+e.target.value)} required />
@@ -67,6 +73,7 @@ const ClientAccountForm: React.FC<ClientAccountFormProps> = ({ onAccountCreated 
           required
         />
       </Form.Group>
+      </div>
       <Button type="submit">Create Account</Button>
     </Form>
   );

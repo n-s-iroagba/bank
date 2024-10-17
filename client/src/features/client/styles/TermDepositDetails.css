@@ -1,0 +1,39 @@
+/* TermDepositDetails.css */
+
+.term-deposit-container {
+    background-color: #f8f9fa; /* Light background for contrast */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .term-deposit-card {
+    background: linear-gradient(to bottom, #c72c41, #003366); /* Red to blue gradient */
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .term-deposit-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .term-deposit-card .list-group-item {
+    background-color: transparent;
+    color: #ffffff; /* White text for readability */
+  }
+  
+  .term-deposit-card .list-group-item span {
+    color: #f8f9fa; /* Light color for bold text */
+  }
+  
+  .term-deposit-card .btn {
+    background-color: #ffffff; /* White button */
+    color: #003366; /* Blue text for button */
+    border-radius: 20px; /* Rounded button */
+  }
+  
+  .term-deposit-card .btn:hover {
+    background-color: #e2e6ea; /* Light gray on hover */
+  }  
