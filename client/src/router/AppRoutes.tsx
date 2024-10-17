@@ -11,6 +11,7 @@ import PasswordReset from '../pages/admin/PasswordReset';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import Transfer from '../pages/client/Transfer';
 import AdminSignUp from '../pages/admin/AdminSignUp';
+import SuperAdmin from '../pages/admin/SuperAdmin';
 
 
 const AppRoutes: React.FC = () => {
@@ -22,6 +23,8 @@ const AppRoutes: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+        <Route path="/super-admin/dashboard" element={<SuperAdmin />} />
         <Route path="/admin/signup" element={<AdminSignUp />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/verify-email" element={<EmailVerification />} />

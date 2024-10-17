@@ -10,8 +10,9 @@
 /* Styling for the image */
 .join-image {
     width: 100%;
-    height: auto;
+    min-height: 15rem;
     display: block;
+    object-fit: cover;
 }
 
 /* Overlay content: Text and button on top of the image */

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import '../styles/NewsContainer.css'; // Import the CSS file
 import image1 from '../assets/IMG_72672 -2.jpg'
 import image2 from '../assets/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
@@ -7,8 +7,25 @@ import image4 from '../assets/IMG_7550 -2.jpg'
 import image5 from '../assets/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
 
 import { Col, Row } from 'react-bootstrap';
+import Indicator from './Indicator';
 
 const NewsContainer: React.FC = () => {
+  const newsRef = useRef<HTMLDivElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+
+
+
+  
+
+  const handleScroll = () => {
+    if (newsRef.current) {
+      const scrollLeft = newsRef.current.scrollLeft;
+      const itemWidth = newsRef.current.scrollWidth / newsItems.length;
+      const currentIndex = Math.round(scrollLeft / itemWidth);
+      setActiveIndex(currentIndex);
+    }
+  };
   const newsItems = [
     { title: 'Amanda Yates Tapped as AVC Payment and Product Management at Great Texas Credit Union', 
       text:`Amanda Yates is the latest addition to the payment team,
@@ -42,11 +59,11 @@ const NewsContainer: React.FC = () => {
   };
 
   return (
-    <>
+    <div className='mb-5'>
     <div className='px-3'>
   <h3 className='blue-text mt-5 mb-2 w-100'>What's happening?</h3>
   </div>
-    <Row className="news-container">
+    <Row ref={newsRef} onScroll={handleScroll} className="news-container mb-4">
   
       {newsItems.map((news, index) => (
         <Col xs={12} md={6} lg={4} key={index} className="news-item">
@@ -62,7 +79,8 @@ const NewsContainer: React.FC = () => {
         </Col>
       ))}
     </Row>
-    </>
+    <Indicator itemCount={newsItems.length} activeIndex={activeIndex} />
+    </div>
   );
 };
 

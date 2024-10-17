@@ -25,7 +25,7 @@ const TopFooter: React.FC = () => {
 
                     {/* Div 1 */}
              <Col xs={12} md={8}>
-  <div className="footer-div1 d-flex flex-column flex-md-row justify-content-center text-center h-100 align-items-center">
+  <div className="footer-div1 d-flex flex-column flex-md-row justify-content-center text-center h-100 align-items-center mb-4">
     <a href={'/home'} className="footer-link link-grey small-font text-center mx-2">PRIVACY NOTICES</a>
     <a href={'/home'} className="footer-link link-grey small-font text-center mx-2">ACCOUNT DISCLOSURES</a>
     <a href={'/home'} className="footer-link link-grey small-font text-center mx-2">ABOUT US</a>
@@ -44,7 +44,7 @@ const TopFooter: React.FC = () => {
                         </div>
                     </Col>
                 </Row>
-                <p className='link-grey small-font'>© 2024 Greater Texas Credit Union.</p>
+                <p className='link-grey small-font mt-3'>© 2024 Greater Texas Credit Union.</p>
       
         </footer>
     );

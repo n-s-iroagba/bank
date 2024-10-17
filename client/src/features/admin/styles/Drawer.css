@@ -1,0 +1,16 @@
+.drawer {
+    background-color: #f8f9fa;
+    padding: 15px;
+    height: 100vh;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  .drawer-col {
+    width: 250px;
+    transition: width 0.3s ease;
+  }
+  
+  .content-col {
+    transition: width 0.3s ease;
+  }
+  
