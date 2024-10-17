@@ -38,7 +38,7 @@ const CarouselHeader: React.FC = () => {
             <h3>Greater Good</h3>
             <h6 className='text-start'>Be part of a credit union that gives back to your community</h6>
             <div className='d-flex justify-content-start'>
-            <Button  className="button-radius bg-red button-width py-2 small font">GREATER GOOD</Button>
+            <Button  className="button-radius bg-red button-width py-2 small-font">GREATER GOOD</Button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

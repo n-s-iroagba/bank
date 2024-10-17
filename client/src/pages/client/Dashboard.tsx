@@ -9,7 +9,7 @@ import AccountsList from '../../features/client/components/AccountList';
 
 const Dashboard: React.FC = () => {
   const [isDrawerVisible, setDrawerVisible] = useState(window.innerWidth > 992);
-  const [selectedOption, setSelectedOption] = useState('Account');
+  const [selectedOption, setSelectedOption] = useState('Accounts');
   const [accountType, setAccountType] = useState('')
 
 

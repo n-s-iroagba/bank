@@ -7,7 +7,7 @@ import '../../features/client/styles/GeneralStyles.css'
 
 
 const Login = ()=>{
-    return <div className='px-4 pt-4'>
+    return <div className='px-4 pt-4 bg-light'>
     <div className='py-3 px-3 bg-red text-light'>
       <h5>Your Feedback Matters</h5>
       <p className='small-font '>Questions? Comments?</p>
