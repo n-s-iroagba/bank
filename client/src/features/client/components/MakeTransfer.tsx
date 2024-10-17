@@ -12,7 +12,7 @@ interface Beneficiary {
   accountNumber: string;
   logo: string; // URL for the bank logo
 }
-
+//ADD beneficiaries
 const beneficiaries: Beneficiary[] = [
   { id: 1, name: 'John Doe', bank: 'Bank A', accountNumber: '123456789', logo: 'path/to/logoA.png' },
   { id: 2, name: 'Jane Smith', bank: 'Bank B', accountNumber: '987654321', logo: 'path/to/logoB.png' },

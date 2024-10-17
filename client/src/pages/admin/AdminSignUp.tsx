@@ -5,3 +5,4 @@ const AdminSignUp:React.FC = () => {
     Admin Sign Up
     </>
 }
+export default AdminSignUp

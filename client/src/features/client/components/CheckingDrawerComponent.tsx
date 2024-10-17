@@ -8,7 +8,7 @@ interface DrawerProps {
   selectedOption: string;
   onSelectOption: (option: string) => void;
   isVisible: boolean;
-  blocked: any
+
   
 }
 

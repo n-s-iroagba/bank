@@ -1,35 +1,31 @@
-import React, { useRef, useState } from 'react';
-import DrawerComponent from '../../features/client/components/DrawerComponent';
+import React, {  useState } from 'react';
 import OptionListingComponent from '../../features/client/components/OptionsListing';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCog } from '@fortawesome/free-solid-svg-icons';
+import CheckingDrawerComponent from '../../features/client/components/CheckingDrawerComponent';
+import TermDrawerComponent from '../../features/client/components/TermDrawerComponent';
+import AccountsList from '../../features/client/components/AccountList';
 
 
 const Dashboard: React.FC = () => {
   const [isDrawerVisible, setDrawerVisible] = useState(window.innerWidth > 992);
-  const [selectedOption, setSelectedOption] = useState('Accounts');
-  const blocked = useRef<boolean>(false)
+  const [selectedOption, setSelectedOption] = useState('Account');
+  const [accountType, setAccountType] = useState('')
+
 
   // Drawer options
-  const options = ['Accounts', 'Transfer', 'Other Option 1', 'Other Option 2'];
+  const checkingOptions = ['Accounts', 'Transfer', 'Other Option 2'];
+  const termOptions =['Accounts','Term Deposit','Other Option 2']
 
   const toggleDrawer = () => {
     setDrawerVisible(!isDrawerVisible);
   };
 
+
+
   const handleOptionSelect = (option: string) => {
 
-      if (option === 'Transfer') {
-      if (blocked.current) {setSelectedOption('');
-      alert('hello')
-      }
-      else {
-        setSelectedOption('Transfer');
-      }
-    } else {
       setSelectedOption(option);
-    }
-  
     if (window.innerWidth < 992) {
       setDrawerVisible(false);
     }
@@ -43,10 +39,28 @@ const Dashboard: React.FC = () => {
         <FontAwesomeIcon icon={faCog} className="wheel-icon text-light" />
       </div>
       
-      <DrawerComponent  blocked={blocked} options={options} selectedOption={selectedOption} onSelectOption={handleOptionSelect} isVisible={isDrawerVisible} />
+      {isDrawerVisible && (
+  accountType === 'Checking Account' ? (
+    <CheckingDrawerComponent
+      selectedOption={selectedOption}
+      options={checkingOptions}
+      isVisible={true}
+      onSelectOption={handleOptionSelect}
+    />
+  ) : (
+    <TermDrawerComponent
+      selectedOption={selectedOption}
+      options={termOptions}
+      isVisible={true}
+      onSelectOption={handleOptionSelect}
+    />
+  )
+)}
 
         <div>
-          <OptionListingComponent setSelectOption={setSelectedOption} blocked ={blocked} selectedOption={selectedOption} />
+          {selectedOption==='Accounts'?<AccountsList  setAccountType={setAccountType} setDrawerVisible={setDrawerVisible}/>:
+          <OptionListingComponent  setDrawerVisible={setDrawerVisible} selectedOption={selectedOption}   />
+}
         </div>
   
     </div>
