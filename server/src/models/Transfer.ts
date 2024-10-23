@@ -1,53 +1,69 @@
-// /src/models/Transfer.ts
-import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../config/dbConfig'; // Adjust import based on your project structure
+import {
+    Model,
+    DataTypes,
+    Optional,
+    BelongsToCreateAssociationMixin,
+  } from 'sequelize';
+  import {sequelize }from '../config/dbConfig';
+import { CheckingAccount } from './CheckingAccount';
 
-class Transfer extends Model {
-  public id!: number;
-  public clientId!: number;
-  public amount!: number;
-  public date!: Date;
-  public name!: string;
-  public accountNumber!: string;
-}
-
-Transfer.init(
+  
+  // Interface for the attributes of the Transfer
+  interface TransferAttributes {
+    id: number;
+    amount: number;
+    transferDate: Date;
+    accountId: number; // Foreign key to Account
+  }
+  
+  // Optional fields when creating a new Transfer instance
+  interface TransferCreationAttributes
+    extends Optional<TransferAttributes, 'id'> {}
+  
+  // The Transfer model itself
+  export class Transfer
+    extends Model<TransferAttributes, TransferCreationAttributes>
+    implements TransferAttributes
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    clientId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Clients',
-        key: 'id',
+    public id!: number;
+    public amount!: number;
+    public transferDate!: Date;
+    public accountId!: number;
+  
+    // Association mixin for creating related entities
+    public createAccount!: BelongsToCreateAssociationMixin<CheckingAccount>;
+  
+    // Timestamps
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+  }
+  
+  Transfer.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      amount: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+      },
+      transferDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      accountId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
-    amount: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    accountNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize,
-    modelName: 'Transfer',
-  }
-);
-
-export default Transfer;
+    {
+      sequelize,
+      modelName: 'Transfer',
+      tableName: 'transfers',
+      timestamps: true,
+    }
+  );
+  

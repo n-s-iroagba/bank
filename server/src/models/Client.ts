@@ -6,9 +6,9 @@ class Client extends Model {
   public id!: number;
   public username!: string;
   public password!: string;
-  public email!: string;
-  public fixedDepositAmount!: number;
-  public checkingAccountAmount!: number;
+  public middleName!: string|null;
+  public firstName!: number;
+  public lastName!: number;
 }
 
 Client.init(
@@ -27,20 +27,17 @@ Client.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
-    fixedDepositAmount: {
+    lastName: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: 0,
     },
-    checkingAccountAmount: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 0,
+    middleName: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
