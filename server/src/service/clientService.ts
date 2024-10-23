@@ -1,35 +1,43 @@
-// /src/services/clientService.ts
-import Client from '../models/Client';
-import Transfer from '../models/Transfer';
+import Client from '../models/Client'; // Adjust import based on your project structure
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'; // Assuming you are using JWT for authentication
 
-export const createClient = async (clientData: any) => {
-  const client = await Client.create(clientData);
-  return client;
+export const createClient = async (data: any) => {
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+  return await Client.create({ ...data, password: hashedPassword });
+};
+
+export const getClientsByAdminId = async (adminId: number) => {
+  // Assuming you have an association set up for adminId
+  return await Client.findAll({ where: { adminId } });
 };
 
 export const getClientById = async (id: number) => {
-  const client = await Client.findByPk(id);
-  if (!client) throw new Error('Client not found');
-  return client;
+  return await Client.findByPk(id);
 };
 
-export const updateClient = async (id: number, clientData: any) => {
-  const client = await getClientById(id);
-  await client.update(clientData);
-  return client;
+export const updateClient = async (id: number, data: any) => {
+  const client = await Client.findByPk(id);
+  if (!client) throw new Error('Client not found');
+  return await client.update(data);
 };
 
 export const deleteClient = async (id: number) => {
-  const client = await getClientById(id);
-  await client.destroy();
+  const client = await Client.findByPk(id);
+  if (!client) throw new Error('Client not found');
+  return await client.destroy();
 };
 
-export const addTransfer = async (transferData: any) => {
-  const transfer = await Transfer.create(transferData);
-  return transfer;
-};
+export const loginClient = async (username: string, password: string) => {
+  const client = await Client.findOne({ where: { username } });
+  if (!client) throw new Error('Client not found');
 
-export const getTransfersByClientId = async (clientId: number) => {
-  const transfers = await Transfer.findAll({ where: { clientId } });
-  return transfers;
+  const isMatch = await bcrypt.compare(password, client.password);
+  if (!isMatch) throw new Error('Invalid credentials');
+
+  const token = jwt.sign({ id: client.id, username: client.username }, process.env.JWT_SECRET || 'secret', {
+    expiresIn: '1h',
+  });
+
+  return token;
 };
