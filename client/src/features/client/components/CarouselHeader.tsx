@@ -6,7 +6,8 @@ import logo2 from '../assets/IDSHeild (1).png';
 import '../styles/CarouselHeader.css';
 import '../styles/GeneralButtonStyles.css'
 import '../styles/GeneralStyles.css'
-import Login from '../../../pages/client/Login';
+import LoginForm from './LoginForm';
+
 
 const CarouselHeader: React.FC = () => {
   return (
@@ -44,7 +45,7 @@ const CarouselHeader: React.FC = () => {
         </Carousel.Item>
       </Carousel>
       <div className="mb-0 position-absolute w-33 top-0 z-1 start-0 p-3 d-none d-lg-block">
-     <Login/>
+     <LoginForm/>
     </div>
     </div>
   );

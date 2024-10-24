@@ -28,5 +28,3 @@ export const createAccount = async (accountData: any, token: string) => {
   });
 };
 
-
-
