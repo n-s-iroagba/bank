@@ -1,3 +1,7 @@
+
+import api from ".";
+import { LoginDetails, SuperAdminLoginDetails } from "../features/client/types/LoginDetails";
+
 // Format currency
 export const formatCurrency = (amount: number): string => {
     return `$${amount.toFixed(2)}`;
@@ -34,3 +38,8 @@ export const formatCurrency = (amount: number): string => {
     }
     return false;
   };
+
+
+export const postWithNoAuth = async (url:string,data:LoginDetails|SuperAdminLoginDetails) =>{
+  return await api.post(url,data)
+}
