@@ -16,7 +16,7 @@ const OptionListingComponent: React.FC<OptionListingProps> = ({ selectedOption, 
   const renderContent = () => {
     switch (selectedOption) {
      
-      case 'Transfer':
+      case 'Transfers':
         return <TransferList />;
       case 'Term Deposit':
           return <TermDepositDetails />;

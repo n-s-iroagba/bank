@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Account } from '../types/accountTypes';
-import { get } from '../../../utils/api';
+import axios from 'axios';
 
 
 const useAccountBalance = (token: string, accountId: number) => {
@@ -13,8 +13,8 @@ const useAccountBalance = (token: string, accountId: number) => {
   useEffect(() => {
     const fetchAccountBalance = async () => {
       try {
-        const data = await get<Account>(`/accounts/${accountId}`, token); // Adjust the API endpoint accordingly
-        setBalance(data.balance);
+        const data:any = await axios.get<Account>(`/accounts/${accountId}`); // Adjust the API endpoint accordingly
+        setBalance(data.balance as unknown as number);
       } catch (err) {
         setError('Error fetching account balance');
       } finally {

@@ -1,6 +1,6 @@
-// src/services/transactionService.ts
-import { get } from '../utils/api';
+import axios from "axios";
+
 
 export const fetchTransactions = async (token: string) => {
-  return await get('/transfers', token); // Adjust the endpoint as needed
+  return await axios.get('/transfers'); // Adjust the endpoint as needed
 };

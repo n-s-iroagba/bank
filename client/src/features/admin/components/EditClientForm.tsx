@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 
 interface Client {
   id: number;
   firstName: string;
   lastName: string;
   username: string;
-  checkingBalance: number;
-  termDepositBalance: number;
+  password: string;
 }
 
 interface EditClientFormProps {
@@ -20,6 +19,7 @@ const EditClientForm: React.FC<EditClientFormProps> = ({ client, onSubmit, onCan
   const [firstName, setFirstName] = useState(client.firstName);
   const [lastName, setLastName] = useState(client.lastName);
   const [username, setUsername] = useState(client.username);
+  const [password, setPassword] = useState(client.password);
 
   // Update form state if the client prop changes
   useEffect(() => {
@@ -34,6 +34,11 @@ const EditClientForm: React.FC<EditClientFormProps> = ({ client, onSubmit, onCan
   };
 
   return (
+    <Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Client Details (ID: {client.id})</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="clientFirstName">
         <Form.Label>First Name</Form.Label>
@@ -67,7 +72,10 @@ const EditClientForm: React.FC<EditClientFormProps> = ({ client, onSubmit, onCan
           required
         />
       </Form.Group>
-
+      <Form.Group controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Form.Group>
       <div className="d-flex justify-content-end mt-4">
         <Button variant="secondary" onClick={onCancel} className="me-2">
           Cancel
@@ -77,6 +85,8 @@ const EditClientForm: React.FC<EditClientFormProps> = ({ client, onSubmit, onCan
         </Button>
       </div>
     </Form>
+  </Modal.Body>
+  </Modal>
   );
 };
 

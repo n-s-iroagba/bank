@@ -21,7 +21,7 @@ const useTransfers = () => {
 
       try {
         const data = await fetchTransactions(token);
-        setTransfers(data as Transfer[]);
+        setTransfers(data as unknown as Transfer[]);
       } catch (err) {
         setError('Error fetching transfers');
       } finally {
