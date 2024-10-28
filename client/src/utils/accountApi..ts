@@ -1,3 +1,4 @@
+import { makeTransferRoute } from '../data/routes';
 import api from './index';
 
 // Credit account without transfer
@@ -28,3 +29,8 @@ export const createAccount = async (accountData: any, token: string) => {
   });
 };
 
+export const makeTransfer = async (clientId:number,token:string) =>{
+  return await api.post(`${makeTransferRoute}/${clientId}`,{
+    headers: { Authorization: `Bearer ${token}` }   
+  })
+}

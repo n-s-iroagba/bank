@@ -4,7 +4,8 @@ import { jwtDecode } from "jwt-decode";
 
 
 import { DecodedChangePasswordToken, DecodedLoginToken, DecodedVerificationToken } from "../types/authTypes";
-import axios from "../../common/utils/index";
+import axios from "axios";
+
 
 export const getLoginDecodedToken = (): DecodedLoginToken | null => {
   const token = localStorage.getItem('cassockJwtToken');

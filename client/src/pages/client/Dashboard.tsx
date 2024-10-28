@@ -14,8 +14,8 @@ const Dashboard: React.FC = () => {
 
 
   // Drawer options
-  const checkingOptions = ['Accounts', 'Transfer', 'Other Option 2'];
-  const termOptions =['Accounts','Term Deposit','Other Option 2']
+  const checkingOptions = ['Accounts','Statements', 'Transfers', 'Deposit Check', 'Pay a Member','Bill Pay A2A/P2P', 'Money Manager'];
+  const termOptions =['Accounts','Term Deposit','Transfers', 'Deposit Check', 'Pay a Member','Bill Pay A2A/P2P', 'Money Manager']
 
   const toggleDrawer = () => {
     setDrawerVisible(!isDrawerVisible);
@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
   
   return (
     <div className="">
-      <div className="header-bar d-flex bg-blue justify-content-between align-items-center px-5" style={{ height: '1.5cm' }}>
+      <div className="header-bar d-flex bg-blue justify-content-between align-items-center px-4" style={{ height: '1.5cm' }}>
         <FontAwesomeIcon icon={faBars} onClick={toggleDrawer} className="hamburger-icon text-light" />
         <h4 className='text-light'>{selectedOption}</h4>
         <FontAwesomeIcon icon={faCog} className="wheel-icon text-light" />
@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
       
       {isDrawerVisible && (
   accountType === 'Checking Account' ? (
-    <CheckingDrawerComponent
+    <CheckingDrawerComponent 
       selectedOption={selectedOption}
       options={checkingOptions}
       isVisible={true}
@@ -56,7 +56,6 @@ const Dashboard: React.FC = () => {
     />
   )
 )}
-
         <div>
           {selectedOption==='Accounts'?<AccountsList  setAccountType={setAccountType} setDrawerVisible={setDrawerVisible}/>:
           <OptionListingComponent  setDrawerVisible={setDrawerVisible} selectedOption={selectedOption}   />

@@ -9,9 +9,9 @@
   }
   
   .term-deposit-card {
-    background: linear-gradient(to bottom, #c72c41, #003366); /* Red to blue gradient */
-    border: none;
+   border: 1px solid black;
     border-radius: 10px;
+    background-color: #e2e6ea54;
   }
   
   .term-deposit-card .card-title {
@@ -37,3 +37,5 @@
   .term-deposit-card .btn:hover {
     background-color: #e2e6ea; /* Light gray on hover */
   }  
+
+ 

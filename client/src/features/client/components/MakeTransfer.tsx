@@ -8,9 +8,17 @@ import logo from '../assets/greater-texas-cu-logo.svg'
 interface Beneficiary {
   id: number;
   name: string;
-  bank: string;
+  bank: string|null;
   accountNumber: string;
   logo: string; // URL for the bank logo
+}
+
+
+interface TransferDetails{
+  beneficiary:Beneficiary;
+  amount: number;
+  date:any;
+  description: string;
 }
 //ADD beneficiaries
 const beneficiaries: Beneficiary[] = [
@@ -26,16 +34,59 @@ const banks = [
 ];
 
 const MakeTransfers: React.FC = () => {
-  const [selectedBeneficiary, setSelectedBeneficiary] = useState<Beneficiary | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedBank, setSelectedBank] = useState<string>(''); // Storing the selected bank name
-  
-
+  const [transferDetails, setTransferDetails] = useState<TransferDetails>({
+    beneficiary: { 
+      id: 0, 
+      name: '', 
+      bank: null,
+      accountNumber: '',
+      logo: ''
+    },
+    amount: 0,
+    description:'',
+    date:new Date(),
+  });
+  // const { banks, loading, error } = useBanks();
   const handleBeneficiaryClick = (beneficiary: Beneficiary) => {
-    setSelectedBeneficiary(beneficiary);
-    setSearchTerm(beneficiary.name); // Populate the input with the selected beneficiary's name
+    setTransferDetails(prevDetails => ({
+      ...prevDetails,
+       beneficiary: beneficiary
+     }));
+    setSearchTerm(beneficiary.name);
+    
+    // Correctly update the 'beneficiary' field inside 'transferDetails'
+    setTransferDetails(prevDetails => ({
+      ...prevDetails,
+      beneficiary: { ...beneficiary }
+    }));
   };
+  const handleChangeBeneficiary = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+    setTransferDetails(prevDetails => ({
+      ...prevDetails,
+      beneficiary: {
+        ...prevDetails.beneficiary, // Keep the existing beneficiary details
+        [e.target.name]: e.target.value // Update the specific field based on the input name
+      }
+    }));
+  };
+  const handleChangeAmount = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
 
+    setTransferDetails(prevDetails => ({
+     ...prevDetails,
+      amount: parseFloat(e.target.value)
+    }));
+  }
+  
+  const handleBankChange = (bankName: string) => {
+    setTransferDetails(prevDetails => ({
+      ...prevDetails,
+      beneficiary: {
+        ...prevDetails.beneficiary,
+        bank: bankName
+      }
+    }));
+  };
   const filteredBeneficiaries = beneficiaries.filter(beneficiary =>
     beneficiary.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -53,7 +104,11 @@ const MakeTransfers: React.FC = () => {
       <Form.Group controlId="beneficiary">
       <Form.Group controlId="amount">
        
-        <Form.Control type="number" placeholder="AMOUNT" className="sharp-input" />
+        <Form.Control 
+        onChange={(e)=>handleChangeAmount(e)}
+        type="number" placeholder="AMOUNT" className="sharp-input"
+        name='account'
+        />
       </Form.Group>
       <br/>
         <Form.Label>Frequent Beneficiaries</Form.Label>
@@ -82,13 +137,13 @@ const MakeTransfers: React.FC = () => {
       <Form.Group controlId="bank">
       <Dropdown>
     <Dropdown.Toggle variant="light" id="dropdown-basic" className="sharp-input custom-dropdown-toggle">
-      {selectedBeneficiary?.bank || selectedBank || 'BANK'}
+      {transferDetails.beneficiary.bank || 'BANK'}
     </Dropdown.Toggle>
     <Dropdown.Menu>
       {banks.map((bank) => (
         <Dropdown.Item
           key={bank.id}
-          onClick={() => setSelectedBank(bank.name)}
+          onClick={() => handleBankChange(bank.name)}
         >
           <img src={bank.logo} alt={bank.name} style={{ width: '20px', height: '20px', marginRight: '8px' }} />
           {bank.name}
@@ -101,9 +156,21 @@ const MakeTransfers: React.FC = () => {
       <Form.Group controlId="amount">
       
         <Form.Control 
-        value={selectedBeneficiary?.accountNumber||''}
+        name='accountNumber'
+        onChange={(e)=>handleChangeBeneficiary(e)}
+        value={transferDetails.beneficiary.accountNumber}
         type="number" placeholder="BENEFICIARY ACCOUNT NUMBER" className="sharp-input" />
       </Form.Group>
+
+      <Form.Group controlId="amount">
+      
+      <Form.Control 
+      name='description'
+      
+      value={transferDetails.description}
+      type="text" placeholder="DESCRIPTION" className="sharp-input" />
+    </Form.Group>
+      
 <br/>
       <Button className='button-radius w-100 bg-red' type="submit">
         Submit

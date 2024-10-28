@@ -12,8 +12,8 @@ import { doPasswordsMatch } from "../utils/utils";
 
 import { AuthContextType, NewPasswordData, LoginData, Role, DecodedChangePasswordToken,SuperAdminData } from "../types/authTypes";
 import { decodeChangePasswordToken, postData } from "../helpers/helper";
-import { extractErrorCode } from "../../common/utils/helpers";
-import { loginUrlForAdmin, loginUrlForClient, loginUrlForSuperAdmin, newPasswordRoute } from "../../common/data/routes";
+// import { extractErrorCode } from "../../common/utils/helpers";
+// import { loginUrlForAdmin, loginUrlForClient, loginUrlForSuperAdmin, newPasswordRoute } from "../../common/data/routes";
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -129,7 +129,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
         setErrorMessage("Something went wrong, please try again later");
       }
     } catch (error: any) {
-      handleServerError(error, 409, "User with this email already exists");
+      // handleServerError(error, 409, "User with this email already exists");
     } finally {
       setSubmitting(false);
     }
@@ -170,7 +170,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     setSubmitting(true);
     try {
       const response = await postChangePasswordData(
-        `${newPasswordRoute}/${decodedToken.id}`,
+        `${'dummyroute'}/${decodedToken.id}`,
         { password: data.password },
         token
       );
@@ -215,7 +215,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
     setSubmitting(true);
     try {
-      const response = await postData(loginUrlForAdmin, loginData);
+      const response = await postData('dummyroute', loginData);
       handleLoginResponseAdmin(response, navigate);
     } catch (error: any) {
       handleLoginError(error);
@@ -239,7 +239,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
     setSubmitting(true);
     try {
-      const response = await postData(loginUrlForSuperAdmin, loginData);
+      const response = await postData('dummyroute', loginData);
       handleLoginResponseSuperAdmin(response, navigate);
     } catch (error: any) {
       handleLoginError(error);
@@ -263,7 +263,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
     setSubmitting(true);
     try {
-      const response = await postData(loginUrlForClient, loginData);
+      const response = await postData('dummyroute', loginData);
       handleLoginResponseClient(response, navigate);
     } catch (error: any) {
       handleLoginError(error);
@@ -304,23 +304,23 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
 
   const handleLoginError = (error: any) => {
-    const code = extractErrorCode(error.message);
-    if (code === 403) {
-      setErrorMessage("Invalid password.");
-    } else if (code === 404) {
-      setErrorMessage("You are not yet registered on our platform.");
-    } else {
-      setErrorMessage("Our server is currently down. Please try again later.");
-    }
-  };
+  //   const code =  //extractErrorCode(error.message);
+  //   if (code === 403) {
+  //     setErrorMessage("Invalid password.");
+  //   } else if (code === 404) {
+  //     setErrorMessage("You are not yet registered on our platform.");
+  //   } else {
+  //     setErrorMessage("Our server is currently down. Please try again later.");
+  //   }
+  // };
 
-  const handleServerError = (error: any, code: number, defaultMessage: string) => {
-    const errorCode = extractErrorCode(error.message);
-    if (errorCode === code) {
-      setErrorMessage(defaultMessage);
-    } else {
-      setErrorMessage("Our server is currently down. Please try again later.");
-    }
+  // const handleServerError = (error: any, code: number, defaultMessage: string) => {
+  //   const errorCode = extractErrorCode(error.message);
+  //   if (errorCode === code) {
+  //     setErrorMessage(defaultMessage);
+  //   } else {
+  //     setErrorMessage("Our server is currently down. Please try again later.");
+  //   }
   };
 
   // Context value to be passed down to components

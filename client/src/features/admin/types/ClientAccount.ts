@@ -2,11 +2,9 @@
 export interface Transfer {
     date: any;
     description: string;
-    id: number;
-    transferDate: string;  
+    beneficiary:any
     amount: number;
-    recipientName: string;
-    recipientAccountNumber: string;
+    
   }
   
   export interface ClientAccount {

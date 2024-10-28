@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Modal, Button,Form } from "react-bootstrap";
-import EditClientForm from "./EditClientForm";
 
 
 export const CreditModal: React.FC<{ show: boolean,  clientId: number | null,  }> = ({ show, clientId, }) => {
@@ -83,41 +82,5 @@ export const DebitModal: React.FC<{ show: boolean,  clientId: number | null,  }>
   };
 
   
-  interface Client {
-    id: number;
-    firstName: string;
-    lastName: string;
-    username: string;
-    checkingBalance: number;
-    termDepositBalance: number;
-  }
-  
-  interface EditClientModalProps {
-    client: Client;
-    show: boolean;
-    handleClose: () => void;
-    onSubmit: (clientId: number, updatedData: { firstName: string, lastName: string, username: string }) => void;
-  }
-  
-  const EditClientModal: React.FC<EditClientModalProps> = ({ client, show, handleClose, onSubmit }) => {
-    return (
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Client Details (ID: {client.id})</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <EditClientForm 
-            client={client} 
-            onSubmit={(clientId, updatedData) => {
-              onSubmit(clientId, updatedData);
-              handleClose(); // Close the modal on submit
-            }} 
-            onCancel={handleClose}
-          />
-        </Modal.Body>
-      </Modal>
-    );
-  };
-  
-  export default EditClientModal;
+
   

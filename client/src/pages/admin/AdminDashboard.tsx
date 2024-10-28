@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Accordion, Button, Row, Col } from 'react-bootstrap';
 import BeneficiaryModal from '../../features/admin/components/BeneficiaryModal';
-import CreateBeneficiaryFormModal from '../../features/admin/components/CreateBeneficiaryFormModal';
+
+
+import AddTransferForm from '../../features/admin/components/AddTransferForm';
+
+;
 
 
 interface Client {
@@ -20,13 +24,18 @@ const dummyClients: Client[] = [
 const AdminDashboard = () => {
   const [clients, setClients] = useState<Client[]>(dummyClients);
   const [showBeneficiaryModal, setShowBeneficiaryModal] = useState(false);
+  // const [showAddTransferModal, setShowAddTransferModal] = useState(true);
+  // const [showEditClient, setShowEditClient] = useState(false);
+  // const [showTermDeposit, setShowTermDeposit] = useState(false);
+  // const [showCheckingAccount, setShowCheckingAccount] = useState(false);
 
-  const [clientId, setClientId] = useState(0)
+
+  // const [clientId, setClientId] = useState(0)
 
   const handleCreditCheckingVisible = (clientId: number) => {
-    console.log(`Credit Checking Account (visible) for client ID: ${clientId}`);
-  };
-
+    console.log(`Credit Checking Account (visible) for client ID: ${clientId}`)
+  }
+  
   const handleCreditCheckingInvisible = (clientId: number) => {
     console.log(`Credit Checking Account (invisible) for client ID: ${clientId}`);
   };
@@ -39,15 +48,15 @@ const AdminDashboard = () => {
     console.log(`Debit Checking Account (invisible) for client ID: ${clientId}`);
   };
 
-  const handleDebitTermDeposit = (clientId: number) => {
-    console.log(`Debit Term Deposit Account for client ID: ${clientId}`);
-  };
+  // const handleDebitTermDeposit = (clientId: number) => {
+  //   console.log(`Debit Term Deposit Account for client ID: ${clientId}`);
+  // };
 
   const handleDeleteClient = (clientId: number) => {
     setClients(clients.filter(client => client.id !== clientId));
   };
 
-  const handleEd = (clientId: number) => {
+  const handleEditClient = (clientId: number) => {
     console.log(`Edit Client Details for client ID: ${clientId}`);
   };
 
@@ -71,10 +80,12 @@ const AdminDashboard = () => {
   <div>
 
 </div>
+
   return (
     <div>
-    
-        <BeneficiaryModal show={showBeneficiaryModal} handleClose={() => setShowBeneficiaryModal(false)} clientId={clientId} />
+       <AddTransferForm clientId={0} show={true}/>
+ 
+        <BeneficiaryModal show={showBeneficiaryModal} handleClose={() => setShowBeneficiaryModal(false)} clientId={0} />
       <h2>Admin Dashboard</h2>
       <Accordion defaultActiveKey="0">
         {clients.map((client, index) => (
@@ -117,7 +128,7 @@ const AdminDashboard = () => {
                   </Button>
                 </Col>
                 <Col lg={3} md={4} sm={12}>
-                  <Button variant="info" className="w-100 mb-2" onClick={() => handleEd(client.id)}>
+                  <Button variant="info" className="w-100 mb-2" onClick={() => handleEditClient(client.id)}>
                     Edit Client Details
                   </Button>
                 </Col>
@@ -153,3 +164,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+
+

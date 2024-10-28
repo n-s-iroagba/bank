@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { creditAccountWithoutTransfer, debitAccountWithoutTransfer, createAccount, editTransfers } from '../../common/utils/accountApi.';
+import { createAccount, creditAccountWithoutTransfer, debitAccountWithoutTransfer, editTransfers } from '../../../utils/accountApi.';
 
 
 

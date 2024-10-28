@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, Button, Row, Col } from 'react-bootstrap';
+import { Accordion, Button } from 'react-bootstrap';
 import AdminAccordionItem from './AdminAccordionItem';
 
 interface AdminListProps {

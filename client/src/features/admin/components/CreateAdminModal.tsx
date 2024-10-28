@@ -8,13 +8,13 @@ interface CreateAdminModalProps {
 }
 
 const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onCreate }) => {
-  const [adminName, setAdminName] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleCreate = () => {
-    onCreate(adminName, adminPassword);
-    setAdminName('');
-    setAdminPassword('');
+    onCreate(username, password);
+    setUsername('');
+    setPassword('');
   };
 
   return (
@@ -25,19 +25,19 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onCr
       <Modal.Body>
         <Form>
           <Form.Group controlId="adminName">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
-              value={adminName}
-              onChange={(e) => setAdminName(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="adminPassword" className="mt-3">
+          <Form.Group controlId="password" className="mt-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
         </Form>

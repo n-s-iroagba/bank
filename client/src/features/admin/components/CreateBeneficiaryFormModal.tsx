@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
+import useBanks from '../../common/hooks/useBanks';
 
 interface CreateBeneficiaryFormProps {
   onSubmit: (beneficiaryData: { name: string; bank: string; accountNumber: string }) => void;
@@ -7,17 +8,24 @@ interface CreateBeneficiaryFormProps {
 }
 
 const CreateBeneficiaryForm: React.FC<CreateBeneficiaryFormProps> = ({ onSubmit, onCancel }) => {
-  const [name, setName] = useState('');
-  const [bank, setBank] = useState('');
-  const [accountNumber, setAccountNumber] = useState('');
+  const { banks } = useBanks();
+  const [beneficiaryDetails, setBeneficiaryDetails] = useState({
+    name: '',
+    bank: '',
+    accountNumber: '',
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setBeneficiaryDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    onSubmit({ name, bank, accountNumber });
-    // Reset form fields
-    setName('');
-    setBank('');
-    setAccountNumber('');
+    onSubmit(beneficiaryDetails);
   };
 
   return (
@@ -26,8 +34,9 @@ const CreateBeneficiaryForm: React.FC<CreateBeneficiaryFormProps> = ({ onSubmit,
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={beneficiaryDetails.name}
+          onChange={handleChange}
           placeholder="Enter name"
           required
         />
@@ -36,20 +45,28 @@ const CreateBeneficiaryForm: React.FC<CreateBeneficiaryFormProps> = ({ onSubmit,
       <Form.Group controlId="beneficiaryBank" className="mt-3">
         <Form.Label>Bank</Form.Label>
         <Form.Control
-          type="text"
-          value={bank}
-          onChange={(e) => setBank(e.target.value)}
-          placeholder="Enter bank name"
+          as="select"
+          name="bank"
+          value={beneficiaryDetails.bank}
+          onChange={handleChange}
           required
-        />
+        >
+          <option value="">Select a bank...</option>
+          {banks.map((option: any) => (
+            <option key={option.value} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+        </Form.Control>
       </Form.Group>
 
       <Form.Group controlId="beneficiaryAccountNumber" className="mt-3">
         <Form.Label>Account Number</Form.Label>
         <Form.Control
           type="text"
-          value={accountNumber}
-          onChange={(e) => setAccountNumber(e.target.value)}
+          name="accountNumber"
+          value={beneficiaryDetails.accountNumber}
+          onChange={handleChange}
           placeholder="Enter account number"
           required
         />
@@ -67,30 +84,34 @@ const CreateBeneficiaryForm: React.FC<CreateBeneficiaryFormProps> = ({ onSubmit,
   );
 };
 
-const CreateBeneficiaryFormModal:React.FC<{initialShow:boolean}> = ({initialShow}) =>{
-    const [showCreateModal,setShowCreateModal] = useState<boolean>(false)
-    useEffect(()=>{
-        setShowCreateModal(initialShow)
-    }, [initialShow])
+const CreateBeneficiaryFormModal: React.FC<{ initialShow: boolean }> = ({ initialShow }) => {
+  const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
 
-    const handleAddBeneficiary = () =>{
-        setShowCreateModal(false)
-        // Call your addBeneficiary function here
-  
-    }
-    return<>
-     <Modal show={initialShow} onHide={() => setShowCreateModal(false)}>
+  useEffect(() => {
+    setShowCreateModal(initialShow);
+  }, [initialShow]);
+
+  const handleAddBeneficiary = (beneficiaryData: { name: string; bank: string; accountNumber: string }) => {
+    setShowCreateModal(false);
+    // Add the beneficiary handling logic here
+    console.log('New Beneficiary:', beneficiaryData);
+  };
+
+  return (
+    <>
+      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Create Beneficiary</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateBeneficiaryForm 
-            onSubmit={handleAddBeneficiary} 
-            onCancel={() => setShowCreateModal(false)} 
+          <CreateBeneficiaryForm
+            onSubmit={handleAddBeneficiary}
+            onCancel={() => setShowCreateModal(false)}
           />
         </Modal.Body>
       </Modal>
-    
     </>
-}
-export default CreateBeneficiaryFormModal
+  );
+};
+
+export default CreateBeneficiaryFormModal;

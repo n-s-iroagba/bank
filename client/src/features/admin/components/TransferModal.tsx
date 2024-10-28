@@ -1,13 +1,12 @@
 import React from 'react';
 import { Modal, ListGroup, Spinner, Alert } from 'react-bootstrap';
-import { Transfer } from '../types/ClientAccount';
 
 
 
 interface Props {
   show: boolean;
   onHide: () => void;
-  transfers: Transfer[];
+  transfers: any;
   loading: boolean;
   error: string | null;
 }
@@ -24,7 +23,7 @@ const TransfersModal: React.FC<Props> = ({ show, onHide, transfers, loading, err
         <Alert variant="danger">{error}</Alert>
       ) : (
         <ListGroup>
-          {transfers.map((transfer) => (
+          {transfers.map((transfer:any) => (
             <ListGroup.Item key={transfer.id}>
               <strong>Amount:</strong> ${transfer.amount} <br />
               <strong>Description:</strong> {transfer.description} <br />

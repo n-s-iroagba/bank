@@ -31,14 +31,7 @@ const BeneficiaryModal: React.FC<BeneficiaryModalProps> = ({ show, handleClose, 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const handleAddBeneficiary = (beneficiaryData: { name: string; bank: string; accountNumber: string }) => {
-    const newBeneficiary: Beneficiary = {
-      id: beneficiaries.length + 1, // Assuming IDs are sequential
-      ...beneficiaryData,
-    };
-    setBeneficiaries([...beneficiaries, newBeneficiary]);
-    setShowCreateModal(false); // Close the create modal
-  };
+
 
   const handleEditBeneficiary = (beneficiary: Beneficiary) => {
     setSelectedBeneficiary(beneficiary);
@@ -83,7 +76,8 @@ const BeneficiaryModal: React.FC<BeneficiaryModalProps> = ({ show, handleClose, 
         </Modal.Body>
       </Modal>
 
-      {/* Edit Beneficiary Modal */}
+      <CreateBeneficiaryFormModal initialShow={showCreateModal} />
+  
       {selectedBeneficiary && (
         <EditBeneficiaryFormModal 
           beneficiary={selectedBeneficiary} 
@@ -92,8 +86,6 @@ const BeneficiaryModal: React.FC<BeneficiaryModalProps> = ({ show, handleClose, 
           onSubmit={handleUpdateBeneficiary} 
         />
       )}
-  <CreateBeneficiaryFormModal initialShow={showCreateModal} />
-   
     </>
   );
 };

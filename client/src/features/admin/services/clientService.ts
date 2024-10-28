@@ -1,5 +1,5 @@
 
-import { ClientAccount, CreateClientAccount, Transfer } from '../types/ClientAccount';
+import { ClientAccount, CreateClientAccount, } from '../types/ClientAccount';
 
 let clientAccounts: ClientAccount[] = [];
 
@@ -26,7 +26,7 @@ export const deleteClientAccount = (id: number) => {
 
 
 
-export const addTransfer = (clientId: number, transfer: Transfer) => {
+export const addTransfer = (clientId: number, transfer: any) => {
   const client = clientAccounts.find(account => account.id === clientId);
   if (client) {
     transfer.id = client.transfers.length + 1;
