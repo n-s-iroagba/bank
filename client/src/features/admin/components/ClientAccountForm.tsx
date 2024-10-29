@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { createClientAccount } from '../services/clientService';
+
 
 interface ClientAccountFormProps {
   onAccountCreated: () => void;
@@ -18,12 +18,12 @@ const ClientAccountForm: React.FC<ClientAccountFormProps> = ({ onAccountCreated 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createClientAccount({
-      username, password, fixedDepositAmount, checkingAccountAmount,
-      numberOfTransfers,
-      transferStartDate,
-      transferEndDate,
-    });
+    // createClientAccount({
+    //   username, password, fixedDepositAmount, checkingAccountAmount,
+    //   numberOfTransfers,
+    //   transferStartDate,
+    //   transferEndDate,
+    // });
     onAccountCreated();
   };
 

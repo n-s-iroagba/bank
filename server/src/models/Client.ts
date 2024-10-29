@@ -9,6 +9,7 @@ class Client extends Model {
   public middleName!: string|null;
   public firstName!: number;
   public lastName!: number;
+  public adminId!:number
 }
 
 Client.init(

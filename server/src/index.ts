@@ -13,7 +13,7 @@ app.use(cors());
 const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
-app.use('/api/clients', clientRoutes); // This should be the last route to catch all unmatched routes
+app.use('/clients', clientRoutes); // This should be the last route to catch all unmatched routes
 
 app.use('/api/accounts', accountRoutes);     // More specific route
 app.use('/api', adminRoutes);                // More specific route

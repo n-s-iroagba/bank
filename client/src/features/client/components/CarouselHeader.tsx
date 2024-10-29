@@ -6,7 +6,8 @@ import logo2 from '../assets/IDSHeild (1).png';
 import '../styles/CarouselHeader.css';
 import '../styles/GeneralButtonStyles.css'
 import '../styles/GeneralStyles.css'
-import LoginForm from './LoginForm';
+import LoginForm from '../../auth/components/LoginForm';
+
 
 
 const CarouselHeader: React.FC = () => {

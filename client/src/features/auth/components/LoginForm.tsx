@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import "../styles/LoginForm.css";
-import "../styles/GeneralStyles.css";
-import "../styles/GeneralButtonStyles.css";
-import "../styles/CarouselHeader.css";
-
+import { LoginDetails } from "../types/LoginDetails";
 import { useNavigate } from "react-router-dom";
-import { postWithNoAuth } from "../../../utils/helpers";
-import { clientLoginRoute } from "../../../data/routes";
+
+import { clientLoginUrl } from "../../../data/routes";
+import { postWithNoAuth } from "../helpers/api";
 
 const LoginForm: React.FC = () => {
-  const [loginDetails, setLoginDetails] = useState({
+  const [loginDetails, setLoginDetails] = useState<LoginDetails>({
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
 
@@ -26,25 +25,31 @@ const LoginForm: React.FC = () => {
     });
   };
 
-  const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    setErrorMessage("");
 
     try {
-      const response = await postWithNoAuth(clientLoginRoute, loginDetails);
+      const response = await postWithNoAuth(clientLoginUrl, loginDetails);
       if (response.status === 200) {
+        localStorage.setItem("clientToken", JSON.stringify(response.data));
         navigate("/dashboard");
       }
     } catch (error: any) {
       console.error(error);
-      setErrorMessage("Sorry an error occured, try again later.");
+      setErrorMessage("Sorry, an error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <>
       <div className="py-3 px-3 bg-red text-light">
         <h5>Your Feedback Matters</h5>
-        <p className="small-font ">Questions? Comments?</p>
-        <p className="small-font ">Complaints? We're here to help. </p>
+        <p className="small-font">Questions? Comments?</p>
+        <p className="small-font">Complaints? We're here to help.</p>
         <p className="small-font pt-3">
           <span className="underline">Feedback</span> |{" "}
           <span className="underline">Complaints</span>
@@ -55,7 +60,7 @@ const LoginForm: React.FC = () => {
           <Form.Label>User Name</Form.Label>
           <Form.Control
             required
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             className="form-input"
             type="text"
             name="username"
@@ -70,7 +75,7 @@ const LoginForm: React.FC = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             className="form-input"
             name="password"
             type="password"
@@ -81,14 +86,31 @@ const LoginForm: React.FC = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <br />
-        <Button className="button-radius bg-red w-100" type="submit">
-          Login
+        <Button
+          className="button-radius bg-red w-100"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />{" "}
+              login in...
+            </>
+          ) : (
+            "Login"
+          )}
         </Button>
         <div className="line-container mt-4">
           <hr className="gray-line" />
         </div>
 
-        <div className="link-container ">
+        <div className="link-container">
           <a href="/home">Enroll</a>
           <p>|</p>
           <a href="/home">Forgot User Name</a>

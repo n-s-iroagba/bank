@@ -1,21 +1,15 @@
 // /src/routes/clientRoutes.ts
 import { Router } from 'express';
-import {
-  createClient,
-  getClientsByAdminId,
-  getClientById,
-  updateClient,
-  deleteClient,
-  loginClient,
-} from '../controllers/clientController';
+import { createClient, deleteClient, getClientById, getClientsByAdminId, loginClient, updateClient } from '../controllers/ClientController';
+
 
 const router: Router = Router();
 
-router.post('/', createClient); // Create a new client
-router.get('/:adminId', getClientsByAdminId); // Get all clients by adminId
-router.get('/:id', getClientById); // Get a single client
-router.put('/:id', updateClient); // Update a client
-router.delete('/:id', deleteClient); // Delete a client
-router.post('/login', loginClient); // Client login
+router.post('/', createClient); 
+router.get('/:adminId', getClientsByAdminId); 
+router.get('/:id', getClientById); 
+router.put('/:id', updateClient); 
+router.delete('/:id', deleteClient); 
+router.post('/login', loginClient); 
 
 export default router;

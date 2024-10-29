@@ -1,10 +1,9 @@
 // src/components/LoginForm.tsx
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../client/styles/LoginForm.css'
-import'../../client/styles/GeneralStyles.css'
 
-const LoginForm: React.FC = () => {
+
+const AdminLoginForm: React.FC = () => {
   return (
     <Form className='bg-light form py-3
     '>
@@ -25,15 +24,10 @@ const LoginForm: React.FC = () => {
   <hr className="gray-line"/>
 </div>
 
-<div className="link-container">
-  <a href="/home">Enroll</a>
-  <p>|</p>
-  <a href="/home">Forgot User Name</a>
-  <a href="/home">Forgot Password</a>
-</div>
+
 
     </Form>
   );
 };
 
-export default LoginForm;
+export default AdminLoginForm;
