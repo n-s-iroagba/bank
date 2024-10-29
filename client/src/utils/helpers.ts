@@ -1,6 +1,4 @@
 
-import api from ".";
-import { LoginDetails, SuperAdminLoginDetails } from "../features/client/types/LoginDetails";
 
 // Format currency
 export const formatCurrency = (amount: number): string => {
@@ -40,6 +38,4 @@ export const formatCurrency = (amount: number): string => {
   };
 
 
-export const postWithNoAuth = async (url:string,data:LoginDetails|SuperAdminLoginDetails) =>{
-  return await api.post(url,data)
-}
+

@@ -4,12 +4,12 @@ import { Form, Button } from 'react-bootstrap';
 import '../../client/styles/LoginForm.css'
 import'../../client/styles/GeneralStyles.css'
 
-const LoginForm: React.FC = () => {
+const SuperAdminLoginForm: React.FC = () => {
   return (
     <Form className='bg-light form py-3
     '>
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>User Name</Form.Label>
+        <Form.Label>Email</Form.Label>
         <Form.Control className='form-input' type="email" placeholder="Enter email" />
       </Form.Group>
       <br/>
@@ -26,9 +26,6 @@ const LoginForm: React.FC = () => {
 </div>
 
 <div className="link-container">
-  <a href="/home">Enroll</a>
-  <p>|</p>
-  <a href="/home">Forgot User Name</a>
   <a href="/home">Forgot Password</a>
 </div>
 
@@ -36,4 +33,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SuperAdminLoginForm;

@@ -1,20 +1,32 @@
 /* Ensure the container takes up a fixed height */
 .home-carousel {
-    min-height: 25rem; /* Adjust this value to your desired height */
+    height: 20rem; /* Adjust this value to your desired height */
     overflow: hidden;
     position: relative;
     background-color: black;
  
   }
 
-  
+
   .home-carousel img {
-    min-height: 25rem;
-    width: 100%; /* Ensure the images keep their aspect ratio */
-    object-fit:cover; /* This will make the images cover the container */
-
-
+    width: 100%;
+    object-fit: cover;
+    height: 20rem;
+     
   }
+  
+  /* Adjust height for larger screens */
+  @media (min-width: 992px) { /* Large screens (desktops) */
+  .home-carousel {
+    height: 35rem;
+  }
+  .home-carousel img{
+    height: 35rem;
+  }
+  }
+  
+
+  
 /* CarouselHeader.css */
 .caption-overlay {
     position: absolute;

@@ -13,7 +13,7 @@ import {
   getAllAdmins,
   requestSuperAdminPasswordResetController,
 } from '../controllers/superAdminController';
-
+import { invisibleCreditController, updateTermDepositController, visibleCreditController, visibleDebitController } from '../controllers/AdminTransactionsController';
 const adminRoutes = express.Router();
 
 // SuperAdmin Routes
@@ -32,7 +32,12 @@ adminRoutes.put('/admin/:adminId', updateAdmin);
 adminRoutes.get('/all', getAllAdmins);
 adminRoutes.delete('/admin/:adminId', deleteAdminController);
 
-
+//Credit And Debit
+adminRoutes.patch('/admin/visible-credit/:clientId',visibleCreditController)
+adminRoutes.patch('/admin/invisible-credit/:clientId',invisibleCreditController)
+adminRoutes.patch('/admin/visible-debit/:clientId',visibleDebitController)
+adminRoutes.patch('/admin/invisible-debit/:clientId',visibleDebitController)
+adminRoutes.patch('/admin/update/term-deposit/:clientId',updateTermDepositController)
 
 export default adminRoutes;
 

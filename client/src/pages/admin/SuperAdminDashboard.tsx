@@ -6,7 +6,7 @@ import EditAdminModal from '../../features/admin/components/EditAdminModal';
 import AdminDashboard from './AdminDashboard';
 
 
-const SuperAdmin: React.FC = () => {
+const SuperAdminDashboard: React.FC = () => {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [admins, setAdmins] = useState<{ id: number; name: string; workingAccounts: number }[]>([
@@ -100,4 +100,4 @@ const SuperAdmin: React.FC = () => {
   );
 };
 
-export default SuperAdmin;
+export default SuperAdminDashboard;
