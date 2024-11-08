@@ -1,18 +1,24 @@
-// /src/models/Client.ts
-import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../config/dbConfig'; // Adjust import based on your project structure
 
-class Client extends Model {
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../config/dbConfig'; 
+import { CheckingAccount } from './CheckingAccount';
+
+export class AccountHolder extends Model {
   public id!: number;
+  public firstname!: string;
+  public surname!: string;
+  public middlename?: string;
   public username!: string;
   public password!: string;
-  public middleName!: string|null;
-  public firstName!: number;
-  public lastName!: number;
-  public adminId!:number
+  public checkingAccount?: CheckingAccount;
 }
 
-Client.init(
+
+
+
+
+
+AccountHolder.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -32,7 +38,7 @@ Client.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    surName: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
@@ -43,8 +49,6 @@ Client.init(
   },
   {
     sequelize,
-    modelName: 'Client',
+    tableName: 'accountHolder',
   }
 );
-
-export default Client;

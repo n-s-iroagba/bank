@@ -11,7 +11,7 @@ const CreateSecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => 
     firstname: '',
     surname: '',
     accountNumber: '',
-    bank: null,
+    bank: {id:0, name: '',logo:''},
     canReceive: false,
     canSend: false,
   });
@@ -24,6 +24,14 @@ const CreateSecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => 
     setSecondPartyDetails((prevDetails) => ({
       ...prevDetails,
       [name]: fieldValue,
+    }));
+  };
+
+  const handleBankChange = (event:any) => {
+    const selectedBank = banks.find((bank) => bank.name === event.target.value);
+    setSecondPartyDetails((prevDetails) => ({
+      ...prevDetails,
+      bank: selectedBank || { id: 0, name: '', logo: '' },
     }));
   };
 
@@ -69,12 +77,7 @@ const CreateSecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => 
               as="select"
               name="bank"
               value={secondPartyDetails.bank?.name || ''}
-              onChange={(e) =>
-                setSecondPartyDetails((prevDetails) => ({
-                  ...prevDetails,
-                  bank: banks.find((bank) => bank.name === e.target.value) || null,
-                }))
-              }
+              onChange={handleBankChange}
               required
             >
               <option value="">Select a bank...</option>

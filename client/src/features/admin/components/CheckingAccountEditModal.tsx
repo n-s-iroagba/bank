@@ -9,13 +9,9 @@ editId: number;
   onSave: (updatedAccount: EditCheckingAccount) => void;
 }> = ({ show, onHide, editId, onSave }) => {
   const [editedAccount, setEditedAccount] = useState<EditCheckingAccount>({
-    id:editId,
-    numberOfTransfers: 0,
-    transferStartDate: new Date(),
-    transferEndDate: new Date(),
+    accountNumber:0,
     balance: 0,
-    highestTransfer: 0,
-    lowestTransfer: 0,
+
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,47 +44,11 @@ editId: number;
             />
           </Form.Group>
           <Form.Group controlId="numberOfTransfers">
-            <Form.Label>Number of Transfers</Form.Label>
+            <Form.Label>Account Number</Form.Label>
             <Form.Control
               type="number"
               name="numberOfTransfers"
-              value={editedAccount.numberOfTransfers}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="transferStartDate">
-            <Form.Label>Transfer Start Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="transferStartDate"
-              value={editedAccount.transferStartDate.toISOString().split("T")[0]}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="transferEndDate">
-            <Form.Label>Transfer End Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="transferEndDate"
-              value={editedAccount.transferEndDate.toISOString().split("T")[0]}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="highestTransfer">
-            <Form.Label>Highest Transfer</Form.Label>
-            <Form.Control
-              type="number"
-              name="highestTransfer"
-              value={editedAccount.highestTransfer}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="lowestTransfer">
-            <Form.Label>Lowest Transfer</Form.Label>
-            <Form.Control
-              type="number"
-              name="lowestTransfer"
-              value={editedAccount.lowestTransfer}
+              value={editedAccount.accountNumber}
               onChange={handleChange}
             />
           </Form.Group>

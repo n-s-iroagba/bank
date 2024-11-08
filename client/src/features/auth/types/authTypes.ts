@@ -1,8 +1,5 @@
 
-
-
-
-  export interface SuperAdminData {
+export type SuperAdminData = {
     firstName: string;
     lastName: string;
     password: string;
@@ -11,74 +8,68 @@
     secretCode: string;
  
   }
-export interface NewPasswordData{
+export type NewPasswordData ={
   password: string;
   confirmPassword: string;
 }
-export interface LoginData{
+export type LoginData ={
   password: string;
-  email: string;
+  username: string;
 }
-export interface AuthContextType {
+
+export type DecodedChangePasswordToken = {
+  id:number;
+  email:string;
+}
+
+export  enum Role {
+ACCOUNTHOLDER = 'ACCOUNTHOLDER',
+ADMIN = 'ADMIN',
+SUPERADMIN ='SUPERADMIN',
+
+}
+
+export type DecodedLoginToken = {
+  id: string;            
+  email: string;       
+  role: Role;           
+}         
+
+export type DecodedVerificationToken= {
+  id: string;           
+  email: string;        
+  iat: number;           
+}
+export type AuthContextType ={
     superAdminData:SuperAdminData,
     newPasswordData:NewPasswordData,
-    setNewPasswordData: React.Dispatch<React.SetStateAction<NewPasswordData>>,
     submitting: boolean;
     errorMessage: string;
     passwordType:string;
     passwordValidityMessage:string[]
-    setSuperAdminData: React.Dispatch<React.SetStateAction<SuperAdminData>>;
-
-    
-    setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+    isMatchingPassword:boolean
+    loginData:LoginData
     validated: boolean;
+    showPassword:()=>void;
+    setNewPasswordData: React.Dispatch<React.SetStateAction<NewPasswordData>>;
+    setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+    setLoginData: React.Dispatch<React.SetStateAction<LoginData>>;
+    setSuperAdminData: React.Dispatch<React.SetStateAction<SuperAdminData>>;
     setValidated: React.Dispatch<React.SetStateAction<boolean>>;
     handleConfirmPasswordsChange: (
         data:SuperAdminData|NewPasswordData,
       e: React.ChangeEvent<HTMLInputElement>,
-      setState: React.Dispatch<React.SetStateAction<SuperAdminData|NewPasswordData>> 
+      setState: React.Dispatch<React.SetStateAction<SuperAdminData|NewPasswordData|LoginData>> 
     ) => void;
   
-
-    showPassword: () => void;
     handleSubmit:(data:SuperAdminData  ,event: React.FormEvent<HTMLFormElement>,domain:string,navigate:(path:string)=>void)=>void;
-    handleChange:(data:SuperAdminData | NewPasswordData, event:  React.ChangeEvent<HTMLInputElement>,setState: React.Dispatch<React.SetStateAction<SuperAdminData|NewPasswordData>> )=>void
+    handleChange:(data:SuperAdminData | NewPasswordData|LoginData, event:  React.ChangeEvent<HTMLInputElement>,setState: React.Dispatch<React.SetStateAction<SuperAdminData|NewPasswordData|LoginData>> )=>void
     handleSubmitForChangePassword:(data: NewPasswordData, event: React.FormEvent<HTMLFormElement>, navigate: (path: string) => void) =>void
-    isMatchingPassword:boolean
-    loginData:LoginData
+  
     handleLoginSuperAdmin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     handleLoginAdmin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
-    handleLoginClient : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
-    handleLoginChange :(e: React.ChangeEvent<HTMLInputElement>,navigate:(path:string)=>void)=>void
+    handleLoginAccountHolder : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
+   
     handleEmailVerification:(response: string,shouldReload:boolean,navigate:(path:string)=>void)=>void
    
-  }
-  export interface DecodedChangePasswordToken {
-    id:number;
-    email:string;
-    role:Role
-}
-
-export  enum Role {
-  CLIENT = 'client',
-  ADMIN = 'admin',
-  SUPERADMIN ='superadmin'
-  
-  }
-
-
-
-  export interface DecodedLoginToken {
-    id: string;            
-    email: string;       
-    role: Role;           
-    exp: number;           
-    iat: number; 
-  }         
-  
-  export interface DecodedVerificationToken {
-    id: string;           
-    email: string;        
-    iat: number;           
-    secretCode?: string;
   }

@@ -23,4 +23,15 @@ export type Transaction = {
   secondParty: SecondParty
 };
 
+
+export type CreateTransactionSystem = {
+  numberOfTransfers: number;
+  transferStartDate: Date;
+  transferEndDate: Date;
+  highestTransfer: number;
+  lowestTransfer: number
+}
+
+
 export type CreateTransaction = Omit<Transaction, 'id'>
+

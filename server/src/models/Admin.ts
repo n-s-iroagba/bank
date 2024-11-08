@@ -1,9 +1,11 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig'; 
+import { AccountHolder } from './AccountHolder';
 
 
 export class Admin extends Model {
   public id!: number;
+  public name!: string;
   public username!: string;
   public password!: string;
   public superAdminId!: number; 
@@ -15,6 +17,10 @@ Admin.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     username: {
       type: DataTypes.STRING,

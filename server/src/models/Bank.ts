@@ -1,5 +1,7 @@
+// models/Bank.ts
 import { DataTypes, Model, Optional } from 'sequelize';
-import {sequelize} from '../config/dbConfig'; // adjust this import based on your setup
+import {sequelize} from '../config/dbConfig'
+import { SecondParty } from './SecondParty';
 
 interface BankAttributes {
   id: number;
@@ -7,15 +9,12 @@ interface BankAttributes {
   logo: string;
 }
 
-interface BankCreationAttributes extends Optional<BankAttributes, 'id'> {}
+export type CreateBankAttributes = Optional<BankAttributes, 'id'>;
 
-class Bank extends Model<BankAttributes, BankCreationAttributes> implements BankAttributes {
+class Bank extends Model<BankAttributes, CreateBankAttributes> implements BankAttributes {
   public id!: number;
   public name!: string;
-  public logo!: string; // path to the logo file
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public logo!: string;
 }
 
 Bank.init(
@@ -38,7 +37,10 @@ Bank.init(
     sequelize,
     modelName: 'Bank',
     tableName: 'banks',
+    timestamps: false,
   }
 );
+
+
 
 export default Bank;

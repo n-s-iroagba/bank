@@ -2,6 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
 import { Admin } from './Admin';  
 
+
 export class SuperAdmin extends Model {
   public id!: number;
   public username!: string;
@@ -9,6 +10,7 @@ export class SuperAdmin extends Model {
   public password!: string;
   public isVerified!: boolean;
   public resetCode?: number;
+  public adminIdentification!:number
   public verificationCode!: string | null;
   public admins!: Admin[];  
 }
@@ -41,6 +43,10 @@ SuperAdmin.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    adminIdentification: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     resetCode: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -53,12 +59,4 @@ SuperAdmin.init(
 );
 
 
-SuperAdmin.hasMany(Admin, {
-  foreignKey: 'superAdminId',
-  as: 'admins',  
-});
 
-Admin.belongsTo(SuperAdmin, {
-  foreignKey: 'superAdminId',
-  as: 'superAdmin',
-});
