@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import BankService from '../service/BankService';
 
-
 class BankController {
   async getAllBanks(req: Request, res: Response) {
     const banks = await BankService.getAllBanks();

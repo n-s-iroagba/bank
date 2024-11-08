@@ -1,25 +1,19 @@
-import {
-  Model,
-  DataTypes,
-  Optional,
-} from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
+import { AccountHolder } from './AccountHolder';
+import { Transaction } from './Transaction';
 
-interface CheckingAccountAttributes {
-  id: number;
-  balance: number;
-  clientId: number; // Associate with Client
-}
-
-interface CheckingAccountCreationAttributes
-  extends Optional<CheckingAccountAttributes, 'id'> {}
-
-export class CheckingAccount extends Model<CheckingAccountAttributes, CheckingAccountCreationAttributes>
-  implements CheckingAccountAttributes {
+export class CheckingAccount extends Model {
   public id!: number;
+  public accountHolderId!: number;
   public balance!: number;
-  public clientId!: number; // Add clientId field
+  public accountNumber!: number;
 
+  // Associations
+  public transactions?: Transaction[];
+  public accountHolder!: AccountHolder;
+
+  // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -28,27 +22,34 @@ CheckingAccount.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
+    },
+    accountHolderId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: AccountHolder, key: 'id' },
     },
     balance: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       defaultValue: 0.0,
     },
-    clientId: {
+    accountNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'Clients', // Assuming there's a Client model
-        key: 'id',
-      },
+      defaultValue: 0.0,
     },
   },
   {
     sequelize,
-    modelName: 'CheckingAccount',
     tableName: 'checking_accounts',
     timestamps: true,
   }
 );
+
+
+
+
+
+

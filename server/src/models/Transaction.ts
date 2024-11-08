@@ -1,51 +1,40 @@
-import {
-  Model,
-  DataTypes,
-  Optional,
-  BelongsToCreateAssociationMixin,
-  Association,
-} from 'sequelize';
+import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
 import { CheckingAccount } from './CheckingAccount';
 import { SecondParty } from './SecondParty';
 
-// Interface for the attributes of the Transaction
+export enum TransactionType {
+  CREDIT = 'Credit',
+  DEBIT = 'Debit',
+}
+
 interface TransactionAttributes {
   id: number;
-  amount: number;
   date: Date;
-  transferDate: Date;
-  accountId: number; 
   description: string;
-  secondPartyId: number; 
+  secondPartyId: number;
+  origin: 'Admin' | 'System' | 'Client';
+  amount: number;
+  transactionType: TransactionType;
+  accountId: number;
 }
 
+interface TransactionCreationAttributes extends Optional<TransactionAttributes, 'id'> {}
 
-interface TransferCreationAttributes extends Optional<TransactionAttributes, 'id'> {}
-
-
-class Transaction
-  extends Model<TransactionAttributes, TransferCreationAttributes>
-  implements TransactionAttributes {
+export class Transaction extends Model<TransactionAttributes, TransactionCreationAttributes> {
   public id!: number;
-  public amount!: number;
   public date!: Date;
-  public transferDate!: Date;
-  public accountId!: number;
   public description!: string;
   public secondPartyId!: number;
+  public amount!: number;
+  public origin!: 'Admin' | 'System' | 'Client';
+  public transactionType!: TransactionType;
+  public accountId!: number;
 
-
-  public createCheckingAccount!: BelongsToCreateAssociationMixin<CheckingAccount>;
-  public createSecondParty!: BelongsToCreateAssociationMixin<SecondParty>;
-
-
-  public static associations: {
-    checkingAccount: Association<Transaction, CheckingAccount>;
-    secondParty: Association<Transaction, SecondParty>;
-  };
+  // Timestamps
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
-
 
 Transaction.init(
   {
@@ -54,49 +43,45 @@ Transaction.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    secondPartyId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: SecondParty, key: 'id' },
+    },
     amount: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    transferDate: {
-      type: DataTypes.DATE,
+    transactionType: {
+      type: DataTypes.ENUM('Credit', 'Debit'),
       allowNull: false,
     },
     accountId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: CheckingAccount,
-        key: 'id',
-      },
+      references: { model: CheckingAccount, key: 'id' },
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    secondPartyId: {
-      type: DataTypes.INTEGER,
+    origin: {
+      type: DataTypes.ENUM('Admin', 'System', 'Client'),
       allowNull: false,
-      references: {
-        model: SecondParty,
-        key: 'id',
-      },
     },
   },
   {
     sequelize,
     tableName: 'transactions',
-    timestamps: false,
+    timestamps: true,
   }
 );
 
 
-Transaction.belongsTo(CheckingAccount, { foreignKey: 'accountId', as: 'checkingAccount' });
-Transaction.belongsTo(SecondParty, { foreignKey: 'secondPartyId', as: 'secondParty' });
 
-export { Transaction };
+
+

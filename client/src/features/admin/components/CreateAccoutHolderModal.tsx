@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { CreateAccountHolder } from '../../../types/AccountHolder';
 
-
 interface CreateAccountHolderModalProps {
   show: boolean;
   onClose: () => void;
@@ -17,18 +16,20 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
     password: '',
     checkingAccount: {
       balance: 0,
-      numberOfTransfers: 0,
-      transferStartDate: new Date(),
-      transferEndDate: new Date(),
-      highestTransfer: 0,
-      lowestTransfer: 0,
     },
     termDepositAccount: {
       amountDeposited: 0,
       startDate: new Date(),
       durationInDays: 0,
       interestRate: 0,
-    }
+    },
+    transaction: {
+      numberOfTransfers: 0,
+      transferStartDate: new Date(),
+      transferEndDate: new Date(),
+      highestTransfer: 0,
+      lowestTransfer: 0,
+    },
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,8 +46,8 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
       ...prevState,
       checkingAccount: {
         ...prevState.checkingAccount,
-        [name]: value,
-      }
+        [name]: Number(value),
+      },
     }));
   };
 
@@ -56,33 +57,24 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
       ...prevState,
       termDepositAccount: {
         ...prevState.termDepositAccount,
-        [name]: value,
-      }
+        [name]: Number(value),
+      },
+    }));
+  };
+
+  const handleTransactionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAccountHolder((prevState) => ({
+      ...prevState,
+      transaction: {
+        ...prevState.transaction,
+        [name]: name.includes("Date") ? new Date(value) : Number(value),
+      },
     }));
   };
 
   const handleSubmit = () => {
     onSubmit(accountHolder);
-    setAccountHolder({
-      firstname: '',
-      surname: '',
-      username: '',
-      password: '',
-      checkingAccount: {
-        balance: 0,
-        numberOfTransfers: 0,
-        transferStartDate: new Date(),
-        transferEndDate: new Date(),
-        highestTransfer: 0,
-        lowestTransfer: 0,
-      },
-      termDepositAccount: {
-        amountDeposited: 0,
-        startDate: new Date(),
-        durationInDays: 0,
-        interestRate: 0,
-      }
-    });
     onClose();
   };
 
@@ -143,13 +135,51 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
               onChange={handleCheckingAccountChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formNumberOfTransfers">
+
+          <h5>Transfers</h5>
+          <Form.Group controlId="numberOfTransfers">
             <Form.Label>Number of Transfers</Form.Label>
             <Form.Control
               type="number"
               name="numberOfTransfers"
-              value={accountHolder.checkingAccount.numberOfTransfers}
-              onChange={handleCheckingAccountChange}
+              value={accountHolder.transaction.numberOfTransfers}
+              onChange={handleTransactionChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="transferStartDate">
+            <Form.Label>Transfer Start Date</Form.Label>
+            <Form.Control
+              type="date"
+              name="transferStartDate"
+              value={accountHolder.transaction.transferStartDate.toISOString().split("T")[0]}
+              onChange={handleTransactionChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="transferEndDate">
+            <Form.Label>Transfer End Date</Form.Label>
+            <Form.Control
+              type="date"
+              name="transferEndDate"
+              value={accountHolder.transaction.transferEndDate.toISOString().split("T")[0]}
+              onChange={handleTransactionChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="highestTransfer">
+            <Form.Label>Highest Transfer</Form.Label>
+            <Form.Control
+              type="number"
+              name="highestTransfer"
+              value={accountHolder.transaction.highestTransfer}
+              onChange={handleTransactionChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="lowestTransfer">
+            <Form.Label>Lowest Transfer</Form.Label>
+            <Form.Control
+              type="number"
+              name="lowestTransfer"
+              value={accountHolder.transaction.lowestTransfer}
+              onChange={handleTransactionChange}
             />
           </Form.Group>
 

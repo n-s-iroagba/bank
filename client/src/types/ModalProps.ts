@@ -1,5 +1,4 @@
-export type ModalProps =  {
-  show: boolean;
-  id?: number;
-
+export type ModalProps ={
+    id:number  
+    show:boolean
 }

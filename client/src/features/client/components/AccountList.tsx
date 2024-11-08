@@ -10,17 +10,17 @@ type  AccountsListProps = {
   setAccountType: (accountType: string) => void; 
   setDrawerVisible: (isVisible: boolean) => void; 
 }
-type DetailsType = {
-  termDepositAccount:TermDepositAccount
-  checkingAccount:CheckingAccount
+// type DetailsType = {
+//   termDepositAccount:TermDepositAccount
+//   checkingAccount:CheckingAccount
 
-}
+// }
 
 
 
 const AccountsList: React.FC<AccountsListProps> = ({ setAccountType, setDrawerVisible }) => {
     const [selectedAccount, setSelectedAccount] = useState<string>('');
-    const [details, setDetails] = useState<DetailsType | null>(null); // Initialize as null
+    const [details, setDetails] = useState<any>(null); // Initialize as null
 
     // Simulate loading data for demonstration purposes
     React.useEffect(() => {
@@ -31,12 +31,12 @@ const AccountsList: React.FC<AccountsListProps> = ({ setAccountType, setDrawerVi
                 termDepositAccount: {
                     id: 1,
                     amountDeposited: 10000,
-                    startDate: new Date ('2024-01-01'),
+                    startDate: new Date('2024-01-01'),
                     durationInDays: 365,
                     interestRate: 5,
                     accountHolderId: 1,
                     accountNumber: 1234567890,
-                    interest: 500,
+                    accountHolder: undefined
                 },
                 checkingAccount: {
                     id: 1,
@@ -73,12 +73,12 @@ const AccountsList: React.FC<AccountsListProps> = ({ setAccountType, setDrawerVi
                 </Col>
                 <Col xs={6} className="balance-info">
                     <div className="balance-section">
-                        <span className="balance-label">Interest Amount</span>
-                        <div className="balance-amount">{(details.termDepositAccount.interestRate / 100) * details.termDepositAccount.amountDeposited}</div>
+                        <span className="balance-label">Interest Rate</span>
+                        <div className="balance-amount">{(details.termDepositAccount.interestRate / 100)}</div>
                     </div>
                     <div className="balance-section">
-                        <span className="balance-label">Current Amount</span>
-                        <div className="balance-amount">{details.termDepositAccount.interest + details.termDepositAccount.amountDeposited}</div>
+                        <span className="balance-label">Amount Deposited</span>
+                        <div className="balance-amount">{details.termDepositAccount.amountDeposited}</div>
                     </div>
                 </Col>
             </Row>

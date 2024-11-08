@@ -5,15 +5,18 @@ import {
   registerSuperAdmin,
   verifyEmail,
   loginSuperAdminController,
-  createAdmin,
-  loginAdminController,
+
   updateAdmin,
-  deleteAdminController,
+
   changeSuperAdminPasswordController,
   getAllAdmins,
   requestSuperAdminPasswordResetController,
+  createAdmin,
 } from '../controllers/superAdminController';
-import { invisibleCreditController, updateTermDepositController, visibleCreditController, visibleDebitController } from '../controllers/AdminTransactionsController';
+import { AdminController } from '../controllers/AdminController';
+import { deleteAdminBySuperAdmin } from '../service/SuperAdminService';
+
+
 const adminRoutes = express.Router();
 
 // SuperAdmin Routes
@@ -22,23 +25,16 @@ adminRoutes.post('/superadmin/verify-email', verifyEmail);
 adminRoutes.post('/superadmin/login', loginSuperAdminController);
 adminRoutes.post('/superadmin/request-password-change',requestSuperAdminPasswordResetController)
 adminRoutes.post('/superadmin/new-password/:id', changeSuperAdminPasswordController);
+adminRoutes.post('/admin/create/:superAdminId', createAdmin);
+
+adminRoutes.post('/login', AdminController.login);
 
 
 
-// Admin Routes
-adminRoutes.post('/admin/create', createAdmin);
-adminRoutes.post('/admin/login', loginAdminController);
 adminRoutes.put('/admin/:adminId', updateAdmin);
 adminRoutes.get('/all', getAllAdmins);
-adminRoutes.delete('/admin/:adminId', deleteAdminController);
+adminRoutes.delete('/admin/:adminId', deleteAdminBySuperAdmin);
 
-//Credit And Debit
-adminRoutes.patch('/admin/visible-credit/:clientId',visibleCreditController)
-adminRoutes.patch('/admin/invisible-credit/:clientId',invisibleCreditController)
-adminRoutes.patch('/admin/visible-debit/:clientId',visibleDebitController)
-adminRoutes.patch('/admin/invisible-debit/:clientId',visibleDebitController)
-adminRoutes.patch('/admin/update/term-deposit/:clientId',updateTermDepositController)
-
-export default adminRoutes;
+export default adminRoutes
 
 
