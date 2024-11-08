@@ -4,13 +4,16 @@ import { Form, Dropdown, ListGroup, Button } from 'react-bootstrap';
 import AccountBox from './AccountBox';
 import '../styles/MakeTransfer.css'; 
 import logo from '../assets/greater-texas-cu-logo.svg'
-
-import { SecondParty } from '../../common/types/SecondParty';
-import { Bank } from '../../common/types/Bank';
-import { CreateTransaction } from '../../common/types/CreateTransaction';
-import { TransactionType } from '../../common/types/TransactionType';
+import { CreateTransaction, TransactionType } from '../../../types/Transaction';
+import { Bank } from '../../../types/Bank';
+import { SecondParty } from '../../../types/SecondParty';
 
 
+type AccountDetails={
+  accountName: string
+  accountNumber:number;
+
+}
 
 
 const banks:Bank[] = [
@@ -20,7 +23,7 @@ const banks:Bank[] = [
 ];
 
 const MakeDebit: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [transferDetails, setTransferDetails] = useState<CreateTransaction>({
     amount: 0,
     date: new Date(),
@@ -32,11 +35,14 @@ const MakeDebit: React.FC = () => {
       surname:'',
       bank:{ id: 0, name: 'BANK', logo: '' },
       accountNumber: '',
-      canRecieve: true,
+      canReceive: true,
       canSend: false,
     },
   });
-
+  const accountDetails:AccountDetails = {
+    accountName:'Fred Mecury',
+    accountNumber: 1234567890,
+  }
   const receivers:SecondParty[]=[]
   // const { banks, loading, error } = useBanks();
   const handlereceiverClick = (receiver: SecondParty) => {
@@ -81,7 +87,7 @@ const MakeDebit: React.FC = () => {
   };
   
   const filteredReceivers = receivers.filter(receiver =>
-    (receiver.firstname.toLowerCase().includes(searchTerm.toLowerCase())|| receiver.surname.toLowerCase().includes(searchTerm.toLowerCase())) && receiver.canRecieve
+    (receiver.firstname.toLowerCase().includes(searchTerm.toLowerCase())|| receiver.surname.toLowerCase().includes(searchTerm.toLowerCase())) && receiver.canReceive
   );
 
   return (
@@ -91,7 +97,7 @@ const MakeDebit: React.FC = () => {
     
       <AccountBox 
        
-        accountNumber={'000'}
+        {...accountDetails}
       />
   <br/>
       <Form.Group controlId="receiver">

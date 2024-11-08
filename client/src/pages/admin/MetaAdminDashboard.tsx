@@ -1,100 +1,104 @@
 import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import CreateAdminModal from '../../features/admin/components/CreateAdminModal';
-import EditAdminModal from '../../features/admin/components/EditAdminModal';
-import AdminDashboard from './AdminDashboard';
-import SuperAdminList from '../../features/admin/components/SuperAdminList';
-import AdminList from '../../features/admin/components/AdminList';
+import { Button, Container, Offcanvas, Accordion } from 'react-bootstrap';
+
+import { SuperAdmin } from '../../types/SuperAdmin';  // Make sure this type is properly defined
+import { Admin } from '../../types/Admin'; // Assuming you have an Admin type defined
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
-const SuperAdminDashboard: React.FC = () => {
 
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [admins, setAdmins] = useState<{ id: number; name: string; workingAccounts: number }[]>([
-    { id: 1, name: 'Admin One', workingAccounts: 5 },
-    { id: 2, name: 'Admin Two', workingAccounts: 3 },
-  ]);
 
-  const [showCreateAdminModal, setShowCreateAdminModal] = useState(false);
-  const [showEditAdminModal, setShowEditAdminModal] = useState<number | null>(null);
-  const [currentAdminName, setCurrentAdminName] = useState('');
+const MetaAdminDashboard: React.FC = () => {
+  const [showDrawer, setShowDrawer] = useState<boolean>(false); 
+  const [superAdmins,setSuperAdmin] = useState<SuperAdmin[]>([])
+  const [selectedSuperAdmin, setSelectedSuperAdmin] = useState<SuperAdmin | null>(null);
+  const [selectedSection, setSelectedSection] = useState<'superAdmins' | 'myAccount'>('superAdmins'); // Section toggle
+  const [showEditModal, setShowEditModal] = useState<boolean>(false); // State to show edit modal
 
-  const handleDrawerOptionClick = (option: string) => {
-    setSelectedOption(option);
+  const handleToggleDrawer = () => setShowDrawer(!showDrawer);  // Toggles drawer visibility
+
+  const handleDeleteSuperAdmin = (id: number) => {
+    // Logic for deleting superadmin (you can make an API call here)
+    alert(`SuperAdmin with ID ${id} deleted`);
   };
 
-  const handleCreateAdmin = (name: string, password: string) => {
-    setAdmins([...admins, { id: Date.now(), name, workingAccounts: 0 }]);
-    setShowCreateAdminModal(false);
+  const handleSelectSection = (section: 'superAdmins' | 'myAccount') => {
+    setSelectedSection(section);
+    setShowDrawer(false);  // Close the drawer after selecting a section
   };
 
-  const handleEditAdmin = (adminId: number, name: string) => {
-    const updatedAdmins = admins.map((admin) =>
-      admin.id === adminId ? { ...admin, name } : admin
-    );
-    setAdmins(updatedAdmins);
-    setShowEditAdminModal(null);
+  const handleEditSuperAdmin = (superAdmin: SuperAdmin) => {
+    setSelectedSuperAdmin(superAdmin);
+    setShowEditModal(true);
   };
-
-
 
   return (
-    <div className="super-admin-dashboard">
-   
-   
-      
-      <Container fluid>
-        <Row>
-      <Col>
-      <ul>
-        <li>
-          <button onClick={() => handleDrawerOptionClick('AdminAccounts')}>SuperAdmins</button>
-        </li>
-        <li>
-          <button onClick={() => handleDrawerOptionClick('WorkingAccounts')}>My Admins</button>
-        </li>
-        <li>
-          <button onClick={() => handleDrawerOptionClick('')}>My Account Holders</button>
-        </li>
-      </ul>
-      
-      </Col>
-          {/* Content Area */}
-          <Col xs={12} className="z-0">
-            {selectedOption === 'AdminAccounts' ? (
-              <>
-                <SuperAdminList/>
-                <AdminList admins={[]} onCreateAdminClick={function (): void {
-                                  throw new Error('Function not implemented.');
-                              } } onEditAdminClick={function (adminId: number): void {
-                                  throw new Error('Function not implemented.');
-                              } } onDeleteAdminClick={function (adminId: number): void {
-                                  throw new Error('Function not implemented.');
-                              } }
-                />
-                <CreateAdminModal
-                  show={showCreateAdminModal}
-                  onClose={() => setShowCreateAdminModal(false)}
-                  onCreate={handleCreateAdmin}
-                />
-                {showEditAdminModal !== null && (
-                  <EditAdminModal
-                    show={!!showEditAdminModal}
-                    onClose={() => setShowEditAdminModal(null)}
-                    onEdit={(name) => handleEditAdmin(showEditAdminModal, name)}
-                    currentName={currentAdminName}
-                  />
-                )}
-              </>
-            ) : (
-              <AdminDashboard />
-            ) 
-        }
-          </Col>
-        </Row>
+    <div>
+      {/* Hamburger Icon for Drawer */}
+      <Button className="mb-3" onClick={handleToggleDrawer}>
+        <FontAwesomeIcon icon={faBars}/>
+      </Button>
+
+      {/* Offcanvas Drawer */}
+      <Offcanvas show={showDrawer} onHide={() => setShowDrawer(false)}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Button variant="link" onClick={() => handleSelectSection('superAdmins')}>
+            Super Admins
+          </Button>
+          <Button variant="link" onClick={() => handleSelectSection('myAccount')}>
+            My Admins
+          </Button>
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      {/* Main Content */}
+      <Container className="mt-4">
+        {selectedSection === 'superAdmins' ? (
+          <div>
+            <Accordion defaultActiveKey="0">
+              {superAdmins.map((superAdmin, index) => (
+                <Accordion.Item eventKey={`superadmin-${index}`} key={superAdmin.id}>
+                  <Accordion.Header>
+                    {superAdmin.username}
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <Button variant="link" className="ms-3" onClick={() => handleEditSuperAdmin(superAdmin)}>
+                      View More
+                    </Button>
+                    <Button
+                      variant="link"
+                      className="ms-3"
+                      onClick={() => handleDeleteSuperAdmin(superAdmin.id)}
+                    >
+                      Delete Super Admin
+                    </Button>
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </div>
+        ) : selectedSection === 'myAccount' ? (
+          <div>
+            {/* Replace with your content or logic for "My Account" */}
+            <h3>My Super Admin Account</h3>
+            {/* You can add details for the current super admin here */}
+          </div>
+        ) : (
+          <div>
+            {/* You can add your content or logic for "My Admin Account" */}
+            <h3>My Admin Account</h3>
+          </div>
+        )}
       </Container>
+
+     
     </div>
   );
 };
 
-export default SuperAdminDashboard;
+export default MetaAdminDashboard;
+

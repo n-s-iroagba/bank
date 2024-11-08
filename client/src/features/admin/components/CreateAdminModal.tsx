@@ -1,20 +1,39 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { CreateAdmin } from '../../../types/Admin';
+
 
 interface CreateAdminModalProps {
   show: boolean;
   onClose: () => void;
-  onCreate: (name: string, password: string) => void;
+  onSubmit: (adminData: CreateAdmin) => void;
 }
 
-const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onCreate }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSubmit }) => {
+  const [admin, setAdmin] = useState<CreateAdmin>({
+ 
+    email: '',
+    username: '',
+    password: ''
+  });
 
-  const handleCreate = () => {
-    onCreate(username, password);
-    setUsername('');
-    setPassword('');
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAdmin((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    onSubmit(admin);
+    setAdmin({
+     
+      email: '',
+      username: '',
+      password: ''
+    });
+    onClose();
   };
 
   return (
@@ -24,20 +43,37 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onCr
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group controlId="adminName">
+    
+
+      
+
+          <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              name="username"
+              value={admin.username}
+              onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group controlId="password" className="mt-3">
+
+          <Form.Group className="mb-3" controlId="formFirstname">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="text"
+              name="firstname"
+              value={admin.email}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={admin.password}
+              onChange={handleInputChange}
             />
           </Form.Group>
         </Form>
@@ -46,8 +82,8 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onCr
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleCreate}>
-          Create
+        <Button variant="primary" onClick={handleSubmit}>
+          Save Admin
         </Button>
       </Modal.Footer>
     </Modal>

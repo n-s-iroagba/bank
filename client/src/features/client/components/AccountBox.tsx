@@ -5,21 +5,22 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 interface AccountBoxProps {
-  accountNumber: string;
+  accountNumber: number;
+  accountName:string;
 }
 
-const AccountBox: React.FC<AccountBoxProps> = ({  accountNumber }) => {
+const AccountBox: React.FC<AccountBoxProps> = ({  accountNumber, accountName }) => {
   return (
     <Card className="bg-blue text-light">
       <Card.Body className='d-flex justify-content-between'>
         <div >
-        <Card.Title>{accountNumber}</Card.Title>
+        <Card.Title>{accountName}</Card.Title>
         <Card.Text>
        CHECKING
         </Card.Text>
 
         <Card.Text>
-        Account Number:  <strong>{accountNumber}</strong> 
+        ACCOUNT NUMBER:  <strong>{accountNumber}</strong> 
         </Card.Text>
         </div>
      

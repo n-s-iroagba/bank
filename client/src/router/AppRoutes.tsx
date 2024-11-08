@@ -14,6 +14,9 @@ import AdminSignUp from '../pages/admin/AdminSignUp';
 import SuperAdminDashboard from '../pages/admin/SuperAdminDashboard';
 
 
+
+
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -22,8 +25,13 @@ const AppRoutes: React.FC = () => {
         <Route path="/transfer" element={<Transfer/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-
+        <Route path="/admin/dashboard" element={
+       
+          <AdminDashboard />
+      
+          } />
+       
+      
         <Route path="/super-admin/dashboard" element={<SuperAdminDashboard />} />
         <Route path="/admin/signup" element={<AdminSignUp />} />
         <Route path="/admin/login" element={<AdminLogin />} />

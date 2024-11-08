@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { Alert, Card, Col, Row, } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import '../styles/TermDepositDetails.css'; 
 
 interface TermDeposit {
@@ -13,7 +13,7 @@ interface TermDeposit {
   accountNumber: string;
 }
 
-const TermDepositDetails: React.FC = () => {
+const AdminTermDepositDetails: React.FC = () => {
   const termDeposit: TermDeposit = {
     depositDate: '2024-01-15',
     payoutDate: '2024-12-15',
@@ -58,11 +58,10 @@ const TermDepositDetails: React.FC = () => {
           </Row>
         </Card.Body>
       </Card>
-      <Alert variant='danger' className='text-center'>Visit Any out branches to unrestrict account.</Alert>
     </div>
    
     </>
   );
 };
 
-export default TermDepositDetails;
+export default AdminTermDepositDetails;

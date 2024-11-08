@@ -1,12 +1,13 @@
 import React from 'react';
 import { Modal, ListGroup, Spinner, Alert } from 'react-bootstrap';
+import { Transaction } from '../../../types/Transaction';
 
 
 
 interface Props {
   show: boolean;
   onHide: () => void;
-  transfers: any;
+  transfers: Transaction [];
   loading: boolean;
   error: string | null;
 }
@@ -23,11 +24,11 @@ const TransfersModal: React.FC<Props> = ({ show, onHide, transfers, loading, err
         <Alert variant="danger">{error}</Alert>
       ) : (
         <ListGroup>
-          {transfers.map((transfer:any) => (
+          {transfers.map((transfer) => (
             <ListGroup.Item key={transfer.id}>
               <strong>Amount:</strong> ${transfer.amount} <br />
               <strong>Description:</strong> {transfer.description} <br />
-              <strong>Date:</strong> {transfer.date} <br />
+              <strong>Date:</strong> {transfer.date.toDateString()} <br />
             </ListGroup.Item>
           ))}
         </ListGroup>

@@ -3,3 +3,5 @@ export type Bank ={
     name:string;
     logo:string;
 }
+
+export type CreateBank = Omit<Bank,'id'>

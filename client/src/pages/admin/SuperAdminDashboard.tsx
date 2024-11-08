@@ -1,101 +1,131 @@
 import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import AdminList from '../../features/admin/components/AdminList';
-import CreateAdminModal from '../../features/admin/components/CreateAdminModal';
-import EditAdminModal from '../../features/admin/components/EditAdminModal';
-import AdminDashboard from './AdminDashboard';
+import { Accordion, Button, Container, Offcanvas } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
+import EditAdminModal from '../../features/admin/components/EditAdminModal';
+import CreateAdminModal from '../../features/admin/components/CreateAdminModal';
+import { BaseAdmin, CreateAdmin } from '../../types/Admin';
+import BankDashboard from '../../features/admin/components/BankDashboard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
+export const admins: BaseAdmin[] = [
+  {
+    id: 1,
+    
+    email: 'Doe',
+    username: '',
+    password: ''
+  },
+  {
+    id: 2,
+
+  email: 'Smith',
+    username: '',
+    password: ''
+  }
+];
 
 const SuperAdminDashboard: React.FC = () => {
+  const [showEditAdminModal, setShowEditAdminModal] = useState<boolean>(false);
+  const [selectedAdmin, setSelectedAdmin] = useState<BaseAdmin | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showDrawer, setShowDrawer] = useState<boolean>(false);  // State to control the drawer visibility
+  const [selectedSection, setSelectedSection] = useState<'admin' | 'bank'>('admin'); // State for toggling sections
 
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [admins, setAdmins] = useState<{ id: number; name: string; workingAccounts: number }[]>([
-    { id: 1, name: 'Admin One', workingAccounts: 5 },
-    { id: 2, name: 'Admin Two', workingAccounts: 3 },
-  ]);
-
-  const [showCreateAdminModal, setShowCreateAdminModal] = useState(false);
-  const [showEditAdminModal, setShowEditAdminModal] = useState<number | null>(null);
-  const [currentAdminName, setCurrentAdminName] = useState('');
-
-  const handleDrawerOptionClick = (option: string) => {
-    setSelectedOption(option);
+  const handleShowEditAdmin = (admin: BaseAdmin) => {
+    setSelectedAdmin(admin);
+    setShowEditAdminModal(true);
   };
 
-  const handleCreateAdmin = (name: string, password: string) => {
-    setAdmins([...admins, { id: Date.now(), name, workingAccounts: 0 }]);
-    setShowCreateAdminModal(false);
+  const handleShowCreateAdmin = () => {
+    // Handle creating admin heres
   };
 
-  const handleEditAdmin = (adminId: number, name: string) => {
-    const updatedAdmins = admins.map((admin) =>
-      admin.id === adminId ? { ...admin, name } : admin
-    );
-    setAdmins(updatedAdmins);
-    setShowEditAdminModal(null);
+  const handleShowDeleteAdmin = () => {
+    // Handle deleting admin here
   };
 
-  const openEditAdminModal = (adminId: number) => {
-    const admin = admins.find((admin) => admin.id === adminId);
-    if (admin) {
-      setCurrentAdminName(admin.name);
-      setShowEditAdminModal(admin.id);
-    }
-  };
-
-  const handleDeleteAdmin = (adminId: number) => {
-    setAdmins(admins.filter((admin) => admin.id !== adminId));
+  const handleToggleDrawer = () => setShowDrawer(!showDrawer);  // Toggles drawer visibility
+  const handleSelectSection = (section: 'admin' | 'bank') => {
+    setSelectedSection(section);
+    setShowDrawer(false);  // Close the drawer after selecting a section
   };
 
   return (
-    <div className="super-admin-dashboard">
-   
-   
-      
-      <Container fluid>
-        <Row>
-      <Col>
-      <ul>
-        <li>
-          <button onClick={() => handleDrawerOptionClick('AdminAccounts')}>Admins</button>
-        </li>
-        <li>
-          <button onClick={() => handleDrawerOptionClick('WorkingAccounts')}>Working Accounts</button>
-        </li>
-      </ul>
-      
-      </Col>
-          {/* Content Area */}
-          <Col xs={12} className="z-0">
-            {selectedOption === 'AdminAccounts' ? (
-              <>
-                <AdminList
-                  admins={admins}
-                  onCreateAdminClick={() => setShowCreateAdminModal(true)}
-                  onEditAdminClick={openEditAdminModal}
-                  onDeleteAdminClick={handleDeleteAdmin}
-                />
-                <CreateAdminModal
-                  show={showCreateAdminModal}
-                  onClose={() => setShowCreateAdminModal(false)}
-                  onCreate={handleCreateAdmin}
-                />
-                {showEditAdminModal !== null && (
-                  <EditAdminModal
-                    show={!!showEditAdminModal}
-                    onClose={() => setShowEditAdminModal(null)}
-                    onEdit={(name) => handleEditAdmin(showEditAdminModal, name)}
-                    currentName={currentAdminName}
-                  />
-                )}
-              </>
-            ) : (
-              <AdminDashboard />
-            ) 
-        }
-          </Col>
-        </Row>
+    <div>
+    
+
+      {/* Hamburger Icon for Drawer */}
+      <Button className="mb-3" onClick={handleToggleDrawer}>
+        <FontAwesomeIcon icon={faBars} />
+      </Button>
+
+      {/* Offcanvas Drawer */}
+      <Offcanvas show={showDrawer} onHide={() => setShowDrawer(false)}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Button variant="link" onClick={() => handleSelectSection('admin')}>
+            Admin Dashboard
+          </Button>
+          <Button variant="link" onClick={() => handleSelectSection('bank')}>
+            Bank Dashboard
+          </Button>
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      {/* Main Content */}
+      <Container className="mt-4">
+        {selectedSection === 'admin' ? (
+          <div>
+             <Button className="mb-3" onClick={handleShowCreateAdmin}>
+        Create Admin
+      </Button>
+            <Accordion defaultActiveKey="0">
+              {admins.map((admin, adminIndex) => (
+                <Accordion.Item eventKey={`admin-${adminIndex}`} key={admin.id}>
+                  <Accordion.Header>{admin.username}</Accordion.Header>
+                  <Accordion.Body>
+                    <Link to={`/admin-dashboard/${admin.id}`}>
+                      <Button variant="link" className="ms-3">See More</Button>
+                    </Link>
+                    <Button variant="link" className="ms-3" onClick={() => handleShowEditAdmin(admin)}>
+                      Edit Admin
+                    </Button>
+                    <Button variant="link" className="ms-3" onClick={handleShowDeleteAdmin}>
+                      Delete Admin
+                    </Button>
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </div>
+        ) : (
+          <BankDashboard />
+        )}
       </Container>
+
+      {/* Modals */}
+      {selectedAdmin && (
+        <EditAdminModal
+          show={showEditAdminModal}
+          onClose={() => setShowModal(false)}
+          adminToEdit={selectedAdmin}
+          onSubmit={(adminData: BaseAdmin) => {
+            console.log('Updating admin data:', adminData);
+            setShowModal(false);
+          }}
+        />
+      )}
+      <CreateAdminModal
+        show={false}
+        onClose={() => {}}
+        onSubmit={(adminData: CreateAdmin) => {
+          console.log('Creating new admin:', adminData);
+        }}
+      />
     </div>
   );
 };
