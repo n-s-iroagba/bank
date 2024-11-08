@@ -50,7 +50,7 @@ export interface AuthContextType {
     handleLoginAdmin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     handleLoginClient : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     handleLoginChange :(e: React.ChangeEvent<HTMLInputElement>,navigate:(path:string)=>void)=>void
-    handleEmailVerification:(response: any,shouldReload:boolean,navigate:(path:string)=>void)=>void
+    handleEmailVerification:(response: string,shouldReload:boolean,navigate:(path:string)=>void)=>void
    
   }
   export interface DecodedChangePasswordToken {

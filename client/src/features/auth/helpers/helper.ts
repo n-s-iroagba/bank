@@ -5,6 +5,8 @@ import { jwtDecode } from "jwt-decode";
 
 import { DecodedChangePasswordToken, DecodedLoginToken, DecodedVerificationToken } from "../types/authTypes";
 import axios from "axios";
+import { CreateAccountHolder } from "../../../types/AccountHolder";
+import { CreateTransaction } from "../../../types/Transaction";
 
 
 export const getLoginDecodedToken = (): DecodedLoginToken | null => {
@@ -45,14 +47,3 @@ export const logOut = (navigate:(path:string)=>void)=>{
    navigate('/')
   }
 
-
-
-  export const postData = async (url: string, data: any, token?: string) => {
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    try {
-      const response = await axios.post(url, data, { headers });
-      return response;
-    } catch (error:any) {
-      throw new Error(error.response?.data?.message || error.message);
-    }
-  };

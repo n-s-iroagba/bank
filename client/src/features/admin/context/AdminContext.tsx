@@ -1,4 +1,4 @@
-// src/contexts/AdminContext.tsx
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AdminContextProps {
@@ -7,25 +7,29 @@ interface AdminContextProps {
   showDeleteModal: boolean;
   showCreditCheckingModal: boolean;
   showDebitCheckingModal: boolean;
-  handleShowBeneficiaryModal: (clientId: number) => void;
+  selectedAccountHolderId: number|null;
+  showCreateAccountHoldersModal: boolean;
+  handleShowBeneficiaryModal: (accountHolderId: number) => void;
   handleCloseBeneficiaryModal: () => void;
-  handleEditClient: (clientId: number) => void;
+  handleEditClient: (accountHolderId: number) => void;
   handleCloseEditModal: () => void;
-  handleDeleteClient: (clientId: number) => void;
+  handleDeleteClient: (accountHolderId: number) => void;
   handleCloseDeleteModal: () => void;
-  handleCreditCheckingVisible: (clientId: number) => void;
+  handleCreditCheckingVisible: (accountHolderId: number) => void;
   handleCloseCreditCheckingModal: () => void;
-  handleDebitCheckingVisible: (clientId: number) => void;
+  handleDebitCheckingVisible: (accountHolderId: number) => void;
   handleCloseDebitCheckingModal: () => void;
-  selectedClientId: number | null;
+  handleCreateAccountHolderModal:() => void
+  
+  
 }
 
-const AdminContext = createContext<AdminContextProps | undefined>(undefined);
+export const AdminContext = createContext<AdminContextProps|any>(undefined);
 
 export const useAdminContext = () => {
   const context = useContext(AdminContext);
   if (!context) {
-    throw new Error('useAdminContext must be used within an AdminProvider');
+    console.error('useAdminContext must be used within an AdminProvider');
   }
   return context;
 };
@@ -40,60 +44,61 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showCreditCheckingModal, setShowCreditCheckingModal] = useState(false);
   const [showDebitCheckingModal, setShowDebitCheckingModal] = useState(false);
-  const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
+  const [selectedAccountHolderId, setSelectedAccountHolderId] = useState<number | null>(null);
+  const [showCreateAccountHoldersModal, setShowCreateAccountHolderModal] = useState (false);
+  
 
-  const handleShowBeneficiaryModal = (clientId: number) => {
-    setSelectedClientId(clientId);
+  const handleShowBeneficiaryModal = (accountHolderId: number) => {
+    setSelectedAccountHolderId(accountHolderId);
     setShowBeneficiaryModal(true);
   };
 
   const handleCloseBeneficiaryModal = () => {
     setShowBeneficiaryModal(false);
-    setSelectedClientId(null);
+    setSelectedAccountHolderId(null);
   };
 
-  const handleEditClient = (clientId: number) => {
-    setSelectedClientId(clientId);
+  const handleEditClient = (accountHolderId: number) => {
+    setSelectedAccountHolderId(accountHolderId);
     setShowEditModal(true);
-    console.log(`Edit Account Holder Details for client ID: ${clientId}`);
   };
 
   const handleCloseEditModal = () => {
     setShowEditModal(false);
-    setSelectedClientId(null);
+    setSelectedAccountHolderId(null);
   };
 
-  const handleDeleteClient = (clientId: number) => {
-    setSelectedClientId(clientId);
+  const handleDeleteClient = (accountHolderId: number) => {
+    setSelectedAccountHolderId(accountHolderId);
     setShowDeleteModal(true);
-    console.log(`Delete Client with ID: ${clientId}`);
+   
   };
 
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
-    setSelectedClientId(null);
+    setSelectedAccountHolderId(null);
   };
 
-  const handleCreditCheckingVisible = (clientId: number) => {
-    setSelectedClientId(clientId);
+  const handleCreditCheckingVisible = (accountHolderId: number) => {
+    setSelectedAccountHolderId(accountHolderId);
     setShowCreditCheckingModal(true);
-    console.log(`Credit Checking Account (visible) for client ID: ${clientId}`);
   };
 
   const handleCloseCreditCheckingModal = () => {
     setShowCreditCheckingModal(false);
-    setSelectedClientId(null);
+    setSelectedAccountHolderId(null);
   };
 
-  const handleDebitCheckingVisible = (clientId: number) => {
-    setSelectedClientId(clientId);
+  const handleDebitCheckingVisible = (accountHolderId: number) => {
+    setSelectedAccountHolderId(accountHolderId);
     setShowDebitCheckingModal(true);
-    console.log(`Debit Checking Account (visible) for client ID: ${clientId}`);
   };
-
+const handleCreateAccountHolderModal = ()=>{
+  setShowCreateAccountHolderModal(true)
+}
   const handleCloseDebitCheckingModal = () => {
     setShowDebitCheckingModal(false);
-    setSelectedClientId(null);
+    setSelectedAccountHolderId(null);
   };
 
   return (
@@ -104,6 +109,9 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         showDeleteModal,
         showCreditCheckingModal,
         showDebitCheckingModal,
+        selectedAccountHolderId,
+        showCreateAccountHoldersModal,
+        handleCreateAccountHolderModal,
         handleShowBeneficiaryModal,
         handleCloseBeneficiaryModal,
         handleEditClient,
@@ -114,7 +122,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         handleCloseCreditCheckingModal,
         handleDebitCheckingVisible,
         handleCloseDebitCheckingModal,
-        selectedClientId
+        
       }}
     >
       {children}

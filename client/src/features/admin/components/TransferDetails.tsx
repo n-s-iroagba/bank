@@ -1,6 +1,6 @@
 import { Row, Col, Button } from "react-bootstrap";
 
-const TransferDetails = ({ clientId }: { clientId: number }) => (
+const CreditAndDebitAccount = ({ clientId }: { clientId: number }) => (
     <Row>
       <Col lg={3} md={4} sm={12}>
         <Button variant="success" className="w-100 mb-2" >
@@ -24,4 +24,4 @@ const TransferDetails = ({ clientId }: { clientId: number }) => (
       </Col>
     </Row>
   );
-  export default TransferDetails
+  export default CreditAndDebitAccount

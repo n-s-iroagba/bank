@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { BaseAdmin } from '../../../types/Admin';
+
 
 interface EditAdminModalProps {
   show: boolean;
   onClose: () => void;
-  onEdit: (name: string) => void;
-  currentName: string;
+  onSubmit: (adminData: BaseAdmin) => void;
+  adminToEdit: BaseAdmin; // Admin data to populate the form for editing
 }
 
-const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onEdit, currentName }) => {
-  const [adminName, setAdminName] = useState(currentName);
+const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onSubmit, adminToEdit }) => {
+  const [admin, setAdmin] = useState<BaseAdmin>(adminToEdit);
 
   useEffect(() => {
-    setAdminName(currentName);
-  }, [currentName]);
+    setAdmin(adminToEdit); // Reset form if the admin data changes
+  }, [adminToEdit]);
 
-  const handleEdit = () => {
-    onEdit(adminName);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAdmin((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    onSubmit(admin);
+    onClose();
   };
 
   return (
@@ -26,12 +37,35 @@ const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onEdit, 
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group controlId="adminNameEdit">
-            <Form.Label>Name</Form.Label>
+      
+
+          <Form.Group className="mb-3" controlId="formSurname">
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="text"
-              value={adminName}
-              onChange={(e) => setAdminName(e.target.value)}
+              name="surname"
+              value={admin.email}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={admin.username}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={admin.password}
+              onChange={handleInputChange}
             />
           </Form.Group>
         </Form>
@@ -40,7 +74,7 @@ const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onEdit, 
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleEdit}>
+        <Button variant="primary" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>

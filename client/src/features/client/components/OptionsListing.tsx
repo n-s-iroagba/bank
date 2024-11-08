@@ -6,7 +6,7 @@ import TermDepositDetails from './TermDepositDetails';
 
 interface OptionListingProps {
   selectedOption: string;
-  setDrawerVisible:any
+  setDrawerVisible:(state:boolean)=>void
 }
 
 

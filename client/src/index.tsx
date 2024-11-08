@@ -5,13 +5,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import reportWebVitals from './reportWebVitals';
 import AppRoutes from './router/AppRoutes';
+import { AdminProvider } from './features/admin/context/AdminContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
+        <AdminProvider>
     <AppRoutes/>
+    </AdminProvider>
   </React.StrictMode>
 );
 
