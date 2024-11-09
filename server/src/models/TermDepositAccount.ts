@@ -60,7 +60,7 @@ TermDepositAccount.init(
       allowNull: false,
     },
     startDate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     interestRate: {
@@ -77,14 +77,13 @@ TermDepositAccount.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'accountHolder', 
+        model: 'accountHolders', 
         key: 'id',
       },
     },
   },
   {
     sequelize,
-    modelName: 'TermDepositAccount',
     tableName: 'term_deposit_accounts',
     timestamps: true,
   }

@@ -3,7 +3,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import {sequelize} from '../config/dbConfig'
 import { SecondParty } from './SecondParty';
 
-interface BankAttributes {
+export interface BankAttributes {
   id: number;
   name: string;
   logo: string;
@@ -35,11 +35,22 @@ Bank.init(
   },
   {
     sequelize,
-    modelName: 'Bank',
     tableName: 'banks',
     timestamps: false,
   }
 );
+Bank.hasMany(
+  SecondParty,
+  {
+    foreignKey: 'bankId',
+    as:'secondParties',
+  }
+)
+
+SecondParty.belongsTo(Bank, {
+  foreignKey: 'bankId',
+  as: 'bank',
+});
 
 
 

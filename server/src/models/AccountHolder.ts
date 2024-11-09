@@ -1,7 +1,9 @@
-
+// src/models/AccountHolder.ts
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../config/dbConfig'; 
+import { sequelize } from '../config/dbConfig'; // Correctly import sequelize instance
+
 import { CheckingAccount } from './CheckingAccount';
+import { TermDepositAccount } from './TermDepositAccount';
 
 export class AccountHolder extends Model {
   public id!: number;
@@ -10,13 +12,10 @@ export class AccountHolder extends Model {
   public middlename?: string;
   public username!: string;
   public password!: string;
-  public checkingAccount?: CheckingAccount;
+  public adminId!:number
+  public checkingAccount!: CheckingAccount;
+  public termDepositAccount!: TermDepositAccount;
 }
-
-
-
-
-
 
 AccountHolder.init(
   {
@@ -34,21 +33,45 @@ AccountHolder.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    firstName: {
+    adminId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'admins',  
+        key: 'id',
+      },
+    },
+    firstname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    surName: {
-      type: DataTypes.FLOAT,
+    surname: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    middleName: {
+    middlename: {
       type: DataTypes.STRING,
       allowNull: true,
     },
   },
   {
-    sequelize,
-    tableName: 'accountHolder',
+    sequelize, // Ensure this is passed correctly
+    tableName: 'accountHolders',
   }
 );
+AccountHolder.hasOne(CheckingAccount, {
+  foreignKey: 'accountHolderId',
+  as: 'checkingAccount',
+});
+CheckingAccount.belongsTo(AccountHolder, {
+  foreignKey: 'accountHolderId',
+  as: 'accountHolder',
+});
+AccountHolder.hasOne(TermDepositAccount, {
+  foreignKey: 'accountHolderId',
+  as: 'termDepositAccount',
+});
+
+TermDepositAccount.belongsTo(AccountHolder, {
+  foreignKey: 'accountHolderId',
+  as: 'accountHolder',
+});

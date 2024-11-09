@@ -23,19 +23,18 @@ SecondParty.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastname: {
+    surname: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     bankId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: Bank, key: 'id' },
+      references: { model: 'banks', key: 'id' },
     },
     accountNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: Bank, key: 'id' },
       },
   },
   {
@@ -43,6 +42,16 @@ SecondParty.init(
     tableName: 'second_parties',
   }
 );
+SecondParty.hasMany(Transaction, {
+  foreignKey:'secondPartyId',
+  as: 'transactions',
+});
+
+
+Transaction.belongsTo(SecondParty, {
+  foreignKey: 'secondPartyId',
+  as: 'secondParty',
+});
 
 
 

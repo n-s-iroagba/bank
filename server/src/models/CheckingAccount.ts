@@ -48,6 +48,17 @@ CheckingAccount.init(
   }
 );
 
+CheckingAccount.hasMany(Transaction, {
+  foreignKey: 'accountId',
+  as: 'transactions',
+});
+
+Transaction.belongsTo(CheckingAccount, {
+  foreignKey: 'accountId',
+  as: 'account',
+});
+
+
 
 
 

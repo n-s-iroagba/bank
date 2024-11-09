@@ -32,7 +32,7 @@ adminRoutes.post('/login', AdminController.login);
 
 
 adminRoutes.put('/admin/:adminId', updateAdmin);
-adminRoutes.get('/all', getAllAdmins);
+adminRoutes.get('/:id', getAllAdmins);
 adminRoutes.delete('/admin/:adminId', deleteAdminBySuperAdmin);
 
 export default adminRoutes

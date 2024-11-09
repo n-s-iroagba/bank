@@ -5,7 +5,7 @@ import { AccountHolder } from './AccountHolder';
 
 export class Admin extends Model {
   public id!: number;
-  public name!: string;
+
   public username!: string;
   public password!: string;
   public superAdminId!: number; 
@@ -18,10 +18,7 @@ Admin.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+ 
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,6 +37,16 @@ Admin.init(
   },
   {
     sequelize,
-    tableName: 'admins', 
+    tableName: 'admins',
   }
 );
+
+Admin.hasMany(AccountHolder, {
+  foreignKey: 'adminId',
+  as: 'accountHolders',  // Use this alias consistently in queries
+});
+
+AccountHolder.belongsTo(Admin, {
+  foreignKey: 'adminId',
+  as: 'admin',  // Ensure this alias is consistent as well
+});

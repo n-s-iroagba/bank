@@ -8,38 +8,27 @@ import { BaseAdmin, CreateAdmin } from '../../types/Admin';
 import BankDashboard from '../../features/admin/components/BankDashboard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import useAdmins from '../../hooks/useAdmins';
+import AdminDashboard from './AdminDashboard';
 
-export const admins: BaseAdmin[] = [
-  {
-    id: 1,
-    
-    email: 'Doe',
-    username: '',
-    password: ''
-  },
-  {
-    id: 2,
 
-  email: 'Smith',
-    username: '',
-    password: ''
-  }
-];
 
-const SuperAdminDashboard: React.FC = () => {
+const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
   const [showEditAdminModal, setShowEditAdminModal] = useState<boolean>(false);
   const [selectedAdmin, setSelectedAdmin] = useState<BaseAdmin | null>(null);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [showDrawer, setShowDrawer] = useState<boolean>(false);  // State to control the drawer visibility
-  const [selectedSection, setSelectedSection] = useState<'admin' | 'bank'>('admin'); // State for toggling sections
-
+  const [showCreateAdminModal, setShowCreateAdminModal] = useState<boolean>(false);
+  const [showDrawer, setShowDrawer] = useState<boolean>(false);  
+  const [selectedSection, setSelectedSection] = useState<'admin' | 'bank'|'accounts'>('admin'); 
+  const {admins,adminLoading,adminError} = useAdmins(id)
+ console.log(admins,adminLoading,adminError)
   const handleShowEditAdmin = (admin: BaseAdmin) => {
     setSelectedAdmin(admin);
     setShowEditAdminModal(true);
   };
 
   const handleShowCreateAdmin = () => {
-    // Handle creating admin heres
+    setShowCreateAdminModal(true);
+    
   };
 
   const handleShowDeleteAdmin = () => {
@@ -47,7 +36,7 @@ const SuperAdminDashboard: React.FC = () => {
   };
 
   const handleToggleDrawer = () => setShowDrawer(!showDrawer);  // Toggles drawer visibility
-  const handleSelectSection = (section: 'admin' | 'bank') => {
+  const handleSelectSection = (section: 'admin' | 'bank'|'accounts') => {
     setSelectedSection(section);
     setShowDrawer(false);  // Close the drawer after selecting a section
   };
@@ -70,6 +59,9 @@ const SuperAdminDashboard: React.FC = () => {
           <Button variant="link" onClick={() => handleSelectSection('admin')}>
             Admin Dashboard
           </Button>
+          <Button variant="link" onClick={() => handleSelectSection('accounts')}>
+            My Working Accounts
+          </Button>
           <Button variant="link" onClick={() => handleSelectSection('bank')}>
             Bank Dashboard
           </Button>
@@ -78,49 +70,54 @@ const SuperAdminDashboard: React.FC = () => {
 
       {/* Main Content */}
       <Container className="mt-4">
-        {selectedSection === 'admin' ? (
-          <div>
-             <Button className="mb-3" onClick={handleShowCreateAdmin}>
-        Create Admin
-      </Button>
-            <Accordion defaultActiveKey="0">
-              {admins.map((admin, adminIndex) => (
-                <Accordion.Item eventKey={`admin-${adminIndex}`} key={admin.id}>
-                  <Accordion.Header>{admin.username}</Accordion.Header>
-                  <Accordion.Body>
-                    <Link to={`/admin-dashboard/${admin.id}`}>
-                      <Button variant="link" className="ms-3">See More</Button>
-                    </Link>
-                    <Button variant="link" className="ms-3" onClick={() => handleShowEditAdmin(admin)}>
-                      Edit Admin
-                    </Button>
-                    <Button variant="link" className="ms-3" onClick={handleShowDeleteAdmin}>
-                      Delete Admin
-                    </Button>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion>
-          </div>
-        ) : (
-          <BankDashboard />
-        )}
-      </Container>
+      {/* Render content based on selected section */}
+      {selectedSection === 'admin' ? (
+        <div>
+          <Button className="mb-3" onClick={handleShowCreateAdmin}>
+            Create Admin
+          </Button>
+          <Accordion defaultActiveKey="0">
+            {admins.map((admin, adminIndex) => (
+              <Accordion.Item eventKey={`admin-${adminIndex}`} key={admin.id}>
+                <Accordion.Header>{admin.username}</Accordion.Header>
+                <Accordion.Body>
+                  <Link to={`/admin-dashboard/${admin.id}`}>
+                    <Button variant="link" className="ms-3">See More</Button>
+                  </Link>
+                  <Button variant="link" className="ms-3" onClick={() => handleShowEditAdmin(admin)}>
+                    Edit Admin
+                  </Button>
+                  <Button variant="link" className="ms-3" onClick={handleShowDeleteAdmin}>
+                    Delete Admin
+                  </Button>
+                </Accordion.Body>
+              </Accordion.Item>
+            ))}
+          </Accordion>
+        </div>
+      ) : selectedSection === 'accounts' ? (
+        <AdminDashboard />
+      ) : (
+        <BankDashboard />
+      )}
+    </Container>
 
       {/* Modals */}
       {selectedAdmin && (
         <EditAdminModal
           show={showEditAdminModal}
-          onClose={() => setShowModal(false)}
-          adminToEdit={selectedAdmin}
-          onSubmit={(adminData: BaseAdmin) => {
-            console.log('Updating admin data:', adminData);
-            setShowModal(false);
-          }}
+          onClose={() => {
+            setShowEditAdminModal(false);
+            setSelectedAdmin(null);
+          } }
+          adminToEdit={selectedAdmin} 
+          onSubmit={function (adminData: BaseAdmin): void {
+            throw new Error('Function not implemented.');
+          } }        
         />
       )}
       <CreateAdminModal
-        show={false}
+        show={showCreateAdminModal}
         onClose={() => {}}
         onSubmit={(adminData: CreateAdmin) => {
           console.log('Creating new admin:', adminData);

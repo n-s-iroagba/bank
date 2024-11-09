@@ -17,6 +17,8 @@ interface TransactionAttributes {
   amount: number;
   transactionType: TransactionType;
   accountId: number;
+  
+
 }
 
 interface TransactionCreationAttributes extends Optional<TransactionAttributes, 'id'> {}
@@ -30,6 +32,7 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
   public origin!: 'Admin' | 'System' | 'Client';
   public transactionType!: TransactionType;
   public accountId!: number;
+
 
   // Timestamps
   public readonly createdAt!: Date;
@@ -54,7 +57,7 @@ Transaction.init(
     secondPartyId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: SecondParty, key: 'id' },
+      references: { model: 'second_parties', key: 'id' },
     },
     amount: {
       type: DataTypes.FLOAT,
@@ -67,7 +70,7 @@ Transaction.init(
     accountId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: CheckingAccount, key: 'id' },
+      references: { model: 'checking_accounts', key: 'id' },
     },
     origin: {
       type: DataTypes.ENUM('Admin', 'System', 'Client'),

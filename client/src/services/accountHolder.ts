@@ -1,6 +1,6 @@
 
 import axiosClient from '../api/axiosClient';
-import { BaseAccountHolder, CreateAccountHolder } from '../types/AccountHolder';
+import {  CreateAccountHolder, EditAccountHolder } from '../types/AccountHolder';
 
 export const createAccountHolder = async (data: CreateAccountHolder) => {
     try {
@@ -22,9 +22,9 @@ export const getAccountHoldersByAdminId = async (adminId: number) => {
 };
 
 
-export const updateAccountHolder = async (data: BaseAccountHolder) => {
+export const updateAccountHolder = async (id:number,data: EditAccountHolder) => {
   try {
-    const response = await axiosClient.patch(`/account-holders/${data.id}`, data);
+    const response = await axiosClient.patch(`/account-holders/${id}`, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to update account holder');
