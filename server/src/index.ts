@@ -10,6 +10,7 @@ import transactionRoutes from './routes/transactionRoutes';
 import termDepositAccountRoutes from './routes/termDepositAccountRoutes';
 import secondPartyRoutes from './routes/secondPartyRoutes';
 import bankRoutes from './routes/BankRoutes';
+import { developmentIndexHandlerNoAuth, indexController } from './controllers/indexController';
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ const PORT = process.env.PORT || 8000;
 app.use(bodyParser.json());
 
 
-app.use('/admin-route', adminRoutes);
+app.use('/admins', adminRoutes);
 app.use('/account-holder',accountHolderRoutes)
 app.use('/bank',bankRoutes);
 app.use('/checking-account', checkingAccountRoutes)
@@ -26,15 +27,27 @@ app.use('/transactions',transactionRoutes)
 app.use('/term-deposit-account', termDepositAccountRoutes)
 app.use('/second-party', secondPartyRoutes)
 
-app.use('/', (req: Request, res: Response) => {
-  res.send('API is running..ddd.'); 
+app.get('/', async (req: Request, res: Response) => {
+  try {
+    await developmentIndexHandlerNoAuth();
+    console.log('Data inserted successfully');
+    res.send('Data inserted successfully');
+  } catch (error) {
+    console.error('Error inserting data:', error);
+    res.status(500).send('Error inserting data');
+  }
 });
 
 
 
 
-sequelize.sync({force:true}).then(() => {
+
+
+sequelize.sync({
+  force:true
+}).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
 })
+

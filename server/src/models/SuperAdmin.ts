@@ -11,7 +11,7 @@ export class SuperAdmin extends Model {
   public isVerified!: boolean;
   public resetCode?: number;
   public adminIdentification!:number
-  public verificationCode!: string | null;
+  public verificationCode?: string ;
   public admins!: Admin[];  
 }
 
@@ -60,3 +60,14 @@ SuperAdmin.init(
 
 
 
+
+
+SuperAdmin.hasMany(Admin, {
+  foreignKey: 'superAdminId',
+  as: 'admins',  
+});
+
+Admin.belongsTo(SuperAdmin, {
+  foreignKey: 'superAdminId',
+  as: 'superAdmin',
+});

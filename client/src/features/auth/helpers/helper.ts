@@ -4,13 +4,11 @@ import { jwtDecode } from "jwt-decode";
 
 
 import { DecodedChangePasswordToken, DecodedLoginToken, DecodedVerificationToken } from "../types/authTypes";
-import axios from "axios";
-import { CreateAccountHolder } from "../../../types/AccountHolder";
-import { CreateTransaction } from "../../../types/Transaction";
+
 
 
 export const getLoginDecodedToken = (): DecodedLoginToken | null => {
-  const token = localStorage.getItem('cassockJwtToken');
+  const token = localStorage.getItem('token');
   
   if (!token) {
       return null;
@@ -38,11 +36,7 @@ export const getLoginDecodedToken = (): DecodedLoginToken | null => {
   };
 
 export const logOut = (navigate:(path:string)=>void)=>{
-    localStorage.removeItem('cassockJwtToken')
-    localStorage.removeItem('cassockId')
-    localStorage.removeItem('cassockVerified')
-    localStorage.removeItem('cassockEmailVerificationToken')
-    localStorage.removeItem('cassockInvestment');
+    localStorage.removeItem('token')
 
    navigate('/')
   }

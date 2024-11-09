@@ -32,7 +32,7 @@ const AppRoutes: React.FC = () => {
           } />
        
       
-        <Route path="/super-admin/dashboard" element={<SuperAdminDashboard />} />
+        <Route path="/super-admin/dashboard" element={<SuperAdminDashboard id={1} />} />
         <Route path="/admin/signup" element={<AdminSignUp />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/verify-email" element={<EmailVerification />} />

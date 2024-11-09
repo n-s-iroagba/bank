@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import "../styles/LoginForm.css";
-import { LoginDetails } from "../types/LoginDetails";
+
 import { useNavigate } from "react-router-dom";
 
 import { clientLoginUrl } from "../../../data/routes";
-import { postWithNoAuth } from "../helpers/api";
+
 
 const LoginForm: React.FC = () => {
-  const [loginDetails, setLoginDetails] = useState<LoginDetails>({
+  const [loginDetails, setLoginDetails] = useState<any>({
     username: "",
     password: "",
   });
@@ -30,18 +30,18 @@ const LoginForm: React.FC = () => {
     setLoading(true);
     setErrorMessage("");
 
-    try {
-      const response = await postWithNoAuth(clientLoginUrl, loginDetails);
-      if (response.status === 200) {
-        localStorage.setItem("clientToken", JSON.stringify(response.data));
-        navigate("/dashboard");
-      }
-    } catch (error: any) {
-      console.error(error);
-      setErrorMessage("Sorry, an error occurred. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   const response = await postWithNoAuth(clientLoginUrl, loginDetails);
+    //   if (response.status === 200) {
+    //     localStorage.setItem("clientToken", JSON.stringify(response.data));
+    //     navigate("/dashboard");
+    //   }
+    // } catch (error: any) {
+    //   console.error(error);
+    //   setErrorMessage("Sorry, an error occurred. Please try again later.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

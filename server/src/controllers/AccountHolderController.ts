@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AccountHolderService } from '../service/AccountHolderService';
-import { BaseAccountHolder } from '../types/AccountHolder';
+import { EditAccountHolder } from '../types/AccountHolder';
 
 
 export class AccountHolderController {
@@ -28,11 +28,12 @@ export class AccountHolderController {
 
   // Update AccountHolder
   static async update(req: Request, res: Response) {
-    const { id, firstname, surname, middlename, username, password }: BaseAccountHolder = req.body;
+    const id = req.params.id;
+    const { firstname, surname, middlename, username, password }: EditAccountHolder = req.body;
 
     try {
-      const updatedAccountHolder = await AccountHolderService.update({
-        id,
+      const updatedAccountHolder = await AccountHolderService.update(Number(id),{
+        
         firstname,
         surname,
         middlename,

@@ -3,7 +3,7 @@ import { CheckingAccount } from '../models/CheckingAccount';
 import { SecondParty } from '../models/SecondParty';
 import { TermDepositAccount } from '../models/TermDepositAccount';
 import { Transaction } from '../models/Transaction';
-import { BaseAccountHolder, CreateAccountHolder } from '../types/AccountHolder';
+import {  CreateAccountHolder, EditAccountHolder } from '../types/AccountHolder';
 import { TransactionOrigin, TransactionType } from '../types/Transaction';
 
 
@@ -78,8 +78,8 @@ export class AccountHolderService {
   }
 
   // Update AccountHolder
-  static async update(accountHolderData: BaseAccountHolder) {
-    const { id, firstname, surname, middlename, username, password } = accountHolderData;
+  static async update(id:number,accountHolderData: EditAccountHolder) {
+    const {  firstname, surname, middlename, username, password } = accountHolderData;
 
     const accountHolder = await AccountHolder.findByPk(id);
     if (!accountHolder) {

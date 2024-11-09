@@ -1,16 +1,23 @@
-// /src/services/adminService.ts
+
 import bcrypt from 'bcrypt';
-import { Op } from 'sequelize';
+
 import { Admin } from '../models/Admin';
 import { SuperAdmin } from '../models/SuperAdmin';
 import { CreateAdmin } from '../types/Admin';
+import { TermDepositAccount } from '../models/TermDepositAccount';
+import { AccountHolder } from '../models/AccountHolder';
+import { CheckingAccount } from '../models/CheckingAccount';
+import { Transaction } from '../models/Transaction';
 
 
 // Create a SuperAdmin
 export const createSuperAdmin = async (username: string, password: string, email: string) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const admin = await Admin.create({ username, password: hashedPassword, email });
-  const superAdmin = await SuperAdmin.create({ username, password: hashedPassword, email,adminIdentification:admin.id });
+  const superAdmin = await SuperAdmin.create({ username, password: hashedPassword, email});
+  const admin = await Admin.create({ username, password: hashedPassword, email,superAdminId: superAdmin.id});
+  superAdmin.adminIdentification = admin.id;
+  await superAdmin.save()
+ 
   return superAdmin;
 };
 
@@ -44,11 +51,46 @@ export const createAdminBySuperAdmin = async (superAdminId: number, username: st
   return admin;
 };
 
-// Get all Admins
-export const getAdmins = async () => {
-  return await Admin.findAll();
+
+
+export const getAdmins = async (id: number) => {
+  try {
+   // getAdmins function
+const admins = await Admin.findAll({
+  where: {
+    superAdminId: id,
+  },
+  include: [
+    {
+      model: AccountHolder,
+      as: 'accountHolders',  // Must match the alias in the association
+      include: [
+        {
+          model: CheckingAccount,
+          as: 'checkingAccount',
+          include: [
+            {
+              model: Transaction,
+              as: 'transactions',
+            },
+          ],
+        },
+        {
+          model: TermDepositAccount,
+          as: 'termDepositAccount',
+        },
+      ],
+    },
+  ],
+});
+
+    return admins;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || error.message);
+  }
 };
 
+  
 // Update Admin Details by SuperAdmin
 export const updateAdminBySuperAdmin = async (adminId: number, updates:CreateAdmin) => {
   const admin = await Admin.findByPk(adminId);

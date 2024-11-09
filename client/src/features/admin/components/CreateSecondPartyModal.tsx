@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Modal, ModalProps } from 'react-bootstrap';
-import useBanks from '../../common/hooks/useBanks';
 
 import { Bank } from '../../../types/Bank';
 import { CreateSecondParty } from '../../../types/SecondParty';
+import useBanks from '../../../hooks/useBanks';
 
 const CreateSecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => {
   const { banks } = useBanks();

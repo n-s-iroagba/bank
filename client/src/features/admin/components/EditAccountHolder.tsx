@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { BaseAccountHolder } from "../../../types/AccountHolder";
+import { EditAccountHolder } from '../../../types/AccountHolder';
+
 
 interface EditAccountHolderModalProps {
   show: boolean;
   onClose: (state:boolean) => void;
-  accountHolder: BaseAccountHolder | null;
+  accountHolder: EditAccountHolder | null;
 }
 
 const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, onClose, accountHolder }) => {
@@ -27,7 +28,7 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
 
   const handleSave = () => {
     if (accountHolder) {
-      const updatedAccountHolder: BaseAccountHolder = {
+      const updatedAccountHolder: EditAccountHolder = {
         ...accountHolder,
         firstname,
         middlename,
