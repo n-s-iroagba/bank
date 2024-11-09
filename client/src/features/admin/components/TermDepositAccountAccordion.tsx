@@ -2,25 +2,19 @@ import React, { useState } from "react";
 import { Row, Col, Button, Accordion } from "react-bootstrap";
 import { TermDepositAccount } from "../../../types/TermDepositAccount";
 import EditTermDepositModal from "./EditTermDepositModal";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 
 
-
-
-const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount }> = ({ account }) => {
+const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount,dividendEarned:number,dividendToBeEarned:number }> = ({ account,dividendEarned,dividendToBeEarned }) => {
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
+
 
   const handleSave = (updatedAccount: TermDepositAccount) => {
     console.log("Updated account:", updatedAccount);
     setShowEditModal(false);
   };
 
-  const handleDelete = () => {
-    console.log("Deleted account ID:", account.id);
-    setShowConfirmDeleteModal(false);
-  };
+
 
   return (
     <>
@@ -32,6 +26,8 @@ const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount }> = (
             <p><strong>End Date:</strong> {(new Date(account.startDate.getTime() + account.durationInDays * 24 * 60 * 60 * 1000)).toDateString()}</p>
             <p><strong>Interest Rate:</strong> {account.interestRate}%</p>
             <p><strong>Amount Deposited:</strong> ${account.amountDeposited}</p>
+            <p><strong>Dividend Earned:</strong> ${dividendEarned}</p>
+            <p><strong>Dividend yet to be earned: ${dividendToBeEarned}</strong></p>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -47,14 +43,9 @@ const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount }> = (
             Edit Term Deposit Account Details
           </Button>
         </Col>
-        <Col lg={3} md={4} sm={12}>
-          <Button variant="danger" className="w-100 mb-2" onClick={() => setShowConfirmDeleteModal(true)}>
-            Delete Term Deposit Account
-          </Button>
-        </Col>
       </Row>
 
-      {/* Edit Modal */}
+  
       <EditTermDepositModal
         show={showEditModal}
         onClose={() => setShowEditModal(false)}
@@ -62,12 +53,6 @@ const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount }> = (
         onSave={handleSave}
       />
 
-      {/* Confirm Delete Modal */}
-      <ConfirmDeleteModal
-        show={showConfirmDeleteModal}
-        onClose={() => setShowConfirmDeleteModal(false)}
-        onConfirm={handleDelete}
-      />
     </>
   );
 };

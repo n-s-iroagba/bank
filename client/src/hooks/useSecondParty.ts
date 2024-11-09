@@ -8,7 +8,7 @@ interface UseSecondPartyResult {
   secondPartyLoading: boolean;
 }
 
-const useSecondParty = (): UseSecondPartyResult => {
+const useSecondParty = (id:number): UseSecondPartyResult => {
   const [secondParties, setSecondParties] = useState<SecondParty[]>([]);
   const [secondPartyError, setSecondPartyError] = useState<string | null>(null);
   const [secondPartyLoading, setsecondPartyLoading] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const useSecondParty = (): UseSecondPartyResult => {
     const fetchSecondParties = async () => {
       setsecondPartyLoading(true);
       try {
-        const data = await getAllSecondParties();
+        const data = await getAllSecondParties(id);
         setSecondParties(data);
       } catch (err: any) {
         setSecondPartyError(err.message);
@@ -27,7 +27,7 @@ const useSecondParty = (): UseSecondPartyResult => {
     };
 
     fetchSecondParties();
-  }, []);
+  }, [id]);
 
   return { secondParties, secondPartyError, secondPartyLoading };
 };

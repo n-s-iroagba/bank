@@ -2,20 +2,17 @@ import { Router } from 'express';
 import { AccountHolderController } from '../controllers/AccountHolderController';
 
 const accountHolderRoutes = Router();
+accountHolderRoutes.post('/create/:id',AccountHolderController.createAccountHolder)
 
-// Route to get all AccountHolders
-accountHolderRoutes.get('/accountHolders', AccountHolderController.getAll);
 
-// Route to get AccountHolders by adminId
-accountHolderRoutes.get('/accountHolders/admin/:adminId', AccountHolderController.getByAdminId);
+accountHolderRoutes.get('/get/:id', AccountHolderController.getByAdminId);
 
-// Route to update an AccountHolder
-accountHolderRoutes.put('/accountHolders/update', AccountHolderController.update);
+accountHolderRoutes.patch('/update/:id', AccountHolderController.update);
 
-// Route to delete an AccountHolder by id
-accountHolderRoutes.delete('/accountHolders/:id', AccountHolderController.delete);
 
-accountHolderRoutes.post('/accountHolders/login', AccountHolderController.loginAccountHolder);
+accountHolderRoutes.delete('/delete/:id', AccountHolderController.delete);
+
+accountHolderRoutes.post('/login', AccountHolderController.loginAccountHolder);
 
 
 export default accountHolderRoutes;

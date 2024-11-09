@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { CreateAccountHolder } from '../../../types/AccountHolder';
+import axiosClient from '../../../api/axiosClient';
+import { createAccountHolderUrl } from '../../../data/routes';
 
 interface CreateAccountHolderModalProps {
   show: boolean;
   onClose: () => void;
-  onSubmit: (accountHolderData: CreateAccountHolder) => void;
+  adminId:number,
+
 }
 
-const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ show, onClose, onSubmit }) => {
+const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ adminId,show, onClose}) => {
   const [accountHolder, setAccountHolder] = useState<CreateAccountHolder>({
     firstname: '',
     surname: '',
@@ -31,6 +34,7 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
       lowestTransfer: 0,
     },
   });
+  const [errorMessage,setErrorMessage] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -73,9 +77,18 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
     }));
   };
 
-  const handleSubmit = () => {
-    onSubmit(accountHolder);
-    onClose();
+  const handleSubmit = async () => {
+    const url = `${axiosClient.defaults.baseURL}${createAccountHolderUrl}/${adminId}`
+  try{
+   const response = await axiosClient.post(url,accountHolder)
+    if (response.status === 201) {
+       alert('Account Holder successfully create')
+       window.location.reload()
+    }
+  }catch(error:any){
+    console.error(error)
+    setErrorMessage('Error contact site owners')
+  }
   };
 
   return (
@@ -221,6 +234,7 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ sho
           Save Account Holder
         </Button>
       </Modal.Footer>
+      {errorMessage && <div className="text-danger">{errorMessage}</div>}
     </Modal>
   );
 };

@@ -16,17 +16,10 @@ export class AccountHolderController {
       res.status(error.status||500).json({ message: error.message });
     }
   }
-  static async getAll(req: Request, res: Response) {
-    try {
-      const accountHolders = await AccountHolderService.getAll();
-      res.status(200).json(accountHolders);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  }
+
 
   static async getByAdminId(req: Request, res: Response) {
-    const adminId = parseInt(req.params.adminId);
+    const adminId = parseInt(req.params.id);
 
     try {
       const accountHolders = await AccountHolderService.getByAdminId(adminId);

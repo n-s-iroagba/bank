@@ -4,6 +4,7 @@ import { sequelize } from '../config/dbConfig'; // Correctly import sequelize in
 
 import { CheckingAccount } from './CheckingAccount';
 import { TermDepositAccount } from './TermDepositAccount';
+import { SecondParty } from './SecondParty';
 
 
 
@@ -85,6 +86,15 @@ AccountHolder.hasOne(TermDepositAccount, {
 });
 
 TermDepositAccount.belongsTo(AccountHolder, {
+  foreignKey: 'accountHolderId',
+  as: 'accountHolder',
+});
+
+AccountHolder.hasMany(SecondParty, {
+  foreignKey: 'accountHolderId',
+  as: 'secondParty',
+});
+SecondParty.belongsTo(AccountHolder, {
   foreignKey: 'accountHolderId',
   as: 'accountHolder',
 });
