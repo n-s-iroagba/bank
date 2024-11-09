@@ -1,14 +1,10 @@
-// controllers/TermDepositAccountController.ts
+
 import { Request, Response } from 'express';
 import { TermDepositAccountService } from '../service/TermDepositAccountService';
-import { EditTermDepositAccount } from '../types/TermDepositAccount';
-
-
+import { EditTermDepositAccount } from '../types/TermDepositAccountTypes';
 
 export class TermDepositAccountController {
 
-
-  // Update a Term Deposit Account
   static async update(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
@@ -20,7 +16,6 @@ export class TermDepositAccountController {
     }
   }
 
-  // Delete a Term Deposit Account
   static async delete(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);

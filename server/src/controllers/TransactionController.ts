@@ -1,7 +1,8 @@
 // controllers/TransferController.ts
 import { Request, Response } from 'express';
-import { CreateTransactionSystem } from '../types/Transaction';
+
 import { TransactionService } from '../service/TransactionService';
+import { CreateTransactionSystem } from '../types/TransactionType';
 
 export class TransactionController {
   static async updateTransfer(req: Request, res: Response) {
@@ -12,7 +13,7 @@ export class TransactionController {
       transferEndDate,
       highestTransfer,
       lowestTransfer,
-    } = req.body as CreateTransactionSystem;
+    }:CreateTransactionSystem = req.body ;
 
     try {
       const updatedTransfer = await TransactionService.updateTransaction(parseInt(id), {

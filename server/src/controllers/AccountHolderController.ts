@@ -1,10 +1,21 @@
 import { Request, Response } from 'express';
 import { AccountHolderService } from '../service/AccountHolderService';
-import { EditAccountHolder } from '../types/AccountHolder';
+
+import { AccountHolder } from '../models/AccountHolder';
+import { CreateAccountHolder, EditAccountHolder } from '../types/AccountHolderTypes';
 
 
 export class AccountHolderController {
-  // Get all AccountHolders
+  static async createAccountHolder(req: Request, res: Response) {
+    const id = parseInt(req.params.id)
+    try {
+      const data:CreateAccountHolder = req.body;
+      const newAccountHolder = await AccountHolderService.createAccountHolder(id, data);
+      res.status(201).json(newAccountHolder);
+    } catch (error: any) {
+      res.status(error.status||500).json({ message: error.message });
+    }
+  }
   static async getAll(req: Request, res: Response) {
     try {
       const accountHolders = await AccountHolderService.getAll();
@@ -14,7 +25,6 @@ export class AccountHolderController {
     }
   }
 
-  // Get AccountHolders by adminId
   static async getByAdminId(req: Request, res: Response) {
     const adminId = parseInt(req.params.adminId);
 
@@ -26,7 +36,7 @@ export class AccountHolderController {
     }
   }
 
-  // Update AccountHolder
+
   static async update(req: Request, res: Response) {
     const id = req.params.id;
     const { firstname, surname, middlename, username, password }: EditAccountHolder = req.body;
@@ -46,7 +56,6 @@ export class AccountHolderController {
     }
   }
 
-  // Delete AccountHolder by id
   static async delete(req: Request, res: Response) {
     const accountHolderId = parseInt(req.params.id);
 

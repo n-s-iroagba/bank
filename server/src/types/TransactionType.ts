@@ -1,5 +1,4 @@
 
-import { SecondParty } from "./SecondParty";
 
 export enum TransactionOrigin {
   ADMIN = 'Admin',
@@ -13,14 +12,14 @@ export enum TransactionType {
 }
 
 
-export type Transaction = {
-  id: number;
+export type CreateTransaction = {
+
   date: Date;
   description: string;
   amount: number;
   transactionType: TransactionType;
   origin?: TransactionOrigin;  // Adding the optional origin field
-  secondParty: SecondParty
+  secondPartyId: number
 };
 
 
@@ -35,5 +34,5 @@ export type CreateTransactionSystem = {
 }
 
 
-export type CreateTransaction = Omit<Transaction, 'id'>
+
 

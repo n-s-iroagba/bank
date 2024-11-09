@@ -2,18 +2,17 @@ import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
 import { CheckingAccount } from './CheckingAccount';
 import { SecondParty } from './SecondParty';
+import { TransactionOrigin, TransactionType } from '../types/TransactionType';
 
-export enum TransactionType {
-  CREDIT = 'Credit',
-  DEBIT = 'Debit',
-}
+
+
 
 interface TransactionAttributes {
   id: number;
   date: Date;
   description: string;
   secondPartyId: number;
-  origin: 'Admin' | 'System' | 'Client';
+  origin: TransactionOrigin;
   amount: number;
   transactionType: TransactionType;
   accountId: number;
@@ -29,7 +28,7 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
   public description!: string;
   public secondPartyId!: number;
   public amount!: number;
-  public origin!: 'Admin' | 'System' | 'Client';
+  public origin!: TransactionOrigin;
   public transactionType!: TransactionType;
   public accountId!: number;
 

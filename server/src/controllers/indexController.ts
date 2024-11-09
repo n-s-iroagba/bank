@@ -3,10 +3,12 @@ import { Admin } from "../models/Admin";
 import { AccountHolder } from '../models/AccountHolder';
 import { CheckingAccount } from '../models/CheckingAccount';
 import { TermDepositAccount } from '../models/TermDepositAccount';
-import { Transaction, TransactionType } from '../models/Transaction';
+
 import Bank from '../models/Bank';
 import { SecondParty } from '../models/SecondParty';
 import { SuperAdmin } from '../models/SuperAdmin';
+import { TransactionOrigin, TransactionType } from '../types/TransactionType';
+import { Transaction } from '../models/Transaction';
 
 export const indexController = async (req: Request, res: Response) => {
     developmentIndexHandlerNoAuth()
@@ -21,7 +23,7 @@ export const indexController = async (req: Request, res: Response) => {
 };
 
 export const developmentIndexHandlerNoAuth = async () => {
-    async function createAccountHolder(adminId: number, holderData: Partial<AccountHolder>, checkingData: Partial<CheckingAccount>, termDepositData: Partial<TermDepositAccount>) {
+    async function createAccountHolder(adminId: number, holderData:any, checkingData: any, termDepositData: Partial<TermDepositAccount>) {
         const accountHolder = await AccountHolder.create({
             adminId,
             ...holderData,
@@ -51,16 +53,18 @@ export const developmentIndexHandlerNoAuth = async () => {
             transactionType: TransactionType.CREDIT,
             accountId: checkingAccount.id,
             secondPartyId: secondParty.id,
-            origin: 'Admin'
+            origin: TransactionOrigin.ADMIN
         });
     }
+
+    
     const bank = await Bank.create(
         { name: 'BankName',logo:'' }
     )
     const secondParty = await SecondParty.create({
         firstname: 'Example',
         surname: 'Bank',
-        accountNumber: '11111111',
+        accountNumber: 11111111,
         bankId: bank.id,
         canReceive: true,
         canSend: true,
@@ -69,24 +73,26 @@ export const developmentIndexHandlerNoAuth = async () => {
     const superAdmin = await SuperAdmin.create({
         firstname: 'John',
         surname: 'Snow',
-        username: 'johnsnow',         // Ensure this matches the username field
         email: 'john@example.com',
-        password: 'securepassword',    // Make sure to hash passwords in production
+        password: 'securepassword',
+        
     });
 
     const firstAdmin = await Admin.create({
-        superAdminId:superAdmin.id,
-        username: 'johnsnow',        
-        password: 'securepassword', 
+        superAdminId: superAdmin.id,
+        username: 'johnsnow',
+        password: 'securepassword',
+        email: 'abc@gmail.com'
     }
     )
     superAdmin.adminIdentification=firstAdmin.id
     await superAdmin.save()
 
     const secondAdmin = await Admin.create({
-        superAdminId:superAdmin.id,
-        username: 'jane.smith',        
+        superAdminId: superAdmin.id,
+        username: 'jane.smith',
         password: 'securepassword',
+        email: 'xxy@gmail.com',
     })
     if (firstAdmin) {
         await createAccountHolder(firstAdmin.id, 

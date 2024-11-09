@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AccountService } from '../service/CheckingAccountService';
-import { EditCheckingAccount } from '../types/CheckingAccount';
+import { EditCheckingAccount } from '../types/CheckingAccountTypes';
+
 
 
 export class AccountController {
@@ -32,7 +33,7 @@ export class AccountController {
 
   static async updateCheckingAccount(req: Request, res: Response) {
     const { id } = req.params;
-    const { balance, accountNumber } = req.body as EditCheckingAccount;
+    const { balance, accountNumber }: EditCheckingAccount = req.body ;
 
     try {
       const updatedAccount = await AccountService.updateCheckingAccount(parseInt(id), {

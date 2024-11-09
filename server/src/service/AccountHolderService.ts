@@ -3,21 +3,22 @@ import { CheckingAccount } from '../models/CheckingAccount';
 import { SecondParty } from '../models/SecondParty';
 import { TermDepositAccount } from '../models/TermDepositAccount';
 import { Transaction } from '../models/Transaction';
-import {  CreateAccountHolder, EditAccountHolder } from '../types/AccountHolder';
-import { TransactionOrigin, TransactionType } from '../types/Transaction';
+import { CreateAccountHolder, EditAccountHolder } from '../types/AccountHolderTypes';
+import { TransactionOrigin, TransactionType } from '../types/TransactionType';
+
 
 
 export class AccountHolderService {
 
 
-    static async createAccountHolder(data:CreateAccountHolder) {
+    static async createAccountHolder(id:number,data:CreateAccountHolder) {
         const accountHolder = await AccountHolder.create({
           firstname: data.firstname,
           surname: data.surname,
           middlename: data.middlename,
           username: data.username,
           password: data.password,
-  
+          adminId: id
         })
         const checkingAccountNumber= Math.floor(Math.random() *100000000000)
         const checkingAccount = await CheckingAccount.create({

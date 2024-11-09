@@ -1,7 +1,8 @@
 // controllers/SecondPartyController.ts
 import { Request, Response } from 'express';
-import { CreateSecondParty } from '../types/SecondParty';
+
 import { SecondPartyService } from '../service/SecondPartyService';
+import { CreateSecondParty } from '../types/SecondPartyTypes';
 
 export class SecondPartyController {
   // Create a new SecondParty
