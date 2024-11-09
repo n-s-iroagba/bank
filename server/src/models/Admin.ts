@@ -1,14 +1,23 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig'; 
 import { AccountHolder } from './AccountHolder';
+import { SuperAdmin } from './SuperAdmin';
 
-
-export class Admin extends Model {
+type TAdmin ={
+  id: number;
+  username: string;
+  email:string;
+  password: string;
+  superAdminId: number;
+}
+type CreationTAdmin = Omit<TAdmin,'id'>
+export class Admin extends Model<TAdmin,CreationTAdmin> {
   public id!: number;
 
   public username!: string;
   public password!: string;
-  public superAdminId!: number; 
+  public superAdminId!: number
+  public SuperAdmin!:SuperAdmin; 
 }
 
 Admin.init(
@@ -18,7 +27,7 @@ Admin.init(
       autoIncrement: true,
       primaryKey: true,
     },
- 
+
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,9 +39,13 @@ Admin.init(
     superAdminId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'super_admins',  
+        model: 'super_admins',
         key: 'id',
       },
+    },
+    email:{
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

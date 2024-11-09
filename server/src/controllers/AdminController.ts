@@ -1,6 +1,7 @@
 // controllers/AdminController.ts
 import { Request, Response } from 'express';
 import { AdminService } from '../service/AdminService';
+import { CreateAdmin, EditAdmin } from '../types/AdminTypes';
 
 
 export class AdminController {
@@ -17,4 +18,59 @@ export class AdminController {
   }
 }
 
-  
+export const createAdmin = async (req: Request, res: Response) => {
+  const superAdminId = parseInt(req.params.superAdminId);
+  const {  username, password, email } = req.body  as CreateAdmin;
+  try {
+    const admin = await AdminService.createAdminBySuperAdmin(
+      superAdminId,
+      username,
+      password,
+      email
+    );
+    res.status(201).json({ message: "Admin created successfully", admin });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+export const getAllAdmins = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id)
+
+  try {
+    const admins = await AdminService.getAdmins(id);
+    res.status(200).json(admins);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const updateAdmin = async (req: Request, res: Response) => {
+  const { adminId } = req.params;
+  const { username, email, password }:EditAdmin = req.body ;
+  try {
+    const updatedAdmin = await AdminService.updateAdminBySuperAdmin(parseInt(adminId), {
+      username,
+      email,
+      password,
+    });
+    res
+      .status(200)
+      .json({ message: "Admin updated successfully", updatedAdmin });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+export const deleteAdmin = async (req: Request, res: Response) => {
+  const { adminId } = req.params;
+  try {
+    await AdminService.deleteAdminBySuperAdmin(parseInt(adminId));
+    res.status(200).json({ message: "Admin deleted successfully" });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};

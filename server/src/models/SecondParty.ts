@@ -3,13 +3,26 @@ import { Model, DataTypes, BelongsTo } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
 import Bank  from './Bank';
 import { Transaction } from './Transaction';
+type TSecondParty={
+  id:number;
+  firstname: string;
+  surname: string;
+  accountNumber: number;
+  bankId: number;
+  canSend:boolean;
+  canReceive: boolean
 
-export class SecondParty extends Model {
+}
+type CreationTSecondParty = Omit<TSecondParty,'id'>
+export class SecondParty extends Model<TSecondParty,CreationTSecondParty> {
   public id!: number;
   public firstname!: string;
-  public lastname!: string;
+  public surname!: string;
   public accountNumber!: number;
   public bankId!: number;
+  public bank!: Bank;
+  public canSend!:boolean;
+  public canReceive!: boolean
 }
 
 SecondParty.init(
@@ -24,18 +37,28 @@ SecondParty.init(
       allowNull: false,
     },
     surname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     bankId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: { model: 'banks', key: 'id' },
     },
     accountNumber: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    canSend: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    canReceive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    }
   },
   {
     sequelize,

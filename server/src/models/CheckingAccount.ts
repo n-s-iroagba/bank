@@ -2,8 +2,14 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
 import { AccountHolder } from './AccountHolder';
 import { Transaction } from './Transaction';
-
-export class CheckingAccount extends Model {
+type TCheckingAccount = {
+    id: number;
+  accountHolderId: number;
+  balance: number;
+  accountNumber: number;
+}
+type CreationTCheckingAccount = Omit<TCheckingAccount,'id'>
+export class CheckingAccount extends Model<TCheckingAccount,CreationTCheckingAccount> {
   public id!: number;
   public accountHolderId!: number;
   public balance!: number;

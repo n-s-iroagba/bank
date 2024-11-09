@@ -5,7 +5,20 @@ import { sequelize } from '../config/dbConfig'; // Correctly import sequelize in
 import { CheckingAccount } from './CheckingAccount';
 import { TermDepositAccount } from './TermDepositAccount';
 
-export class AccountHolder extends Model {
+
+
+type  TAccountHolder={
+  id: number;
+  firstname: string;
+  surname: string;
+  middlename?: string;
+  username: string;
+  password: string;
+  adminId:number
+}
+type CreationTAccountHolder = Omit<TAccountHolder,'id'>
+
+export class AccountHolder extends Model<TAccountHolder,CreationTAccountHolder> {
   public id!: number;
   public firstname!: string;
   public surname!: string;
@@ -36,7 +49,7 @@ AccountHolder.init(
     adminId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'admins',  
+        model: 'admins',
         key: 'id',
       },
     },
@@ -52,7 +65,7 @@ AccountHolder.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-  },
+},
   {
     sequelize, // Ensure this is passed correctly
     tableName: 'accountHolders',

@@ -1,17 +1,30 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
 import { Admin } from './Admin';  
+type TSuperAdmin = {
+   id: number;
 
-
-export class SuperAdmin extends Model {
+ firstname:string;
+ surname:string;
+   email: string;
+   password: string;
+   isVerified: boolean;
+   resetCode?: string;
+   adminIdentification:number
+   verificationCode: string|null ;
+}
+type CreationTSuperAdmin = Omit<TSuperAdmin,'id'|'adminIdentification'|'isVerified'>
+export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
   public id!: number;
-  public username!: string;
+
+  public firstname!:string;
+  public surname!:string;
   public email!: string;
   public password!: string;
   public isVerified!: boolean;
-  public resetCode?: number;
-  public adminIdentification!:number
-  public verificationCode?: string ;
+  public resetCode?: string;
+  public adminIdentification?:number
+  public verificationCode!: string|null ;
   public admins!: Admin[];  
 }
 
@@ -22,7 +35,11 @@ SuperAdmin.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    surname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -37,6 +54,7 @@ SuperAdmin.init(
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
+      allowNull:false,
       defaultValue: false,
     },
     verificationCode: {
@@ -48,7 +66,7 @@ SuperAdmin.init(
       allowNull: true,
     },
     resetCode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
