@@ -7,7 +7,7 @@ import CheckingAccountEditModal from "./CheckingAccountEditModal";
 import CreditDebitModal from "./CreditDebitModal";
 
 
-const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: boolean }> = ({ account, isAdmin }) => {
+const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: boolean,adminId:number }> = ({ account, isAdmin,adminId }) => {
   const [showTransactions, setShowTransactions] = useState(false);
   const [showEditCheckingAccountModal, setShowEditCheckingAccountModal] = useState(false);
   const [operationType, setOperationType] = useState<"credit" | "debit" | null>(null);
@@ -69,8 +69,7 @@ const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: b
         show={showOperationModal}
         onHide={() => setShowOperationModal(false)}
         type={operationType}
-        isTransferVisible={isTransferVisible}
-      />
+        isTransferVisible={isTransferVisible} adminId={adminId}      />
     </>
   );
 };

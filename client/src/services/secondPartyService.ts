@@ -1,4 +1,5 @@
 import axiosClient from "../api/axiosClient";
+import { getAllSecondPartyUrl } from "../data/routes";
 import { CreateSecondParty } from "../types/SecondParty";
 
 export const createSecondParty = async (data: CreateSecondParty) => {
@@ -11,9 +12,9 @@ export const createSecondParty = async (data: CreateSecondParty) => {
 };
 
 
-export const getAllSecondParties = async () => {
+export const getAllSecondParties = async (id:number) => {
   try {
-    const response = await axiosClient.get('/second-parties');
+    const response = await axiosClient.get(`${axiosClient.defaults.baseURL}${getAllSecondPartyUrl}/${id}`);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to retrieve SecondParties');

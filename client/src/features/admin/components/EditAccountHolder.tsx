@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { EditAccountHolder } from '../../../types/AccountHolder';
+import axiosClient from '../../../api/axiosClient';
+import { updateAccountHolderUrl } from '../../../data/routes';
 
 
 interface EditAccountHolderModalProps {
   show: boolean;
   onClose: (state:boolean) => void;
   accountHolder: EditAccountHolder | null;
+  accountHolderId:number
 }
 
-const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, onClose, accountHolder }) => {
+const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, onClose, accountHolder,accountHolderId }) => {
   const [firstname, setFirstname] = useState('');
   const [middlename, setMiddlename] = useState('');
   const [surname, setSurname] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (accountHolder) {
@@ -26,21 +30,21 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
     }
   }, [accountHolder]);
 
-  const handleSave = () => {
-    if (accountHolder) {
-      const updatedAccountHolder: EditAccountHolder = {
-        ...accountHolder,
-        firstname,
-        middlename,
-        surname,
-        username,
-        password,
-      };
-      console.log(updatedAccountHolder);
+  const handleSave = async () => {
+    const url = `${axiosClient.defaults.baseURL}${updateAccountHolderUrl}/${accountHolderId}`
 
-      onClose(false);
-    }
-  };
+    try{
+    if (accountHolder) {
+     const response = await axiosClient.patch(url, accountHolder)
+     if (response.status === 200) {
+      alert('Account Holder successfully create')
+      window.location.reload()
+   }
+ }}catch(error:any){
+   console.error(error)
+   setErrorMessage('Error contact site owners')
+ }
+ };
 
   return (
     <Modal show={show} onHide={()=>onClose(false)}>
@@ -99,6 +103,7 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
           Save Changes
         </Button>
       </Modal.Footer>
+      {errorMessage && <div className="text-danger">{errorMessage}</div>}
     </Modal>
   );
 };

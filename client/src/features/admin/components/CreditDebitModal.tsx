@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Dropdown, ListGroup, Button, Modal } from 'react-bootstrap';
+import { Form, Dropdown, ListGroup, Button, Modal, Spinner, Alert } from 'react-bootstrap';
 
 import logo from '../../../features/client/assets/greater-texas-cu-icon.svg';
 import { Bank } from '../../../types/Bank';
 import { SecondParty } from '../../../types/SecondParty';
 import { CreateTransaction, TransactionType } from '../../../types/Transaction';
+import useSecondParty from '../../../hooks/useSecondParty';
 
 const banks: Bank[] = [
   { id: 1, name: 'Bank A', logo: 'path/to/logoA.png' },
@@ -16,10 +17,11 @@ interface CreditDebitModalProps {
   onHide: () => void;
   type: "credit" | "debit" | null;
   isTransferVisible: boolean;
+  adminId:number;
 
 }
 
-const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type, isTransferVisible, }) => {
+const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type, isTransferVisible,adminId }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [transferDetails, setTransferDetails] = useState<CreateTransaction>({
     amount: 0,
@@ -37,7 +39,7 @@ const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type,
     },
   });
 
-  const secondPartys: SecondParty[] = [];
+  const {secondParties,secondPartyLoading,secondPartyError} =  useSecondParty(adminId)
 
 
 
@@ -75,10 +77,17 @@ const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type,
     }));
   };
 
-  const filteredSenders = secondPartys.filter(secondParty =>
+  const filteredSenders = secondParties.filter(secondParty =>
     (secondParty.firstname.toLowerCase().includes(searchTerm.toLowerCase()) || 
     secondParty.surname.toLowerCase().includes(searchTerm.toLowerCase())) && secondParty.canSend
   );
+
+  if(secondPartyLoading){
+    return <Spinner title='loading...'/>
+  }
+  if(secondPartyError){
+    return <Alert variant='danger'>Sorry and error occured contact site owner</Alert>
+  }
 
   return (
     <>

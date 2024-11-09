@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import {  Accordion, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Accordion, Alert, Button, Spinner } from "react-bootstrap";
+import CreateSecondPartyModal from "./CreateSecondPartyModal";
+import EditSecondPartyModal from "./EditSecondPartyModal";
+import { SecondParty } from "../../../types/SecondParty";
+import useBanks from "../../../hooks/useBanks";
 
-
-
-import CreateSecondPartyModal from './CreateSecondPartyModal';
-import EditSecondPartyModal from './EditSecondPartyModal';
-import { SecondParty } from '../../../types/SecondParty';
-import { ModalProps } from '../../../types/ModalProps';
-
-
-
-
-const SecondPartySection: React.FC<ModalProps&{isAdmin:boolean}> = ({ show, id,isAdmin }) => {
-  const [secondParties, setSecondParties] = useState<SecondParty[]>([]);
-
-  const [selectedSecondParty, setSelectedSecondParty] = useState<SecondParty | null>(null);
+const SecondPartySection: React.FC<{
+  isAdmin: boolean;
+  secondParties: SecondParty[];
+}> = ({ secondParties, isAdmin }) => {
+  const [selectedSecondParty, setSelectedSecondParty] =
+    useState<SecondParty | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const { banks, bankLoading } = useBanks();
 
   const handleEditSecondParty = (secondParty: SecondParty) => {
     setSelectedSecondParty(secondParty);
@@ -24,49 +22,69 @@ const SecondPartySection: React.FC<ModalProps&{isAdmin:boolean}> = ({ show, id,i
   };
 
   const handleDeleteSecondParty = (secondPartyId: number) => {
-    setSecondParties(secondParties.filter(sp => sp.id !== secondPartyId));
+    const selected = secondParties.find((sp) => sp.id !== secondPartyId);
+    selected && setSelectedSecondParty(selected);
   };
-
 
   return (
     <>
-   
-          <Button variant="primary" onClick={() => setShowCreateModal(true)} className="mb-3">
-            Add Second Party
-          </Button>
-          <Accordion>
-            {secondParties.map((secondParty, index) => (
-              <Accordion.Item eventKey={index.toString()} key={secondParty.id}>
-                <Accordion.Header>{secondParty.firstname} {secondParty.surname}</Accordion.Header>
-                <Accordion.Body>
-                  <p><strong>Bank:</strong> {secondParty.bank?.name}</p>
-                  <p><strong>Account Number:</strong> {secondParty.accountNumber}</p>
+      <Button
+        variant="primary"
+        onClick={() => setShowCreateModal(true)}
+        className="mb-3"
+      >
+        Add Second Party
+      </Button>
+      <Accordion>
+        {secondParties.map((secondParty, index) => (
+          <Accordion.Item eventKey={index.toString()} key={secondParty.id}>
+            <Accordion.Header>
+              {secondParty.firstname} {secondParty.surname}
+            </Accordion.Header>
+            <Accordion.Body>
+              <p>
+                <strong>Bank:</strong> {secondParty.bank?.name}
+              </p>
+              <p>
+                <strong>Account Number:</strong> {secondParty.accountNumber}
+              </p>
 
-                  {isAdmin&&
-                    <>
-                  <Button variant="info" onClick={() => handleEditSecondParty(secondParty)} className="me-2">
+              {isAdmin && (
+                <>
+                  <Button
+                    variant="info"
+                    onClick={() => handleEditSecondParty(secondParty)}
+                    className="me-2"
+                  >
                     Edit
                   </Button>
-                  <Button variant="danger" onClick={() => handleDeleteSecondParty(secondParty.id)}>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDeleteSecondParty(secondParty.id)}
+                  >
                     Delete
                   </Button>
-                  </>
-}
-
-                </Accordion.Body>
-              </Accordion.Item>
-            ))}
-          </Accordion>
-    
+                </>
+              )}
+            </Accordion.Body>
+          </Accordion.Item>
+        ))}
+      </Accordion>
 
       <CreateSecondPartyModal show={showCreateModal} id={0} />
-  
-      {selectedSecondParty && (
-        <EditSecondPartyModal show={showEditModal} secondParty={selectedSecondParty} banks={[]} onClose={()=>setShowEditModal(false) }   
-   
-         
-        />
-      )}
+      {showEditModal &&
+        (selectedSecondParty && banks ? (
+          <EditSecondPartyModal
+            show={showEditModal}
+            secondParty={selectedSecondParty}
+            banks={banks}
+            onClose={() => setShowEditModal(false)}
+          />
+        ) : bankLoading ? (
+          <Spinner title="Loading..." />
+        ) : (
+          <Alert variant="danger">Error Occurred</Alert>
+        ))}
     </>
   );
 };

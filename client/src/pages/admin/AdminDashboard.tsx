@@ -1,47 +1,51 @@
-import React, { useContext, useState } from 'react';
-import { Accordion, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Accordion, Button, Col, Row, Spinner } from 'react-bootstrap';
 
-import AccountHolderDetails from '../../features/admin/components/AccountHolderDetails';
 import SecondPartySection from '../../features/admin/components/SecondPartySection';
-import { AdminContext } from '../../features/admin/context/AdminContext';
-import { AccountHolder, BaseAccountHolder, CreateAccountHolder } from '../../types/AccountHolder';
+import { BaseAccountHolder, } from '../../types/AccountHolder';
 import CheckingAccountAccordion from '../../features/admin/components/CheckingAccountAccordion';
 import TermDepositAccountAccordion from '../../features/admin/components/TermDepositAccountAccordion';
 import EditAccountHolderModal from '../../features/admin/components/EditAccountHolder';
-import CreateAccountHolderModal from '../../features/admin/components/CreateAccoutHolderModal';
+import CreateAccountHolderModal from '../../features/admin/components/CreateAccountHolderModal';
+import useAccountHolders from '../../hooks/UseAccountHolders';
+import { calculateDividends } from '../../utils/calculateDividends';
+import ConfirmDeleteModal from '../../features/admin/components/ConfirmDeleteModal';
 
 
 ;
-const calculateDividends = (
-  amountDeposited: number,
-  startDate: Date,
-  durationInDays:number,
-  interestRate: number
-) => {
-  const start = new Date(startDate);
-  const end = new Date (start.getDay() + durationInDays)
 
-  const now = new Date();
 
-  const totalTerm = end.getTime() - start.getTime();
-  const elapsedTerm = now.getTime() - start.getTime();
-  const fullDividend = amountDeposited * (interestRate / 100);
+const AdminDashboard: React.FC<{adminId:number,isAdmin:boolean}> = ({adminId,isAdmin}) => {
+  const [showCreateAccountHolderModal, setShowCreateAccountHolderModal] = useState (false);
+  const [showEditAccountHolderModal, setShowEditAccountHolderModal] = useState (false);
+  const [showDeleteAccountHolderModal, setShowDeleteAccountHolderModal] = useState (false);
+  const [selectedAccountHolder,setSelectedAccountHolder] = useState<BaseAccountHolder|null> (null);
 
-  const dividendEarned = (elapsedTerm / totalTerm) * fullDividend;
-  const dividendToBeEarned = fullDividend - dividendEarned;
+const {accountHolders,accountLoading,accountHoldersError } = useAccountHolders(adminId)
 
-  return {
-    dividendEarned: dividendEarned > 0 ? dividendEarned.toFixed(2) : '0.00',
-    dividendToBeEarned: dividendToBeEarned > 0 ? dividendToBeEarned.toFixed(2) : '0.00',
-  };
-};
 
-const AdminDashboard: React.FC = () => {
-  const [accountHolders, setAccountHolders] = useState<AccountHolder[]|null>(null)
-  const{selectedAccountHolderId,handleCreateAccountHolderModal,showCreateAccountHoldersModal} = useContext(AdminContext)
+const handleCreateAccountHolderModal = ()=>{
+  setShowCreateAccountHolderModal(true)
+}
+const handleDeleteAccountHolderModal = (accountHolder:BaseAccountHolder)=>{
+  setSelectedAccountHolder(accountHolder)
+  setShowDeleteAccountHolderModal(true)
+}
 
-if(accountHolders===null){
-  return <p>loading</p>
+const handleEditAccountHolderModal = (accountHolder:BaseAccountHolder)=>{
+  setSelectedAccountHolder(accountHolder)
+  setShowEditAccountHolderModal(true)
+}
+
+const handleDelete=()=>{
+
+}
+
+if(accountHoldersError) {
+return<p className='text-danager'>Error Fetching AccountHolders</p>
+}
+if(accountLoading){
+  return <Spinner title='loading...'/>
 }
 
   return (
@@ -72,32 +76,45 @@ if(accountHolders===null){
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>Account Holder Details</Accordion.Header>
                     <Accordion.Body>
-                      <AccountHolderDetails accountHolder={accountHolder as BaseAccountHolder} />
+                    <p><strong>Username:</strong> {accountHolder.username}</p>
+      <p><strong>Password:</strong> {accountHolder.password}</p>
+
+ {isAdmin &&    <Row>
+        <Col lg={3} md={4} sm={12}>
+          <Button variant="info" className="w-100 mb-2" onClick={() => handleEditAccountHolderModal(accountHolder as BaseAccountHolder)}>
+            Edit Account Holder Details
+          </Button>
+        </Col>
+        <Col lg={3} md={4} sm={12}>
+          <Button variant="danger" className="w-100 mb-2" onClick={() => handleDeleteAccountHolderModal(accountHolder as BaseAccountHolder)}>
+            Delete Client
+          </Button>
+        </Col>
+      </Row>
+      }
                     </Accordion.Body>
                   </Accordion.Item>
 
                   <Accordion.Item eventKey="1">
                     <Accordion.Header>Checking Account</Accordion.Header>
                     <Accordion.Body>
-                      <CheckingAccountAccordion account={accountHolder.checkingAccount}  />
+                      <CheckingAccountAccordion account={accountHolder.checkingAccount} adminId={adminId}  />
                     </Accordion.Body>
                   </Accordion.Item>
-
-               
 
                    <Accordion.Item eventKey="3">
                     <Accordion.Header>Receivers and Senders</Accordion.Header>
                     <Accordion.Body>
                       <SecondPartySection 
-                        id={accountHolder.id}
-                        show={false} isAdmin={false}                      />
+                        secondParties={accountHolder.secondParties}
+                       isAdmin={isAdmin} />
                     </Accordion.Body>
                   </Accordion.Item>
 
                   <Accordion.Item eventKey="4">
                     <Accordion.Header>Term Deposit Account</Accordion.Header>
                     <Accordion.Body>
-                      <TermDepositAccountAccordion account={accountHolder.termDepositAccount} />
+                      <TermDepositAccountAccordion account={accountHolder.termDepositAccount} dividendEarned={dividendEarned} dividendToBeEarned={dividendToBeEarned} />
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
@@ -107,15 +124,12 @@ if(accountHolders===null){
         })}
       </Accordion>
     </div>
-    <CreateAccountHolderModal show={false} onClose={function (): void {
-        throw new Error('Function not implemented.');
-      } } onSubmit={function (accountHolderData:CreateAccountHolder): void {
-        throw new Error('Function not implemented.');
-      } }/>
-    <EditAccountHolderModal show={false} onClose={function (state: boolean): void {
-        throw new Error('Function not implemented.');
-      } } accountHolder={null}/>
-    </>
+    <CreateAccountHolderModal show={showCreateAccountHolderModal} onClose={() => setShowCreateAccountHolderModal(false)} adminId={adminId}/>
+{selectedAccountHolder&&<EditAccountHolderModal show={showEditAccountHolderModal} onClose={() => setShowEditAccountHolderModal(false)} accountHolder={selectedAccountHolder} accountHolderId={selectedAccountHolder?.id}/>
+  }  
+  
+  <ConfirmDeleteModal show={showDeleteAccountHolderModal} onClose={()=>setShowDeleteAccountHolderModal(false)} onConfirm={handleDelete} message={''}/>
+  </>
   );
 }; 
 

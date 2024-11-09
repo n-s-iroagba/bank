@@ -19,11 +19,11 @@ const PORT = process.env.PORT || 8000;
 app.use(bodyParser.json());
 
 
-app.use('/admins', adminRoutes);
+app.use('/admin', adminRoutes);
 app.use('/account-holder',accountHolderRoutes)
 app.use('/bank',bankRoutes);
 app.use('/checking-account', checkingAccountRoutes)
-app.use('/transactions',transactionRoutes)
+app.use('/transaction',transactionRoutes)
 app.use('/term-deposit-account', termDepositAccountRoutes)
 app.use('/second-party', secondPartyRoutes)
 

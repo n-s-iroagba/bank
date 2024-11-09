@@ -81,7 +81,7 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
               <Accordion.Item eventKey={`admin-${adminIndex}`} key={admin.id}>
                 <Accordion.Header>{admin.username}</Accordion.Header>
                 <Accordion.Body>
-                  <Link to={`/admin-dashboard/${admin.id}`}>
+                  <Link to={`/admindashboard/${admin.id}`}>
                     <Button variant="link" className="ms-3">See More</Button>
                   </Link>
                   <Button variant="link" className="ms-3" onClick={() => handleShowEditAdmin(admin)}>
@@ -96,7 +96,7 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
           </Accordion>
         </div>
       ) : selectedSection === 'accounts' ? (
-        <AdminDashboard />
+        <AdminDashboard adminId={id} isAdmin={true} />
       ) : (
         <BankDashboard />
       )}
