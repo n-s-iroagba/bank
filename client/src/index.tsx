@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import reportWebVitals from './reportWebVitals';
 import AppRoutes from './router/AppRoutes';
 import { AuthContextProvider } from './features/auth/context/AuthContext';
