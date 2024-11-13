@@ -34,13 +34,12 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [passwordValidityMessage, setPasswordValidityMessage] = useState<string[]>([]);
- ;
+ 
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [isMatchingPassword, setIsMatchingPassword] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
   const [passwordType, setPasswordType] = useState<'password'|'text'>('password')
-   
 
   const [superAdminData, setSuperAdminData] = useState<SuperAdminData>({
     firstname: "",
@@ -376,8 +375,6 @@ console.error(error)
     }
   };
 
-
-
   const authContextValue: AuthContextType = {
     superAdminData,
     submitting,
@@ -406,7 +403,6 @@ console.error(error)
     handleLoginAccountHolder,
     handleLoginAdmin,
     handleLoginSuperAdmin,
-   
   };
 
   return (
