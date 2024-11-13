@@ -15,9 +15,6 @@ import SuperAdminDashboard from '../pages/admin/SuperAdminDashboard';
 import AdminDashboardWrapper from '../pages/admin/AdminDashboardWrapper';
 
 
-
-
-
 const AppRoutes: React.FC = () => {
   return (
     <Router>
