@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { EditAccountHolder } from '../../../types/AccountHolder';
 import axiosClient from '../../../api/axiosClient';
 import { updateAccountHolderUrl } from '../../../data/routes';
@@ -42,7 +42,7 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
    }
  }}catch(error:any){
    console.error(error)
-   setErrorMessage('Error contact site owners')
+   setErrorMessage('Error contact site owners.')
  }
  };
 
@@ -103,7 +103,7 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
           Save Changes
         </Button>
       </Modal.Footer>
-      {errorMessage && <div className="text-danger">{errorMessage}</div>}
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
     </Modal>
   );
 };

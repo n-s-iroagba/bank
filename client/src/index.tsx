@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import reportWebVitals from './reportWebVitals';
 import AppRoutes from './router/AppRoutes';
+import { AuthContextProvider } from './features/auth/context/AuthContext';
 
 
 const root = ReactDOM.createRoot(
@@ -12,9 +13,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-   
+   <AuthContextProvider>
     <AppRoutes/>
-   
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

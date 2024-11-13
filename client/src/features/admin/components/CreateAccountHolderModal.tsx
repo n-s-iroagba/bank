@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { CreateAccountHolder } from '../../../types/AccountHolder';
 import axiosClient from '../../../api/axiosClient';
 import { createAccountHolderUrl } from '../../../data/routes';
@@ -234,7 +234,7 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ adm
           Save Account Holder
         </Button>
       </Modal.Footer>
-      {errorMessage && <div className="text-danger">{errorMessage}</div>}
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
     </Modal>
   );
 };

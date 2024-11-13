@@ -1,28 +1,20 @@
 import React, { useContext, useState } from "react";
-import { Form, Button, Spinner, Modal, Alert, InputGroup } from "react-bootstrap";
+import { Form, Button, Spinner, Modal, Alert} from "react-bootstrap";
 import "../styles/LoginForm.css";
 import { useNavigate } from "react-router-dom";
-
 import { AuthContext } from "../context/AuthContext";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 
-
-
 const LoginForm: React.FC = () => {
- 
-
   const [showModal, setShowModal] = useState(false);
   const {loginData,setLoginData,handleChange,handleLoginAccountHolder,showPassword,passwordType,submitting,errorMessage} = useContext(AuthContext)
   const navigate = useNavigate();
 
-
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
  
-
-
   return (
     <>
       <div className="py-3 px-3 bg-red text-light">
@@ -52,6 +44,7 @@ const LoginForm: React.FC = () => {
         <br />
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
+    
           <Form.Control
             required
             onChange={(e)=>handleChange(e,setLoginData)}
@@ -60,11 +53,10 @@ const LoginForm: React.FC = () => {
             type={passwordType}
             placeholder="Password"
           />
-          <InputGroup>
-          <InputGroup.Text onClick={() => showPassword()}>
-              <FontAwesomeIcon icon={passwordType === 'text' ? faEye : faEyeSlash} />
-            </InputGroup.Text>
-          </InputGroup>
+          
+          <div className="d-flex justify-content-center">
+              <FontAwesomeIcon onClick={() => showPassword()} icon={passwordType === 'text' ? faEye : faEyeSlash}/>
+          </div>
           <PasswordStrengthMeter password={loginData.password} />
           <Form.Control.Feedback type="invalid">
             Please enter password.
@@ -98,7 +90,7 @@ const LoginForm: React.FC = () => {
         <div className="link-container">
         <a href="/home">Enroll</a>
         <p>|</p>
-        <a href="#!" onClick={handleShowModal}>Forgot User Name</a>
+        <a href="#!" onClick={handleShowModal}>Forgot Username</a>
         <a href="#!" onClick={handleShowModal}>Forgot Password</a>
       </div>
       {errorMessage&& <Alert className="w-100" variant="danger">
