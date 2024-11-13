@@ -11,6 +11,7 @@ import termDepositAccountRoutes from './routes/termDepositAccountRoutes';
 import secondPartyRoutes from './routes/secondPartyRoutes';
 import bankRoutes from './routes/BankRoutes';
 import { developmentIndexHandlerNoAuth, indexController } from './controllers/indexController';
+import superAdminRoutes from './routes/superAdminRoutes';
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 
-
+app.use ('/superadmin',superAdminRoutes)
 app.use('/admin', adminRoutes);
 app.use('/account-holder',accountHolderRoutes)
 app.use('/bank',bankRoutes);

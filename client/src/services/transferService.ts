@@ -1,34 +1,33 @@
 import axiosClient from "../api/axiosClient";
-import { CreateTransactionSystem, CreateTransaction } from "../types/Transaction";
+import { clientDebitUrl, putTransactionsUrl } from "../data/routes";
+import { CreateTransaction, CreateTransactionSystem } from "../types/Transaction";
 
-export const updateTransfer = async (
-  id: number,
-  data: CreateTransactionSystem
-): Promise<{ message: string; updatedTransfer?: any }> => {
-  try {
-    const response = await axiosClient.patch(`/transactions/${id}`, data);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update transfer');
-  }
+export const updateCheckingAccountTransactions = async (id: number, data: CreateTransactionSystem) => {
+  const url = `${axiosClient.defaults.baseURL}${putTransactionsUrl}/${id}`;
+try {
+const response = await axiosClient.put(url, data);
+return response.data;
+} catch (error: any) {
+throw new Error(error.response?.data?.message || 'Failed to update checking account');
+}
 };
 
-
+export const clientDebit = async (id:number,data:CreateTransaction)=>{
+  const url = `${axiosClient.defaults.baseURL}${clientDebitUrl}/${id}`
+  try {
+    const response = await axiosClient.post(url, data);
+    return response.data;
+  } catch (error: any) {
+}
+}
 
 export const deleteTransfer = async (id: number) => {
   try {
-    const response = await axiosClient.delete(`/transactions/${id}`);
+    const response = await axiosClient.delete(`/transaction/${id}`);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete transfer');
   }
 };
 
-export const makeTransfer = async (data: CreateTransaction) => {
-  try {
-    const response = await axiosClient.post('/transactions', data);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to create transfer');
-  }
-};
+

@@ -1,9 +1,11 @@
 import axiosClient from "../api/axiosClient";
-import { CreateBank } from "../types/Bank";
+import { createBankUrl, getAllBanksUrl } from "../data/routes";
+import { CreateBank, EditBank } from "../types/Bank";
 
 export const getAllBanks = async () => {
+    const url = `${axiosClient.defaults.baseURL}${getAllBanksUrl}`
   try {
-    const response = await axiosClient.get('/banks');
+    const response = await axiosClient.get(url);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch banks');
@@ -12,12 +14,13 @@ export const getAllBanks = async () => {
 
 
 export const createBank = async (data: CreateBank) => {
+  const url = `${axiosClient.defaults.baseURL}${createBankUrl}`
   try {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('logo', data.logo);
 
-    const response = await axiosClient.post('/banks', formData, {
+    const response = await axiosClient.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -29,7 +32,7 @@ export const createBank = async (data: CreateBank) => {
 };
 
 
-export const updateBank = async (id: number, data: CreateBank) => {
+export const updateBank = async (id: number, data: EditBank) => {
   try {
     const formData = new FormData();
     formData.append('name', data.name);

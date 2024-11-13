@@ -1,6 +1,7 @@
+import { CheckingAccount } from "../models/CheckingAccount";
 import { SecondParty } from "../models/SecondParty";
 import { Transaction } from "../models/Transaction";
-import { CreateTransactionSystem, TransactionOrigin, TransactionType } from "../types/Transaction";
+import { CreateTransaction, CreateTransactionSystem, TransactionOrigin, TransactionType } from "../types/TransactionType";
 
 export class TransactionService {
     static async updateTransaction(checkingAccountId: number, data: CreateTransactionSystem) {
@@ -41,4 +42,23 @@ export class TransactionService {
         
         return true;
     }
+
+    static async clientDebitAccount(id:number,data:CreateTransaction){
+        const checkingAccount = await CheckingAccount.findByPk(id);
+        if(!checkingAccount){
+            throw new Error('CheckingAccount not found')
+        }
+        checkingAccount.balance -= data.amount
+        await Transaction.create({
+            accountId: checkingAccount.id,
+            date: data.date,
+            description: data.description,
+            secondPartyId: data.secondPartyId,
+            origin: TransactionOrigin.CLIENT,
+            amount: data.amount,
+            transactionType: TransactionType.DEBIT,
+        })
+        await checkingAccount.save()
+    }
 }
+

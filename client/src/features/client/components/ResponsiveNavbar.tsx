@@ -4,10 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/GeneralButtonStyles.css'
 import '../styles/GeneralStyles.css'
 import '../styles/ResponsiveNavbar.css'
-import '../styles/Logo.css'
-import Logo from './Logo';
+import '../../common/styles/Logo.css'
+
 import aggLogo from '../assets/agg-icon-circle.svg'
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../common/components/Logo';
 const ResponsiveNavbar: React.FC = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
   const navigate = useNavigate()

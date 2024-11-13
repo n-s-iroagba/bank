@@ -19,3 +19,11 @@ export type CreateSecondParty = {
     canReceive: boolean; 
     canSend: boolean;
 };
+export type EditSecondParty = {
+    firstname: string;
+    surname: string;
+    accountNumber: string;
+    bank: Bank;
+    canReceive: boolean; 
+    canSend: boolean;
+}

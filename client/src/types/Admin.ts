@@ -13,3 +13,5 @@ export type Admin = BaseAdmin & {
 };
 
 export type CreateAdmin = Omit<BaseAdmin,'id'>;
+
+export type EditAdmin = Omit<BaseAdmin,'id'>;

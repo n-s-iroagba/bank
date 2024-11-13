@@ -1,10 +1,11 @@
 import axiosClient from '../api/axiosClient';
-import { EditCheckingAccount } from '../types/CheckingAccount';
-import { CreateTransaction } from '../types/Transaction';
+import { editCheckingAccountBalanceNoTransactionUrl, editCheckingAccountBalanceWithTransactionUrl } from '../data/routes';
+import { CreateCheckingAccount, EditCheckingAccount } from '../types/CheckingAccount';
 
-export const editBalanceAccountWithoutTransaction = async (adminId: number, data: EditCheckingAccount) => {
+export const editBalanceWithoutTransaction = async (adminId: number, data: EditCheckingAccount) => {
+    const url = `${axiosClient.defaults.baseURL}${editCheckingAccountBalanceNoTransactionUrl}/${adminId}`;
   try {
-    const response = await axiosClient.patch(`/accounts/${adminId}/editBalanceWithoutTransaction`, data);
+    const response = await axiosClient.patch(url, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to edit balance without transaction');
@@ -12,20 +13,24 @@ export const editBalanceAccountWithoutTransaction = async (adminId: number, data
 };
 
 
-export const editBalanceAccountWithTransaction = async (clientId: number, data: EditCheckingAccount) => {
+export const editBalanceWithTransaction = async (adminId: number, data: EditCheckingAccount) => {
+    const url = `${axiosClient.defaults.baseURL}${editCheckingAccountBalanceWithTransactionUrl}/${adminId}`
+  
   try {
-    const response = await axiosClient.patch(`/accounts/${clientId}/editBalanceWithTransaction`, data);
+    const response = await axiosClient.patch(url, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to edit balance with transaction');
   }
 };
 
-export const updateCheckingAccount = async (id: number, data: CreateTransaction) => {
+
+export const updateCheckingAccount = async (id:number,data: CreateCheckingAccount)=>{
+  const url = `${axiosClient.defaults.baseURL}/checking-account/${id}`;
   try {
-    const response = await axiosClient.put(`/accounts/${id}/updateCheckingAccount`, data);
+    const response = await axiosClient.put(url, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to update checking account');
   }
-};
+}

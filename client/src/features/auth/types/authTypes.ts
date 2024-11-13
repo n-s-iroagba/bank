@@ -1,12 +1,8 @@
+import { CreateSuperAdmin } from "../../../types/SuperAdmin";
 
-export type SuperAdminData = {
-    firstName: string;
-    lastName: string;
-    password: string;
-    confirmPassword: string;
-    email: string;
+export type SuperAdminData = CreateSuperAdmin & {
     secretCode: string;
- 
+    confirmPassword:string
   }
 export type NewPasswordData ={
   password: string;
@@ -16,10 +12,20 @@ export type LoginData ={
   password: string;
   username: string;
 }
-
+export type SuperAdminLoginData ={
+  password: string;
+  email: string;
+}
 export type DecodedChangePasswordToken = {
   id:number;
   email:string;
+}
+export type ChangePasswordRequest = {
+  email:string;
+}
+
+export type NewPassword={
+  password:string;
 }
 
 export  enum Role {
@@ -50,21 +56,27 @@ export type AuthContextType ={
     isMatchingPassword:boolean
     loginData:LoginData
     validated: boolean;
+    superAdminLoginData:SuperAdminLoginData
+    setSuperAdminLoginData: React.Dispatch<React.SetStateAction<SuperAdminLoginData>>;
+    handleRequestPasswordChange:(event: React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     showPassword:()=>void;
     setNewPasswordData: React.Dispatch<React.SetStateAction<NewPasswordData>>;
+    setChangePasswordData: React.Dispatch<React.SetStateAction<ChangePasswordRequest>>
     setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
     setLoginData: React.Dispatch<React.SetStateAction<LoginData>>;
     setSuperAdminData: React.Dispatch<React.SetStateAction<SuperAdminData>>;
     setValidated: React.Dispatch<React.SetStateAction<boolean>>;
-    handleConfirmPasswordsChange: (
+    handleChangeForConfirmPassword: (
+      e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>,
         data:SuperAdminData|NewPasswordData,
-      e: React.ChangeEvent<HTMLInputElement>,
-      setState: React.Dispatch<React.SetStateAction<SuperAdminData|NewPasswordData|LoginData>> 
+      
+      setState: React.Dispatch<React.SetStateAction<any>> 
     ) => void;
   
-    handleSubmit:(data:SuperAdminData  ,event: React.FormEvent<HTMLFormElement>,domain:string,navigate:(path:string)=>void)=>void;
-    handleChange:(data:SuperAdminData | NewPasswordData|LoginData, event:  React.ChangeEvent<HTMLInputElement>,setState: React.Dispatch<React.SetStateAction<SuperAdminData|NewPasswordData|LoginData>> )=>void
-    handleSubmitForChangePassword:(data: NewPasswordData, event: React.FormEvent<HTMLFormElement>, navigate: (path: string) => void) =>void
+    handleSubmit:(event: React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void;
+    handleChange:( event:  React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>,
+      setState: React.Dispatch<React.SetStateAction<any>> )=>void
+    handleSubmitForChangePassword:(event: React.FormEvent<HTMLFormElement>, navigate: (path: string) => void) =>void
   
     handleLoginSuperAdmin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     handleLoginAdmin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void

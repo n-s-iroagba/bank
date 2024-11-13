@@ -12,7 +12,7 @@ const PasswordResetRequestForm: React.FC = () => {
     // Send request to reset password (skip for now)
     // On success:
     alert('Password reset email sent');
-    navigate('/reset-password'); // Go to the reset password page
+
   };
 
   return (

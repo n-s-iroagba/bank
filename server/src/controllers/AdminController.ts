@@ -36,10 +36,10 @@ export const createAdmin = async (req: Request, res: Response) => {
 
 
 export const getAllAdmins = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const superAdminId = parseInt(req.params.superAdminId)
 
   try {
-    const admins = await AdminService.getAdmins(id);
+    const admins = await AdminService.getAdmins(superAdminId);
     res.status(200).json(admins);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
