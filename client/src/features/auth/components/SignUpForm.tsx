@@ -1,61 +1,94 @@
 // /components/SignUp.tsx
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useContext} from 'react';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import PasswordStrengthMeter from './PasswordStrengthMeter';
+import { AuthContext } from '../context/AuthContext';
+
 
 const SignUpForm: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [secretCode, setSecretCode] = useState('');
-  const navigate = useNavigate();
+   const navigate = useNavigate();
+const{superAdminData,handleChange,showPassword,passwordValidityMessage,passwordType,handleSubmit,setSuperAdminData,handleChangeForConfirmPassword} = useContext(AuthContext)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
-    // Send request to backend (skip for now)
-    // On success:
-    navigate('/verify-email'); // Navigate to email verification page
-  };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={(e)=>handleSubmit(e,navigate)}>
       <Form.Group controlId="username">
-        <Form.Label>Username</Form.Label>
+        <Form.Label>Firstname</Form.Label>
         <Form.Control
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={superAdminData.firstname}
+          onChange={(e) =>handleChange(e,setSuperAdminData)}
           required
         />
       </Form.Group>
       <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>Surname</Form.Label>
         <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type="text"
+          value={superAdminData.surname}
+          onChange={(e) =>handleChange(e,setSuperAdminData)}
           required
         />
       </Form.Group>
+
+      <Form.Group controlId="confirmPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          value={superAdminData.password}
+          onChange={(e) =>handleChange(e,setSuperAdminData)}
+          required
+        />
+        <InputGroup>
+
+               <InputGroup.Text onClick={() => showPassword()}>
+              <FontAwesomeIcon icon={passwordType === 'text' ? faEye : faEyeSlash} />
+            </InputGroup.Text>
+          </InputGroup>
+          <PasswordStrengthMeter password={superAdminData.password} />
+          <div className='d-flex flex-column'>
+            {
+              Array.isArray(passwordValidityMessage) && passwordValidityMessage.length > 0 && (
+                passwordValidityMessage.map((message, index) => (
+                  <Form.Text className='text-danger' key={index}>*{message}</Form.Text>
+                ))
+              )
+            }
+          </div>
+      </Form.Group>
+
       <Form.Group controlId="confirmPassword">
         <Form.Label>Confirm Password</Form.Label>
         <Form.Control
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          type={passwordType}
+          value={superAdminData.confirmPassword}
+          onChange={(e) => handleChangeForConfirmPassword(e,superAdminData,setSuperAdminData)}
           required
-        />
+        /><InputGroup>
+               <InputGroup.Text onClick={() => showPassword()}>
+              <FontAwesomeIcon icon={passwordType === 'text' ? faEye : faEyeSlash} />
+            </InputGroup.Text>
+          </InputGroup>
+          <div className='d-flex flex-column'>
+            {
+              Array.isArray(passwordValidityMessage) && passwordValidityMessage.length > 0 && (
+                passwordValidityMessage.map((message, index) => (
+                  <Form.Text className='text-danger' key={index}>*{message}</Form.Text>
+                ))
+              )
+            }
+          </div>
       </Form.Group>
       <Form.Group controlId="secretCode">
         <Form.Label>Secret Code</Form.Label>
         <Form.Control
           type="text"
-          value={secretCode}
-          onChange={(e) => setSecretCode(e.target.value)}
+          value={superAdminData.secretCode}
+          
+          onChange={(e) =>handleChange(e,setSuperAdminData)}
           required
         />
       </Form.Group>

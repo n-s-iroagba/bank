@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AccountHolder } from '../types/AccountHolder';
-import { getAccountHoldersByAdminId } from '../services/accountHolder';
+import { getAccountHoldersByAdminId } from '../services/accountHolderService';
+
 
 interface UseAccountHoldersResult {
   accountHolders: AccountHolder[];

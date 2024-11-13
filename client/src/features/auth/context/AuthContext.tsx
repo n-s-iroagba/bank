@@ -14,33 +14,38 @@ import {
   AuthContextType,
   NewPasswordData,
   LoginData,
-  DecodedChangePasswordToken,
   SuperAdminData,
+  SuperAdminLoginData,
+  ChangePasswordRequest,
+  NewPassword,
 } from "../types/authTypes";
-import axiosClient from "../../../api/axiosClient";
-import { jwtDecode } from "jwt-decode";
 import { loginAdmin } from "../../../services/adminService";
-import { loginSuperAdmin } from "../../../services/superAdminService";
+import { changeSuperAdminPassword, loginSuperAdmin, registerSuperAdmin, requestSuperAdminPasswordChange } from "../../../services/superAdminService";
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
-);
+import { loginAccountHolder } from "../../../services/accountHolderService";
+import { CreateSuperAdmin } from "../../../types/SuperAdmin";
+import { getIdFromChangePasswordToken } from "../helpers/helper";
+import { mockAuthContext } from "../types/data";
+
+
+export const AuthContext = createContext<AuthContextType>(mockAuthContext);
 
 export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [passwordValidityMessage, setPasswordValidityMessage] = useState<
-    string[]
-  >([]);
-  const [passwordType, setPasswordType] = useState<string>("password");
+  const [passwordValidityMessage, setPasswordValidityMessage] = useState<string[]>([]);
+ ;
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [isMatchingPassword, setIsMatchingPassword] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
+  const [passwordType, setPasswordType] = useState<'password'|'text'>('password')
+   
 
   const [superAdminData, setSuperAdminData] = useState<SuperAdminData>({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    surname: "",
+    username:'',
     password: "",
     confirmPassword: "",
     email: "",
@@ -56,6 +61,16 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     password: "",
     username: "",
   });
+
+  const [superAdminLoginData, setSuperAdminLoginData] = useState<SuperAdminLoginData>({
+    email: "",
+    password: "",
+  });
+
+  const [changePasswordData, setChangePasswordData] = useState<ChangePasswordRequest>({
+    email:''
+  })
+
 
   // Helper function to validate password and set validation messages
   const validatePassword = (password: string) => {
@@ -77,10 +92,9 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const handleChange = (
-    data: SuperAdminData | NewPasswordData | LoginData,
-    e: ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>,
     setState: Dispatch<
-      SetStateAction<SuperAdminData | NewPasswordData | LoginData>
+      SetStateAction<SuperAdminData | NewPasswordData | LoginData |SuperAdminLoginData|ChangePasswordRequest>
     >
   ) => {
     e.preventDefault();
@@ -95,14 +109,14 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const handleConfirmPasswordsChange = (
+  const    handleChangeForConfirmPassword = (
+    e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>,
     data: SuperAdminData | NewPasswordData,
-    e: ChangeEvent<HTMLInputElement>,
     setState: Dispatch<
-      SetStateAction<SuperAdminData | NewPasswordData | LoginData>
+      SetStateAction<any>
     >
   ) => {
-    handleChange(data, e, setState);
+    handleChange( e, setState);
 
     if ("password" in data) {
       setIsMatchingPassword(doPasswordsMatch(data.password, e.target.value));
@@ -113,16 +127,17 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
+
+
+//CREATE_SUPERADMIN
   const handleSubmit = async (
-    data: SuperAdminData,
     event: FormEvent<HTMLFormElement>,
-    url: string,
     navigate: (path: string) => void
   ) => {
     event.preventDefault();
     const form = event.currentTarget;
     const secretCodeMatch =
-      data.secretCode === process.env.REACT_APP_ADMIN_SECRET_KEY;
+      superAdminData.secretCode === process.env.REACT_APP_ADMIN_SECRET_KEY;
 
     setValidated(true);
 
@@ -141,8 +156,9 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
 
     setSubmitting(true);
+  
     try {
-      const response = await axiosClient.post(url, data);
+      const response = await registerSuperAdmin( superAdminData as CreateSuperAdmin);
       if (response.status === 201) {
         handleEmailVerification(response, false, navigate);
       } else if (response.status === 409) {
@@ -151,7 +167,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
         setErrorMessage("Something went wrong, please try again later");
       }
     } catch (error: any) {
-      // handleServerError(error, 409, "User with this email already exists");
+      console.error(error);
     } finally {
       setSubmitting(false);
     }
@@ -163,8 +179,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     navigate: (path: string) => void
   ) => {
     localStorage.setItem(
-      "EmailVerificationToken",
-      JSON.stringify(response.data)
+      "EmailVerificationId",
+      JSON.stringify(response.data.id)
     );
     shouldReload
       ? window.location.reload()
@@ -175,6 +191,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     navigate("/verify-email");
   };
 
+
+  //LOGIN_SUPERADMIN
   const handleLoginSuperAdmin = async (
     event: FormEvent<HTMLFormElement>,
     navigate: (path: string) => void
@@ -190,7 +208,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
     setSubmitting(true);
     try {
-      const response = await loginSuperAdmin(loginData);
+      const response = await loginSuperAdmin(superAdminLoginData);
       handleLoginResponseSuperAdmin(response, navigate);
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
@@ -214,6 +232,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+
+  //ADMIN
   const handleLoginAdmin = async (
     event: FormEvent<HTMLFormElement>,
     navigate: (path: string) => void
@@ -226,10 +246,9 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       setErrorMessage("Please fill in all fields.");
       return;
     }
-
     setSubmitting(true);
     try {
-      const response = await loginAdmin({ ...loginData });
+      const response = loginAdmin(loginData)
       handleLoginResponseAdmin(response, navigate);
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
@@ -251,6 +270,9 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+
+
+//ACCOUNT_HOLDER
   const handleLoginAccountHolder = async (
     event: FormEvent<HTMLFormElement>,
     navigate: (path: string) => void
@@ -263,10 +285,9 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       setErrorMessage("Please fill in all fields.");
       return;
     }
-
     setSubmitting(true);
     try {
-      const response = await axiosClient.post("dummyroute", loginData);
+      const response = await loginAccountHolder(loginData)
       handleLoginResponseAccountHolder(response, navigate);
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
@@ -287,15 +308,35 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       setErrorMessage("Cannot complete request at this time try again Later");
     }
   };
-  const postChangePasswordData = async (
-    url: string,
-    data: { password: string }
-  ) => {
-    return await axiosClient.post(url, data);
-  };
+
+
+  //PASSWORD CHANGE
+  const handleRequestPasswordChange = async (
+    event: FormEvent<HTMLFormElement>,
+    navigate: (path: string) => void
+  )=>{
+    event.preventDefault()
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      setErrorMessage("Kindly enter your email.");
+      return;
+    }
+    setSubmitting(true);
+  
+    try{
+      const response = await requestSuperAdminPasswordChange(changePasswordData)
+      if (response.status === 200){
+        localStorage.setItem('bankChangePasswordToken', JSON.stringify(response.data))
+        navigate('/new-password')
+      }
+    }catch(error:any){
+      setErrorMessage('sorry you request cannot be completed, contact your developer')
+console.error(error)
+    }
+  }
+
 
   const handleSubmitForChangePassword = async (
-    data: NewPasswordData,
     event: FormEvent<HTMLFormElement>,
     navigate: (path: string) => void
   ) => {
@@ -309,23 +350,24 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       return;
     }
 
-    const token = localStorage.getItem("ChangePasswordToken");
-    const decodedToken = getIdFromChangePasswordToken(token);
+    const token = localStorage.getItem('bankChangePasswordToken');
+    if (!token) {
+      setErrorMessage("You are not authorized to make this request");
+      return;
+    }
+    const id = getIdFromChangePasswordToken(token);
 
-    if (!decodedToken || !token) {
+    if (!id) {
       setErrorMessage("You are not authorized to make this request");
       return;
     }
 
     setSubmitting(true);
     try {
-      const response = await postChangePasswordData(
-        `${"dummyroute"}/${decodedToken.id}`,
-        { password: data.password }
-      );
+      const response = await changeSuperAdminPassword(id,newPasswordData as NewPassword);
       if (response.status === 200) {
         localStorage.setItem("JwtToken", JSON.stringify(response.data));
-        navigate("/super-admin/dashboard");
+        navigate("/superadmin/dashboard");
       }
     } catch (error: any) {
       alert("An error occurred, kindly try again later");
@@ -334,42 +376,37 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const getIdFromChangePasswordToken = (
-    token: string | null
-  ): DecodedChangePasswordToken | null => {
-    const decodedToken: DecodedChangePasswordToken | null = token
-      ? jwtDecode(token)
-      : null;
-    if (!token || !decodedToken) {
-      setErrorMessage("You are not authorized to make this request");
-    }
-    return decodedToken;
-  };
+
 
   const authContextValue: AuthContextType = {
     superAdminData,
     submitting,
     loginData,
     errorMessage,
-    setErrorMessage,
     validated,
-    setValidated,
-    handleConfirmPasswordsChange,
     isMatchingPassword,
-    handleSubmit,
-    handleChange,
     passwordType,
     passwordValidityMessage,
-    handleSubmitForChangePassword,
-    handleEmailVerification,
     newPasswordData,
-    showPassword,
+    superAdminLoginData,
+    setChangePasswordData,
+    setValidated,
+    setSuperAdminLoginData,
+    setErrorMessage,
     setSuperAdminData,
     setNewPasswordData,
     setLoginData,
+    handleChangeForConfirmPassword,
+    handleSubmit,
+    handleChange,
+    handleRequestPasswordChange ,
+    handleSubmitForChangePassword,
+    handleEmailVerification,
+    showPassword,
     handleLoginAccountHolder,
     handleLoginAdmin,
     handleLoginSuperAdmin,
+   
   };
 
   return (

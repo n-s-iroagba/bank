@@ -1,15 +1,9 @@
 
 import { jwtDecode } from "jwt-decode";
-
-
-
 import { DecodedChangePasswordToken, DecodedLoginToken, DecodedVerificationToken } from "../types/authTypes";
-
-
 
 export const getLoginDecodedToken = (): DecodedLoginToken | null => {
   const token = localStorage.getItem('token');
-  
   if (!token) {
       return null;
   }
@@ -22,7 +16,6 @@ export const getLoginDecodedToken = (): DecodedLoginToken | null => {
       return null;
   }
 };
-
 
   export const getVerificationTokenData = (token:string):DecodedVerificationToken|null=>{
     const decoded:DecodedVerificationToken|null= jwtDecode(token)
@@ -41,3 +34,10 @@ export const logOut = (navigate:(path:string)=>void)=>{
    navigate('/')
   }
 
+export const getIdFromChangePasswordToken = (token:string)=>{
+  if (token) {
+    const decodedToken: DecodedChangePasswordToken | null = jwtDecode(token);
+    return decodedToken?.id;
+  }
+  return null;
+}

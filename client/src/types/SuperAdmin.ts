@@ -10,6 +10,8 @@ export type SuperAdmin = {
 
 export type CreateSuperAdmin = {
     username: string;
+    firstname:string;
+    surname:string;
     email: string;
     password:string;
 }

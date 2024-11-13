@@ -1,11 +1,14 @@
 import axiosClient from "../api/axiosClient";
+import { createAdminUrl, deleteAdminUrl, getAdminUrl, loginUrlAdmin, updateAdminUrl } from "../data/routes";
 import { LoginData } from "../features/auth/types/authTypes";
-import { CreateAdmin } from "../types/Admin";
+import { CreateAdmin, EditAdmin } from "../types/Admin";
 
 export const loginAdmin = async (data:LoginData) => {
-    try {
-      const response = await axiosClient.post('/admin/login', { ...data });
-      return response.data;
+  const url = `${axiosClient.defaults.baseURL}${loginUrlAdmin}`
+
+  try {
+    const response = await axiosClient.post(url, data);
+      return response;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to log in');
     }
@@ -13,8 +16,10 @@ export const loginAdmin = async (data:LoginData) => {
 
 
 export const createAdmin = async (superAdminId: number, data: CreateAdmin) => {
+  const url = `${axiosClient.defaults.baseURL}${createAdminUrl}/${superAdminId}`
+
   try {
-    const response = await axiosClient.post(`/superadmin/${superAdminId}/admin`, data);
+    const response = await axiosClient.post(url, data);
     return response.data;
   } catch (error: any) {
     console.error(error)
@@ -24,8 +29,9 @@ export const createAdmin = async (superAdminId: number, data: CreateAdmin) => {
 
 
 export const getAllAdmins = async (id:number) => {
+  const url = `${axiosClient.defaults.baseURL}${getAdminUrl}/${id}`;
   try {
-    const response = await axiosClient.get(`http://localhost:8000/admins/${id}`);
+    const response = await axiosClient.get(url);
     return response.data;
   } catch (error: any) {
     console.error(error)
@@ -34,9 +40,10 @@ export const getAllAdmins = async (id:number) => {
 };
 
 
-export const updateAdmin = async (adminId: number, data: CreateAdmin) => {
+export const updateAdmin = async (adminId: number, data: EditAdmin) => {
+  const url = `${axiosClient.defaults.baseURL}${updateAdminUrl}/${adminId}`;
   try {
-    const response = await axiosClient.put(`/superadmin/admins/${adminId}`, data);
+    const response = await axiosClient.put(url, data);
     return response.data;
   } catch (error: any) {
     console.error(error)
@@ -46,8 +53,10 @@ export const updateAdmin = async (adminId: number, data: CreateAdmin) => {
 
 
 export const deleteAdmin = async (adminId: number) => {
+  const url = `${axiosClient.defaults.baseURL}${deleteAdminUrl}/${adminId}`;
+  
   try {
-    const response = await axiosClient.delete(`/superadmin/admins/${adminId}`);
+    const response = await axiosClient.delete(url);
     return response.data;
   } catch (error: any) {
     console.error(error)

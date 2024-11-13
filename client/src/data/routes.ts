@@ -1,14 +1,17 @@
 //SuperAdmin
 export const superAdminRegisterUrl = '/super-admin/register'
 export const superAdminResetPasswordUrl = '/super-admin/reset-password'
+export const superadminAdminRequestNewCodeUrl = '/super-admin/request-new-code'
 export const superAdminVerifyUrl = '/super-admin/verify'
-export const loginUrlForSuperAdmin = '/super-admin/login'
-export const requestPasswordChangeUrlForSuperAdmin = '/super-admin/request-password-change'
+export const SuperAdminLoginUrl = '/super-admin/login'
+export const superAdminRequestPasswordChange = '/super-admin/request-password-change'
 
 //Admin
-export const loginUrlForAdmin = '/admin/login'
+export const loginUrlAdmin = '/admin/login'
 export const updateAdminUrl = '/admin/update'
 export const createAdminUrl = '/admin/create'
+export const getAdminUrl = '/admin'
+export const deleteAdminUrl = '/admin/delete'
 
 
 //AccountHolder
@@ -21,11 +24,15 @@ export const deleteAccountHolderUrl = '/account-holder/delete'
 //Bank
 export const createBankUrl = '/bank/create'
 export const updateBankUrl = '/bank/update'
-export const getAllBanks = '/bank/getAllBanks'
+export const getAllBanksUrl = '/bank/getAllBanks'
 export const  deleteBankUrl = '/bank/delete'
 
 //CheckingAccount
-export const updateCheckingAccountUrl = '/checking-account/update'
+
+export  const editCheckingAccountBalanceNoTransactionUrl = '/checking-account/no-transaction/update'
+export  const editCheckingAccountBalanceWithTransactionUrl = '/checking/with-transaction/update'
+export  const updateCheckingAccountUrl = '/checking/account/update'
+
 
 //TermDepositAccount
 export const updateTermDepositAccountUrl = '/term-deposit-account/update'
@@ -37,7 +44,6 @@ export const getAllSecondPartyUrl = '/second-party/get'
 export const deleteSecondPartyUrl = '/second-party/delete'
 
 //Transaction
-export const createTransactionUrl = '/transaction/create'
-export  const updateTransactionUrlNoTransaction = '/transaction/no-transaction/update'
-export  const updateTransactionUrlWithTransaction = '/transaction/with-transaction/update'
-export  const makeDebit = '/transactions/debit'
+export const putTransactionsUrl = '/transaction/update'
+export  const clientDebitUrl = '/checking-account/debit'
+export const deleteTransferTransactionsUrl = '/transaction/delete'

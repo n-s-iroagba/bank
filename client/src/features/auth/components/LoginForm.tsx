@@ -1,48 +1,27 @@
-import React, { useState } from "react";
-import { Form, Button, Spinner } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Form, Button, Spinner, Modal, Alert, InputGroup } from "react-bootstrap";
 import "../styles/LoginForm.css";
-
 import { useNavigate } from "react-router-dom";
 
-import { clientLoginUrl } from "../../../data/routes";
+import { AuthContext } from "../context/AuthContext";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PasswordStrengthMeter from "./PasswordStrengthMeter";
+
 
 
 const LoginForm: React.FC = () => {
-  const [loginDetails, setLoginDetails] = useState<any>({
-    username: "",
-    password: "",
-  });
-  const [loading, setLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+ 
+
+  const [showModal, setShowModal] = useState(false);
+  const {loginData,setLoginData,handleChange,handleLoginAccountHolder,showPassword,passwordType,submitting,errorMessage} = useContext(AuthContext)
   const navigate = useNavigate();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setLoginDetails({
-      ...loginDetails,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setErrorMessage("");
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+ 
 
-    // try {
-    //   const response = await postWithNoAuth(clientLoginUrl, loginDetails);
-    //   if (response.status === 200) {
-    //     localStorage.setItem("clientToken", JSON.stringify(response.data));
-    //     navigate("/dashboard");
-    //   }
-    // } catch (error: any) {
-    //   console.error(error);
-    //   setErrorMessage("Sorry, an error occurred. Please try again later.");
-    // } finally {
-    //   setLoading(false);
-    // }
-  };
 
   return (
     <>
@@ -55,12 +34,12 @@ const LoginForm: React.FC = () => {
           <span className="underline">Complaints</span>
         </p>
       </div>
-      <Form className="bg-light form py-3" onSubmit={handleLogin}>
+      <Form className="bg-light form py-3" onSubmit={(e)=>handleLoginAccountHolder(e,navigate)}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>User Name</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             required
-            onChange={handleChange}
+            onChange={(e)=>handleChange(e,setLoginData)}
             className="form-input"
             type="text"
             name="username"
@@ -75,12 +54,18 @@ const LoginForm: React.FC = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
-            onChange={handleChange}
+            onChange={(e)=>handleChange(e,setLoginData)}
             className="form-input"
             name="password"
-            type="password"
+            type={passwordType}
             placeholder="Password"
           />
+          <InputGroup>
+          <InputGroup.Text onClick={() => showPassword()}>
+              <FontAwesomeIcon icon={passwordType === 'text' ? faEye : faEyeSlash} />
+            </InputGroup.Text>
+          </InputGroup>
+          <PasswordStrengthMeter password={loginData.password} />
           <Form.Control.Feedback type="invalid">
             Please enter password.
           </Form.Control.Feedback>
@@ -89,9 +74,9 @@ const LoginForm: React.FC = () => {
         <Button
           className="button-radius bg-red w-100"
           type="submit"
-          disabled={loading}
+          disabled={submitting}
         >
-          {loading ? (
+          {submitting ? (
             <>
               <Spinner
                 as="span"
@@ -111,13 +96,30 @@ const LoginForm: React.FC = () => {
         </div>
 
         <div className="link-container">
-          <a href="/home">Enroll</a>
-          <p>|</p>
-          <a href="/home">Forgot User Name</a>
-          <a href="/home">Forgot Password</a>
-        </div>
+        <a href="/home">Enroll</a>
+        <p>|</p>
+        <a href="#!" onClick={handleShowModal}>Forgot User Name</a>
+        <a href="#!" onClick={handleShowModal}>Forgot Password</a>
+      </div>
+      {errorMessage&& <Alert className="w-100" variant="danger">
+        {errorMessage}</Alert>}
       </Form>
-      <p className="w-100 text-center text-danger fs-6">{errorMessage}</p>
+    
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Assistance Required</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Alert variant="danger">
+            Kindly contact the Texas Credit Union for assistance.
+          </Alert>
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleCloseModal} className="btn btn-secondary">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

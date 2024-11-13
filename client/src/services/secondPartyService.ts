@@ -1,10 +1,13 @@
 import axiosClient from "../api/axiosClient";
-import { getAllSecondPartyUrl } from "../data/routes";
-import { CreateSecondParty } from "../types/SecondParty";
+import { createSecondPartyUrl, deleteSecondPartyUrl, getAllSecondPartyUrl, updateSecondPartyUrl } from "../data/routes";
+import { CreateSecondParty, EditSecondParty } from "../types/SecondParty";
 
-export const createSecondParty = async (data: CreateSecondParty) => {
+
+export const createSecondParty = async (adminId:number,data: CreateSecondParty) => {
+  const url = `${axiosClient.defaults.baseURL}${createSecondPartyUrl}/${adminId}`;
+
   try {
-    const response = await axiosClient.post('/second-parties', data);
+    const response = await axiosClient.post(url, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to create SecondParty');
@@ -22,9 +25,10 @@ export const getAllSecondParties = async (id:number) => {
 };
 
 
-export const updateSecondParty = async (id: number, data: CreateSecondParty) => {
+export const updateSecondParty = async (id: number, data: EditSecondParty) => {
+  const url = `${axiosClient.defaults.baseURL}${updateSecondPartyUrl}/${id}`
   try {
-    const response = await axiosClient.patch(`/second-parties/${id}`, data);
+    const response = await axiosClient.patch(url, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to update SecondParty');
@@ -33,8 +37,9 @@ export const updateSecondParty = async (id: number, data: CreateSecondParty) => 
 
 
 export const deleteSecondParty = async (id: number) => {
+  const url = `${axiosClient.defaults.baseURL}${deleteSecondPartyUrl}/${id}`
   try {
-    const response = await axiosClient.delete(`/second-parties/${id}`);
+    const response = await axiosClient.delete(url);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete SecondParty');

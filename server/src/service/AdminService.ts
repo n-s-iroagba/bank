@@ -23,12 +23,12 @@ static createAdminBySuperAdmin = async (superAdminId: number, username: string, 
   
   
   
-static getAdmins = async (id: number) => {
+static getAdmins = async (superAdminId: number) => {
     try {
      // getAdmins function
   const admins = await Admin.findAll({
     where: {
-      superAdminId: id,
+      superAdminId: superAdminId,
     },
     include: [
       {
