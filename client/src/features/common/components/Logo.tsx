@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../client/assets/greater-texas-cu-logo.svg';
-import scrolledLogo from '../../client/assets/greater-texas-cu-logo.svg';
+import scrolledLogo from '../../client/assets/greater-texas-cu-icon.svg';
 import aggLogo from '../../client/assets/agg-icon-circle.svg'
 import '../styles/Logo.css';
 import '../../client/styles/GeneralButtonStyles.css';
@@ -15,12 +15,12 @@ const Logo = () => {
     // Function to handle scrolling
     const handleScroll = () => {
         const scrollY = window.scrollY;
-        setIsScrolled(scrollY > 50); // Example threshold for scroll change
+        setIsScrolled(scrollY > 50);
     };
 
     // Function to handle window resize
     const handleResize = () => {
-        setIsLargeScreen(window.innerWidth > 768); // Example for large screen threshold
+        setIsLargeScreen(window.innerWidth > 768); 
     };
 
     useEffect(() => {
