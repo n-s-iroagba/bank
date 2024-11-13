@@ -1,16 +1,15 @@
 // src/components/LoginForm.tsx
 import React, { useContext } from "react";
-import { Form, Button, Alert, Spinner, InputGroup } from "react-bootstrap";
+import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../common/components/Logo";
 import { AuthContext } from "../context/AuthContext";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PasswordStrengthMeter from "./PasswordStrengthMeter";
+
 
 const SuperAdminLoginForm: React.FC = () => {
   const {
-    superAdminLoginData,
     setSuperAdminData,
     handleChange,
     handleLoginSuperAdmin,
@@ -18,9 +17,11 @@ const SuperAdminLoginForm: React.FC = () => {
     passwordType,
     submitting,
     errorMessage,
+    passwordValidityMessage
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  
 
   return (
     <>
@@ -57,17 +58,18 @@ const SuperAdminLoginForm: React.FC = () => {
             type={passwordType}
             placeholder="Password"
           />
-          <InputGroup>
-            <InputGroup.Text onClick={() => showPassword()}>
-              <FontAwesomeIcon
-                icon={passwordType === "text" ? faEye : faEyeSlash}
-              />
-            </InputGroup.Text>
-          </InputGroup>
-          <PasswordStrengthMeter password={superAdminLoginData.password} />
-          <Form.Control.Feedback type="invalid">
-            Please enter password.
-          </Form.Control.Feedback>
+            <div className="d-flex justify-content-center">
+              <FontAwesomeIcon onClick={() => showPassword()} icon={passwordType === 'text' ? faEye : faEyeSlash}/>
+          </div>
+          <div className='d-flex flex-column'>
+            {
+              Array.isArray(passwordValidityMessage) && passwordValidityMessage.length > 0 && (
+                passwordValidityMessage.map((message, index) => (
+                  <Form.Text className='text-danger' key={index}>*{message}</Form.Text>
+                ))
+              )
+            }
+          </div>
         </Form.Group>
         <br />
         <Button

@@ -1,6 +1,6 @@
 // src/components/LoginForm.tsx
 import React, { useContext, useState } from 'react';
-import { Form, Button, Alert, Modal, Spinner, InputGroup } from 'react-bootstrap';
+import { Form, Button, Alert, Modal, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../common/components/Logo';
 import { AuthContext } from '../context/AuthContext';
@@ -55,11 +55,9 @@ const AdminLoginForm: React.FC = () => {
             type="password"
             placeholder="Password"
           />
-            <InputGroup>
-          <InputGroup.Text onClick={() => showPassword()}>
-              <FontAwesomeIcon icon={passwordType === 'text' ? faEye : faEyeSlash} />
-            </InputGroup.Text>
-          </InputGroup>
+           <div className="d-flex justify-content-center">
+              <FontAwesomeIcon onClick={() => showPassword()} icon={passwordType === 'text' ? faEye : faEyeSlash}/>
+          </div>
           <PasswordStrengthMeter password={loginData.password} />
           <Form.Control.Feedback type="invalid">
             Please enter password.

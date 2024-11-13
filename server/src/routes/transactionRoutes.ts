@@ -5,9 +5,6 @@ import { TransactionController } from '../controllers/TransactionController';
 
 const router = Router();
 
-router.get(
-  '/update-transfer/:id',
-  TransactionController.updateTransfer
-);
+router.get('/update/:id', TransactionController.updateTransfer);
 
 export default router;

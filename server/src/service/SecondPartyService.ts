@@ -1,6 +1,6 @@
 
 import { SecondParty } from '../models/SecondParty';
-import { CreateSecondParty } from '../types/SecondParty';
+import { CreateSecondParty } from '../types/SecondPartyTypes';
 
 export class SecondPartyService {
   // Create a new SecondParty

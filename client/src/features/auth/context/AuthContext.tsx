@@ -28,6 +28,7 @@ import { getIdFromChangePasswordToken } from "../helpers/helper";
 import { mockAuthContext } from "../types/data";
 
 
+
 export const AuthContext = createContext<AuthContextType>(mockAuthContext);
 
 export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
@@ -108,7 +109,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const    handleChangeForConfirmPassword = (
+  const handleChangeForConfirmPassword = (
     e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>,
     data: SuperAdminData | NewPasswordData,
     setState: Dispatch<
@@ -124,6 +125,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
   const showPassword = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
+
   };
 
 
@@ -136,10 +138,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     event.preventDefault();
     const form = event.currentTarget;
     const secretCodeMatch =
-      superAdminData.secretCode === process.env.REACT_APP_ADMIN_SECRET_KEY;
-
+    superAdminData.secretCode === process.env.REACT_APP_ADMIN_SECRET_KEY;
     setValidated(true);
-
     if (
       form.checkValidity() === false ||
       passwordValidityMessage.length ||
@@ -153,9 +153,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       );
       return;
     }
-
     setSubmitting(true);
-  
     try {
       const response = await registerSuperAdmin( superAdminData as CreateSuperAdmin);
       if (response.status === 201) {
@@ -268,7 +266,6 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       setErrorMessage("Cannot complete request at this time try again Later");
     }
   };
-
 
 
 //ACCOUNT_HOLDER

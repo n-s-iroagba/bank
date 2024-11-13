@@ -9,8 +9,8 @@ const EmailVerification = () => {
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const [isVerifying, setIsVerifying] = useState(false);
   const [error, setError] = useState('');
-  const [canResend, setCanResend] = useState(true); // Track if resend is allowed
-  const [timeLeft, setTimeLeft] = useState(0); // Track the time left before the next resend is allowed
+  const [canResend, setCanResend] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(0); 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
   const [id,setId] = useState(0)
