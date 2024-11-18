@@ -7,7 +7,6 @@ export const createSuperAdmin = async (data: CreateSuperAdmin) => {
 
   try {
     const response = await apiPost<string,CreateSuperAdmin>(url, data);
-    console.log('Super Admin registration successful:', response);
     return response.data;
   } catch (error: any) {
     console.error('Error during Super Admin registration:', error);
