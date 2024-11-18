@@ -22,7 +22,7 @@ export type AccountHolder = BaseAccountHolder & {
     termDepositAccount: TermDepositAccount;
 };
 
-export type EditAccountHolder = Omit<BaseAccountHolder, 'id'>
+export type UpdateAccountHolder = Omit<BaseAccountHolder, 'id'>
 
 export type CreateAccountHolder = Omit<BaseAccountHolder,'id'> & {
    

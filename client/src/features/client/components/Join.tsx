@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Join.css'; // Import CSS for styling
-import joinImage from '../assets/wide_kidsScenicView.jpg'; // Replace with your image path
+import joinImage from '../../../assets/images/wide_kidsScenicView.jpg'; // Replace with your image path
 import '../styles/GeneralButtonStyles.css'
 
 const Join = () => {

@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Spinner, Alert, Button } from 'react-bootstrap';
-import { verifySuperAdminEmail, requestNewCode } from '../../services/superAdminService'; // Add a service for requesting new code
+
 import { useNavigate } from 'react-router-dom';
 import '../styles/EmailVerification.css'
+import { verifySuperAdminEmail } from '../../services/authService';
 
 const EmailVerification = () => {
   // State for holding the code entered in each box
@@ -48,10 +49,7 @@ const EmailVerification = () => {
     }
 
     try {
-      const response = await verifySuperAdminEmail(id, code);
-      if (response.status !== 200) {
-        throw new Error('Verification failed');
-      }
+      const response = await verifySuperAdminEmail(id, {code:code});
 
       alert('Verification successful');
     } catch (error) {
@@ -62,7 +60,7 @@ const EmailVerification = () => {
     }
   };
 
-  // Function to request a new verification code with cooldown logic
+  // Function to request a new verification co}de with cooldown logic
   const resendCode = async () => {
     if (!canResend) {
       alert(`Please wait ${timeLeft} seconds before requesting a new code.`);
@@ -72,13 +70,7 @@ const EmailVerification = () => {
     try {
       // Call the service to request a new code
       const response = await requestNewCode(id);
-      if (response.status === 200) {
-        alert('A new verification code has been sent to your email');
-        setCanResend(false); // Disable resend button
-        startCooldown(); // Start cooldown
-      } else {
-        alert('Failed to request a new code');
-      }
+     
     } catch (error) {
       alert('Error while requesting a new code');
     }
@@ -148,3 +140,7 @@ const EmailVerification = () => {
 };
 
 export default EmailVerification;
+function requestNewCode(id: number) {
+  throw new Error('Function not implemented.');
+}
+

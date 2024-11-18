@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Accordion, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; // Import Link for routing
 import { Bank, CreateBank } from '../../../types/Bank';
-import { CreateBankModal, EditBankModal } from './BankModals';
+import { CreateBankModal, UpdateBankModal } from './BankModals';
 
 // Example Bank data
 export const banks: Bank[] = [
@@ -19,13 +19,13 @@ export const banks: Bank[] = [
 ];
 
 const BankDashboard: React.FC = () => {
-  const [showEditBankModal, setShowEditBankModal] = useState<boolean>(false);
+  const [showUpdateBankModal, setShowUpdateBankModal] = useState<boolean>(false);
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const [showCreateBankModal, setShowCreateBankModal] = useState<boolean>(false);
 
-  const handleShowEditBank = (bank: Bank) => {
+  const handleShowUpdateBank = (bank: Bank) => {
     setSelectedBank(bank);
-    setShowEditBankModal(true);
+    setShowUpdateBankModal(true);
   };
 
   const handleShowCreateBank = () => {
@@ -51,7 +51,7 @@ const BankDashboard: React.FC = () => {
                 <Link to={`/bank-dashboard/${bank.id}`}>
                   <Button variant="link" className="ms-3">See More</Button>
                 </Link>
-                <Button variant="link" className="ms-3" onClick={() => handleShowEditBank(bank)}>Edit Bank</Button>
+                <Button variant="link" className="ms-3" onClick={() => handleShowUpdateBank(bank)}>Update Bank</Button>
                 <Button variant="link" className="ms-3" onClick={() => handleShowDeleteBank(bank.id)}>Delete Bank</Button>
               </Accordion.Body>
             </Accordion.Item>
@@ -61,18 +61,18 @@ const BankDashboard: React.FC = () => {
 
       {/* Modals */}
       {selectedBank && (
-        <EditBankModal
-                  show={showEditBankModal}
-                  onClose={() => setShowEditBankModal(false)}
-                  bankToEdit={selectedBank}
+        <UpdateBankModal
+                  show={showUpdateBankModal}
+                  onClose={() => setShowUpdateBankModal(false)}
+                  bankToUpdate={selectedBank}
                   onSubmit={(bankData: Bank) => {
                       console.log('Updating bank data:', bankData);
-                      setShowEditBankModal(false);
+                      setShowUpdateBankModal(false);
                   } } bank={{
                       id: 0,
                       name: '',
                       logo: ''
-                  }} onEdit={function (updatedBank: Bank): void {
+                  }} onUpdate={function (updatedBank: Bank): void {
                       throw new Error('Function not implemented.');
                   } }        />
       )}

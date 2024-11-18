@@ -1,13 +1,13 @@
 // src/components/ImageGrid.tsx
 import React, { useRef, useState } from 'react';
 import '../styles/ImageGrid.css'; // Import the CSS file
-import image1 from '../assets/small_manApronBusiness.jpg'
-import image2 from '../assets/small_officeMeeting.jpg'
-import image3 from '../assets/female hand holding piggy bank.png'
-import image4 from '../assets/Rewards Card.png'
+import image1 from '../../../assets/images/small_manApronBusiness.jpg'
+import image2 from '../../../assets/images/small_officeMeeting.jpg'
+import image3 from '../../../assets/images/female hand holding piggy bank.png'
+import image4 from '../../../assets/images/Rewards Card.png'
 
 
-import image5 from '../assets/dad and son on computer.png'
+import image5 from '../../../assets/images/dad and son on computer.png'
 
 
 import { Col, Row } from 'react-bootstrap';

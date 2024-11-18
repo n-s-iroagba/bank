@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Dropdown, ListGroup, Button, Modal, Spinner, Alert } from 'react-bootstrap';
 
-import logo from '../../../features/client/assets/greater-texas-cu-icon.svg';
+import logo from '../../../assets/images/greater-texas-cu-icon.svg';
 import { Bank } from '../../../types/Bank';
 import { SecondParty } from '../../../types/SecondParty';
 import { CreateTransaction, TransactionType } from '../../../types/Transaction';

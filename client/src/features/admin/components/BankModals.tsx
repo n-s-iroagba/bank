@@ -6,9 +6,9 @@ interface CreateBankModalProps extends ModalProps {
   onCreate: (bank: CreateBank) => void;
 }
 
-interface EditBankModalProps extends ModalProps {
+interface UpdateBankModalProps extends ModalProps {
   bank: Bank;
-  onEdit: (updatedBank: Bank) => void;
+  onUpdate: (updatedBank: Bank) => void;
 }
 
 const CreateBankModal: React.FC<CreateBankModalProps> = ({ onCreate, show, onHide }) => {
@@ -74,7 +74,7 @@ const CreateBankModal: React.FC<CreateBankModalProps> = ({ onCreate, show, onHid
   );
 };
 
-const EditBankModal: React.FC<EditBankModalProps> = ({ bank, onEdit, show, onHide }) => {
+const UpdateBankModal: React.FC<UpdateBankModalProps> = ({ bank, onUpdate, show, onHide }) => {
   const [bankDetails, setBankDetails] = useState<Bank>(bank);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,14 +87,14 @@ const EditBankModal: React.FC<EditBankModalProps> = ({ bank, onEdit, show, onHid
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    onEdit(bankDetails);
+    onUpdate(bankDetails);
     onHide?.();
   };
 
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Bank</Modal.Title>
+        <Modal.Title>Update Bank</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -136,4 +136,4 @@ const EditBankModal: React.FC<EditBankModalProps> = ({ bank, onEdit, show, onHid
   );
 };
 
-export { CreateBankModal, EditBankModal };
+export { CreateBankModal, UpdateBankModal };

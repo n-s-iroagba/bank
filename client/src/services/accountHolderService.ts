@@ -1,13 +1,11 @@
-
-import axiosClient from '../api/axiosClient';
-import { accountHolderLoginUrl, createAccountHolderUrl, deleteAccountHolderUrl, getAccountHolderUrl, updateAccountHolderUrl } from '../data/routes';
-import { LoginData } from '../features/auth/types/authTypes';
-import {  CreateAccountHolder, EditAccountHolder } from '../types/AccountHolder';
+import { apiDelete, apiGet, apiPatch, apiPost } from '../api/api';
+import { API_ENDPOINTS } from '../api/urls';
+import {  AccountHolder, CreateAccountHolder, UpdateAccountHolder } from '../types/AccountHolder';
 
 export const createAccountHolder = async (adminId:number,data: CreateAccountHolder) => {
-  const url = `${axiosClient.defaults.baseURL}${createAccountHolderUrl}/${adminId}`
+  const url = `${API_ENDPOINTS.accountHolder.create}/${adminId}`
     try {
-      const response = await axiosClient.post(url, data);
+      const response = await apiPost<AccountHolder,CreateAccountHolder>(url, data);
       return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to update account holder');
@@ -16,9 +14,9 @@ export const createAccountHolder = async (adminId:number,data: CreateAccountHold
   
 
 export const getAccountHoldersByAdminId = async (adminId: number) => {
-    const url = `${axiosClient.defaults.baseURL}${getAccountHolderUrl}/${adminId}`
+    const url = `${API_ENDPOINTS.accountHolder.get}/${adminId}`
   try {
-    const response = await axiosClient.get(url);
+    const response = await apiGet<AccountHolder[]>(url);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch account holders for admin');
@@ -26,10 +24,10 @@ export const getAccountHoldersByAdminId = async (adminId: number) => {
 };
 
 
-export const updateAccountHolder = async (accountHolderId:number,data: EditAccountHolder) => {
-    const url = `${axiosClient.defaults.baseURL}${updateAccountHolderUrl}/${accountHolderId}`
+export const updateAccountHolder = async (accountHolderId:number,data: UpdateAccountHolder) => {
+    const url = `${API_ENDPOINTS.accountHolder.update}/${accountHolderId}`
   try {
-    const response = await axiosClient.patch(url, data);
+    const response = await apiPatch<AccountHolder,UpdateAccountHolder>(url, data);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to update account holder');
@@ -38,9 +36,9 @@ export const updateAccountHolder = async (accountHolderId:number,data: EditAccou
 
 
 export const deleteAccountHolder = async (accountHolderId: number) => {
-    const url = `${axiosClient.defaults.baseURL}${deleteAccountHolderUrl}/${accountHolderId}`
+      const url = `${API_ENDPOINTS.accountHolder.delete}/${accountHolderId}`
   try {
-    const response = await axiosClient.delete(url);
+    const response = await apiDelete<string>(url);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete account holder');
@@ -48,13 +46,3 @@ export const deleteAccountHolder = async (accountHolderId: number) => {
 };
 
 
-export const loginAccountHolder = async (data:LoginData) => {
-  const url = `${axiosClient.defaults.baseURL}${accountHolderLoginUrl}`
-  try {
-    const response = await axiosClient.post(url, data);
-  
-      return response.data;
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to log in');
-    }
-  };

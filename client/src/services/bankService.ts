@@ -1,26 +1,28 @@
-import axiosClient from "../api/axiosClient";
-import { createBankUrl, getAllBanksUrl } from "../data/routes";
-import { CreateBank, EditBank } from "../types/Bank";
+import { apiGet, apiPost, apiPatch, apiDelete } from '../api/api';
+import { API_ENDPOINTS } from '../api/urls';
 
-export const getAllBanks = async () => {
-    const url = `${axiosClient.defaults.baseURL}${getAllBanksUrl}`
+import { CreateBank, UpdateBank, Bank } from '../types/Bank';
+
+// Get all banks
+export const getAllBanks = async (): Promise<Bank[]> => {
+  const url = API_ENDPOINTS.bank.getAll;
   try {
-    const response = await axiosClient.get(url);
+    const response = await apiGet<Bank[]>(url);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch banks');
   }
 };
 
-
-export const createBank = async (data: CreateBank) => {
-  const url = `${axiosClient.defaults.baseURL}${createBankUrl}`
+// Create a new bank
+export const createBank = async (data: CreateBank): Promise<Bank> => {
+  const url = API_ENDPOINTS.bank.create;
   try {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('logo', data.logo);
 
-    const response = await axiosClient.post(url, formData, {
+    const response = await apiPost<Bank, FormData>(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -31,8 +33,9 @@ export const createBank = async (data: CreateBank) => {
   }
 };
 
-
-export const updateBank = async (id: number, data: EditBank) => {
+// Update a bank
+export const updateBank = async (id: number, data: UpdateBank): Promise<Bank> => {
+  const url = `${API_ENDPOINTS.bank.update}/${id}`;
   try {
     const formData = new FormData();
     formData.append('name', data.name);
@@ -40,7 +43,7 @@ export const updateBank = async (id: number, data: EditBank) => {
       formData.append('logo', data.logo);
     }
 
-    const response = await axiosClient.patch(`/banks/${id}`, formData, {
+    const response = await apiPatch<Bank, FormData>(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -51,9 +54,11 @@ export const updateBank = async (id: number, data: EditBank) => {
   }
 };
 
-export const deleteBank = async (id: number) => {
+// Delete a bank
+export const deleteBank = async (id: number): Promise<boolean> => {
+  const url = `${API_ENDPOINTS.bank.delete}/${id}`;
   try {
-    const response = await axiosClient.delete(`/banks/${id}`);
+    const response = await apiDelete<string>(url);
     return response.status === 204;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete bank');

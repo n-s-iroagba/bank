@@ -1,4 +1,5 @@
-import { CreateSuperAdmin } from "../../../types/SuperAdmin";
+import { CreateSuperAdmin } from "./SuperAdmin";
+
 
 export type SuperAdminData = CreateSuperAdmin & {
     secretCode: string;

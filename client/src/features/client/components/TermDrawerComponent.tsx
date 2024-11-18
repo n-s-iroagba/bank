@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import '../styles/DrawerComponent.css';
-import logo from '../assets/greater-texas-cu-logo.svg'
+import logo from '../../../assets/images/greater-texas-cu-logo.svg'
 import LogOutButton from './LogOutButton';
 
 interface DrawerProps {

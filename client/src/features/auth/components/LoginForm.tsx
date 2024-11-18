@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Form, Button, Spinner, Modal, Alert} from "react-bootstrap";
-import "../styles/LoginForm.css";
+import "../styles/AuthForm.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
+import { AuthContext } from "../../../context/AuthContext";
 
 const LoginForm: React.FC = () => {
   const [showModal, setShowModal] = useState(false);

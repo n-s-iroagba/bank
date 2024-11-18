@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import { EditAccountHolder } from '../../../types/AccountHolder';
-import axiosClient from '../../../api/axiosClient';
-import { updateAccountHolderUrl } from '../../../data/routes';
+import { UpdateAccountHolder } from '../../../types/AccountHolder';
 
 
-interface EditAccountHolderModalProps {
+
+interface UpdateAccountHolderModalProps {
   show: boolean;
   onClose: (state:boolean) => void;
-  accountHolder: EditAccountHolder | null;
+  accountHolder: UpdateAccountHolder | null;
   accountHolderId:number
 }
 
-const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, onClose, accountHolder,accountHolderId }) => {
+const UpdateAccountHolderModal: React.FC<UpdateAccountHolderModalProps> = ({ show, onClose, accountHolder,accountHolderId }) => {
   const [firstname, setFirstname] = useState('');
   const [middlename, setMiddlename] = useState('');
   const [surname, setSurname] = useState('');
@@ -31,25 +30,13 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
   }, [accountHolder]);
 
   const handleSave = async () => {
-    const url = `${axiosClient.defaults.baseURL}${updateAccountHolderUrl}/${accountHolderId}`
-
-    try{
-    if (accountHolder) {
-     const response = await axiosClient.patch(url, accountHolder)
-     if (response.status === 200) {
-      alert('Account Holder successfully create')
-      window.location.reload()
-   }
- }}catch(error:any){
-   console.error(error)
-   setErrorMessage('Error contact site owners.')
- }
+   
  };
 
   return (
     <Modal show={show} onHide={()=>onClose(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Account Holder</Modal.Title>
+        <Modal.Title>Update Account Holder</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -108,4 +95,4 @@ const EditAccountHolderModal: React.FC<EditAccountHolderModalProps> = ({ show, o
   );
 };
 
-export default EditAccountHolderModal;
+export default UpdateAccountHolderModal;

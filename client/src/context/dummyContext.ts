@@ -1,11 +1,12 @@
-import { AuthContextType } from "./authTypes";
+import { AuthContextType } from "../types/AuthContextType";
+
 
 export const mockAuthContext: AuthContextType = {
     superAdminData: {
-     username: "admin",
      firstname: 'John Doe',
      surname:'',
      password:'',
+     username:'',
      confirmPassword:'',
       email: 'admin@example.com',
       secretCode:''

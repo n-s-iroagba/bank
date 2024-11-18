@@ -13,18 +13,18 @@ const axiosClient = axios.create({
   },
 });
 
-// Request interceptor to add authorization token
-axiosClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }else{
-      config.headers.Authorization = 'Bearer NoToken'
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// // Request interceptor to add authorization token
+// axiosClient.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem('token');
+//     if (token && config.headers) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }else{
+//       config.headers.Authorization = 'Bearer NoToken'
+//     }
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
 
 export default axiosClient;

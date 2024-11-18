@@ -11,9 +11,8 @@ interface CreateAdminModalProps {
 
 const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSubmit }) => {
   const [admin, setAdmin] = useState<CreateAdmin>({
- 
     email: '',
-    username: '',
+   username: '',
     password: ''
   });
 
@@ -28,7 +27,7 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSu
   const handleSubmit = () => {
     onSubmit(admin);
     setAdmin({
-     
+  
       email: '',
       username: '',
       password: ''

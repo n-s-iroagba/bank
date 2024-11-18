@@ -1,8 +1,8 @@
 import React from 'react';
 import { Carousel,  Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo1 from '../assets/Generic-Hero-Asset GT 1.png';
-import logo2 from '../assets/IDSHeild (1).png';
+import logo1 from '../../../assets/images/Generic-Hero-Asset GT 1.png';
+import logo2 from '../../../assets/images/IDSHeild (1).png';
 import '../styles/CarouselHeader.css';
 import '../styles/GeneralButtonStyles.css'
 import '../styles/GeneralStyles.css'

@@ -8,5 +8,5 @@ export type CheckingAccount = {
     transactions?: Transaction[];
 }
 
-export type EditCheckingAccount = Omit<CheckingAccount,'transactions'|'id'>
+export type UpdateCheckingAccount = Omit<CheckingAccount,'transactions'|'id'>
 export type CreateCheckingAccount =  Omit<CheckingAccount,'id'|'transactions'|'accountNumber'>

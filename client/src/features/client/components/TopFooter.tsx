@@ -1,11 +1,11 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import logo1 from '../assets/download.jpeg';
-import logo2 from '../assets/download (1).jpeg'
-import logo3 from '../assets/cuna.svg';
-import logo4 from '../assets/nafcu.svg';
-import logo5 from '../assets/co-op.svg';
-import logo6 from '../assets/verified-by-visa.svg'
+import logo1 from '../../../assets/images/download.jpeg';
+import logo2 from '../../../assets/images/download (1).jpeg'
+import logo3 from '../../../assets/images/cuna.svg';
+import logo4 from '../../../assets/images/nafcu.svg';
+import logo5 from '../../../assets/images/co-op.svg';
+import logo6 from '../../../assets/images/verified-by-visa.svg'
 
 import '../styles/TopFooter.css'; 
 

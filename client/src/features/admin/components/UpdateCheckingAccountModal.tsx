@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Modal, Button,Form } from "react-bootstrap";
-import { EditCheckingAccount } from "../../../types/CheckingAccount";
+import { UpdateCheckingAccount } from "../../../types/CheckingAccount";
 
-const CheckingAccountEditModal: React.FC<{
+const UpdateCheckingAccountModal: React.FC<{
   show: boolean;
   onHide: () => void;
 editId: number;
-  onSave: (updatedAccount: EditCheckingAccount) => void;
+  onSave: (updatedAccount: UpdateCheckingAccount) => void;
 }> = ({ show, onHide, editId, onSave }) => {
-  const [editedAccount, setEditedAccount] = useState<EditCheckingAccount>({
+  const [editedAccount, setUpdateedAccount] = useState<UpdateCheckingAccount>({
     accountNumber:0,
     balance: 0,
 
@@ -16,7 +16,7 @@ editId: number;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedAccount(prev => ({
+    setUpdateedAccount(prev => ({
       ...prev,
       [name]: name === "balance" || name.includes("Transfer") ? parseFloat(value) : value
     }));
@@ -30,7 +30,7 @@ editId: number;
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Checking Account</Modal.Title>
+        <Modal.Title>Update Checking Account</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -65,4 +65,4 @@ editId: number;
     </Modal>
   );
 };
-export default CheckingAccountEditModal
+export default UpdateCheckingAccountModal

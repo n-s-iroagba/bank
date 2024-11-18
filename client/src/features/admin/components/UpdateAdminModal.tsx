@@ -3,19 +3,19 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { BaseAdmin } from '../../../types/Admin';
 
 
-interface EditAdminModalProps {
+interface UpdateAdminModalProps {
   show: boolean;
   onClose: () => void;
   onSubmit: (adminData: BaseAdmin) => void;
-  adminToEdit: BaseAdmin; // Admin data to populate the form for editing
+  adminToUpdate: BaseAdmin; // Admin data to populate the form for editing
 }
 
-const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onSubmit, adminToEdit }) => {
-  const [admin, setAdmin] = useState<BaseAdmin>(adminToEdit);
+const UpdateAdminModal: React.FC<UpdateAdminModalProps> = ({ show, onClose, onSubmit, adminToUpdate }) => {
+  const [admin, setAdmin] = useState<BaseAdmin>(adminToUpdate);
 
   useEffect(() => {
-    setAdmin(adminToEdit); // Reset form if the admin data changes
-  }, [adminToEdit]);
+    setAdmin(adminToUpdate); // Reset form if the admin data changes
+  }, [adminToUpdate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,7 +33,7 @@ const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onSubmit
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Admin</Modal.Title>
+        <Modal.Title>Update Admin</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -82,4 +82,4 @@ const EditAdminModal: React.FC<EditAdminModalProps> = ({ show, onClose, onSubmit
   );
 };
 
-export default EditAdminModal;
+export default UpdateAdminModal;
