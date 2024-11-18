@@ -1,31 +1,17 @@
-import React, {
-  createContext,
-  useState,
-  ReactNode,
-  FormEvent,
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { ReactNode, useState, ChangeEvent, Dispatch, SetStateAction, FormEvent, createContext } from "react";
 
-import { doPasswordsMatch } from "../utils/utils";
-
-import {
-  AuthContextType,
-  NewPasswordData,
-  LoginData,
-  SuperAdminData,
-  SuperAdminLoginData,
-  ChangePasswordRequest,
-  NewPassword,
-} from "../types/authTypes";
-import { loginAdmin } from "../../../services/adminService";
-import { changeSuperAdminPassword, loginSuperAdmin, registerSuperAdmin, requestSuperAdminPasswordChange } from "../../../services/superAdminService";
-
-import { loginAccountHolder } from "../../../services/accountHolderService";
-import { CreateSuperAdmin } from "../../../types/SuperAdmin";
 import { getIdFromChangePasswordToken } from "../helpers/helper";
-import { mockAuthContext } from "../types/data";
+
+
+
+import { AuthContextType, SuperAdminData, NewPasswordData, LoginData, SuperAdminLoginData, ChangePasswordRequest, NewPassword } from "../types/AuthContextType";
+import { CreateSuperAdmin } from "../types/SuperAdmin";
+import { doPasswordsMatch } from "../utils";
+import { mockAuthContext } from "./dummyContext";
+import { JWTService } from "../services/JWTService";
+import { loginSuperAdmin, loginAdmin,updateSuperAdminPassword,requestToChangeSuperAdminPassword, loginAccountHolder } from "../services/authService";
+import { createSuperAdmin } from "../services/superAdminService";
+import { BaseAdmin } from "../types/Admin";
 
 
 
@@ -80,13 +66,13 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     const hasLowercase = /[a-z]/.test(password);
     const length = password.length;
 
-    if (!hasNumber) tempPasswordState.push("Password must contain a number");
+    if (!hasNumber) tempPasswordState.push("password must contain a number.");
     if (!hasUppercase)
-      tempPasswordState.push("Password must contain an uppercase letter");
+      tempPasswordState.push("password must contain an uppercase letter.");
     if (!hasLowercase)
-      tempPasswordState.push("Password must contain a lowercase letter");
+      tempPasswordState.push("password must contain a lowercase letter.");
     if (length < 8)
-      tempPasswordState.push("Password must be at least 8 characters");
+      tempPasswordState.push("password must be at least 8 characters.");
 
     setPasswordValidityMessage(tempPasswordState);
   };
@@ -98,7 +84,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     >
   ) => {
     e.preventDefault();
-
+  
     setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -136,6 +122,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     navigate: (path: string) => void
   ) => {
     event.preventDefault();
+    setValidated(true);
     const form = event.currentTarget;
     const secretCodeMatch =
     superAdminData.secretCode === process.env.REACT_APP_ADMIN_SECRET_KEY;
@@ -155,39 +142,49 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
     setSubmitting(true);
     try {
-      const response = await registerSuperAdmin( superAdminData as CreateSuperAdmin);
-      if (response.status === 201) {
-        handleEmailVerification(response, false, navigate);
-      } else if (response.status === 409) {
-        setErrorMessage("This email is already registered");
-      } else {
-        setErrorMessage("Something went wrong, please try again later");
-      }
+   
+      const token = await createSuperAdmin( superAdminData as CreateSuperAdmin);
+
+      handleEmailVerification(token, false, navigate);
+   
     } catch (error: any) {
       console.error(error);
+      if (error.status === 409) {
+        setErrorMessage("This email is already registered.");
+      } else {
+        setErrorMessage("Something went wrong, please try again later or contact the developer.");
+      }
     } finally {
       setSubmitting(false);
     }
   };
 
   const handleEmailVerification = (
-    response: any,
+    token: string,
     shouldReload = false,
     navigate: (path: string) => void
   ) => {
-    localStorage.setItem(
-      "EmailVerificationId",
-      JSON.stringify(response.data.id)
-    );
-    shouldReload
-      ? window.location.reload()
-      : navigateToVerifyEmailPage(navigate);
-  };
+    try {
+   
+      const decoded = JWTService.decodeToken<BaseAdmin>(token);
+      shouldReload
+        ? window.location.reload()
+        : navigateToVerifyEmailPage(navigate, decoded.email, decoded.id);
 
-  const navigateToVerifyEmailPage = (navigate: (path: string) => void) => {
-    navigate("/verify-email");
-  };
 
+    } catch (error) {
+      console.error("Invalid token:", error);
+      setErrorMessage("Invalid token. Please try again.");
+    }
+  };
+  
+  const navigateToVerifyEmailPage = (
+    navigate: (path: string) => void,
+    email: string,
+    id: number
+  ) => {
+    navigate(`/verify-email/${email}/${id}`);
+  };
 
   //LOGIN_SUPERADMIN
   const handleLoginSuperAdmin = async (
@@ -205,8 +202,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
     setSubmitting(true);
     try {
-      const response = await loginSuperAdmin(superAdminLoginData);
-      handleLoginResponseSuperAdmin(response, navigate);
+      const token = await loginSuperAdmin(superAdminLoginData);
+      handleLogintokenSuperAdmin(token, navigate);
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
       console.error(error);
@@ -215,15 +212,15 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const handleLoginResponseSuperAdmin = (
-    response: any,
+  const handleLogintokenSuperAdmin = (
+    token: any,
     navigate: (path: string) => void
   ) => {
-    if (response.status === 200) {
-      localStorage.setItem("bankToken", JSON.stringify(response.data));
+    if (token.status === 200) {
+      localStorage.setItem("bankToken", JSON.stringify(token.data));
       navigate("/super-admin/dashboard");
-    } else if (response.status === 201) {
-      handleEmailVerification(response, false, navigate);
+    } else if (token.status === 201) {
+      handleEmailVerification(token, false, navigate);
     } else {
       setErrorMessage("Cannot complete request at this time try again Later");
     }
@@ -245,8 +242,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
     setSubmitting(true);
     try {
-      const response = loginAdmin(loginData)
-      handleLoginResponseAdmin(response, navigate);
+      const token = loginAdmin(loginData)
+      handleLogintokenAdmin(token, navigate);
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
       console.error(error);
@@ -255,12 +252,12 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const handleLoginResponseAdmin = (
-    response: any,
+  const handleLogintokenAdmin = (
+    token: any,
     navigate: (path: string) => void
   ) => {
-    if (response.status === 200) {
-      localStorage.setItem("bankToken", JSON.stringify(response.data));
+    if (token.status === 200) {
+      localStorage.setItem("bankToken", JSON.stringify(token.data));
       navigate("/admin/dashboard");
     } else {
       setErrorMessage("Cannot complete request at this time try again Later");
@@ -283,8 +280,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
     setSubmitting(true);
     try {
-      const response = await loginAccountHolder(loginData)
-      handleLoginResponseAccountHolder(response, navigate);
+      const token = await loginAccountHolder(loginData)
+      handleLogintokenAccountHolder(token, navigate);
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
       console.error(error);
@@ -293,12 +290,12 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const handleLoginResponseAccountHolder = (
-    response: any,
+  const handleLogintokenAccountHolder = (
+    token: any,
     navigate: (path: string) => void
   ) => {
-    if (response.status === 200) {
-      localStorage.setItem("bankToken", JSON.stringify(response.data));
+    if (token.status === 200) {
+      localStorage.setItem("bankToken", JSON.stringify(token.data));
       navigate("/dashboard");
     } else {
       setErrorMessage("Cannot complete request at this time try again Later");
@@ -320,11 +317,11 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     setSubmitting(true);
   
     try{
-      const response = await requestSuperAdminPasswordChange(changePasswordData)
-      if (response.status === 200){
-        localStorage.setItem('bankChangePasswordToken', JSON.stringify(response.data))
+      const token = await requestToChangeSuperAdminPassword(changePasswordData)
+
+        localStorage.setItem('bankChangePasswordToken', JSON.stringify(token))
         navigate('/new-password')
-      }
+      
     }catch(error:any){
       setErrorMessage('sorry you request cannot be completed, contact your developer')
 console.error(error)
@@ -360,11 +357,9 @@ console.error(error)
 
     setSubmitting(true);
     try {
-      const response = await changeSuperAdminPassword(id,newPasswordData as NewPassword);
-      if (response.status === 200) {
-        localStorage.setItem("JwtToken", JSON.stringify(response.data));
+      const token = await updateSuperAdminPassword(id,newPasswordData as NewPassword);
+        localStorage.setItem("JwtToken", JSON.stringify(token));
         navigate("/superadmin/dashboard");
-      }
     } catch (error: any) {
       alert("An error occurred, kindly try again later");
     } finally {

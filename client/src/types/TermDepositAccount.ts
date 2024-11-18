@@ -11,4 +11,4 @@ export type TermDepositAccount = {
         accountNumber: number;
 }
 export type CreateTermDepositAccount = Omit<TermDepositAccount,'id'|'accountNumber'|'accountHolderId'|'accountHolder'>
-export type EditTermDepositAccount = Omit<TermDepositAccount,'id'>
+export type UpdateTermDepositAccount = Omit<TermDepositAccount,'id'>

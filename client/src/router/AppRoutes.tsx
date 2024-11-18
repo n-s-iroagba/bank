@@ -13,6 +13,7 @@ import Transfer from '../pages/client/Transfer';
 import AdminSignUp from '../pages/admin/AdminSignUp';
 import SuperAdminDashboard from '../pages/admin/SuperAdminDashboard';
 import AdminDashboardWrapper from '../pages/admin/AdminDashboardWrapper';
+import SignUp from '../pages/admin/SignUp';
 
 
 const AppRoutes: React.FC = () => {
@@ -31,6 +32,7 @@ const AppRoutes: React.FC = () => {
           } />
        
         <Route path="/super-admin/dashboard" element={<SuperAdminDashboard id={1} />} />
+        <Route path="/super-admin/signup" element={<SignUp/>} />
         <Route path="/admin/signup" element={<AdminSignUp />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/verify-email" element={<EmailVerification />} />

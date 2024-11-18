@@ -4,7 +4,7 @@ import SecondPartySection from "../../features/admin/components/SecondPartySecti
 import { BaseAccountHolder } from "../../types/AccountHolder";
 import CheckingAccountAccordion from "../../features/admin/components/CheckingAccountAccordion";
 import TermDepositAccountAccordion from "../../features/admin/components/TermDepositAccountAccordion";
-import EditAccountHolderModal from "../../features/admin/components/EditAccountHolder";
+import UpdateAccountHolderModal from "../../features/admin/components/UpdateAccountHolder";
 import CreateAccountHolderModal from "../../features/admin/components/CreateAccountHolderModal";
 import useAccountHolders from "../../hooks/UseAccountHolders";
 import { calculateDividends } from "../../utils/calculateDividends";
@@ -17,7 +17,7 @@ const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
 }) => {
   const [showCreateAccountHolderModal, setShowCreateAccountHolderModal] =
     useState(false);
-  const [showEditAccountHolderModal, setShowEditAccountHolderModal] =
+  const [showUpdateAccountHolderModal, setShowUpdateAccountHolderModal] =
     useState(false);
   const [showDeleteAccountHolderModal, setShowDeleteAccountHolderModal] =
     useState(false);
@@ -35,9 +35,9 @@ const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
     setShowDeleteAccountHolderModal(true);
   };
 
-  const handleEditAccountHolderModal = (accountHolder: BaseAccountHolder) => {
+  const handleUpdateAccountHolderModal = (accountHolder: BaseAccountHolder) => {
     setSelectedAccountHolder(accountHolder);
-    setShowEditAccountHolderModal(true);
+    setShowUpdateAccountHolderModal(true);
   };
 
   const handleDelete = () => {};
@@ -110,12 +110,12 @@ const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
                                 variant="info"
                                 className="w-100 mb-2"
                                 onClick={() =>
-                                  handleEditAccountHolderModal(
+                                  handleUpdateAccountHolderModal(
                                     accountHolder as BaseAccountHolder
                                   )
                                 }
                               >
-                                Edit Account Holder Details
+                                Update Account Holder Details
                               </Button>
                             </Col>
                             <Col lg={3} md={4} sm={12}>
@@ -179,9 +179,9 @@ const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
         adminId={adminId}
       />
       {selectedAccountHolder && (
-        <EditAccountHolderModal
-          show={showEditAccountHolderModal}
-          onClose={() => setShowEditAccountHolderModal(false)}
+        <UpdateAccountHolderModal
+          show={showUpdateAccountHolderModal}
+          onClose={() => setShowUpdateAccountHolderModal(false)}
           accountHolder={selectedAccountHolder}
           accountHolderId={selectedAccountHolder?.id}
         />

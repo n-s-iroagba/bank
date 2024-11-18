@@ -3,7 +3,7 @@ import { Form, Button, Modal } from 'react-bootstrap';
 import { Bank } from '../../../types/Bank';
 import { SecondParty } from '../../../types/SecondParty';
 
-interface EditSecondPartyModalProps {
+interface UpdateSecondPartyModalProps {
   show: boolean;
   secondParty: SecondParty | null; // Handle null if `secondParty` might not be provided initially
   banks: Bank[]; // Array of available banks to choose from
@@ -11,7 +11,7 @@ interface EditSecondPartyModalProps {
 
 }
 
-const EditSecondPartyModal: React.FC<EditSecondPartyModalProps> = ({ show, secondParty, banks, onClose }) => {
+const UpdateSecondPartyModal: React.FC<UpdateSecondPartyModalProps> = ({ show, secondParty, banks, onClose }) => {
   const [formValues, setFormValues] = useState<SecondParty>({
     id: 0,
     firstname: '',
@@ -53,7 +53,7 @@ const EditSecondPartyModal: React.FC<EditSecondPartyModalProps> = ({ show, secon
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Second Party</Modal.Title>
+        <Modal.Title>Update Second Party</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -173,4 +173,4 @@ const EditSecondPartyModal: React.FC<EditSecondPartyModalProps> = ({ show, secon
   );
 };
 
-export default EditSecondPartyModal;
+export default UpdateSecondPartyModal;

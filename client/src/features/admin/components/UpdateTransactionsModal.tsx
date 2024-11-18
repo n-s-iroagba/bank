@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Modal, Button,Form } from "react-bootstrap";
 import {  CreateTransactionSystem } from "../../../types/Transaction";
 
-const EditTransfersModal: React.FC<{
+const UpdateTransfersModal: React.FC<{
   show: boolean;
   onHide: () => void;
 editId: number;
   onSave: (updatedAccount: CreateTransactionSystem) => void;
 }> = ({ show, onHide, editId, onSave }) => {
-  const [editedAccount, setEditedAccount] = useState<CreateTransactionSystem>({
+  const [editedAccount, setUpdateedAccount] = useState<CreateTransactionSystem>({
     numberOfTransfers: 0,
     transferStartDate: new Date(),
     transferEndDate: new Date(),
@@ -19,7 +19,7 @@ editId: number;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedAccount(prev => ({
+    setUpdateedAccount(prev => ({
       ...prev,
       [name]: name === "balance" || name.includes("Transfer") ? parseFloat(value) : value
     }));
@@ -33,7 +33,7 @@ editId: number;
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Checking Account</Modal.Title>
+        <Modal.Title>Update Checking Account</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -96,4 +96,4 @@ editId: number;
     </Modal>
   );
 };
-export default EditTransfersModal
+export default UpdateTransfersModal

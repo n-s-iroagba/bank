@@ -2,10 +2,10 @@ import React, { useState, useRef } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import '../styles/Help.css';
 import Indicator from './Indicator'; // Import the Indicator component
-import helpImage1 from '../assets/Open Account.png';
-import helpImage2 from '../assets/80 x 80 - Check Form.png';
-import helpImage3 from '../assets/Loan Payment.png';
-import helpImage4 from '../assets/Mobile App.png';
+import helpImage1 from '../../../assets/images/Open Account.png';
+import helpImage2 from '../../../assets/images/80 x 80 - Check Form.png';
+import helpImage3 from '../../../assets/images/Loan Payment.png';
+import helpImage4 from '../../../assets/images/Mobile App.png';
 
 interface help {
   src: string;

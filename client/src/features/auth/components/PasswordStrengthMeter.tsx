@@ -34,9 +34,9 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({ password}
   return (
     <div className='d-flex justify-content-between'>
       <div className="meter-label">
-        {strength === 'weak' && <p className='text-danger mb-0'>Weak password</p>}
-        {strength === 'fairly-strong' && <p className='text-warning mb-0'>Fairly strong password</p>}
-        {strength === 'strong' && <p className='text-light mb-0'>Strong password</p>}
+        {strength === 'weak' && <p className='text-danger mb-0'>weak password.</p>}
+        {strength === 'fairly-strong' && <p className='text-warning mb-0'>fairly strong password.</p>}
+        {strength === 'strong' && <p className='text-success mb-0'>strong password.</p>}
       </div>
     </div>
   );

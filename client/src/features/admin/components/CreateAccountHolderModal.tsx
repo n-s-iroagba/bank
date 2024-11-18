@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { CreateAccountHolder } from '../../../types/AccountHolder';
-import axiosClient from '../../../api/axiosClient';
-import { createAccountHolderUrl } from '../../../data/routes';
+import { createAccountHolder } from '../../../services/accountHolderService';
+
 
 interface CreateAccountHolderModalProps {
   show: boolean;
@@ -78,13 +78,12 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ adm
   };
 
   const handleSubmit = async () => {
-    const url = `${axiosClient.defaults.baseURL}${createAccountHolderUrl}/${adminId}`
+
   try{
-   const response = await axiosClient.post(url,accountHolder)
-    if (response.status === 201) {
-       alert('Account Holder successfully create')
-       window.location.reload()
-    }
+    await createAccountHolder(adminId,accountHolder)
+  
+    alert('Account Holder Created Successfully')
+
   }catch(error:any){
     console.error(error)
     setErrorMessage('Error contact site owners')

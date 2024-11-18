@@ -1,47 +1,48 @@
-import axiosClient from "../api/axiosClient";
-import { createSecondPartyUrl, deleteSecondPartyUrl, getAllSecondPartyUrl, updateSecondPartyUrl } from "../data/routes";
-import { CreateSecondParty, EditSecondParty } from "../types/SecondParty";
+import { apiPost, apiGet, apiPatch, apiDelete } from '../api/api';
+import { API_ENDPOINTS } from '../api/urls';
 
+import { CreateSecondParty, UpdateSecondParty } from '../types/SecondParty';
 
-export const createSecondParty = async (adminId:number,data: CreateSecondParty) => {
-  const url = `${axiosClient.defaults.baseURL}${createSecondPartyUrl}/${adminId}`;
-
+// Create second party
+export const createSecondParty = async (adminId: number, data: CreateSecondParty) => {
+  const url = `${API_ENDPOINTS.secondParty.create}/${adminId}`;
   try {
-    const response = await axiosClient.post(url, data);
+    const response = await apiPost(url, data);
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to create SecondParty');
+    throw new Error(error.response?.data?.message || 'Failed to create second party');
   }
 };
 
-
-export const getAllSecondParties = async (id:number) => {
+// Get all second parties for an ID
+export const getAllSecondParties = async (id: number) => {
+  const url = `${API_ENDPOINTS.secondParty.getAll}/${id}`;
   try {
-    const response = await axiosClient.get(`${axiosClient.defaults.baseURL}${getAllSecondPartyUrl}/${id}`);
+    const response = await apiGet(url);
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to retrieve SecondParties');
+    throw new Error(error.response?.data?.message || 'Failed to retrieve second parties');
   }
 };
 
-
-export const updateSecondParty = async (id: number, data: EditSecondParty) => {
-  const url = `${axiosClient.defaults.baseURL}${updateSecondPartyUrl}/${id}`
+// Update second party
+export const updateSecondParty = async (id: number, data: UpdateSecondParty) => {
+  const url = `${API_ENDPOINTS.secondParty.update}/${id}`;
   try {
-    const response = await axiosClient.patch(url, data);
+    const response = await apiPatch(url, data);
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update SecondParty');
+    throw new Error(error.response?.data?.message || 'Failed to update second party');
   }
 };
 
-
+// Delete second party
 export const deleteSecondParty = async (id: number) => {
-  const url = `${axiosClient.defaults.baseURL}${deleteSecondPartyUrl}/${id}`
+  const url = `${API_ENDPOINTS.secondParty.delete}/${id}`;
   try {
-    const response = await axiosClient.delete(url);
-    return response.data;
+    const response = await apiDelete(url);
+    return response.status === 204;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to delete SecondParty');
+    throw new Error(error.response?.data?.message || 'Failed to delete second party');
   }
 };

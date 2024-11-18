@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Accordion, Button, Container, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import EditAdminModal from '../../features/admin/components/EditAdminModal';
+
 import CreateAdminModal from '../../features/admin/components/CreateAdminModal';
 import { BaseAdmin, CreateAdmin } from '../../types/Admin';
 import BankDashboard from '../../features/admin/components/BankDashboard';
@@ -10,20 +10,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import useAdmins from '../../hooks/useAdmins';
 import AdminDashboard from './AdminDashboard';
+import UpdateAdminModal from '../../features/admin/components/UpdateAdminModal';
 
 
 
 const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
-  const [showEditAdminModal, setShowEditAdminModal] = useState<boolean>(false);
+  const [showUpdateAdminModal, setShowUpdateAdminModal] = useState<boolean>(false);
   const [selectedAdmin, setSelectedAdmin] = useState<BaseAdmin | null>(null);
   const [showCreateAdminModal, setShowCreateAdminModal] = useState<boolean>(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);  
   const [selectedSection, setSelectedSection] = useState<'admin' | 'bank'|'accounts'>('admin'); 
   const {admins,adminLoading,adminError} = useAdmins(id)
  console.log(admins,adminLoading,adminError)
-  const handleShowEditAdmin = (admin: BaseAdmin) => {
+  const handleShowUpdateAdmin = (admin: BaseAdmin) => {
     setSelectedAdmin(admin);
-    setShowEditAdminModal(true);
+    setShowUpdateAdminModal(true);
   };
 
   const handleShowCreateAdmin = () => {
@@ -84,8 +85,8 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
                   <Link to={`/admindashboard/${admin.id}`}>
                     <Button variant="link" className="ms-3">See More</Button>
                   </Link>
-                  <Button variant="link" className="ms-3" onClick={() => handleShowEditAdmin(admin)}>
-                    Edit Admin
+                  <Button variant="link" className="ms-3" onClick={() => handleShowUpdateAdmin(admin)}>
+                    Update Admin
                   </Button>
                   <Button variant="link" className="ms-3" onClick={handleShowDeleteAdmin}>
                     Delete Admin
@@ -104,13 +105,13 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
 
       {/* Modals */}
       {selectedAdmin && (
-        <EditAdminModal
-          show={showEditAdminModal}
+        <UpdateAdminModal
+          show={showUpdateAdminModal}
           onClose={() => {
-            setShowEditAdminModal(false);
+            setShowUpdateAdminModal(false);
             setSelectedAdmin(null);
           } }
-          adminToEdit={selectedAdmin} 
+          adminToUpdate={selectedAdmin} 
           onSubmit={function (adminData: BaseAdmin): void {
             throw new Error('Function not implemented.');
           } }        

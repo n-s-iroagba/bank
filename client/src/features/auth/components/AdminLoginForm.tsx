@@ -3,10 +3,11 @@ import React, { useContext, useState } from 'react';
 import { Form, Button, Alert, Modal, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../common/components/Logo';
-import { AuthContext } from '../context/AuthContext';
+
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PasswordStrengthMeter from './PasswordStrengthMeter';
+import { AuthContext } from '../../../context/AuthContext';
 
 
 

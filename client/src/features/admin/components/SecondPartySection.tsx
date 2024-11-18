@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Accordion, Alert, Button, Spinner } from "react-bootstrap";
 import CreateSecondPartyModal from "./CreateSecondPartyModal";
-import EditSecondPartyModal from "./EditSecondPartyModal";
+
 import { SecondParty } from "../../../types/SecondParty";
 import useBanks from "../../../hooks/useBanks";
+import UpdateSecondPartyModal from "./UpdateSecondPartyModal";
 
 const SecondPartySection: React.FC<{
   isAdmin: boolean;
@@ -11,14 +12,14 @@ const SecondPartySection: React.FC<{
 }> = ({ secondParties, isAdmin }) => {
   const [selectedSecondParty, setSelectedSecondParty] =
     useState<SecondParty | null>(null);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const { banks, bankLoading } = useBanks();
 
-  const handleEditSecondParty = (secondParty: SecondParty) => {
+  const handleUpdateSecondParty = (secondParty: SecondParty) => {
     setSelectedSecondParty(secondParty);
-    setShowEditModal(true);
+    setShowUpdateModal(true);
   };
 
   const handleDeleteSecondParty = (secondPartyId: number) => {
@@ -53,10 +54,10 @@ const SecondPartySection: React.FC<{
                 <>
                   <Button
                     variant="info"
-                    onClick={() => handleEditSecondParty(secondParty)}
+                    onClick={() => handleUpdateSecondParty(secondParty)}
                     className="me-2"
                   >
-                    Edit
+                    Update
                   </Button>
                   <Button
                     variant="danger"
@@ -72,13 +73,13 @@ const SecondPartySection: React.FC<{
       </Accordion>
 
       <CreateSecondPartyModal show={showCreateModal} id={0} />
-      {showEditModal &&
+      {showUpdateModal &&
         (selectedSecondParty && banks ? (
-          <EditSecondPartyModal
-            show={showEditModal}
+          <UpdateSecondPartyModal
+            show={showUpdateModal}
             secondParty={selectedSecondParty}
             banks={banks}
-            onClose={() => setShowEditModal(false)}
+            onClose={() => setShowUpdateModal(false)}
           />
         ) : bankLoading ? (
           <Spinner title="Loading..." />

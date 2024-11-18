@@ -3,9 +3,10 @@ import React, { useContext } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../common/components/Logo";
-import { AuthContext } from "../context/AuthContext";
+
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AuthContext } from "../../../context/AuthContext";
 
 
 const SuperAdminLoginForm: React.FC = () => {
@@ -100,7 +101,7 @@ const SuperAdminLoginForm: React.FC = () => {
           <a href="#!" onClick={() => navigate("/forgot-password")}>
             Forgot Password
           </a>
-          <a href="#!" onClick={() => navigate("/superadmin/signup")}>
+          <a href="#!" onClick={() => navigate("/super-admin/signup")}>
             Create Account
           </a>
         </div>

@@ -19,7 +19,7 @@ export type CreateSecondParty = {
     canReceive: boolean; 
     canSend: boolean;
 };
-export type EditSecondParty = {
+export type UpdateSecondParty = {
     firstname: string;
     surname: string;
     accountNumber: string;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../../client/assets/greater-texas-cu-logo.svg';
-import scrolledLogo from '../../client/assets/greater-texas-cu-icon.svg';
-import aggLogo from '../../client/assets/agg-icon-circle.svg'
+import logo from '../../../assets/images/greater-texas-cu-logo.svg';
+import scrolledLogo from '../../../assets/images/greater-texas-cu-icon.svg';
+import aggLogo from '../../../assets/images/agg-icon-circle.svg'
 import '../styles/Logo.css';
 import '../../client/styles/GeneralButtonStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

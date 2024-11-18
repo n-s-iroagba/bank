@@ -1,6 +1,6 @@
-import serviceImage1 from '../assets/Auto Loan.png'
-import serviceImage2 from '../assets/Home Equity.png'
-import serviceImage3 from '../assets/80 x 80 - Graph Up.png'
+import serviceImage1 from '../../../assets/images/Auto Loan.png'
+import serviceImage2 from '../../../assets/images/Home Equity.png'
+import serviceImage3 from '../../../assets/images/80 x 80 - Graph Up.png'
 import '../styles/Services.css'
 
 import React from 'react';

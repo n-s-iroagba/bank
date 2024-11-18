@@ -5,4 +5,4 @@ export type Bank ={
 }
 
 export type CreateBank = Omit<Bank,'id'>
-export type EditBank =  Omit<Bank,'id'>
+export type UpdateBank =  Omit<Bank,'id'>

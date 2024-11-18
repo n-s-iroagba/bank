@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Form, Dropdown, ListGroup, Button } from 'react-bootstrap';
 import AccountBox from './AccountBox';
 import '../styles/MakeTransfer.css'; 
-import logo from '../assets/greater-texas-cu-logo.svg'
+import logo from '../../../assets/images/greater-texas-cu-logo.svg'
 import { CreateTransaction, TransactionType } from '../../../types/Transaction';
 import { Bank } from '../../../types/Bank';
 import { SecondParty } from '../../../types/SecondParty';

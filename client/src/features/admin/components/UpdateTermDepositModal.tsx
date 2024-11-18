@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import {  Button,  Modal, Form } from "react-bootstrap";
 import { TermDepositAccount } from "../../../types/TermDepositAccount";
 
-// Edit Term Deposit Modal
-const EditTermDepositModal: React.FC<{
+// Update Term Deposit Modal
+const UpdateTermDepositModal: React.FC<{
   show: boolean;
   onClose: () => void;
   account: TermDepositAccount | null;
@@ -39,7 +39,7 @@ const EditTermDepositModal: React.FC<{
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Term Deposit Details</Modal.Title>
+        <Modal.Title>Update Term Deposit Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -88,4 +88,4 @@ const EditTermDepositModal: React.FC<{
     </Modal>
   );
 };
-export default EditTermDepositModal
+export default UpdateTermDepositModal

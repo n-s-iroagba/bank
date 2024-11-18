@@ -1,25 +1,13 @@
-import axiosClient from "../api/axiosClient";
-import { createAdminUrl, deleteAdminUrl, getAdminUrl, loginUrlAdmin, updateAdminUrl } from "../data/routes";
-import { LoginData } from "../features/auth/types/authTypes";
-import { CreateAdmin, EditAdmin } from "../types/Admin";
+import { apiDelete, apiGet, apiPatch, apiPost } from "../api/api";
+import { API_ENDPOINTS } from "../api/urls";
+import { Admin, CreateAdmin, UpdateAdmin } from "../types/Admin";
 
-export const loginAdmin = async (data:LoginData) => {
-  const url = `${axiosClient.defaults.baseURL}${loginUrlAdmin}`
-
-  try {
-    const response = await axiosClient.post(url, data);
-      return response;
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to log in');
-    }
-  };
 
 
 export const createAdmin = async (superAdminId: number, data: CreateAdmin) => {
-  const url = `${axiosClient.defaults.baseURL}${createAdminUrl}/${superAdminId}`
-
+  const url = `${API_ENDPOINTS.admin.create}/${superAdminId}`
   try {
-    const response = await axiosClient.post(url, data);
+    const response = await apiPost<Admin,CreateAdmin>(url,data);
     return response.data;
   } catch (error: any) {
     console.error(error)
@@ -28,10 +16,10 @@ export const createAdmin = async (superAdminId: number, data: CreateAdmin) => {
 };
 
 
-export const getAllAdmins = async (id:number) => {
-  const url = `${axiosClient.defaults.baseURL}${getAdminUrl}/${id}`;
+export const getAllAdmins = async (superAdminId:number) => {
+  const url = `${API_ENDPOINTS.admin.get}/${superAdminId}`;
   try {
-    const response = await axiosClient.get(url);
+    const response = await apiGet<Admin[]>(url);
     return response.data;
   } catch (error: any) {
     console.error(error)
@@ -40,10 +28,10 @@ export const getAllAdmins = async (id:number) => {
 };
 
 
-export const updateAdmin = async (adminId: number, data: EditAdmin) => {
-  const url = `${axiosClient.defaults.baseURL}${updateAdminUrl}/${adminId}`;
+export const updateAdmin = async (adminId: number, data: UpdateAdmin) => {
+  const url = `${API_ENDPOINTS.admin.update}/${adminId}`;
   try {
-    const response = await axiosClient.put(url, data);
+    const response = await apiPatch<Admin, UpdateAdmin>(url, data);
     return response.data;
   } catch (error: any) {
     console.error(error)
@@ -53,10 +41,9 @@ export const updateAdmin = async (adminId: number, data: EditAdmin) => {
 
 
 export const deleteAdmin = async (adminId: number) => {
-  const url = `${axiosClient.defaults.baseURL}${deleteAdminUrl}/${adminId}`;
-  
+  const url = `${API_ENDPOINTS.admin.delete}/${adminId}`;
   try {
-    const response = await axiosClient.delete(url);
+    const response = await apiDelete<string>(url);
     return response.data;
   } catch (error: any) {
     console.error(error)

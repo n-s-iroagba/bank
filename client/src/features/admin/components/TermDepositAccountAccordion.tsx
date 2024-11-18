@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Accordion } from "react-bootstrap";
 import { TermDepositAccount } from "../../../types/TermDepositAccount";
-import EditTermDepositModal from "./EditTermDepositModal";
+import UpdateTermDepositModal from "./UpdateTermDepositModal";
+
 
 
 
 const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount,dividendEarned:number,dividendToBeEarned:number }> = ({ account,dividendEarned,dividendToBeEarned }) => {
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
 
   const handleSave = (updatedAccount: TermDepositAccount) => {
     console.log("Updated account:", updatedAccount);
-    setShowEditModal(false);
+    setShowUpdateModal(false);
   };
 
 
@@ -39,16 +40,16 @@ const TermDepositAccountAccordion: React.FC<{ account: TermDepositAccount,divide
           </Button>
         </Col>
         <Col lg={3} md={4} sm={12}>
-          <Button variant="info" className="w-100 mb-2" onClick={() => setShowEditModal(true)}>
-            Edit Term Deposit Account Details
+          <Button variant="info" className="w-100 mb-2" onClick={() => setShowUpdateModal(true)}>
+            Update Term Deposit Account Details
           </Button>
         </Col>
       </Row>
 
   
-      <EditTermDepositModal
-        show={showEditModal}
-        onClose={() => setShowEditModal(false)}
+      <UpdateTermDepositModal
+        show={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
         account={account}
         onSave={handleSave}
       />

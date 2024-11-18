@@ -6,7 +6,7 @@ import '../styles/GeneralStyles.css'
 import '../styles/ResponsiveNavbar.css'
 import '../../common/styles/Logo.css'
 
-import aggLogo from '../assets/agg-icon-circle.svg'
+import aggLogo from '../../../assets/images/agg-icon-circle.svg'
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../common/components/Logo';
 const ResponsiveNavbar: React.FC = () => {

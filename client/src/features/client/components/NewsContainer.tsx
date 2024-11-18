@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import '../styles/NewsContainer.css'; // Import the CSS file
-import image1 from '../assets/IMG_72672 -2.jpg'
-import image2 from '../assets/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
-import image3 from '../assets/IMG_7526 - cropped.jpg'
-import image4 from '../assets/IMG_7550 -2.jpg'
-import image5 from '../assets/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
+import image1 from '../../../assets/images/IMG_72672 -2.jpg'
+import image2 from '../../../assets/images/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
+import image3 from '../../../assets/images/IMG_7526 - cropped.jpg'
+import image4 from '../../../assets/images/IMG_7550 -2.jpg'
+import image5 from '../../../assets/images/Austin - Habitat Fall Wall Raising 2024 (All Group Photo).jpg'
 
 import { Col, Row } from 'react-bootstrap';
 import Indicator from './Indicator';
