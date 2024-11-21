@@ -2,6 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbConfig'; 
 import { AccountHolder } from './AccountHolder';
 import { SuperAdmin } from './SuperAdmin';
+import { SecondParty } from './SecondParty';
 
 type TAdmin ={
   id: number;
@@ -62,4 +63,12 @@ Admin.hasMany(AccountHolder, {
 AccountHolder.belongsTo(Admin, {
   foreignKey: 'adminId',
   as: 'admin',  // Ensure this alias is consistent as well
+});
+Admin.hasMany(SecondParty, {
+  foreignKey: 'adminId',
+  as: 'secondParty',
+});
+SecondParty.belongsTo(Admin, {
+  foreignKey: 'adminId',
+  as: 'admin',
 });

@@ -1,10 +1,10 @@
 // services/TermDepositAccountService.ts
 import { TermDepositAccount } from '../models/TermDepositAccount';
-import { EditTermDepositAccount } from '../types/TermDepositAccountTypes';
+import { UpdateTermDepositAccount } from '../types/TermDepositAccountTypes';
 
 export class TermDepositAccountService {
   // Update a Term Deposit Account
-  static async updateTermDepositAccount(id: number, data: EditTermDepositAccount) {
+  static async updateTermDepositAccount(id: number, data: UpdateTermDepositAccount) {
     const account = await TermDepositAccount.findByPk(id);
     if (!account) {
       throw new Error('Term Deposit Account not found');

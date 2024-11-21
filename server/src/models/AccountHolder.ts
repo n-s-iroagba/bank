@@ -90,11 +90,4 @@ TermDepositAccount.belongsTo(AccountHolder, {
   as: 'accountHolder',
 });
 
-AccountHolder.hasMany(SecondParty, {
-  foreignKey: 'accountHolderId',
-  as: 'secondParty',
-});
-SecondParty.belongsTo(AccountHolder, {
-  foreignKey: 'accountHolderId',
-  as: 'accountHolder',
-});
+

@@ -10,16 +10,19 @@ import transactionRoutes from './routes/transactionRoutes';
 import termDepositAccountRoutes from './routes/termDepositAccountRoutes';
 import secondPartyRoutes from './routes/secondPartyRoutes';
 import bankRoutes from './routes/BankRoutes';
-import { developmentIndexHandlerNoAuth, indexController } from './controllers/indexController';
 import superAdminRoutes from './routes/superAdminRoutes';
 
 const app = express();
-app.use(cors());
-const PORT = process.env.PORT || 8000;
+
+const PORT = process.env.PORT || 5000;
+app.use(cors({
+  origin: 'http://localhost:3000' // or the URL of your React app
+}));
 
 app.use(bodyParser.json());
+app.use('/', superAdminRoutes); 
 
-app.use ('/superadmin',superAdminRoutes)
+app.use ('/super-admin',superAdminRoutes)
 app.use('/admin', adminRoutes);
 app.use('/account-holder',accountHolderRoutes)
 app.use('/bank',bankRoutes);
@@ -27,21 +30,6 @@ app.use('/checking-account', checkingAccountRoutes)
 app.use('/transaction',transactionRoutes)
 app.use('/term-deposit-account', termDepositAccountRoutes)
 app.use('/second-party', secondPartyRoutes)
-
-app.get('/', async (req: Request, res: Response) => {
-  try {
-    await developmentIndexHandlerNoAuth();
-    console.log('Data inserted successfully');
-    res.send('Data inserted successfully');
-  } catch (error) {
-    console.error('Error inserting data:', error);
-    res.status(500).send('Error inserting data');
-  }
-});
-
-
-
-
 
 
 sequelize.sync({

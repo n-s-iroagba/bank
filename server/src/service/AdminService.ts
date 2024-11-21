@@ -6,7 +6,7 @@ import { Transaction } from '../models/Transaction';
 import { AccountHolder } from '../models/AccountHolder';
 import { CheckingAccount } from '../models/CheckingAccount';
 import { TermDepositAccount } from '../models/TermDepositAccount';
-import { EditAdmin } from '../types/AdminTypes';
+import { UpdateAdmin } from '../types/AdminTypes';
 
 
 export class AdminService {
@@ -62,7 +62,7 @@ static getAdmins = async (superAdminId: number) => {
   
     
   // Update Admin Details by SuperAdmin
-static updateAdminBySuperAdmin = async (adminId: number, updates:EditAdmin) => {
+static updateAdminBySuperAdmin = async (adminId: number, updates:UpdateAdmin) => {
     const admin = await Admin.findByPk(adminId);
     if (!admin) {
       throw new Error('Admin not found');

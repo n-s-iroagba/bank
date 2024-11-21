@@ -7,9 +7,10 @@ import { CreateSecondParty } from '../types/SecondPartyTypes';
 export class SecondPartyController {
   // Create a new SecondParty
   static async createSecondParty(req: Request, res: Response) {
+    const adminId = parseInt(req.params.adminId)
     try {
       const data: CreateSecondParty = req.body;
-      const newSecondParty = await SecondPartyService.createSecondParty(data);
+      const newSecondParty = await SecondPartyService.createSecondParty(adminId,data);
       res.status(201).json(newSecondParty);
     } catch (error: any) {
       res.status(500).json({ message: error.message });

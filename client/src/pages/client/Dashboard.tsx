@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
 
   // Drawer options
   const checkingOptions = ['Accounts','Statements', 'Transfers', 'Deposit Check', 'Pay a Member','Bill Pay A2A/P2P', 'Money Manager'];
-  const termOptions =['Accounts','Term Deposit','Transfers', 'Deposit Check', 'Pay a Member','Bill Pay A2A/P2P', 'Money Manager']
+  const termOptions =['Accounts','Term Deposit',]
 
   const toggleDrawer = () => {
     setDrawerVisible(!isDrawerVisible);

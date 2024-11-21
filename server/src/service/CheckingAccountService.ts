@@ -1,6 +1,6 @@
 import { CheckingAccount } from "../models/CheckingAccount";
 import { Transaction } from "../models/Transaction";
-import { EditCheckingAccount } from "../types/CheckingAccountTypes";
+import { UpdateCheckingAccount } from "../types/CheckingAccountTypes";
 import { CreateTransaction, TransactionOrigin, TransactionType } from "../types/TransactionType";
 export class AccountService {
 
@@ -36,7 +36,7 @@ static async editCheckingBalanceWithTransaction(id:number,data:CreateTransaction
 
 
   
-static async updateCheckingAccount(id: number, data: EditCheckingAccount) {
+static async updateCheckingAccount(id: number, data: UpdateCheckingAccount) {
     const checkingAccount = await CheckingAccount.findByPk(id);
     if (!checkingAccount) return null;
 

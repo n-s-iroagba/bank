@@ -6,7 +6,7 @@ export const createSuperAdmin = async (data: CreateSuperAdmin) => {
   const url = API_ENDPOINTS.superAdmin.register;
 
   try {
-    const response = await apiPost<string,CreateSuperAdmin>(url, data);
+    const response = await apiPost(url, data);
     return response.data;
   } catch (error: any) {
     console.error('Error during Super Admin registration:', error);

@@ -1,13 +1,12 @@
-// /components/SignUp.tsx
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
+import { AuthContext } from "../../../context/AuthContext";
 
 import "../styles/AuthForm.css";
-import { AuthContext } from "../../../context/AuthContext";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
@@ -26,63 +25,71 @@ const SignUpForm: React.FC = () => {
   } = useContext(AuthContext);
 
   return (
-    <div className="form-wrapper">
-      <h1 className="text-center fs-5 my-3">Bank Site Owner Registration.</h1>
+    <div className="form-wrapper" data-testid="sign-up-form">
+      <h1 className="text-center fs-5 my-3">Bank Site Owner Registration</h1>
 
       <Form
         className="mx-auto w-100 w-lg-25"
         onSubmit={(e) => handleSubmit(e, navigate)}
       >
+        {/* Username */}
         <Form.Group>
-          <Form.Label className="fs-6">pick a username</Form.Label>
+          <Form.Label className="fs-6">Pick a Username</Form.Label>
           <Form.Control
             type="text"
             className="form-input"
             name="username"
             value={superAdminData.username}
             onChange={(e) => handleChange(e, setSuperAdminData)}
+            data-testid="username-input"
             required
           />
         </Form.Group>
-        <br />
-        <Form.Group>
-          <Form.Label className="fs-6">firstname</Form.Label>
+
+        {/* Firstname */}
+        <Form.Group className="mt-3">
+          <Form.Label className="fs-6">Firstname</Form.Label>
           <Form.Control
             type="text"
             className="form-input"
             name="firstname"
             value={superAdminData.firstname}
             onChange={(e) => handleChange(e, setSuperAdminData)}
+            data-testid="firstname-input"
             required
           />
         </Form.Group>
 
-        <br />
-        <Form.Group>
+        {/* Surname */}
+        <Form.Group className="mt-3">
           <Form.Label className="fs-6">Surname</Form.Label>
           <Form.Control
             type="text"
-            name="surname"
             className="form-input"
+            name="surname"
             value={superAdminData.surname}
             onChange={(e) => handleChange(e, setSuperAdminData)}
+            data-testid="surname-input"
             required
           />
         </Form.Group>
-        <br />
-        <Form.Group>
+
+        {/* Email */}
+        <Form.Group className="mt-3">
           <Form.Label className="fs-6">Email</Form.Label>
           <Form.Control
             type="email"
-            name="email"
             className="form-input"
+            name="email"
             value={superAdminData.email}
             onChange={(e) => handleChange(e, setSuperAdminData)}
+            data-testid="email-input"
             required
           />
         </Form.Group>
-        <br />
-        <Form.Group>
+
+        {/* Password */}
+        <Form.Group className="mt-3">
           <Form.Label className="fs-6">Password</Form.Label>
           <div className="form-input d-flex align-items-center">
             <Form.Control
@@ -91,28 +98,27 @@ const SignUpForm: React.FC = () => {
               name="password"
               value={superAdminData.password}
               onChange={(e) => handleChange(e, setSuperAdminData)}
+              data-testid="password-input"
               required
             />
-
             <FontAwesomeIcon
               className="px-3"
-              onClick={() => showPassword()}
+              name="toggle-password-visibility"
+              onClick={showPassword}
               icon={passwordType === "text" ? faEye : faEyeSlash}
+              data-testid="toggle-password-visibility"
             />
           </div>
-          <div className="d-flex flex-column">
-            {Array.isArray(passwordValidityMessage) &&
-              passwordValidityMessage.length > 0 &&
-              passwordValidityMessage.map((message, index) => (
-                <Form.Text className="text-danger" key={index}>
-                  *{message}
-                </Form.Text>
-              ))}
-          </div>
           <PasswordStrengthMeter password={superAdminData.password} />
+          {passwordValidityMessage.map((message, index) => (
+            <Form.Text className="text-danger" key={index} data-testid={`password-error-${index}`}>
+              * {message}
+            </Form.Text>
+          ))}
         </Form.Group>
-        <br />
-        <Form.Group>
+
+        {/* Confirm Password */}
+        <Form.Group className="mt-3">
           <Form.Label className="fs-6">Confirm Password</Form.Label>
           <div className="form-input d-flex align-items-center">
             <Form.Control
@@ -127,56 +133,64 @@ const SignUpForm: React.FC = () => {
                   setSuperAdminData
                 )
               }
+              data-testid="confirm-password-input"
               required
             />
-
             <FontAwesomeIcon
               className="px-3"
-              onClick={() => showPassword()}
+              onClick={showPassword}
               icon={passwordType === "text" ? faEye : faEyeSlash}
             />
           </div>
-          <br />
-          {superAdminData.confirmPassword && !isMatchingPassword && (
-            <p className=" mb-0 text-danger">***passwords do not match.</p>
+          {!isMatchingPassword && (
+            <p className="text-danger" data-testid="password-mismatch-error">
+              *** Passwords do not match
+            </p>
           )}
         </Form.Group>
-        <br />
-        <Form.Group>
+
+        {/* Secret Code */}
+        <Form.Group className="mt-3">
           <Form.Label className="fs-6">Secret Code</Form.Label>
           <div className="form-input d-flex align-items-center">
             <Form.Control
+              type={passwordType}
               value={superAdminData.secretCode}
               className="form-input"
               name="secretCode"
-              type={passwordType}
               onChange={(e) => handleChange(e, setSuperAdminData)}
+              data-testid="secret-code-input"
               required
             />
-
             <FontAwesomeIcon
               className="px-3"
-              onClick={() => showPassword()}
+              onClick={showPassword}
               icon={passwordType === "text" ? faEye : faEyeSlash}
             />
           </div>
           <p className="fs-6 text-center">
-            ***The code provided to you by the developer.
+            *** The code provided to you by the developer.
           </p>
         </Form.Group>
 
+        {/* Submit Button */}
         <Button
-          className="w-100 button-radius bg-blue"
-          disabled={submitting}
+          className="w-100 mt-4 button-radius bg-blue"
           type="submit"
+          disabled={submitting}
+          data-testid="submit-button"
         >
           {submitting ? <Spinner size="sm" /> : "Sign Up"}
         </Button>
       </Form>
 
-      <br />
+      {/* Error Message */}
       {errorMessage && (
-        <Alert variant="danger" className="min-width-100 text-center">
+        <Alert
+          variant="danger"
+          className="mt-3 min-width-100 text-center"
+          data-testid="error-message"
+        >
           {errorMessage}
         </Alert>
       )}

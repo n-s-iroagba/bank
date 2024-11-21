@@ -42,6 +42,7 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
     setShowDrawer(false);  // Close the drawer after selecting a section
   };
 
+
   return (
     <div>
     
@@ -82,7 +83,7 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
               <Accordion.Item eventKey={`admin-${adminIndex}`} key={admin.id}>
                 <Accordion.Header>{admin.username}</Accordion.Header>
                 <Accordion.Body>
-                  <Link to={`/admindashboard/${admin.id}`}>
+                  <Link to={`/admin-dashboard/${admin.id}`}>
                     <Button variant="link" className="ms-3">See More</Button>
                   </Link>
                   <Button variant="link" className="ms-3" onClick={() => handleShowUpdateAdmin(admin)}>
@@ -118,11 +119,9 @@ const SuperAdminDashboard: React.FC<{id:number}> = ({id}) => {
         />
       )}
       <CreateAdminModal
+      id={id}
         show={showCreateAdminModal}
-        onClose={() => {}}
-        onSubmit={(adminData: CreateAdmin) => {
-          console.log('Creating new admin:', adminData);
-        }}
+        onClose={() => {setShowCreateAdminModal(false)}}
       />
     </div>
   );

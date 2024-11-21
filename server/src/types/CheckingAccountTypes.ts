@@ -4,8 +4,8 @@
 export interface  CheckingAccount  {
     id: number;
     balance: number;
-    accountNumber: number;
+    accountNumber: string;
 }
 
-export type EditCheckingAccount = Omit<CheckingAccount,|'id'>
+export type UpdateCheckingAccount = Omit<CheckingAccount,|'id'>
 export type CreateCheckingAccount =  Omit<CheckingAccount,'id'|'accountNumber'>

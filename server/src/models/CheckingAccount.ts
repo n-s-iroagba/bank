@@ -6,14 +6,14 @@ type TCheckingAccount = {
     id: number;
   accountHolderId: number;
   balance: number;
-  accountNumber: number;
+  accountNumber: string;
 }
 type CreationTCheckingAccount = Omit<TCheckingAccount,'id'>
 export class CheckingAccount extends Model<TCheckingAccount,CreationTCheckingAccount> {
   public id!: number;
   public accountHolderId!: number;
   public balance!: number;
-  public accountNumber!: number;
+  public accountNumber!: string;
 
   // Associations
   public transactions?: Transaction[];
@@ -42,7 +42,7 @@ CheckingAccount.init(
       defaultValue: 0.0,
     },
     accountNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 0.0,
     },

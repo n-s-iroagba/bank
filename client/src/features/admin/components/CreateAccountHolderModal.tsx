@@ -86,7 +86,7 @@ const CreateAccountHolderModal: React.FC<CreateAccountHolderModalProps> = ({ adm
 
   }catch(error:any){
     console.error(error)
-    setErrorMessage('Error contact site owners')
+    setErrorMessage('Error creating account holders contact owner or developer.')
   }
   };
 

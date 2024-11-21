@@ -8,12 +8,36 @@ export class JWTService {
   }
 
   static getLoginToken(): string | null {
-    return localStorage.getItem('authToken');
+    const key = 'authToken'
+    const value = localStorage.getItem(key);
+      if (value === null) {
+        throw new Error(`Item with key ${key} is missing in localStorage.`);
+      }
+      return value;
   }
 
  
   static removeLoginToken(): void {
     localStorage.removeItem('authToken');
+  }
+
+
+  static saveEmailVerificationToken(token: string): void {
+    localStorage.setItem('emailVerificationToken', token);
+  }
+
+  static getEmailVerificationToken(): string  {
+    const key = 'emailVerificationToken'
+  const value = localStorage.getItem(key);
+    if (value === null) {
+      throw new Error(`Item with key ${key} is missing in localStorage.`);
+    }
+    return value;
+  }
+
+ 
+  static removeEmailVerificationToken(): void {
+    localStorage.removeItem('emailVerificationToken');
   }
 
 

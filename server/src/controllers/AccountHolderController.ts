@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { AccountHolderService } from '../service/AccountHolderService';
 
 import { AccountHolder } from '../models/AccountHolder';
-import { CreateAccountHolder, EditAccountHolder } from '../types/AccountHolderTypes';
+import { CreateAccountHolder, UpdateAccountHolder } from '../types/AccountHolderTypes';
 
 
 export class AccountHolderController {
@@ -16,7 +16,6 @@ export class AccountHolderController {
       res.status(error.status||500).json({ message: error.message });
     }
   }
-
 
   static async getByAdminId(req: Request, res: Response) {
     const adminId = parseInt(req.params.id);
@@ -32,7 +31,7 @@ export class AccountHolderController {
 
   static async update(req: Request, res: Response) {
     const id = req.params.id;
-    const { firstname, surname, middlename, username, password }: EditAccountHolder = req.body;
+    const { firstname, surname, middlename, username, password }: UpdateAccountHolder = req.body;
 
     try {
       const updatedAccountHolder = await AccountHolderService.update(Number(id),{

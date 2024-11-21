@@ -1,136 +1,126 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Spinner, Alert, Button } from 'react-bootstrap';
-
 import { useNavigate } from 'react-router-dom';
-import '../styles/EmailVerification.css'
-import { verifySuperAdminEmail } from '../../services/authService';
+import '../styles/EmailVerification.css';
+import { requestNewVerificationCode, verifySuperAdminEmail } from '../../services/authService';
+import { JWTService } from '../../services/JWTService';
+
 
 const EmailVerification = () => {
-  // State for holding the code entered in each box
   const [code, setCode] = useState(['', '', '', '', '', '']);
-  const [isVerifying, setIsVerifying] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [canResend, setCanResend] = useState(true);
   const [timeLeft, setTimeLeft] = useState(0); 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
-  const [id,setId] = useState(0)
 
-  // Function to handle code change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newCode = [...code];
     newCode[index] = e.target.value;
-
-    // Update the code array state
     setCode(newCode);
-
-    // If the box is filled and it's not the last box, move to the next one
     if (e.target.value && index < 5) {
       inputRefs.current[index + 1]?.focus();
     }
-
-    // If the last box is filled, call handleVerifyEmail
     if (index === 5 && newCode.every((digit) => digit)) {
       handleVerifyEmail(Number(newCode.join('')));
     }
   };
 
-  // Handle email verification
   const handleVerifyEmail = async (code: number) => {
-    setIsVerifying(true);
-    setError(''); // reset error before each attempt
-
-  
-
-    if (id) {
-      alert('You are unauthorised to view this page');
-      navigate('/login');
-      return;
-    }
-
+    setIsSubmitting(true);
+    setError('');
     try {
-      const response = await verifySuperAdminEmail(id, {code:code});
-
+      const token = JWTService.getEmailVerificationToken();
+      const id = JWTService.decodeToken<any>(token).id;
+      const loginToken = await verifySuperAdminEmail(id, {code});
+      JWTService.saveLoginToken(loginToken);
+      JWTService.removeEmailVerificationToken();
       alert('Verification successful');
+      navigate('/super-admin/dashboard');
     } catch (error) {
       console.error(error);
-      setError('Sorry an error occurred, contact developer');
+      setError('Sorry, an error occurred. Contact the developer.');
     } finally {
-      setIsVerifying(false);
+      setIsSubmitting(false);
     }
   };
 
-  // Function to request a new verification co}de with cooldown logic
   const resendCode = async () => {
     if (!canResend) {
       alert(`Please wait ${timeLeft} seconds before requesting a new code.`);
       return;
     }
-
+    setIsSubmitting(true);
     try {
-      // Call the service to request a new code
-      const response = await requestNewCode(id);
-     
+      const emailToken = JWTService.getEmailVerificationToken();
+      const id = JWTService.decodeToken<any>(emailToken).id;
+      const token = await requestNewVerificationCode(id);
+      JWTService.saveEmailVerificationToken(token);
+      alert('Kindly check your email for a new code.');
     } catch (error) {
+      console.error(error);
       alert('Error while requesting a new code');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  // Start the cooldown timer
   const startCooldown = () => {
-    const cooldownTime = 5 * 60; // 5 minutes in seconds
+    const cooldownTime = 5 * 60;
     setTimeLeft(cooldownTime);
 
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          setCanResend(true); // Allow resend after cooldown
+          setCanResend(true); 
           return 0;
         }
         return prevTime - 1;
       });
-    }, 1000); // Update every second
+    }, 1000); 
   };
 
   useEffect(() => {
-    const idString = localStorage.getItem('EmailVerificationId');
-    if (!idString) {
-      alert('You are unauthorised to view this page');
-      navigate('/login');
-      return
+    try {
+      JWTService.getEmailVerificationToken();
+    } catch (error) {
+      alert("You are unauthorized to view this page");
+      navigate('/');
     }
-    setId(Number(idString));
+    startCooldown();
   }, [navigate]);
 
   return (
-    <div className="email-verification-container">
+    <div className="email-verification-container" data-cy="email-verification">
       <h3>Email Verification</h3>
-      <div className="code-inputs">
+      <div className="code-inputs" data-cy="code-inputs">
         {code.map((digit, index) => (
           <input
             key={index}
-            type="number"
+            type="text"
             maxLength={1}
             value={digit}
             onChange={(e) => handleChange(e, index)}
             ref={(el) => (inputRefs.current[index] = el)}
             className="code-box"
-            disabled={isVerifying} // Disable input fields while verifying
+            disabled={isSubmitting}
+            data-cy={`code-input-${index}`}
           />
         ))}
       </div>
 
-      {isVerifying ? (
-        <div>
+      {isSubmitting ? (
+        <div data-cy="loading-spinner">
           <Spinner animation="border" variant="primary" />
-          <Alert variant="info">Verifying...</Alert>
+          <Alert variant="info" data-cy="submitting-message">Submitting...</Alert>
         </div>
       ) : error ? (
-        <Alert variant="danger">{error}</Alert>
+        <Alert className="mt-5" variant="danger" data-cy="error-message">{error}</Alert>
       ) : (
-        <div>
-          <Button onClick={resendCode} disabled={!canResend}>
+        <div data-cy="resend-button-container">
+          <Button onClick={resendCode} disabled={!canResend} data-cy="resend-button">
             {canResend ? 'Resend Code' : `Wait ${timeLeft}s`}
           </Button>
         </div>
@@ -140,7 +130,3 @@ const EmailVerification = () => {
 };
 
 export default EmailVerification;
-function requestNewCode(id: number) {
-  throw new Error('Function not implemented.');
-}
-

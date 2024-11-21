@@ -5,4 +5,11 @@ export type CreateAdmin = {
     password: string;
 };
 
-export type EditAdmin = CreateAdmin
+export type UpdateAdmin = CreateAdmin
+
+export type BaseAdmin ={
+    email:string;
+    username: string;
+    password: string;
+};
+
