@@ -1,9 +1,4 @@
 import { ReactNode, useState, ChangeEvent, Dispatch, SetStateAction, FormEvent, createContext } from "react";
-
-import { getIdFromChangePasswordToken } from "../helpers/helper";
-
-
-
 import { AuthContextType, SuperAdminData, NewPasswordData, LoginData, SuperAdminLoginData, ChangePasswordRequest, NewPassword } from "../types/AuthContextType";
 import { CreateSuperAdmin } from "../types/SuperAdmin";
 import { doPasswordsMatch } from "../utils";
@@ -114,8 +109,6 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
   };
 
-
-
 //CREATE_SUPERADMIN
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>,
@@ -145,7 +138,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
    
       const token = await createSuperAdmin( superAdminData as CreateSuperAdmin);
 
-      handleEmailVerification(token, false, navigate);
+      handleEmailVerification(token.token, false, navigate);
    
     } catch (error: any) {
       console.error(error);
@@ -167,9 +160,13 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     try {
    
       const decoded = JWTService.decodeToken<BaseAdmin>(token);
+      if(decoded){
+        JWTService.saveEmailVerificationToken(token)
+      }
+
       shouldReload
         ? window.location.reload()
-        : navigateToVerifyEmailPage(navigate, decoded.email, decoded.id);
+        : navigate('/verify-email');
 
 
     } catch (error) {
@@ -177,14 +174,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       setErrorMessage("Invalid token. Please try again.");
     }
   };
-  
-  const navigateToVerifyEmailPage = (
-    navigate: (path: string) => void,
-    email: string,
-    id: number
-  ) => {
-    navigate(`/verify-email/${email}/${id}`);
-  };
+
 
   //LOGIN_SUPERADMIN
   const handleLoginSuperAdmin = async (
@@ -345,12 +335,6 @@ console.error(error)
 
     const token = localStorage.getItem('bankChangePasswordToken');
     if (!token) {
-      setErrorMessage("You are not authorized to make this request");
-      return;
-    }
-    const id = getIdFromChangePasswordToken(token);
-
-    if (!id) {
       setErrorMessage("You are not authorized to make this request");
       return;
     }

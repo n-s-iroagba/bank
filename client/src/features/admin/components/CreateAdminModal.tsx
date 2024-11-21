@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { CreateAdmin } from '../../../types/Admin';
+import { createAdmin } from '../../../services/adminService';
 
 
 interface CreateAdminModalProps {
   show: boolean;
   onClose: () => void;
-  onSubmit: (adminData: CreateAdmin) => void;
+  id:number
+
 }
 
-const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSubmit }) => {
+const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose,id }) => {
   const [admin, setAdmin] = useState<CreateAdmin>({
     email: '',
    username: '',
     password: ''
   });
+ const [errorMessage,setErrorMessage] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,15 +27,17 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSu
     }));
   };
 
-  const handleSubmit = () => {
-    onSubmit(admin);
-    setAdmin({
-  
-      email: '',
-      username: '',
-      password: ''
-    });
-    onClose();
+  const handleSubmit = async () => {
+    try{
+      await createAdmin(id,admin)
+      alert('Admin created successfully.')
+      onClose();
+    }catch(e){
+      console.error(e);
+      setErrorMessage('Error creating admin, contact developer.')
+    }
+    
+ 
   };
 
   return (
@@ -60,7 +65,7 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSu
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="text"
-              name="firstname"
+              name="email"
               value={admin.email}
               onChange={handleInputChange}
             />
@@ -69,7 +74,7 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSu
           <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              type="password"
+              type="text"
               name="password"
               value={admin.password}
               onChange={handleInputChange}
@@ -85,6 +90,7 @@ const CreateAdminModal: React.FC<CreateAdminModalProps> = ({ show, onClose, onSu
           Save Admin
         </Button>
       </Modal.Footer>
+      {errorMessage&&<Alert variant='danger' className='text-center'>{errorMessage}</Alert>}
     </Modal>
   );
 };

@@ -16,7 +16,7 @@ interface AccountAttributes {
   durationInDays: number;
   interestRate: number;
   accountHolderId: number; 
-  accountNumber:number;
+  accountNumber:string;
 }
 
 // Optional fields when creating a new Account instance
@@ -31,7 +31,7 @@ export class TermDepositAccount
   public durationInDays!: number;
   public interestRate!: number;
   public id!: number;
-  public accountNumber!:number;
+  public accountNumber!:string;
   public amountDeposited!: number;
   public accountHolderId!: number; // Foreign key to AccountHolder
 
@@ -69,7 +69,7 @@ TermDepositAccount.init(
       defaultValue: 0,
     },
     accountNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 0,
     },

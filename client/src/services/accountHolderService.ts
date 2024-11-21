@@ -8,6 +8,7 @@ export const createAccountHolder = async (adminId:number,data: CreateAccountHold
       const response = await apiPost<AccountHolder,CreateAccountHolder>(url, data);
       return response.data;
     } catch (error: any) {
+      console.error(error)
       throw new Error(error.response?.data?.message || 'Failed to update account holder');
     }
   };
@@ -17,8 +18,10 @@ export const getAccountHoldersByAdminId = async (adminId: number) => {
     const url = `${API_ENDPOINTS.accountHolder.get}/${adminId}`
   try {
     const response = await apiGet<AccountHolder[]>(url);
+    console.log('RESPONSE', response.data);
     return response.data;
   } catch (error: any) {
+    console.error(error)
     throw new Error(error.response?.data?.message || 'Failed to fetch account holders for admin');
   }
 };

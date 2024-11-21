@@ -27,9 +27,6 @@ const OptionListingComponent: React.FC<OptionListingProps> = ({ selectedOption, 
 
   return (
     <div className="option-listing">
-      
-
-      {/* Conditionally render the content below the HeaderBar */}
       <div className="content-area">
         {renderContent()}
       </div>

@@ -19,4 +19,4 @@ export type CreateAccountHolder = Omit<BaseAccountHolder,'id'> & {
 }
 
 
-export type EditAccountHolder = Omit<BaseAccountHolder,'id'>;
+export type UpdateAccountHolder = Omit<BaseAccountHolder,'id'>;

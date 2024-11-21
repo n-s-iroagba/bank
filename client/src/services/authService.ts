@@ -1,4 +1,4 @@
-import { apiPatch, apiPost } from "../api/api";
+import { apiGet, apiPatch, apiPost } from "../api/api";
 import { API_ENDPOINTS } from "../api/urls";
 import { ChangePasswordRequest, LoginData, NewPassword, SuperAdminLoginData } from "../types/AuthContextType";
 
@@ -27,6 +27,7 @@ export const loginAdmin = async (data:LoginData) => {
 
     export const verifySuperAdminEmail = async (id:number, code:{code:number}) => {
         const url = `${API_ENDPOINTS.superAdmin.verifyEmail}/${id}`;
+        alert(url)
         try {
           const response = await apiPatch<string,{code:number}>(url,  code );
           return response.data;
@@ -34,7 +35,15 @@ export const loginAdmin = async (data:LoginData) => {
           throw new Error(error.response?.data?.message || 'Failed to verify email');
         }
       };
-      
+    export const requestNewVerificationCode = async (id:number)=>{
+      const url =`${API_ENDPOINTS.superAdmin.requestNewCode}/${id}`
+      try {
+        const response = await apiGet<string>(url );
+        return response.data;
+      } catch (error: any) {
+        throw new Error(error.response?.data?.message || 'Failed to verify email');
+      }
+    }      
       
       export const loginSuperAdmin = async (data:SuperAdminLoginData) => {
         const url = `${API_ENDPOINTS.superAdmin.login}`;

@@ -3,7 +3,7 @@ import { sequelize } from '../config/dbConfig';
 import { Admin } from './Admin';  
 type TSuperAdmin = {
    id: number;
-
+ username:string;
  firstname:string;
  surname:string;
    email: string;
@@ -11,11 +11,12 @@ type TSuperAdmin = {
    isVerified: boolean;
    resetCode?: string;
    adminIdentification:number
-   verificationCode: string|null ;
+   verificationCode: number|null ;
 }
 type CreationTSuperAdmin = Omit<TSuperAdmin,'id'|'adminIdentification'|'isVerified'>
 export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
   public id!: number;
+  public username!: string;
 
   public firstname!:string;
   public surname!:string;
@@ -24,7 +25,7 @@ export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
   public isVerified!: boolean;
   public resetCode?: string;
   public adminIdentification?:number
-  public verificationCode!: string|null ;
+  public verificationCode!: number|null ;
   public admins!: Admin[];  
 }
 
@@ -54,7 +55,7 @@ SuperAdmin.init(
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
-      allowNull:false,
+      allowNull: false,
       defaultValue: false,
     },
     verificationCode: {
@@ -68,6 +69,10 @@ SuperAdmin.init(
     resetCode: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    username:  {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

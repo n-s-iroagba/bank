@@ -4,7 +4,7 @@ import { createAdmin, AdminController, updateAdmin, getAllAdmins, deleteAdmin } 
 
 const adminRoutes = express.Router();
 
-adminRoutes.post('create/:superAdminId', createAdmin);
+adminRoutes.post('/create/:superAdminId', createAdmin);
 adminRoutes.post('/login', AdminController.login);
 adminRoutes.put('/update/:adminId', updateAdmin);
 adminRoutes.get('/:superAdminId', getAllAdmins);

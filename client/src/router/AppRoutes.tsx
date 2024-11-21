@@ -5,15 +5,18 @@ import Login from '../pages/client/Login';
 import Home from '../pages/client/Home';
 import Dashboard from '../pages/client/Dashboard';
 import AdminLogin from '../pages/admin/AdminLogin';
-import EmailVerification from '../pages/admin/EmailVerification';
+
 import PasswordRequest from '../pages/admin/PasswordRequest';
 import PasswordReset from '../pages/admin/PasswordReset';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import Transfer from '../pages/client/Transfer';
-import AdminSignUp from '../pages/admin/AdminSignUp';
+
 import SuperAdminDashboard from '../pages/admin/SuperAdminDashboard';
 import AdminDashboardWrapper from '../pages/admin/AdminDashboardWrapper';
 import SignUp from '../pages/admin/SignUp';
+import EmailVerification from '../pages/admin/EmailVerification';
+import SignUpForm from '../features/auth/components/SignUpForm';
+import SuperAdminAdminDashboardWrapper from '../pages/admin/SuperAdmin-AdminDashboard';
 
 
 const AppRoutes: React.FC = () => {
@@ -25,15 +28,10 @@ const AppRoutes: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard/:id" element={<AdminDashboardWrapper />} />
-        <Route path="/admin/dashboard" element={
-       
-          <AdminDashboard adminId={1} isAdmin={false} />
-      
-          } />
+        <Route path="/admin-dashboard/:id" element={<SuperAdminAdminDashboardWrapper/>} />
        
         <Route path="/super-admin/dashboard" element={<SuperAdminDashboard id={1} />} />
-        <Route path="/super-admin/signup" element={<SignUp/>} />
-        <Route path="/admin/signup" element={<AdminSignUp />} />
+        <Route path="/super-admin/signup" element={<SignUpForm/>} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/verify-email" element={<EmailVerification />} />
         <Route path="/reset-password-request" element={<PasswordRequest />} />

@@ -4,8 +4,16 @@ import { CreateSecondParty } from '../types/SecondPartyTypes';
 
 export class SecondPartyService {
   // Create a new SecondParty
-  static async createSecondParty(data: CreateSecondParty) {
-    return await SecondParty.create(data);
+  static async createSecondParty(adminId:number,data: CreateSecondParty) {
+    return await SecondParty.create({
+      firstname: data.firstname,
+      surname: data.surname,
+      accountNumber: Math.random()*10000000000,
+      bankId: data.bankId,
+      canSend: data.canSend,
+      canReceive: data.canReceive,
+      adminId: adminId
+    });
   }
 
   // Get all SecondParties

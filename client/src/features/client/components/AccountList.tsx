@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import '../styles/AccountList.css';
 import { TermDepositAccount } from '../../../types/TermDepositAccount';
 import { CheckingAccount } from '../../../types/CheckingAccount';
+import '../styles/Listing.css'
 
 
 
@@ -10,11 +11,12 @@ type  AccountsListProps = {
   setAccountType: (accountType: string) => void; 
   setDrawerVisible: (isVisible: boolean) => void; 
 }
-// type DetailsType = {
-//   termDepositAccount:TermDepositAccount
-//   checkingAccount:CheckingAccount
+type DetailsType = {
+  accountName: string,
+  termDepositAccount:TermDepositAccount
+  checkingAccount:CheckingAccount
 
-// }
+}
 
 
 
@@ -28,6 +30,7 @@ const AccountsList: React.FC<AccountsListProps> = ({ setAccountType, setDrawerVi
             // Simulate an API call
             await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
             setDetails({
+                accountName:'John Smith',
                 termDepositAccount: {
                     id: 1,
                     amountDeposited: 10000,
@@ -63,42 +66,49 @@ const AccountsList: React.FC<AccountsListProps> = ({ setAccountType, setDrawerVi
 
     return (
         <div className="accounts-list">
+        <div className="responsive-container">
             <Row
                 className={`account-item pt-2 ${selectedAccount === 'Term Deposit Account' ? 'selected' : ''}`}
                 onClick={() => handleAccountClick('Term Deposit Account')}
             >
                 <Col xs={6} className="account-info d-flex flex-column justify-content-center mx-0">
-                    <div className="account-name">Term Deposit Account</div>
+                    <div className="account-name">Term Deposit</div>
+                    <div className="account-number">{details.accountName}</div>
+                    <div className="account-name">Term Deposit Account Number</div>
                     <div className="account-number">{details.termDepositAccount.accountNumber}</div>
                 </Col>
                 <Col xs={6} className="balance-info">
                     <div className="balance-section">
                         <span className="balance-label">Interest Rate</span>
-                        <div className="balance-amount">{(details.termDepositAccount.interestRate / 100)}</div>
+                        <div className="balance-amount">{(details.termDepositAccount.interestRate)}%</div>
                     </div>
                     <div className="balance-section">
                         <span className="balance-label">Amount Deposited</span>
-                        <div className="balance-amount">{details.termDepositAccount.amountDeposited}</div>
+                        <div className="balance-amount">${details.termDepositAccount.amountDeposited}</div>
                     </div>
                 </Col>
             </Row>
-
+    
             <Row
                 className={`account-item pt-2 ${selectedAccount === 'Checking Account' ? 'selected' : ''}`}
                 onClick={() => handleAccountClick('Checking Account')}
             >
                 <Col xs={6} className="account-info d-flex flex-column justify-content-center mx-0">
                     <div className="account-name">Checking Account</div>
+                    <div className="account-number">{details.accountName}</div>
+                    <div className="account-name">Checking Account Number</div>
                     <div className="account-number">{details.checkingAccount.accountNumber}</div>
                 </Col>
                 <Col xs={6} className="balance-info">
                     <div className="balance-section">
-                        <span className="balance-label">Available</span>
-                        <div className="balance-amount">{details.checkingAccount.balance}</div>
+                        <span className="balance-label">Available Balance</span>
+                        <div className="balance-amount">${details.checkingAccount.balance}</div>
                     </div>
                 </Col>
             </Row>
         </div>
+    </div>
+    
     );
 };
 

@@ -5,6 +5,7 @@ export type CreateSuperAdmin = {
     surname: string;
     email: string;
     password:string;
+    username:string;
 
 }
 

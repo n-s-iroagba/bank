@@ -6,7 +6,7 @@ export const API_ENDPOINTS = {
     superAdmin: {
         register: `${BASE_URL}/super-admin/register`,
         resetPassword: `${BASE_URL}/super-admin/reset-password`,
-        requestNewCode: `${BASE_URL}/super-admin/request-new-code`,
+        requestNewCode: `${BASE_URL}/super-admin/new-verification-code`,
         verifyEmail: `${BASE_URL}/super-admin/verify-email`,
         login: `${BASE_URL}/super-admin/login`,
         requestPasswordChange: `${BASE_URL}/super-admin/request-password-change`,

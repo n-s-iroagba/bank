@@ -1,14 +1,14 @@
 
 import { Request, Response } from 'express';
 import { TermDepositAccountService } from '../service/TermDepositAccountService';
-import { EditTermDepositAccount } from '../types/TermDepositAccountTypes';
+import { UpdateTermDepositAccount } from '../types/TermDepositAccountTypes';
 
 export class TermDepositAccountController {
 
   static async update(req: Request, res: Response) {
     try {
       const id = parseInt(req.params.id);
-      const accountData: EditTermDepositAccount = req.body;
+      const accountData: UpdateTermDepositAccount = req.body;
       const updatedAccount = await TermDepositAccountService.updateTermDepositAccount(id, accountData);
       res.status(200).json(updatedAccount);
     } catch (error: any) {

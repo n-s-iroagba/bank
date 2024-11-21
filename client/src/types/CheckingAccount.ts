@@ -4,7 +4,7 @@ import { Transaction } from "./Transaction";
 export type CheckingAccount = {
     id: number;
     balance: number;
-    accountNumber: number;
+    accountNumber: string;
     transactions?: Transaction[];
 }
 

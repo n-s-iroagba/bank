@@ -10,6 +10,6 @@ export type CreateTermDepositAccount = {
    
 }
 
-export type EditTermDepositAccount = CreateTermDepositAccount &{
-        accountNumber:number
+export type UpdateTermDepositAccount = CreateTermDepositAccount &{
+        accountNumber:string
 }

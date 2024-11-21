@@ -6,15 +6,15 @@ import { SecondPartyController } from '../controllers/SecondPartyController';
 const secondPartyRoutes = Router();
 
 // Create a new SecondParty
-secondPartyRoutes.post('/second-parties', SecondPartyController.createSecondParty);
+secondPartyRoutes.post('/:adminId', SecondPartyController.createSecondParty);
 
 // Get all SecondParties
-secondPartyRoutes.get('/second-parties', SecondPartyController.getAllSecondParties);
+secondPartyRoutes.get('/:adminId', SecondPartyController.getAllSecondParties);
 
 // Update a SecondParty by ID
-secondPartyRoutes.put('/second-parties/:id', SecondPartyController.updateSecondParty);
+secondPartyRoutes.put('/:id', SecondPartyController.updateSecondParty);
 
 // Delete a SecondParty by ID
-secondPartyRoutes.delete('/second-parties/:id', SecondPartyController.deleteSecondParty);
+secondPartyRoutes.delete('/:id', SecondPartyController.deleteSecondParty);
 
 export default secondPartyRoutes;

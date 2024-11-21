@@ -8,7 +8,7 @@ export type TermDepositAccount = {
         interestRate: number;
         accountHolderId: number;
         accountHolder:AccountHolder
-        accountNumber: number;
+        accountNumber: string;
 }
 export type CreateTermDepositAccount = Omit<TermDepositAccount,'id'|'accountNumber'|'accountHolderId'|'accountHolder'>
 export type UpdateTermDepositAccount = Omit<TermDepositAccount,'id'>

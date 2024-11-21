@@ -4,11 +4,11 @@ import SecondPartySection from "../../features/admin/components/SecondPartySecti
 import { BaseAccountHolder } from "../../types/AccountHolder";
 import CheckingAccountAccordion from "../../features/admin/components/CheckingAccountAccordion";
 import TermDepositAccountAccordion from "../../features/admin/components/TermDepositAccountAccordion";
-import UpdateAccountHolderModal from "../../features/admin/components/UpdateAccountHolder";
 import CreateAccountHolderModal from "../../features/admin/components/CreateAccountHolderModal";
 import useAccountHolders from "../../hooks/UseAccountHolders";
-import { calculateDividends } from "../../utils/calculateDividends";
+
 import ConfirmDeleteModal from "../../features/admin/components/ConfirmDeleteModal";
+import UpdateAccountHolderModal from "../../features/admin/components/UpdateAccountHolder";
 
 
 const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
@@ -74,12 +74,12 @@ const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
           {accountHolders.map((accountHolder, index) => {
             const { amountDeposited, startDate, durationInDays, interestRate } =
               accountHolder.termDepositAccount;
-            const { dividendEarned, dividendToBeEarned } = calculateDividends(
-              amountDeposited,
-              startDate,
-              durationInDays,
-              interestRate
-            );
+            // const { dividendEarned, dividendToBeEarned } = calculateDividends(
+            //   amountDeposited,
+            //   startDate,
+            //   durationInDays,
+            //   interestRate
+            // );
 
             return (
               <Accordion.Item
@@ -160,9 +160,7 @@ const AdminDashboard: React.FC<{ adminId: number; isAdmin: boolean }> = ({
                       <Accordion.Header>Term Deposit Account</Accordion.Header>
                       <Accordion.Body>
                         <TermDepositAccountAccordion
-                          account={accountHolder.termDepositAccount}
-                          dividendEarned={dividendEarned}
-                          dividendToBeEarned={dividendToBeEarned}
+                          account={accountHolder.termDepositAccount}p
                         />
                       </Accordion.Body>
                     </Accordion.Item>

@@ -1,7 +1,7 @@
 // controllers/AdminController.ts
 import { Request, Response } from 'express';
 import { AdminService } from '../service/AdminService';
-import { CreateAdmin, EditAdmin } from '../types/AdminTypes';
+import { CreateAdmin, UpdateAdmin } from '../types/AdminTypes';
 
 
 export class AdminController {
@@ -40,6 +40,7 @@ export const getAllAdmins = async (req: Request, res: Response) => {
 
   try {
     const admins = await AdminService.getAdmins(superAdminId);
+    console.log('ADMINS',admins)
     res.status(200).json(admins);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -49,7 +50,7 @@ export const getAllAdmins = async (req: Request, res: Response) => {
 
 export const updateAdmin = async (req: Request, res: Response) => {
   const { adminId } = req.params;
-  const { username, email, password }:EditAdmin = req.body ;
+  const { username, email, password }:UpdateAdmin = req.body ;
   try {
     const updatedAdmin = await AdminService.updateAdminBySuperAdmin(parseInt(adminId), {
       username,

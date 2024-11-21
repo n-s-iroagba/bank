@@ -11,7 +11,7 @@ type TSecondParty={
   bankId: number;
   canSend:boolean;
   canReceive: boolean
-  accountHolderId: number;
+  adminId: number;
 
 }
 type CreationTSecondParty = Omit<TSecondParty,'id'>
@@ -24,7 +24,7 @@ export class SecondParty extends Model<TSecondParty,CreationTSecondParty> {
   public bank!: Bank;
   public canSend!:boolean;
   public canReceive!: boolean
-  public accountHolderId!: number;
+  public adminId!: number;
 }
 
 SecondParty.init(
@@ -47,10 +47,10 @@ SecondParty.init(
       allowNull: false,
       references: { model: 'banks', key: 'id' },
     },
-    accountHolderId: {
+    adminId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: 'accountHolders', key: 'id' },
+      references: { model: 'admins', key: 'id' },
     },
     accountNumber: {
       type: DataTypes.INTEGER,
