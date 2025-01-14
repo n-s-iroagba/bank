@@ -10,7 +10,7 @@ import { SecondParty } from './SecondParty';
 
 type  TAccountHolder={
   id: number;
-  firstname: string;
+  firstName: string;
   surname: string;
   middlename?: string;
   username: string;
@@ -21,7 +21,7 @@ type CreationTAccountHolder = Omit<TAccountHolder,'id'>
 
 export class AccountHolder extends Model<TAccountHolder,CreationTAccountHolder> {
   public id!: number;
-  public firstname!: string;
+  public firstName!: string;
   public surname!: string;
   public middlename?: string;
   public username!: string;
@@ -54,7 +54,7 @@ AccountHolder.init(
         key: 'id',
       },
     },
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

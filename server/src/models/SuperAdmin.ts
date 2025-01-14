@@ -4,7 +4,7 @@ import { Admin } from './Admin';
 type TSuperAdmin = {
    id: number;
  username:string;
- firstname:string;
+ firstName:string;
  surname:string;
    email: string;
    password: string;
@@ -18,7 +18,7 @@ export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
   public id!: number;
   public username!: string;
 
-  public firstname!:string;
+  public firstName!:string;
   public surname!:string;
   public email!: string;
   public password!: string;
@@ -36,7 +36,7 @@ SuperAdmin.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

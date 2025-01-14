@@ -18,7 +18,7 @@ const useSecondParty = (id:number): UseSecondPartyResult => {
       setsecondPartyLoading(true);
       try {
         const data = await getAllSecondParties(id);
-        setSecondParties(data);
+        setSecondParties(data as unknown as SecondParty[]);
       } catch (err: any) {
         setSecondPartyError(err.message);
       } finally {

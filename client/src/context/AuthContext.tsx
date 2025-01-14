@@ -1,12 +1,12 @@
 import { ReactNode, useState, ChangeEvent, Dispatch, SetStateAction, FormEvent, createContext } from "react";
-import { AuthContextType, SuperAdminData, NewPasswordData, LoginData, SuperAdminLoginData, ChangePasswordRequest, NewPassword } from "../types/AuthContextType";
-import { CreateSuperAdmin } from "../types/SuperAdmin";
-import { doPasswordsMatch } from "../utils";
 import { mockAuthContext } from "./dummyContext";
+import { loginSuperAdmin, loginAdmin, loginAccountHolder, requestToChangeSuperAdminPassword, updateSuperAdminPassword } from "../services/authService";
 import { JWTService } from "../services/JWTService";
-import { loginSuperAdmin, loginAdmin,updateSuperAdminPassword,requestToChangeSuperAdminPassword, loginAccountHolder } from "../services/authService";
 import { createSuperAdmin } from "../services/superAdminService";
 import { BaseAdmin } from "../types/Admin";
+import { AuthContextType, SuperAdminData, NewPasswordData, LoginData, SuperAdminLoginData, ChangePasswordRequest, NewPassword } from "../types/AuthContextType";
+import { CreateSuperAdmin } from "../types/SuperAdmin";
+import { doPasswordsMatch } from "../utils/utils";
 
 
 
@@ -24,7 +24,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
   const [passwordType, setPasswordType] = useState<'password'|'text'>('password')
 
   const [superAdminData, setSuperAdminData] = useState<SuperAdminData>({
-    firstname: "",
+    firstName: "",
     surname: "",
     username:'',
     password: "",
@@ -138,7 +138,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
    
       const token = await createSuperAdmin( superAdminData as CreateSuperAdmin);
 
-      handleEmailVerification(token.token, false, navigate);
+      handleEmailVerification(token as unknown as string, false, navigate);
    
     } catch (error: any) {
       console.error(error);
@@ -341,8 +341,8 @@ console.error(error)
 
     setSubmitting(true);
     try {
-      const token = await updateSuperAdminPassword(id,newPasswordData as NewPassword);
-        localStorage.setItem("JwtToken", JSON.stringify(token));
+      // const token = await updateSuperAdminPassword(newPasswordData as NewPassword);
+      //   localStorage.setItem("JwtToken", JSON.stringify(token));
         navigate("/superadmin/dashboard");
     } catch (error: any) {
       alert("An error occurred, kindly try again later");

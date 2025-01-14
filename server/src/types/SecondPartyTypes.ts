@@ -1,7 +1,7 @@
 
 
 export type CreateSecondParty = {
-    firstname: string;
+    firstName: string;
     surname: string;
     bankId: number;
     canReceive: boolean; 

@@ -114,7 +114,7 @@ export const requestSuperAdminPasswordReset = async (email: string) => {
   if (!superAdmin) {
     throw new Error('SuperAdmin not found');
   }
-   const resetToken =  JWTService.generateToken({firstname:superAdmin.firstname})
+   const resetToken =  JWTService.generateToken({firstName:superAdmin.firstName})
    superAdmin.resetCode = resetToken;
   // For example, sendResetEmail(superAdmin.email, resetToken);
 };

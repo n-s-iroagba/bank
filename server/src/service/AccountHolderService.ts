@@ -13,7 +13,7 @@ export class AccountHolderService {
 
     static async createAccountHolder(id:number,data:CreateAccountHolder) {
         const accountHolder = await AccountHolder.create({
-          firstname: data.firstname,
+          firstName: data.firstName,
           surname: data.surname,
           middlename: data.middlename,
           username: data.username,
@@ -80,14 +80,14 @@ export class AccountHolderService {
 
   // Update AccountHolder
   static async update(id:number,accountHolderData: UpdateAccountHolder) {
-    const {  firstname, surname, middlename, username, password } = accountHolderData;
+    const {  firstName, surname, middlename, username, password } = accountHolderData;
 
     const accountHolder = await AccountHolder.findByPk(id);
     if (!accountHolder) {
       throw new Error('AccountHolder not found');
     }
 
-    accountHolder.firstname = firstname;
+    accountHolder.firstName = firstName;
     accountHolder.surname = surname;
     accountHolder.middlename = middlename;
     accountHolder.username = username;

@@ -3,10 +3,13 @@ import BankService from '../service/BankService';
 
 class BankController {
   async getAllBanks(req: Request, res: Response) {
+    try{
     const banks = await BankService.getAllBanks();
-    res.json(banks);
+    res.status(200).json(banks);
+    }catch(error:any){
+      res.status(500).json({ message: error.message });
+    }
   }
-
 
 
   async createBank(req: Request, res: Response): Promise<void> {

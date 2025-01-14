@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Spinner, Alert, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import '../styles/EmailVerification.css';
 import { requestNewVerificationCode, verifySuperAdminEmail } from '../../services/authService';
 import { JWTService } from '../../services/JWTService';
 

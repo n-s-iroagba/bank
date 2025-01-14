@@ -1,10 +1,13 @@
 import React, {  useState } from 'react';
-import OptionListingComponent from '../../features/client/components/OptionsListing';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCog } from '@fortawesome/free-solid-svg-icons';
-import CheckingDrawerComponent from '../../features/client/components/CheckingDrawerComponent';
-import TermDrawerComponent from '../../features/client/components/TermDrawerComponent';
-import AccountsList from '../../features/client/components/AccountList';
+import CheckingAccountDrawer from '../../components/CheckingAccountDrawer';
+
+import TermDepositAccountDrawer from '../../components/TermDepositDrawer';
+import AccountList from '../../components/AccountList';
+import OptionListing from '../../components/OptionsListing';
+
 
 
 const Dashboard: React.FC = () => {
@@ -41,14 +44,14 @@ const Dashboard: React.FC = () => {
       
       {isDrawerVisible && (
   accountType === 'Checking Account' ? (
-    <CheckingDrawerComponent 
+    <CheckingAccountDrawer 
       selectedOption={selectedOption}
       options={checkingOptions}
       isVisible={true}
       onSelectOption={handleOptionSelect}
     />
   ) : (
-    <TermDrawerComponent
+    <TermDepositAccountDrawer
       selectedOption={selectedOption}
       options={termOptions}
       isVisible={true}
@@ -57,8 +60,8 @@ const Dashboard: React.FC = () => {
   )
 )}
         <div>
-          {selectedOption==='Accounts'?<AccountsList  setAccountType={setAccountType} setDrawerVisible={setDrawerVisible}/>:
-          <OptionListingComponent  setDrawerVisible={setDrawerVisible} selectedOption={selectedOption}   />
+          {selectedOption==='Accounts'?<AccountList  setAccountType={setAccountType} setDrawerVisible={setDrawerVisible} />:
+          <OptionListing  setDrawerVisible={setDrawerVisible} selectedOption={selectedOption}   />
 }
         </div>
   
