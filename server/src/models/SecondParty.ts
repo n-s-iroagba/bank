@@ -5,7 +5,7 @@ import Bank  from './Bank';
 import { Transaction } from './Transaction';
 type TSecondParty={
   id:number;
-  firstname: string;
+  firstName: string;
   surname: string;
   accountNumber: number;
   bankId: number;
@@ -17,7 +17,7 @@ type TSecondParty={
 type CreationTSecondParty = Omit<TSecondParty,'id'>
 export class SecondParty extends Model<TSecondParty,CreationTSecondParty> {
   public id!: number;
-  public firstname!: string;
+  public firstName!: string;
   public surname!: string;
   public accountNumber!: number;
   public bankId!: number;
@@ -34,7 +34,7 @@ SecondParty.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

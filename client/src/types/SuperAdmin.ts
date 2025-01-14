@@ -4,14 +4,14 @@ export type SuperAdmin = {
     id:number,
     email: string;
     password:string;
-    firstname:string;
+    firstName:string;
     surname:string;
     username:string;
     admins:Admin[]
 }
 
 export type CreateSuperAdmin = {
-    firstname:string;
+    firstName:string;
     surname:string;
     email: string;
     password:string;

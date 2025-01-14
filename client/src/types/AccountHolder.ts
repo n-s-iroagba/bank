@@ -5,7 +5,7 @@ import { CreateTransactionSystem } from "./Transaction";
 
 export type BaseAccountHolder = {
     id: number;
-    firstname: string;
+    firstName: string;
     surname: string;
     middlename?: string;
     username:string;

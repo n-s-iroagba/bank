@@ -51,7 +51,7 @@ export const getVerificationEmailContent = (user: SuperAdmin): string => {
         <h1>Welcome to Our Platform</h1>
       </div>
       <div class="content">
-        <p>Dear ${user.firstname} ${user.surname},</p>
+        <p>Dear ${user.firstName} ${user.surname},</p>
         <p>Thank you for signing up. Please use the following verification code to complete your registration:</p>
         <p class="verification-code">${user.verificationCode}</p>
         <p>If you did not initiate this registration, please ignore this email.</p>

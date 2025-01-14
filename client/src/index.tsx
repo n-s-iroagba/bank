@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
-import AppRoutes from './router/AppRoutes';
+import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <AppRoutes />
+      <App />
     </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')

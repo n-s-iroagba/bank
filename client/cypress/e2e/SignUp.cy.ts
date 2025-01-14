@@ -11,7 +11,7 @@ describe('Super Admin Sign-Up and Email Verification Flow', () => {
 
   it('should render the sign-up form with all required fields', () => {
     cy.get('[data-testid="sign-up-form"]').should('exist');
-    ['username', 'firstname', 'surname', 'email', 'password', 'confirm-password', 'secret-code']
+    ['username', 'firstName', 'surname', 'email', 'password', 'confirm-password', 'secret-code']
       .forEach(field => cy.get(`[data-testid="${field}-input"]`).should('exist'));
     cy.get('[data-testid="submit-button"]').should('exist');
   });
@@ -38,7 +38,7 @@ describe('Super Admin Sign-Up and Email Verification Flow', () => {
 
   it('should allow form submission when valid', () => {
     cy.get('[data-testid="username-input"]').type('TestUser', { force: true });
-    cy.get('[data-testid="firstname-input"]').type('John', { force: true });
+    cy.get('[data-testid="firstName-input"]').type('John', { force: true });
     cy.get('[data-testid="surname-input"]').type('Doe', { force: true });
     cy.get('[data-testid="email-input"]').type('john.doe@example.com', { force: true });
     cy.get('[data-testid="password-input"]').type('StrongPassword123', { force: true });

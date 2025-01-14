@@ -6,7 +6,7 @@ export class SecondPartyService {
   // Create a new SecondParty
   static async createSecondParty(adminId:number,data: CreateSecondParty) {
     return await SecondParty.create({
-      firstname: data.firstname,
+      firstName: data.firstName,
       surname: data.surname,
       accountNumber: Math.random()*10000000000,
       bankId: data.bankId,

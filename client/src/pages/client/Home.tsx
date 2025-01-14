@@ -1,37 +1,30 @@
-import React from 'react'
-import ResponsiveNavbar from '../../features/client/components/ResponsiveNavbar';
-import CarouselHeader from '../../features/client/components/CarouselHeader';
-import ImageGrid from '../../features/client/components/ImageGrid';
-import NewsContainer from '../../features/client/components/NewsContainer';
-import Services from '../../features/client/components/Services';
-import Help from '../../features/client/components/Help';
-import Join from '../../features/client/components/Join';
-import TopFooter from '../../features/client/components/TopFooter';
-import Footer from '../../features/client/components/Footer';
+import React from "react";
+import CarouselHeader from "../../components/CarouselHeader";
+import Footer from "../../components/Footer";
+import Help from "../../components/Help";
+import ImageGrid from "../../components/ImageGrid";
+import Join from "../../components/Join";
+import NewsContainer from "../../components/NewsContainer";
+import ResponsiveNavbar from "../../components/ResponsiveNavbar";
+import Services from "../../components/Services";
+import TopFooter from "../../components/TopFooter";
 
+const Home: React.FC = () => {
+  return (
+    <>
+      <ResponsiveNavbar />
 
+      <CarouselHeader />
+      <Services />
+      <ImageGrid />
+      <NewsContainer />
+      <Help />
 
-const Home:React.FC = ()=>{
- 
-
-
-    return (
-        <>
-     
-        <ResponsiveNavbar/>
- 
-      <CarouselHeader/>
-        <Services/>
-        <ImageGrid/>
-        <NewsContainer/>
-        <Help/>
-
-        <Join/>
-        <TopFooter/>
-        <Footer/>
-        
-        </>
-    )
-}
+      <Join />
+      <TopFooter />
+      <Footer />
+    </>
+  );
+};
 
 export default Home;

@@ -31,12 +31,12 @@ export class AccountHolderController {
 
   static async update(req: Request, res: Response) {
     const id = req.params.id;
-    const { firstname, surname, middlename, username, password }: UpdateAccountHolder = req.body;
+    const { firstName, surname, middlename, username, password }: UpdateAccountHolder = req.body;
 
     try {
       const updatedAccountHolder = await AccountHolderService.update(Number(id),{
         
-        firstname,
+        firstName,
         surname,
         middlename,
         username,

@@ -2,7 +2,7 @@ import { Bank } from "./Bank";
 
 export type SecondParty = {
     id: number;
-    firstname: string;
+    firstName: string;
     surname: string;
     accountNumber: string;
     bank: Bank;
@@ -12,15 +12,14 @@ export type SecondParty = {
 
 export type CreateSecondParty = {
  
-    firstname: string;
+    firstName: string;
     surname: string;
     accountNumber: string;
     bank: Bank;
     canReceive: boolean; 
-    canSend: boolean;
 };
 export type UpdateSecondParty = {
-    firstname: string;
+    firstName: string;
     surname: string;
     accountNumber: string;
     bank: Bank;
