@@ -2,9 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import AccountHolderModal from "../../components/AccountHolderModal";
+import AccountHolderLayout from "../../components/AccountHolderLayout";
 
 
-const AccountHolderDetail: React.FC = () => {
+const AccountHolderDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -28,8 +29,10 @@ let accountHolder ={
     alert("Account Holder deleted!");
     navigate("/account-holder-list");
   };
+ 
 
   return (
+    <AccountHolderLayout id={0}>
     <div>
       <h5>Account Holder Details</h5>
       <div>
@@ -49,7 +52,8 @@ let accountHolder ={
         // accountHolderToBeUpdated={accountHolder}
       />
     </div>
+    </AccountHolderLayout>
   );
 };
 
-export default AccountHolderDetail;
+export default AccountHolderDetails;

@@ -1,17 +1,23 @@
 import { useState } from "react";
-import { Accordion, Button } from "react-bootstrap";
-import CreditDebitModal from "./CreditDebitModal";
-import UpdateCheckingAccountModal from "./UpdateCheckingAccountModal";
+import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
-import { CheckingAccount, UpdateCheckingAccount } from "../types/CheckingAccount";
+import CreditDebitModal from "../../components/CreditDebitModal";
+import UpdateCheckingAccountModal from "../../components/UpdateCheckingAccountModal";
+import {UpdateCheckingAccount } from "../../types/CheckingAccount";
+import AccountHolderLayout from "../../components/AccountHolderLayout";
+import useCheckingAccount from "../../hooks/useCheckingAccount";
 
 
-const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: boolean,adminId:number }> = ({ account, isAdmin,adminId }) => {
+
+const AdminCheckingAccountDetails: React.FC =()  => {
   const [showUpdateCheckingAccountModal, setShowUpdateCheckingAccountModal] = useState(false);
   const [operationType, setOperationType] = useState<"credit" | "debit" | null>(null);
   const [isTransferVisible, setIsTransferVisible] = useState(false);
   const [showOperationModal, setShowOperationModal] = useState(false);
   const navigate = useNavigate()
+  const id = 0
+
+  const account = useCheckingAccount(id)
 
   const handleUpdateCheckingAccount = () => {
     setShowUpdateCheckingAccountModal(true);
@@ -32,12 +38,12 @@ const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: b
 
   return (
     <>
-      <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Checking Account ID: {account.id}</Accordion.Header>
-          <Accordion.Body>
+    <AccountHolderLayout  id={0}>
+   
+          <div>Checking Account ID: {account.id}</div>
+         
             <p><strong>Balance:</strong> ${account.balance}</p>
-            {isAdmin && (
+            
               <div>
                 <Button variant="info" onClick={handleUpdateCheckingAccount}>Update</Button>
                 <Button variant="info" onClick={() => openOperationModal("debit", true)}>Debit (with Transfer)</Button>
@@ -45,12 +51,10 @@ const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: b
                 <Button variant="info" onClick={() => openOperationModal("debit", false)}>Debit (no Transfer)</Button>
                 <Button variant="info" onClick={() => openOperationModal("credit", false)}>Credit (no Transfer)</Button>
               </div>
-            )}
+      
             <Button variant="link" onClick={() => navigate(`/admin/transactions/${account.id}`)}>View Transactions</Button>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
+         
+            </AccountHolderLayout>
 
       <UpdateCheckingAccountModal
         show={showUpdateCheckingAccountModal}
@@ -63,10 +67,10 @@ const CheckingAccountAccordion: React.FC<{ account: CheckingAccount; isAdmin?: b
         show={showOperationModal}
         onHide={() => setShowOperationModal(false)}
         type={operationType}
-        isTransferVisible={isTransferVisible} adminId={adminId}      />
+        isTransferVisible={isTransferVisible} checkingAccountId={account.id}      />
     </>
   );
 };
 
-export default CheckingAccountAccordion;
+export default AdminCheckingAccountDetails;
 
