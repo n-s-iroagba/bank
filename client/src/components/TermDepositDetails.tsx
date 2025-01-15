@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button, Card, Col, Container, Row, Table, ButtonGroup } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-import useGetTermDepositAccount from '../../hooks/useGetTermDepositAccount';
-import UpdateTermDepositModal from '../../components/UpdateTermDepositModal';
+import useGetTermDepositAccount from '../hooks/useGetTermDepositAccount';
+import UpdateTermDepositModal from './UpdateTermDepositModal';
+
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -20,7 +21,7 @@ const generateWeekdays = (startDate: string, days: number) => {
   return result.reverse();
 };
 
-const TermDepositDetails = () => {
+const TermDepositDetails:React.FC<{isAdmin?:boolean}> = ({isAdmin}) => {
   const maxDays = 30; 
   const totalWeeks = Math.ceil(maxDays / 5);
   const [chartIndex, setChartIndex] = useState(0);
@@ -75,31 +76,15 @@ const TermDepositDetails = () => {
 
   return (
     <Container className="mt-4">
-      {/* Header */}
-      <Row className="mb-4 text-center">
-        <Col>
-          <h2>Term Deposit Account</h2>
-        </Col>
-      </Row>
+    
+          <h4 className='text-center'>Term Deposit Account</h4>
+        {isAdmin &&  <div className="d-flex justify-content-center mb-4">
+        <button>Edit Term Deposit Account</button>
+      </div>
+}
 
       {/* Account Overview and Details */}
-      <Row className="mb-4">
-        <Col xs={12} md={4} className="mb-3 mb-md-0">
-          <Card>
-            <Card.Body>
-              <Card.Title>Account Overview</Card.Title>
-              <Card.Text>
-                <strong>Account Holder:</strong> John Doe
-                <br />
-                <strong>Account Number:</strong> 1234567890
-                <br />
-                <strong>Total Balance:</strong> $10,000
-                <br />
-                <strong>Next Maturity Date:</strong> 2024-12-01
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
+      <Row className="d-flex justify-content-center">
 
         <Col xs={12} md={8}>
           <Card>

@@ -17,11 +17,11 @@ interface CreditDebitModalProps {
   onHide: () => void;
   type: "credit" | "debit" | null;
   isTransferVisible: boolean;
-  adminId:number;
+  checkingAccountId:number;
 
 }
 
-const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type, isTransferVisible,adminId }) => {
+const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type, isTransferVisible,checkingAccountId }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [transferDetails, setTransferDetails] = useState<CreateTransaction>({
     amount: 0,
@@ -39,7 +39,7 @@ const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type,
     },
   });
 
-  const {secondParties,secondPartyLoading,secondPartyError} =  useSecondParty(adminId)
+  const {secondParties,secondPartyLoading,secondPartyError} =  useSecondParty(checkingAccountId)
 
 
 

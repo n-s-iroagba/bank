@@ -5,7 +5,7 @@ import useSecondParty from "../../hooks/useSecondParty";
 import useBanks from "../../hooks/useBanks";
 import { SecondParty } from "../../types/SecondParty";
 
-const SecondPartySection: React.FC<{
+const SecondPartyList: React.FC<{
   isAdmin: boolean;
   adminId:number
 }> = ({ adminId, isAdmin }) => {
@@ -91,4 +91,4 @@ const SecondPartySection: React.FC<{
   );
 };
 
-export default SecondPartySection;
+export default SecondPartyList;
