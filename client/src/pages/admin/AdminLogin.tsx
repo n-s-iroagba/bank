@@ -1,37 +1,39 @@
 
-import React, { useContext, useState } from 'react';
-import { Form, Button, Alert, Modal, Spinner } from 'react-bootstrap';
+import React, { useContext, } from 'react';
+import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../context/AuthContext';
-import Logo from '../../components/Logo';
+import image from '../../assets/images/greater-texas-cu-icon.svg'
+import { AuthOption } from '../../components/AuthOption';
+import '../../styles/AuthForm.css'
 
 
 
 
 
-const AdminLogin: React.FC = () => {
+const AdminLogin: React.FC<{isSuperAdmin?:boolean}> = ({isSuperAdmin}) => {
 
   const {setLoginData,handleChange,handleLoginAdmin,showPassword,passwordType,submitting,errorMessage} = useContext(AuthContext)
 
-  const [showModal, setShowModal] = useState(false);
+
 
   const navigate = useNavigate();
 
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  
 
 
   return (
     <>
-      <div className="py-3 px-3">
-        <Logo/>
+    
+      <div className="form-wrapper d-flex flex-column align-items-center">
+      <img style={{height:'2cm'}} src={image} alt='icon'/>
         <h5>Admin Login</h5>
-      </div>
-      <Form className="bg-light form py-3" onSubmit={(e)=>handleLoginAdmin(e,navigate)}>
+    
+      <Form className=" " onSubmit={(e)=>handleLoginAdmin(e,navigate)}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -91,28 +93,16 @@ const AdminLogin: React.FC = () => {
         </div>
 
         <div className="link-container">
-        <a href="#!" onClick={handleShowModal}>Forgot User Name</a>
-        <a href="#!" onClick={handleShowModal}>Forgot Password</a>
+     
+        <a href="/forgot-password" >Forgot Password</a>
       </div>
       {errorMessage&& <Alert className="w-100" variant="danger">
         {errorMessage}</Alert>}
       </Form>
+      <AuthOption dontShowLogo route={'/super-admin/signup'} title={'Do have a super admin account'} buttonText={'Signup'}/>
+      </div>
     
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Assistance Required</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Alert variant="danger">
-            Kindly contact the Texas Credit Union for assistance.
-          </Alert>
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleCloseModal} className="btn btn-secondary">
-            Close
-          </button>
-        </Modal.Footer>
-      </Modal>
+   
     </>
   )
 };

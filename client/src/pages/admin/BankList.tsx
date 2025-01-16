@@ -1,82 +1,89 @@
-import React, { useState } from 'react';
-import { Accordion, Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; 
-import { CreateBankModal, UpdateBankModal } from '../../components/BankModals';
-import useBanks from '../../hooks/useBanks';
-import { Bank, CreateBank } from '../../types/Bank';
+import React, { useState } from "react";
+import { Accordion, Button, Image } from "react-bootstrap";
+import useBanks from "../../hooks/useBanks";
+import AdminDashboardLayout from "../../components/AdminDashboardLayout";
+import BankModal from "../../components/BankModal";
+import { Bank } from "../../types/Bank";
 
-
-
-const BankDashboard: React.FC = () => {
-  const [showUpdateBankModal, setShowUpdateBankModal] = useState<boolean>(false);
+const BankList = () => {
+  const [showModal, setShowModal] = useState(false);
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
-  const [showCreateBankModal, setShowCreateBankModal] = useState<boolean>(false);
- const {banks} = useBanks()
-  const handleShowUpdateBank = (bank: Bank) => {
+  const adminId = 1;
+  const { banks } = useBanks();
+
+  const handleEditClick = (bank: Bank) => {
     setSelectedBank(bank);
-    setShowUpdateBankModal(true);
+    setShowModal(true);
   };
 
-  const handleShowCreateBank = () => {
-    setShowCreateBankModal(true);
-  };
-
-  const handleShowDeleteBank = (bankId: number) => {
-    // Handle delete logic here
-    console.log(`Deleting bank with id: ${bankId}`);
+  const handleDeleteClick = (bankId: number) => {
+    if (window.confirm("Are you sure you want to delete this bank?")) {
+      // Implement delete logic here
+    }
   };
 
   return (
-    <Container>
-      <Button className="mb-3" onClick={handleShowCreateBank}>
-        Create Bank
-      </Button>
-      <div className="container mt-4">
-        <Accordion defaultActiveKey="0">
-          {banks.map((bank, bankIndex) => (
-            <Accordion.Item eventKey={`bank-${bankIndex}`} key={bank.id}>
-              <Accordion.Header>{bank.name}</Accordion.Header>
+    <>
+      <AdminDashboardLayout adminId={adminId}>
+        <div>
+          <Button variant="primary" onClick={() => setShowModal(true)}>
+            Add Bank
+          </Button>
+        </div>
+
+        <Accordion>
+          {banks.map((bank: Bank, index: number) => (
+            <Accordion.Item eventKey={index.toString()} key={bank.id}>
+              <Accordion.Header>
+                <Image
+                  src={bank.logo}
+                  alt={`${bank.name} logo`}
+                  rounded
+                  style={{ width: "30px", height: "30px", marginRight: "10px" }}
+                />
+                {bank.name}
+              </Accordion.Header>
               <Accordion.Body>
-                <Link to={`/bank-dashboard/${bank.id}`}>
-                  <Button variant="link" className="ms-3">See More</Button>
-                </Link>
-                <Button variant="link" className="ms-3" onClick={() => handleShowUpdateBank(bank)}>Update Bank</Button>
-                <Button variant="link" className="ms-3" onClick={() => handleShowDeleteBank(bank.id)}>Delete Bank</Button>
+                <div className="d-flex justify-content-between align-items-center">
+                 
+                  <div>
+                    <Button
+                      variant="primary"
+                      className="me-2"
+                      onClick={() => handleEditClick(bank)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="danger"
+                      className="me-2"
+                      onClick={() => handleDeleteClick(bank.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
               </Accordion.Body>
             </Accordion.Item>
           ))}
         </Accordion>
-      </div>
 
-      {/* Modals */}
-      {selectedBank && (
-        <UpdateBankModal
-                  show={showUpdateBankModal}
-                  onClose={() => setShowUpdateBankModal(false)}
-                  bankToUpdate={selectedBank}
-                  onSubmit={(bankData: Bank) => {
-                      console.log('Updating bank data:', bankData);
-                      setShowUpdateBankModal(false);
-                  } } bank={{
-                      id: 0,
-                      name: '',
-                      logo: ''
-                  }} onUpdate={function (updatedBank: Bank): void {
-                      throw new Error('Function not implemented.');
-                  } }        />
-      )}
-
-      <CreateBankModal
-              show={showCreateBankModal}
-              onClose={() => setShowCreateBankModal(false)}
-              onSubmit={(bankData: CreateBank) => {
-                  console.log('Creating new bank:', bankData);
-                  setShowCreateBankModal(false);
-              } } onCreate={function (bank: CreateBank): void {
-                  throw new Error('Function not implemented.');
-              } }      />
-    </Container>
+        {showModal && selectedBank && (
+          <BankModal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            bankToBeUpdated={selectedBank}
+          />
+        )}
+        {showModal && !selectedBank && (
+          <BankModal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+          />
+        )}
+      </AdminDashboardLayout>
+    </>
   );
 };
 
-export default BankDashboard;
+export default BankList;

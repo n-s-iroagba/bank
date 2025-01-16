@@ -14,6 +14,9 @@ import AccountHolderDetails from './pages/admin/AccountHolderDetails';
 import AdminCheckingAccountDetails from './pages/admin/AdminCheckingAccountDetails';
 import AdminTermDepositDetails from './pages/admin/AdminTermDepositDetails';
 import AdminTransactionList from './pages/admin/AdminTransactionList';
+import AdminList from './pages/admin/AdminList';
+import ForgotPassword from './pages/admin/ForgotPassword';
+import NewPassword from './pages/admin/NewPassword';
 
 
 
@@ -30,18 +33,21 @@ const AppRoutes: React.FC = () => {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path='/admin/account-holders/:id' element={<AccountHolderList/>}/>
-        <Route path='/admin/second-parties/:id' element={<SecondPartyList isAdmin={false} adminId={0}/>}/>
-        <Route path='/admin/banks' element={<BankList/>}/>
+        <Route path='/admin/second-parties/:id' element={<SecondPartyList />}/>
+        <Route path='/super-admin/banks' element={<BankList/>}/>
+        <Route path='/super-admin/admins/:id' element={<AdminList/>}/>
 
         <Route path='/admin/account-holder-details/:id' element={<AccountHolderDetails/>}/>
         <Route path='/admin/checking-account/:id' element={<AdminCheckingAccountDetails/>}/>
         <Route path='/admin/term-deposit-account/:id' element={<AdminTermDepositDetails/>}/>
         <Route path='/admin/transactions/:id' element={<AdminTransactionList/>}/>
     
-       
         <Route path="/super-admin/signup" element={<SignUp/>} />
+        <Route path="/super-admin/login" element={<AdminLogin isSuperAdmin = {true} />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/verify-email" element={<EmailVerification />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/new-password" element={<NewPassword />} />
       </Routes>
     </Router>
   );

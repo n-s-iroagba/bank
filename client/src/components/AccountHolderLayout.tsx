@@ -1,6 +1,6 @@
 import React from "react";
 import { faUser, faBank, faMoneyBillTransfer } from "@fortawesome/free-solid-svg-icons";
-import AdminDashboardLayout from "./AdminDashboardLayout";
+import SideBarLayout from "./SideBarLayout";
 
 interface AccountHolderLayoutProps {
   children: React.ReactNode;
@@ -16,9 +16,9 @@ const AccountHolderLayout: React.FC<AccountHolderLayoutProps> = ({ children, id 
   ];
 
   return (
-    <AdminDashboardLayout navItems={accountHolderNavItems}>
+    <SideBarLayout navItems={accountHolderNavItems}>
       {children}
-    </AdminDashboardLayout>
+    </SideBarLayout>
   );
 };
 

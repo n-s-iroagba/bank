@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/AuthForm.css";
 import { AuthContext } from "../../context/AuthContext";
 import PasswordStrengthMeter from "../../components/PasswordStrengthMeter";
+import { AuthOption } from "../../components/AuthOption";
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="form-wrapper" data-testid="sign-up-form">
+      <AuthOption  route={"/super-admin/login"} title={"Already have a super admin account?"} buttonText={"Login"}/>
       <h1 className="text-center fs-5 my-3">Bank Site Owner Registration</h1>
 
       <Form

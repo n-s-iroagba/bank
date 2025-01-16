@@ -26,7 +26,7 @@ export const registerSuperAdmin = async (req: Request, res: Response) => {
     await sendVerificationEmail(superAdmin)
     res
       .status(201)
-      .json({message:'Super Admin created succesfully', token:token, superAdmin:superAdmin});
+      .json(token);
   } catch (error: any) {
       console.error(error)
   

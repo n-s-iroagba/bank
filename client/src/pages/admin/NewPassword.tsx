@@ -1,48 +1,39 @@
-// /components/PasswordReset.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import image from '../../assets/images/greater-texas-cu-icon.svg'
 
-const PasswordResetForm: React.FC = () => {
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
-    // Send request to update password (skip for now)
-    // On success:
-    alert('Password reset successful');
-    navigate('/login');
-  };
+const NewPassword: React.FC = () => {
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="newPassword">
-        <Form.Label>New Password</Form.Label>
-        <Form.Control
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
-      <Form.Group controlId="confirmPassword">
-        <Form.Label>Confirm New Password</Form.Label>
-        <Form.Control
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
+    <div className="form-wrapper d-flex flex-column align-items-center">
+  
+    <img style={{height:'2cm'}} src={image} alt='icon'/>
+    <h3 className='text-center'>Enter Your New Password</h3>
+  <Form>
+    <Form.Group controlId="email">
+      <Form.Label>New  password</Form.Label>
+      <Form.Control
+        type="email"
+       
+        className='form-input'
    
-      <Button type="submit">Reset Password</Button>
-    </Form>
+        required
+      />
+      <br/>
+    </Form.Group>
+    <Form.Group controlId="email">
+      <Form.Label>Confirm  password</Form.Label>
+      <Form.Control
+        type="email"
+     
+        className='form-input'
+        required
+      />
+    </Form.Group>
+    <br />
+    <Button   className="button-radius bg-red w-100" type="submit">Submit</Button>
+  </Form>
+  </div>
   )
 }
-export default PasswordResetForm
+export default NewPassword

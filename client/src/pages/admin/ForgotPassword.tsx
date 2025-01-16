@@ -1,33 +1,31 @@
-// /components/PasswordResetRequest.tsx
+
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import image from '../../assets/images/greater-texas-cu-icon.svg'
+import '../../styles/AuthForm.css'
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
-  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Send request to reset password (skip for now)
-    // On success:
-    alert('Password reset email sent');
-
-  };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <div className="form-wrapper d-flex flex-column align-items-center">
+      <img style={{height:'2cm'}} src={image} alt='icon'/>
+    <Form>
       <Form.Group controlId="email">
         <Form.Label>Enter your email to reset your password</Form.Label>
         <Form.Control
           type="email"
           value={email}
+          className='form-input'
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </Form.Group>
-      <Button type="submit">Request Password Reset</Button>
+      <br />
+      <Button   className="button-radius bg-red w-100" type="submit">Submit</Button>
     </Form>
+    </div>
   );
 };
 
