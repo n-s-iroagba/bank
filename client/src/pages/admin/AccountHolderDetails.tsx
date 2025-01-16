@@ -5,7 +5,7 @@ import AccountHolderModal from "../../components/AccountHolderModal";
 import AccountHolderLayout from "../../components/AccountHolderLayout";
 
 
-const AccountHolderDetails: React.FC = () => {
+const AccountHolderDetails: React.FC<{}> = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -32,7 +32,7 @@ let accountHolder ={
  
 
   return (
-    <AccountHolderLayout id={0}>
+    <AccountHolderLayout  id={0}>
     <div>
       <h5>Account Holder Details</h5>
       <div>

@@ -3,6 +3,7 @@ import { Spinner, Alert, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { requestNewVerificationCode, verifySuperAdminEmail } from '../../services/authService';
 import { JWTService } from '../../services/JWTService';
+import '../../styles/EmailVerification.css'
 
 
 const EmailVerification = () => {
@@ -36,7 +37,7 @@ const EmailVerification = () => {
       JWTService.saveLoginToken(loginToken);
       JWTService.removeEmailVerificationToken();
       alert('Verification successful');
-      navigate('/super-admin/dashboard');
+      navigate(`/admin/account-holders/${id}`);
     } catch (error) {
       console.error(error);
       setError('Sorry, an error occurred. Contact the developer.');

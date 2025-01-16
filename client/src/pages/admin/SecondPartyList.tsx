@@ -4,18 +4,16 @@ import SecondPartyModal from "../../components/SecondPartyModal";
 import useSecondParty from "../../hooks/useSecondParty";
 import useBanks from "../../hooks/useBanks";
 import { SecondParty } from "../../types/SecondParty";
+import AdminDashboardLayout from "../../components/AdminDashboardLayout";
 
-const SecondPartyList: React.FC<{
-  isAdmin: boolean;
-  adminId:number
-}> = ({ adminId, isAdmin }) => {
+const SecondPartyList: React.FC = () => {
   const [selectedSecondParty, setSelectedSecondParty] =
     useState<SecondParty | null>(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const { banks, bankLoading } = useBanks();
-
+  const adminId = 1
   const {secondParties} = useSecondParty(adminId);
 
   const handleUpdateSecondParty = (secondParty: SecondParty) => {
@@ -29,7 +27,7 @@ const SecondPartyList: React.FC<{
   };
 
   return (
-    <>
+    <AdminDashboardLayout adminId={adminId}>
       <Button
         variant="primary"
         onClick={() => setShowCreateModal(true)}
@@ -51,7 +49,6 @@ const SecondPartyList: React.FC<{
                 <strong>Account Number:</strong> {secondParty.accountNumber}
               </p>
 
-              {isAdmin && (
                 <>
                   <Button
                     variant="info"
@@ -67,7 +64,7 @@ const SecondPartyList: React.FC<{
                     Delete
                   </Button>
                 </>
-              )}
+         
             </Accordion.Body>
           </Accordion.Item>
         ))}
@@ -87,7 +84,7 @@ const SecondPartyList: React.FC<{
         ) : (
           <Alert variant="danger">Error Occurred</Alert>
         ))}
-    </>
+    </AdminDashboardLayout>
   );
 };
 

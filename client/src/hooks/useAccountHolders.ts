@@ -8,7 +8,7 @@ interface UseAccountHoldersResult {
   accountHoldersError: string | null;
   accountLoading: boolean;
 }
-
+ 
 const useAccountHolders = (adminId: number | null): UseAccountHoldersResult => {
   const [accountHolders, setAccountHolders] = useState<BaseAccountHolder[]>([
     { id: 1, firstName: 'Nnamdi', surname:'Iroagba', username: 'aaa', password: '', }

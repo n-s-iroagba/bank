@@ -1,32 +1,24 @@
 import { ListGroup, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import AdminDashboardLayout from "../../components/AdminDashboardLayout";
-import useAccountHolders from "../../hooks/UseAccountHolders";
+import useAccountHolders from "../../hooks/useAccountHolders";
 import AccountHolderModal from "../../components/AccountHolderModal";
 import { useState } from "react";
-import { faUsers, faUserAlt, faBank } from "@fortawesome/free-solid-svg-icons";
+
 
 
 const AccountHolderList: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
-  const id = 0
-
-  const {accountHolders} = useAccountHolders(id)
-
+  const adminId = 0
+  const {accountHolders} = useAccountHolders(adminId)
   const handleNavigateToDetail = (accountHolderId: number) => {
     navigate(`/admin/account-holder/${accountHolderId}`);
-
   };
 
-  const navItems = [
-    { icon: faUsers, label: "Account Holders", path:`/admin/account-holders/${id}`  },
-    { icon: faUserAlt, label: "Second Parties", path: `/admin/second-parties/${id}`  },
-    { icon: faBank, label: "Banks", path: "/admin/banks" },
-  
-  ];
+ 
   return (
-    <AdminDashboardLayout navItems={navItems} >
+    <AdminDashboardLayout  adminId={adminId} >
     <div>
       <div className="d-flex justify-content-center mb-2">
         <button onClick={()=>setShowModal(true)}>Add Account Holders</button>
@@ -51,7 +43,7 @@ const AccountHolderList: React.FC = () => {
         ))}
       </ListGroup>
     </div>
-    <AccountHolderModal show={showModal} onClose={()=>setShowModal(false) } adminId={id}/>
+    <AccountHolderModal show={showModal} onClose={()=>setShowModal(false) } adminId={adminId}/>
     </AdminDashboardLayout>
   );
 };
