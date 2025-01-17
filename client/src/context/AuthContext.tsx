@@ -233,11 +233,10 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     setSubmitting(true);
 
     try {
-      localStorage.setItem(
-        "bankChangePasswordToken",
+ 
         await forgotPassword(forgotPasswordInput)
-      );
-      navigate("/new-password");
+    
+      navigate("/email-sent");
     } catch (error: any) {
       setErrorMessage(
         "sorry you request cannot be completed, contact your developer"
@@ -298,6 +297,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     passwordType,
     passwordValidityMessage,
     newPasswordInput,
+    forgotPasswordInput,
     handleChangeForConfirmPassword,
     handleSubmit,
     handleChange,

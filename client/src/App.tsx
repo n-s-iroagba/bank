@@ -17,6 +17,7 @@ import AdminTransactionList from './pages/admin/AdminTransactionList';
 import AdminList from './pages/admin/AdminList';
 import ForgotPassword from './pages/admin/ForgotPassword';
 import NewPassword from './pages/admin/NewPassword';
+import EmailSent from './pages/admin/EmailSent';
 
 
 
@@ -47,7 +48,8 @@ const AppRoutes: React.FC = () => {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/verify-email" element={<EmailVerification />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/new-password" element={<NewPassword />} />
+        <Route path="/new-password/:token" element={<NewPassword />} />
+        <Route path="/email-sent" element={<EmailSent />} />
       </Routes>
     </Router>
   );

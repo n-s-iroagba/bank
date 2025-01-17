@@ -8,7 +8,7 @@ import { AnySoaRecord } from 'dns';
 import { Role } from '../types/Role';
 import { BaseAdmin } from '../types/AdminTypes';
 import { CreateSuperAdmin } from '../types/SuperAdminTypes';
-import { sendVerificationEmail } from './mailService';
+import { sendPasswordResetEmail, sendVerificationEmail } from './mailService';
 
 
 
@@ -116,5 +116,5 @@ export const requestSuperAdminPasswordReset = async (email: string) => {
   }
    const resetToken =  JWTService.generateToken({firstName:superAdmin.firstName})
    superAdmin.resetCode = resetToken;
-  // For example, sendResetEmail(superAdmin.email, resetToken);
+  sendPasswordResetEmail(superAdmin);
 };
