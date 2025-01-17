@@ -16,7 +16,7 @@ superAdminRoutes.post('/super-admin/register', registerSuperAdmin);
 superAdminRoutes.patch('/verify-email/:id', verifyEmail);
 superAdminRoutes.get('/new-verification-code/:id',requestNewCode)
 superAdminRoutes.post('/login', loginSuperAdminController);
-superAdminRoutes.post('/request-change-password',requestSuperAdminPasswordResetController)
+superAdminRoutes.post('/forgot-password',requestSuperAdminPasswordResetController)
 superAdminRoutes.post('/new-password/:id', changeSuperAdminPasswordController);
 
 

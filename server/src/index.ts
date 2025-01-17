@@ -33,7 +33,7 @@ app.use('/second-party', secondPartyRoutes)
 
 
 sequelize.sync({
-  force:true
+  // force:true
 }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

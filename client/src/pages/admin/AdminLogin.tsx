@@ -56,7 +56,7 @@ const AdminLogin: React.FC<{isSuperAdmin?:boolean}> = ({isSuperAdmin}) => {
             onChange={(e)=>handleChange(e,setLoginData)}
             className="form-input"
             name="password"
-            type="password"
+            type={passwordType}
             placeholder="Password"
           />
            <div className="d-flex justify-content-center">

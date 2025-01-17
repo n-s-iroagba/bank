@@ -54,9 +54,10 @@ export type AuthContextType ={
     isMatchingPassword:boolean
     loginData:LoginData
     validated: boolean;
+    forgotPasswordInput : ForgotPassword
    
 
-    handleForgotPassword:(event: React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
+    handleForgotPassword:(event: React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void;
     showPassword:()=>void;
     setNewPasswordInput: React.Dispatch<React.SetStateAction<NewPasswordInput>>;
     setForgotPasswordInput: React.Dispatch<React.SetStateAction<ForgotPassword>>

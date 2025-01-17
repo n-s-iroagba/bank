@@ -68,7 +68,7 @@ export const loginAdmin = async (data:LoginData) => {
       
       
       export const forgotPassword = async (data:ForgotPassword) => {
-           const url = `${API_ENDPOINTS.superAdmin.resetPassword}`
+           const url = API_ENDPOINTS.superAdmin.forgotPassword
         try {
           const response = await apiPost<string,ForgotPassword>(url, data );
           return response.data;

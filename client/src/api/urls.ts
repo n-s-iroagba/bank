@@ -1,3 +1,4 @@
+
 import axiosClient from "./axiosClient";
 
 const BASE_URL = axiosClient.defaults.baseURL
@@ -9,7 +10,7 @@ export const API_ENDPOINTS = {
         requestNewCode: `${BASE_URL}/super-admin/new-verification-code`,
         verifyEmail: `${BASE_URL}/super-admin/verify-email`,
         login: `${BASE_URL}/super-admin/login`,
-        requestPasswordChange: `${BASE_URL}/super-admin/request-password-change`,
+        forgotPassword: `${BASE_URL}/super-admin/forgot-password`,
     },
     admin: {
         login: `${BASE_URL}/admin/login`,

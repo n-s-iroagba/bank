@@ -1,10 +1,13 @@
 import nodemailer from 'nodemailer';
 import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import { SuperAdmin } from '../models/SuperAdmin';
 
-import { COMPANY_NAME, COMPANY_VERIFICATION_EMAIL } from '../data/emailData';
 import { getVerificationEmailContent } from '../helpers/getVerificationEmailContent';
+import { COMPANY_NAME, COMPANY_VERIFICATION_EMAIL } from '../data/emailData';
+import { getNewPasswordEmailContent } from '../helpers/getNewPasswordEmailContent';
 
 
 const transporter = nodemailer.createTransport({
@@ -43,6 +46,44 @@ export const sendVerificationEmail = async (user: SuperAdmin) => {
     console.error('Error sending verification email:', error);
   }
 };
+
+
+
+
+const { VERIFY_PASSWORD_RESET_TOKEN_URL_DEV, VERIFY_PASSWORD_RESET_TOKEN_URL_PROD, NODE_ENV,  TOKEN_EXPIRATION_TIME,  } = process.env;
+
+  // Determine the base URL based on the environment
+  const baseUrl = NODE_ENV === 'production' 
+    ? VERIFY_PASSWORD_RESET_TOKEN_URL_PROD 
+    : VERIFY_PASSWORD_RESET_TOKEN_URL_DEV
+
+export const sendPasswordResetEmail = async (user: SuperAdmin) => {
+  const passwordResetToken = user.passwordResetToken;
+;
+
+  // Construct the verification URL
+  const verificationUrl = `${baseUrl}/${passwordResetToken}`;
+
+  const emailHtmlContent = getNewPasswordEmailContent(verificationUrl, TOKEN_EXPIRATION_TIME||'', COMPANY_NAME);
+  try {
+    const emailBody = { html: emailHtmlContent };
+    await transporter.sendMail({
+      from: COMPANY_VERIFICATION_EMAIL,
+      to: user.email,
+      subject: `Change your ${COMPANY_NAME} account password`,
+      attachments: [{
+        filename: 'logo.png',
+        path: logoPath,
+        cid: 'unique@logo', // same CID as in the HTML img src
+      }],
+      ...emailBody,
+    });
+  } catch (error: any) {
+    console.error('Error sending password reset email:', error.message);
+  }
+};
+
+
 
 // export const sendCustomMail = async (user:Investor, emailContent:{body:string,subject:string})=>{
 //   const content = getCustomEmailContent(user,emailContent);
@@ -85,27 +126,7 @@ export const sendVerificationEmail = async (user: SuperAdmin) => {
 //   }
 // };
 
-// export const sendPasswordResetEmail = async (user:Investor|Admin) => {
-//   const verificationToken = user.changePasswordToken;
-//   const verificationUrl = `${VERIFY_PASSWORD_RESET_TOKEN_URL}/${verificationToken}`;
-//   const emailHtmlContent = getNewPasswordEmailContent(verificationUrl, TOKEN_EXPIRATION_TIME, COMPANY_NAME);
-//   try {
-//     const emailBody = { html: emailHtmlContent };
-//     await transporter.sendMail({
-//       from: COMPANY_VERIFICATION_EMAIL,
-//       to: user.email,
-//       subject: `Change your ${COMPANY_NAME} account password`,
-//       attachments: [{
-//         filename: 'blacklogo.png',
-//         path: logoPath,
-//         cid: 'unique@logo' // same CID as in the HTML img src
-//       }],
-//       ...emailBody,
-//     });
-//   } catch (error:any) {
-//     console.error('Error sending password reset email:', error.message);
-//   }
-// };
+
 
 
 // export const sendPasswordChangedEmail = async (investor: Investor, investment: Investment) => {

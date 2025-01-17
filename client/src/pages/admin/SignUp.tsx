@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
   } = useContext(AuthContext);
 
   return (
-    <div className="form-wrapper" data-testid="sign-up-form">
+    <div className="form-wrapper d-flex flex-column align-items-center" data-testid="sign-up-form">
       <AuthOption  route={"/super-admin/login"} title={"Already have a super admin account?"} buttonText={"Login"}/>
       <h1 className="text-center fs-5 my-3">Bank Site Owner Registration</h1>
 

@@ -12,6 +12,7 @@ type TSuperAdmin = {
    resetCode?: string;
    adminIdentification:number
    verificationCode: number|null ;
+   passwordResetToken: string|null
 }
 type CreationTSuperAdmin = Omit<TSuperAdmin,'id'|'adminIdentification'|'isVerified'>
 export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
@@ -24,6 +25,8 @@ export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
   public password!: string;
   public isVerified!: boolean;
   public resetCode?: string;
+  public passwordResetToken: string|null = null
+
   public adminIdentification?:number
   public verificationCode!: number|null ;
   public admins!: Admin[];  
@@ -70,10 +73,14 @@ SuperAdmin.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    username:  {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    passwordResetToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   },
   {
     sequelize,

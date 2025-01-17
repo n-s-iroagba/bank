@@ -28,7 +28,9 @@ export const mockAuthContext: AuthContextType = {
     password: 'password123'
   },
   validated: true,
-
+  forgotPasswordInput:{
+    email:''
+  },
 
   handleForgotPassword: () => { },
   showPassword: () => { },
