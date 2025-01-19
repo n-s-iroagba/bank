@@ -91,11 +91,12 @@ export const changeSuperAdminPasswordController = async (
   req: Request,
   res: Response
 ) => {
-  const { superAdminId } = req.params;
-  const {  newPassword } = req.body;
+  const superAdminId  = req.params.id;
+  console.log(req.body)
+  const  newPassword  = req.body.password;
   try {
     await changeSuperAdminPassword(
-      Number(superAdminId),
+      superAdminId,
       newPassword
     );
     res.status(200).json({ message: "Password updated successfully" });

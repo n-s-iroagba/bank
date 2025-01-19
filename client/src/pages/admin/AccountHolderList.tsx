@@ -4,24 +4,34 @@ import AdminDashboardLayout from "../../components/AdminDashboardLayout";
 import useAccountHolders from "../../hooks/useAccountHolders";
 import AccountHolderModal from "../../components/AccountHolderModal";
 import { useState } from "react";
+import useBanks from "../../hooks/useBanks";
 
 
 
 const AccountHolderList: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
-  const adminId = 0
+  const adminId = 1
   const {accountHolders} = useAccountHolders(adminId)
-  const handleNavigateToDetail = (accountHolderId: number) => {
-    navigate(`/admin/account-holder/${accountHolderId}`);
-  };
+  const {banks} = useBanks()
 
- 
+  const handleNavigateToDetail = (accountHolderId: number) => {
+    navigate(`/admin/account-holder-details/${accountHolderId}`);
+  };
+  const handleShowCreateModal = () =>{
+    if (banks.length){
+    setShowModal(true)
+    }else{
+      alert("Please ask site owner to add banks first bank first")
+   
+    }
+  }
+
   return (
     <AdminDashboardLayout  adminId={adminId} >
     <div>
       <div className="d-flex justify-content-center mb-2">
-        <button onClick={()=>setShowModal(true)}>Add Account Holders</button>
+        <button onClick={handleShowCreateModal}>Add Account Holders</button>
       </div>
       <h6>My Account Holders</h6>
       <ListGroup>

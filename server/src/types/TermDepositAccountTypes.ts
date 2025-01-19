@@ -3,8 +3,8 @@
 export type CreateTermDepositAccount = {
   
         amountDeposited: number;
-        startDate: Date;
-        durationInDays: number;
+        depositDate: Date;
+        payoutDate: Date;
         interestRate: number;
 
    

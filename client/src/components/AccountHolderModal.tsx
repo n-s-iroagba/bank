@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import { BaseAccountHolder, CreateAccountHolder } from '../types/AccountHolder';
-import { createAccountHolder } from '../services/accountHolderService';
-
-
+import React, { useState } from "react";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { BaseAccountHolder, CreateAccountHolder } from "../types/AccountHolder";
+import { createAccountHolder } from "../services/accountHolderService";
+import '../styles/Modal.css'
 
 interface AccountHolderModalProps {
   show: boolean;
   onClose: () => void;
-  adminId:number,
-  accountHolderToBeUpdated?:BaseAccountHolder
-
+  adminId: number;
+  accountHolderToBeUpdated?: BaseAccountHolder;
 }
 
-const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, onClose}) => {
+const AccountHolderModal: React.FC<AccountHolderModalProps> = ({
+  adminId,
+  show,
+  onClose,
+}) => {
   const [accountHolder, setAccountHolder] = useState<CreateAccountHolder>({
-    firstName: '',
-    surname: '',
-    username: '',
-    password: '',
+    firstName: "",
+    surname: "",
+    username: "",
+    password: "",
     checkingAccount: {
       balance: 0,
     },
@@ -27,7 +29,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
       depositDate: new Date(),
       payoutDate: new Date(),
       interestRate: 0,
-      accountHolderIds: []
+      accountHolderIds: [],
     },
     transaction: {
       numberOfTransfers: 0,
@@ -37,7 +39,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
       lowestTransfer: 0,
     },
   });
-  const [errorMessage,setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -64,7 +66,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
       ...prevState,
       termDepositAccount: {
         ...prevState.termDepositAccount,
-        [name]: Number(value),
+        [name]: name.includes("Date") ? new Date(value) : Number(value),
       },
     }));
   };
@@ -81,25 +83,40 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
   };
 
   const handleSubmit = async () => {
+    const currentDate = new Date();
 
-  try{
-    await createAccountHolder(adminId,accountHolder)
-  
-    alert('Account Holder Created Successfully')
+    // Validation logic
+    if (accountHolder.termDepositAccount.depositDate >= currentDate) {
+      setErrorMessage("Term Deposit Start Date must be earlier than today.");
+      return;
+    }
+    if (accountHolder.termDepositAccount.payoutDate <= currentDate) {
+      setErrorMessage("Term Deposit End Date must be later than today.");
+      return;
+    }
+    if (accountHolder.transaction.transferStartDate >= currentDate) {
+      setErrorMessage("Transfer Start Date must be earlier than today.");
+      return;
+    }
 
-  }catch(error:any){
-    console.error(error)
-    setErrorMessage('Error creating account holders contact owner or developer.')
-  }
+    try {
+      await createAccountHolder(adminId, accountHolder);
+      alert("Account Holder Created Successfully");
+      onClose(); // Close the modal after successful creation
+    } catch (error: any) {
+      console.error(error);
+      setErrorMessage("Error creating account holder. Contact the owner or developer.");
+    }
   };
 
   return (
-    <Modal show={show} onHide={onClose}>
+    <Modal style={{zIndex:'1000'}} show={show} onHide={onClose}>
       <Modal.Header closeButton>
         <Modal.Title>Create Account Holder</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
+          {/* Input fields for accountHolder details */}
           <Form.Group className="mb-3" controlId="formFirstname">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -109,7 +126,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleInputChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}
+
           <Form.Group className="mb-3" controlId="formSurname">
             <Form.Label>Surname</Form.Label>
             <Form.Control
@@ -119,7 +136,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleInputChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}
+
           <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -129,7 +146,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleInputChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}
+
           <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -139,10 +156,10 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleInputChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}
-          <h5>Checking Account</h5>
-          <Form.Group className="mb-3" controlId="formBalance">
-            <Form.Label>Balance</Form.Label>
+
+          <h3> Checking Account Details</h3>
+          <Form.Group className="mb-3" controlId="formCheckingBalance">
+            <Form.Label>Checking Account Balance</Form.Label>
             <Form.Control
               type="number"
               name="balance"
@@ -150,9 +167,8 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleCheckingAccountChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}
-          <h5>Transfers</h5>
-          <Form.Group controlId="numberOfTransfers">
+
+          <Form.Group className="mb-3" controlId="formCheckingBalance">
             <Form.Label>Number of Transfers</Form.Label>
             <Form.Control
               type="number"
@@ -161,16 +177,18 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleTransactionChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}          <Form.Group controlId="transferStartDate">
+
+          <Form.Group className="mb-3" controlId="formTransferStartDate">
             <Form.Label>Transfer Start Date</Form.Label>
             <Form.Control
               type="date"
               name="transferStartDate"
-              value={accountHolder.termDepositAccount.depositDate.toISOString().split("T")[0]}
+              value={accountHolder.transaction.transferStartDate.toISOString().split("T")[0]}
               onChange={handleTransactionChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}          <Form.Group controlId="transferEndDate">
+
+          <Form.Group className="mb-3" controlId="formTransferEndDate">
             <Form.Label>Transfer End Date</Form.Label>
             <Form.Control
               type="date"
@@ -179,8 +197,9 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleTransactionChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}          <Form.Group controlId="highestTransfer">
-            <Form.Label>Highest Transfer</Form.Label>
+
+          <Form.Group className="mb-3" controlId="formHighestTransfer">
+            <Form.Label>Highest Transfer Amount</Form.Label>
             <Form.Control
               type="number"
               name="highestTransfer"
@@ -188,8 +207,9 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleTransactionChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}          <Form.Group controlId="lowestTransfer">
-            <Form.Label>Lowest Transfer</Form.Label>
+
+          <Form.Group className="mb-3" controlId="formLowestTransfer">
+            <Form.Label>Lowest Transfer Amount</Form.Label>
             <Form.Control
               type="number"
               name="lowestTransfer"
@@ -197,10 +217,10 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleTransactionChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}
-          <h5>Term Deposit Account</h5>
-          <Form.Group className="mb-3" controlId="formAmountDeposited">
-            <Form.Label>Amount Deposited</Form.Label>
+
+         <h3>Term Deposit Account Details</h3>
+         <Form.Group className="mb-3" controlId="formDepositDate">
+            <Form.Label>Amount Deposited </Form.Label>
             <Form.Control
               type="number"
               name="amountDeposited"
@@ -208,7 +228,7 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleTermDepositAccountChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}          <Form.Group className="mb-3" controlId="formInterestRate">
+          <Form.Group className="mb-3" controlId="formDepositDate">
             <Form.Label>Interest Rate</Form.Label>
             <Form.Control
               type="number"
@@ -217,29 +237,28 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
               onChange={handleTermDepositAccountChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}     
-    <Form.Group className="mb-3" >
-    <Form.Label>Deposit Date</Form.Label>
+          <Form.Group className="mb-3" controlId="formDepositDate">
+            <Form.Label>Deposit Date</Form.Label>
             <Form.Control
               type="date"
               name="depositDate"
               value={accountHolder.termDepositAccount.depositDate.toISOString().split("T")[0]}
-              onChange={handleTransactionChange}
+              onChange={handleTermDepositAccountChange}
             />
           </Form.Group>
-    {'LEAVE AS IS NOTE'}          <Form.Group >
+
+          <Form.Group className="mb-3" controlId="formPayoutDate">
             <Form.Label>Payout Date</Form.Label>
             <Form.Control
               type="date"
               name="payoutDate"
               value={accountHolder.termDepositAccount.payoutDate.toISOString().split("T")[0]}
-              onChange={handleTransactionChange}
+              onChange={handleTermDepositAccountChange}
             />
-          </Form.Group>    
-
-    {'LEAVE AS IS NOTE'}          {'LEAVE AS IS NOTE'}
+          </Form.Group>
         </Form>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
           Close
@@ -248,7 +267,8 @@ const AccountHolderModal: React.FC<AccountHolderModalProps> = ({ adminId,show, o
           Save Account Holder
         </Button>
       </Modal.Footer>
-      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
     </Modal>
   );
 };

@@ -33,6 +33,7 @@ export const API_ENDPOINTS = {
         delete: `${BASE_URL}/bank/delete`,
     },
     checkingAccount: {
+        get: `${BASE_URL}/checking-account/:id`,
         noTransaction: `${BASE_URL}/checking-account/no-transaction`,
         withTransaction: `${BASE_URL}/checking-account/with-transaction`,
         update: `${BASE_URL}/checking-account/update`,

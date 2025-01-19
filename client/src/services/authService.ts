@@ -58,6 +58,7 @@ export const loginAdmin = async (data:LoginData) => {
       
       export const resetPassword = async (id:number,data:NewPassword) => {
         const url = `${API_ENDPOINTS.superAdmin.resetPassword}/${id}`
+        alert (url)
         try {
           const response = await apiPatch<string,NewPassword>(url, data);
           return response.data;

@@ -98,8 +98,9 @@ export const loginSuperAdmin = async (email: string, password: string) => {
   return superAdmin;
 };
 
-export const changeSuperAdminPassword = async (superAdminId: number, newPassword: string) => {
-  const superAdmin = await SuperAdmin.findByPk(superAdminId);
+export const changeSuperAdminPassword = async (superAdminId: string, newPassword: string) => {
+  const superAdmin = await SuperAdmin.findByPk(superAdminId)
+  console.log(newPassword)
   if (!superAdmin) {
     throw new Error('SuperAdmin not found');
   }
@@ -114,7 +115,7 @@ export const requestSuperAdminPasswordReset = async (email: string) => {
   if (!superAdmin) {
     throw new Error('SuperAdmin not found');
   }
-   const resetToken =  JWTService.generateToken({firstName:superAdmin.firstName})
-   superAdmin.resetCode = resetToken;
+   const resetToken =  JWTService.generateToken({firstName:superAdmin.firstName,id:superAdmin.id,email:superAdmin.email})
+   superAdmin.passwordResetToken= resetToken;
   sendPasswordResetEmail(superAdmin);
 };

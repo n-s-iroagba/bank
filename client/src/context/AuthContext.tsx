@@ -247,7 +247,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
   const handleResetPassword = async (
     event: FormEvent<HTMLFormElement>,
-    navigate: (path: string) => void
+    navigate: (path: string) => void,
+    id:number
   ) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -259,17 +260,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       return;
     }
 
-    const token = localStorage.getItem("bankChangePasswordToken");
-    if (!token) {
-      setErrorMessage("You are not authorized to make this request");
-      return;
-    }
-    const id = JWTService.decodeToken<{ id: number }>(token).id;
-    if (!id) {
-      alert("not authorized");
 
-      return;
-    }
+
     setSubmitting(true);
     try {
       localStorage.setItem(

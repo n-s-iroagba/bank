@@ -16,12 +16,14 @@ export async function apiGet<T>(url: string, config?: AxiosRequestConfig): Promi
 
 // POST request
 export async function apiPost<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+
   const response = await axiosClient.post<T>(url, data, config);
   return { data: response.data, status: response.status };
 }
 
 // PATCH request
 export async function apiPatch<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  alert(data)
   const response = await axiosClient.patch<T>(url, data, config);
   return { data: response.data, status: response.status };
 }

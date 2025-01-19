@@ -6,43 +6,35 @@ import {
   ForeignKey,
 } from 'sequelize';
 import { sequelize } from '../config/dbConfig';
-import { AccountHolder } from './AccountHolder'; // Import AccountHolder model
 
-// Interface for the attributes of the Account
 interface AccountAttributes {
   id: number;
   amountDeposited: number;
-  startDate: Date;
-  durationInDays: number;
+  depositDate: Date;
+  payoutDate: Date;
   interestRate: number;
   accountHolderId: number; 
   accountNumber:string;
 }
 
-// Optional fields when creating a new Account instance
 interface AccountCreationAttributes extends Optional<AccountAttributes, 'id'> {}
 
-// The Account model itself
+
 export class TermDepositAccount
   extends Model<AccountAttributes, AccountCreationAttributes>
   implements AccountAttributes
 {
-  public startDate!: Date;
-  public durationInDays!: number;
+  public depositDate!: Date;
+  public payoutDate!: Date;
   public interestRate!: number;
   public id!: number;
   public accountNumber!:string;
   public amountDeposited!: number;
-  public accountHolderId!: number; // Foreign key to AccountHolder
-
-
-
-  // Timestamps
+  public accountHolderId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-// Initialize the TermDepositAccount model
 TermDepositAccount.init(
   {
     id: {
@@ -55,11 +47,11 @@ TermDepositAccount.init(
       allowNull: false,
       defaultValue: 0.0,
     },
-    durationInDays: {
-      type: DataTypes.INTEGER,
+    payoutDate: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
-    startDate: {
+    depositDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },

@@ -1,14 +1,15 @@
 import nodemailer from 'nodemailer';
 import path from 'path';
 import dotenv from 'dotenv';
-dotenv.config();
+
 
 import { SuperAdmin } from '../models/SuperAdmin';
 
 import { getVerificationEmailContent } from '../helpers/getVerificationEmailContent';
 import { COMPANY_NAME, COMPANY_VERIFICATION_EMAIL } from '../data/emailData';
 import { getNewPasswordEmailContent } from '../helpers/getNewPasswordEmailContent';
-
+const env = process.env.NODE_ENV || 'development';
+dotenv.config({ path: path.resolve(__dirname, `../.env.${env}`) });
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -50,19 +51,15 @@ export const sendVerificationEmail = async (user: SuperAdmin) => {
 
 
 
-const { VERIFY_PASSWORD_RESET_TOKEN_URL_DEV, VERIFY_PASSWORD_RESET_TOKEN_URL_PROD, NODE_ENV,  TOKEN_EXPIRATION_TIME,  } = process.env;
+const {  TOKEN_EXPIRATION_TIME, CLIENT_URL  } = process.env;
 
-  // Determine the base URL based on the environment
-  const baseUrl = NODE_ENV === 'production' 
-    ? VERIFY_PASSWORD_RESET_TOKEN_URL_PROD 
-    : VERIFY_PASSWORD_RESET_TOKEN_URL_DEV
 
 export const sendPasswordResetEmail = async (user: SuperAdmin) => {
   const passwordResetToken = user.passwordResetToken;
 ;
 
   // Construct the verification URL
-  const verificationUrl = `${baseUrl}/${passwordResetToken}`;
+  const verificationUrl = `${'http://localhost:3000'}/new-password/${passwordResetToken}`;
 
   const emailHtmlContent = getNewPasswordEmailContent(verificationUrl, TOKEN_EXPIRATION_TIME||'', COMPANY_NAME);
   try {
