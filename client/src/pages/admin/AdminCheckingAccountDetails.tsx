@@ -17,7 +17,7 @@ const AdminCheckingAccountDetails: React.FC =()  => {
   const navigate = useNavigate()
   const id = 0
 
-  const account = useCheckingAccount(id)
+  const {account} = useCheckingAccount(1)
 
   const handleUpdateCheckingAccount = () => {
     setShowUpdateCheckingAccountModal(true);
@@ -40,9 +40,9 @@ const AdminCheckingAccountDetails: React.FC =()  => {
     <>
     <AccountHolderLayout  id={0}>
    
-          <div>Checking Account ID: {account.id}</div>
+          <div>Checking Account ID: {account?.id}</div>
          
-            <p><strong>Balance:</strong> ${account.balance}</p>
+            <p><strong>Balance:</strong> ${account?.balance}</p>
             
               <div>
                 <Button variant="info" onClick={handleUpdateCheckingAccount}>Update</Button>
@@ -52,14 +52,14 @@ const AdminCheckingAccountDetails: React.FC =()  => {
                 <Button variant="info" onClick={() => openOperationModal("credit", false)}>Credit (no Transfer)</Button>
               </div>
       
-            <Button variant="link" onClick={() => navigate(`/admin/transactions/${account.id}`)}>View Transactions</Button>
+            <Button variant="link" onClick={() => navigate(`/admin/transactions/${account?.id}`)}>View Transactions</Button>
          
             </AccountHolderLayout>
 
       <UpdateCheckingAccountModal
         show={showUpdateCheckingAccountModal}
         onHide={() => setShowUpdateCheckingAccountModal(false)}
-        editId={account.id}
+        editId={account?.id||0}
         onSave={handleSaveUpdateedAccount}
       />
 
@@ -67,7 +67,7 @@ const AdminCheckingAccountDetails: React.FC =()  => {
         show={showOperationModal}
         onHide={() => setShowOperationModal(false)}
         type={operationType}
-        isTransferVisible={isTransferVisible} checkingAccountId={account.id}      />
+        isTransferVisible={isTransferVisible} checkingAccountId={account?.id||0}      />
     </>
   );
 };

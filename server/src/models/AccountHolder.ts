@@ -1,10 +1,11 @@
 // src/models/AccountHolder.ts
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes, ForeignKey } from 'sequelize';
 import { sequelize } from '../config/dbConfig'; // Correctly import sequelize instance
 
 import { CheckingAccount } from './CheckingAccount';
 import { TermDepositAccount } from './TermDepositAccount';
 import { SecondParty } from './SecondParty';
+import { Admin } from './Admin';
 
 
 
@@ -15,7 +16,7 @@ type  TAccountHolder={
   middlename?: string;
   username: string;
   password: string;
-  adminId:number
+  adminId:ForeignKey<Admin['id']>
 }
 type CreationTAccountHolder = Omit<TAccountHolder,'id'>
 

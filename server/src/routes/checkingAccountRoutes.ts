@@ -1,14 +1,16 @@
 import express from 'express';
-import { AccountController } from '../controllers/CheckingAccountController';
+import { CheckingAccountController } from '../controllers/CheckingAccountController';
 
 
 const checkingAccountRoutes = express.Router();
 
-// Credit and debit without transfer
-checkingAccountRoutes.patch('/no-transaction/:adminId', AccountController.editBalanceAccountWithoutTransaction);
+checkingAccountRoutes.patch('/no-transaction/:id', CheckingAccountController.editBalanceAccountWithoutTransaction);
 
-checkingAccountRoutes.patch('/with-transaction/:adminId', AccountController.editBalanceAccountWithTransaction);
+checkingAccountRoutes.patch('/with-transaction/:id', CheckingAccountController.editBalanceAccountWithTransaction);
 
-checkingAccountRoutes.post('/update/:id', AccountController.updateCheckingAccount)
+checkingAccountRoutes.get('/get/:id', CheckingAccountController.getCheckingAccount);
+
+checkingAccountRoutes.patch('/debit/:id', CheckingAccountController.debitAccount);
+checkingAccountRoutes.post('/update/:id', CheckingAccountController.updateCheckingAccount)
 
 export default checkingAccountRoutes;

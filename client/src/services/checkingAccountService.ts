@@ -1,7 +1,7 @@
 
-import { apiPatch, apiPost } from '../api/api';
+import { apiGet, apiPatch, apiPost } from '../api/api';
 import { API_ENDPOINTS } from '../api/urls';
-import { CreateCheckingAccount, UpdateCheckingAccount } from '../types/CheckingAccount';
+import { CheckingAccount, CreateCheckingAccount, UpdateCheckingAccount } from '../types/CheckingAccount';
 import { CreateTransaction } from '../types/Transaction';
 
 // Update balance without transaction
@@ -27,7 +27,7 @@ export const editBalanceWithTransaction = async (adminId: number, data: UpdateCh
 };
 
 // Update checking account
-export const updateCheckingAccount = async (id: number, data: CreateCheckingAccount) => {
+export const updateCheckingAccount = async (id: number, data: CheckingAccount) => {
   const url = `${API_ENDPOINTS.checkingAccount.update}/${id}`;
   try {
     const response = await apiPatch( url,data);
@@ -37,6 +37,15 @@ export const updateCheckingAccount = async (id: number, data: CreateCheckingAcco
   }
 };
 
+export const getCheckingAccount = async (id:number)=>{
+  const url = `${API_ENDPOINTS.checkingAccount.get}/${id}`;
+  try {
+    const response = await apiGet(url);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to update checking account');
+  }
+}
 // Client debit
 export const clientDebit = async (accountHolderId: number, data: CreateTransaction) => {
   const url = `${API_ENDPOINTS.checkingAccount.debit}/${accountHolderId}`;

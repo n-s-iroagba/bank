@@ -19,11 +19,6 @@ import ForgotPassword from './pages/admin/ForgotPassword';
 import NewPassword from './pages/admin/NewPassword';
 import EmailSent from './pages/admin/EmailSent';
 
-
-
-
-
-
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -34,6 +29,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path='/admin/account-holders/:id' element={<AccountHolderList/>}/>
+        <Route path='/super-admin/account-holders/:id' element={<AccountHolderList/>}/>
         <Route path='/admin/second-parties/:id' element={<SecondPartyList />}/>
         <Route path='/super-admin/banks' element={<BankList/>}/>
         <Route path='/super-admin/admins/:id' element={<AdminList/>}/>

@@ -1,27 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import AccountHolderModal from "../../components/AccountHolderModal";
 import AccountHolderLayout from "../../components/AccountHolderLayout";
-
+import UpdateAccountHolderModal from "../../components/UpdateAccountHolderModal";
+import useGetAccountHolder from "../../hooks/useGetAccountHolder";
 
 const AccountHolderDetails: React.FC<{}> = () => {
-  const { id } = useParams<{ id: string }>();
+  const id = useParams<{ id: string }>() as string;
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
-let accountHolder ={
-    id: id,
-    firstName: "John Doe",
-    surname: "John"
-};
+  const { accountHolder } = useGetAccountHolder(id);
 
   if (!accountHolder) {
     return <div>Account Holder not found</div>;
   }
 
   const handleEdit = () => {
-    setShowModal(true); // Show modal to edit account holder
+    setShowModal(true);
   };
 
   const handleDelete = () => {
@@ -29,29 +25,31 @@ let accountHolder ={
     alert("Account Holder deleted!");
     navigate("/account-holder-list");
   };
- 
 
   return (
-    <AccountHolderLayout  id={0}>
-    <div>
-      <h5>Account Holder Details</h5>
+    <AccountHolderLayout id={0}>
       <div>
-        <p><strong>Name:</strong> {accountHolder?.firstName} {accountHolder.surname}</p>
-       
-        {/* Add other fields as necessary */}
+        <h5>Account Holder Details</h5>
+        <div>
+          <p>
+            <strong>Name:</strong> {accountHolder?.firstName}{" "}
+            {accountHolder.surname}
+          </p>
+        </div>
+
+        <Button variant="secondary" onClick={handleEdit}>
+          Edit
+        </Button>
+        <Button variant="danger" onClick={handleDelete} className="ml-2">
+          Delete
+        </Button>
+
+        <UpdateAccountHolderModal
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          accountHolder={accountHolder}
+        />
       </div>
-
-      <Button variant="secondary" onClick={handleEdit}>Edit</Button>
-      <Button variant="danger" onClick={handleDelete} className="ml-2">Delete</Button>
-
-      {/* Account Holder Edit Modal */}
-      <AccountHolderModal
-        show={showModal}
-        adminId={0}
-        onClose={() => setShowModal(false)}
-        // accountHolderToBeUpdated={accountHolder}
-      />
-    </div>
     </AccountHolderLayout>
   );
 };

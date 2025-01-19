@@ -74,7 +74,7 @@ export type AuthContextType ={
     handleSubmit:(event: React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void;
     handleChange:( event:  React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>,
       setState: React.Dispatch<React.SetStateAction<any>> )=>void
-    handleResetPassword:(event: React.FormEvent<HTMLFormElement>, navigate: (path: string) => void) =>void
+    handleResetPassword:(event: React.FormEvent<HTMLFormElement>, navigate: (path: string) => void,id:number) =>void
     handleLoginAdmin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     handleLoginAccountHolder : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
   
