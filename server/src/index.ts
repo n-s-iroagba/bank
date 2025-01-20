@@ -8,8 +8,8 @@ import accountHolderRoutes from './routes/accounHolderRoutes';
 import checkingAccountRoutes from './routes/checkingAccountRoutes';
 import transactionRoutes from './routes/transactionRoutes';
 import termDepositAccountRoutes from './routes/termDepositAccountRoutes';
-import secondPartyRoutes from './routes/secondPartyRoutes';
-import bankRoutes from './routes/BankRoutes';
+import secondPartyRouter from './routes/secondPartyRouter';
+import bankRouter from './routes/BankRoutes';
 import superAdminRoutes from './routes/superAdminRoutes';
 
 const app = express();
@@ -25,11 +25,11 @@ app.use('/', superAdminRoutes);
 app.use ('/super-admin',superAdminRoutes)
 app.use('/admin', adminRoutes);
 app.use('/account-holder',accountHolderRoutes)
-app.use('/bank',bankRoutes);
+app.use('/bank',bankRouter);
 app.use('/checking-account', checkingAccountRoutes)
 app.use('/transaction',transactionRoutes)
 app.use('/term-deposit-account', termDepositAccountRoutes)
-app.use('/second-party', secondPartyRoutes)
+app.use('/second-party', secondPartyRouter)
 
 
 sequelize.sync({

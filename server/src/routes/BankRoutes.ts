@@ -2,12 +2,12 @@ import { Router } from 'express';
 import BankController from '../controllers/BankController';
 import { upload } from '../config/multer';
 
-const bankRoutes = Router();
+const bankRouter = Router();
 
-bankRoutes.get('/', BankController.getAllBanks);
-bankRoutes.post('/', upload.single('logo'), BankController.createBank);
-bankRoutes.post("/bulk-upload", upload.single("file"), BankController.handleBulkUpload); // Expect a logo file in the "logo" field
-bankRoutes.patch('/:id', upload.single('logo'), BankController.updateBank);
-bankRoutes.delete('/:id', BankController.deleteBank);
+bankRouter.get('/', BankController.getAllBanks);
+bankRouter.post('/create/:id', upload.single('logo'), BankController.createBank);
+bankRouter.post("/bulk-create/:id", upload.single("file"), BankController.handleBulkUpload); // Expect a logo file in the "logo" field
+bankRouter.patch('/update/:id', upload.single('logo'), BankController.updateBank);
+bankRouter.delete('delete/:id', BankController.deleteBank);
 
-export default bankRoutes;
+export default bankRouter;

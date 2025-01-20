@@ -28,8 +28,9 @@ export const API_ENDPOINTS = {
     },
     bank: {
         create: `${BASE_URL}/bank/create`,
+        bulkCreate: `${BASE_URL}/bank/bulk-create`,
         update: `${BASE_URL}/bank/update`,
-        getAll: `${BASE_URL}/bank/getAllBanks`,
+        getAll: `${BASE_URL}/bank/`,
         delete: `${BASE_URL}/bank/delete`,
     },
     checkingAccount: {
@@ -44,8 +45,9 @@ export const API_ENDPOINTS = {
     },
     secondParty: {
         create: `${BASE_URL}/second-party/create`,
+        bulkCreate: `${BASE_URL}/second-party/bulk-create`,
         update: `${BASE_URL}/second-party/update`,
-        getAll: `${BASE_URL}/second-party/get`,
+        getAll: `${BASE_URL}/second-party`,
         delete: `${BASE_URL}/second-party/delete`,
     },
     transaction: {
