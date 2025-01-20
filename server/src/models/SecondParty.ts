@@ -9,8 +9,6 @@ type TSecondParty={
   surname: string;
   accountNumber: number;
   bankId: number;
-  canSend:boolean;
-  canReceive: boolean
   adminId: number;
 
 }
@@ -22,8 +20,7 @@ export class SecondParty extends Model<TSecondParty,CreationTSecondParty> {
   public accountNumber!: number;
   public bankId!: number;
   public bank!: Bank;
-  public canSend!:boolean;
-  public canReceive!: boolean
+
   public adminId!: number;
 }
 
@@ -56,16 +53,6 @@ SecondParty.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    canSend: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    canReceive: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    }
   },
   {
     sequelize,
