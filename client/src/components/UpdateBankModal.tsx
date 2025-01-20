@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Button, Modal, ModalProps } from 'react-bootstrap';
-import { CreateBank, Bank } from '../types/Bank';
+import { Bank } from '../types/Bank';
 
 
-interface BankModalProps extends ModalProps {
+interface UpdateBankModalProps extends ModalProps {
   onHide:()=>void;
-  bankToBeUpdated?:Bank
+  bankToBeUpdated:Bank
   show:boolean
 }
 
-const BankModal: React.FC<BankModalProps> = ({ bankToBeUpdated, show, onHide }) => {
-  const [bankDetails, setBankDetails] = useState<CreateBank|Bank>({ name: '', logo: '' });
+const UpdateBankModal: React.FC<UpdateBankModalProps> = ({ bankToBeUpdated, show, onHide }) => {
+  const [bankDetails, setBankDetails] = useState<Bank>(bankToBeUpdated);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -22,15 +22,14 @@ const BankModal: React.FC<BankModalProps> = ({ bankToBeUpdated, show, onHide }) 
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-   
-    setBankDetails({ name: '', logo: '' });
+ 
     onHide?.();
   };
 
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Create Bank</Modal.Title>
+        <Modal.Title>Edit Bank Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -72,4 +71,4 @@ const BankModal: React.FC<BankModalProps> = ({ bankToBeUpdated, show, onHide }) 
   );
 };
 
-export default BankModal
+export default UpdateBankModal

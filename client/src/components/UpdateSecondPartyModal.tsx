@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Button, Modal, ModalProps } from 'react-bootstrap';
-import { CreateSecondParty } from '../types/SecondParty';
+import { Form, Button, Modal } from 'react-bootstrap';
+
 import useBanks from '../hooks/useBanks';
 import { Bank } from '../types/Bank';
+import { SecondParty } from '../types/SecondParty';
 
 
-const SecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => {
+const UpdateSecondPartyModal: React.FC<{adminId:number, show:boolean, secondPartyToBeUpdated:SecondParty,onHide:()=>void}> = ({ show,adminId,secondPartyToBeUpdated,onHide }) => {
   const { banks } = useBanks();
-  const [secondPartyDetails, setSecondPartyDetails] = useState<CreateSecondParty>({
-    firstName: '',
-    surname: '',
-    accountNumber: '',
-    bank: {id:0, name: '',logo:''},
-    canReceive: false,
-  });
+  const [secondPartyDetails, setSecondPartyDetails] = useState<SecondParty>(secondPartyToBeUpdated);
 
   const handleChange = (event: React.FormEvent<HTMLInputElement | HTMLSelectElement|HTMLTextAreaElement>) => {
     const target = event.target as HTMLInputElement | HTMLSelectElement;
@@ -40,7 +35,7 @@ const SecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => {
   };
 
   return (
-    <Modal show={show} onHide={() => setShow(false)}>
+    <Modal show={show} onHide={() => onHide()}>
       <Modal.Header closeButton>
         <Modal.Title>Create Second Party</Modal.Title>
       </Modal.Header>
@@ -125,7 +120,7 @@ const SecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => {
           </Form.Group>
 
           <div className="d-flex justify-content-end mt-4">
-            <Button variant="secondary" className="me-2" onClick={() => setShow(false)}>
+            <Button variant="secondary" className="me-2" onClick={() =>onHide()}>
               Cancel
             </Button>
             <Button variant="primary" type="submit">
@@ -138,4 +133,4 @@ const SecondPartyModal: React.FC<ModalProps> = ({ id, setShow, show }) => {
   );
 };
 
-export default SecondPartyModal;
+export default UpdateSecondPartyModal;
