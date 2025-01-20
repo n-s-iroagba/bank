@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Accordion, Alert, Button, Spinner } from "react-bootstrap";
-import SecondPartyModal from "../../components/SecondPartyModal";
+
 import useSecondParty from "../../hooks/useSecondParty";
 import useBanks from "../../hooks/useBanks";
 import { SecondParty } from "../../types/SecondParty";
 import AdminDashboardLayout from "../../components/AdminDashboardLayout";
+import SecondPartyUploadModal from "../../components/SecondPartyUploadModal";
+import UpdateSecondPartyModal from "../../components/UpdateSecondPartyModal";
 
 const SecondPartyList: React.FC = () => {
   const [selectedSecondParty, setSelectedSecondParty] =
@@ -70,15 +72,14 @@ const SecondPartyList: React.FC = () => {
         ))}
       </Accordion>
 
-      <SecondPartyModal show={showCreateModal} id={0} />
+      <SecondPartyUploadModal show={showCreateModal} onHide={()=>setShowCreateModal(false)}  />
       {showUpdateModal &&
         (selectedSecondParty && banks ? (
-          <SecondPartyModal
-            show={showUpdateModal}
-            secondParty={selectedSecondParty}
-            banks={banks}
-            onClose={() => setShowUpdateModal(false)}
-          />
+          <UpdateSecondPartyModal
+          show={showUpdateModal}
+          secondPartyToBeUpdated={selectedSecondParty}
+
+          onHide={() => setShowUpdateModal(false)} adminId={0}          />
         ) : bankLoading ? (
           <Spinner title="Loading..." />
         ) : (

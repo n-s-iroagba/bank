@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Accordion, Button, Image } from "react-bootstrap";
 import useBanks from "../../hooks/useBanks";
 import AdminDashboardLayout from "../../components/AdminDashboardLayout";
-import BankModal from "../../components/BankModal";
 import { Bank } from "../../types/Bank";
+import UpdateBankModal from "../../components/UpdateBankModal";
+import BankUploadModal from "../../components/BankUploadModal";
 
 const BankList = () => {
   const [showModal, setShowModal] = useState(false);
@@ -69,14 +70,14 @@ const BankList = () => {
         </Accordion>
 
         {showModal && selectedBank && (
-          <BankModal
+          <UpdateBankModal
             show={showModal}
             onHide={() => setShowModal(false)}
             bankToBeUpdated={selectedBank}
           />
         )}
         {showModal && !selectedBank && (
-          <BankModal
+          <BankUploadModal
             show={showModal}
             onHide={() => setShowModal(false)}
           />

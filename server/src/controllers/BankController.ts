@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import BankService from '../service/BankService';
+import path from "path";
+import fs from "fs";
 
 class BankController {
   async getAllBanks(req: Request, res: Response) {
@@ -10,7 +12,28 @@ class BankController {
       res.status(500).json({ message: error.message });
     }
   }
-
+  async handleBulkUpload (req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.file) {
+        res.status(400).json({ message: "No file uploaded." });
+        return;
+      }
+  
+      const filePath = path.resolve(req.file.path);
+  
+      const result = await BankService.uploadBulkBanks(filePath);
+  
+      // Delete the uploaded file after processing
+      fs.unlinkSync(filePath);
+  
+      res.status(201).json({
+        message: `Successfully uploaded ${result.count} banks.`,
+      });
+    } catch (error:any) {
+      console.error("Bulk upload failed:", error);
+      res.status(500).json({ message: error.message });
+    }
+  };
 
   async createBank(req: Request, res: Response): Promise<void> {
     try {
