@@ -13,6 +13,7 @@ export class AdminController {
       const { token } = await AdminService.loginAdmin(username, password);
       res.status(200).json({ token });
     } catch (error: any) {
+      console.error(error)
       res.status(401).json({ message: error.message });
     }
   }
@@ -30,6 +31,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     );
     res.status(201).json({ message: "Admin created successfully", admin });
   } catch (error: any) {
+    console.error(error)
     res.status(400).json({ error: error.message });
   }
 };
@@ -43,6 +45,7 @@ export const getAllAdmins = async (req: Request, res: Response) => {
     console.log('ADMINS',admins)
     res.status(200).json(admins);
   } catch (error: any) {
+    console.error(error)
     res.status(500).json({ message: error.message });
   }
 };
@@ -61,6 +64,7 @@ export const updateAdmin = async (req: Request, res: Response) => {
       .status(200)
       .json({ message: "Admin updated successfully", updatedAdmin });
   } catch (error: any) {
+    console.error(error)
     res.status(400).json({ error: error.message });
   }
 };
@@ -72,6 +76,7 @@ export const deleteAdmin = async (req: Request, res: Response) => {
     await AdminService.deleteAdminBySuperAdmin(parseInt(adminId));
     res.status(200).json({ message: "Admin deleted successfully" });
   } catch (error: any) {
+    console.error(error)
     res.status(400).json({ error: error.message });
   }
 };

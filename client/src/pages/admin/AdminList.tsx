@@ -68,12 +68,12 @@ const AdminList = () => {
         <AdminModal
                   show={showModal}
                   onClose={() => setShowModal(false)}
-                  adminToBeUpdated={selectedAdmin} superAdminId={0}        />
+                  adminToBeUpdated={selectedAdmin} superAdminId={superAdminId}        />
       )}
        {showModal && !selectedAdmin && (
         <AdminModal
                   show={showModal}
-                  onClose={() => setShowModal(false)} superAdminId={0}        
+                  onClose={() => setShowModal(false)} superAdminId={superAdminId}        
         />
       )}
       </AdminDashboardLayout>

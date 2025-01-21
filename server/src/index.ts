@@ -8,9 +8,11 @@ import accountHolderRoutes from './routes/accounHolderRoutes';
 import checkingAccountRoutes from './routes/checkingAccountRoutes';
 import transactionRoutes from './routes/transactionRoutes';
 import termDepositAccountRoutes from './routes/termDepositAccountRoutes';
-import secondPartyRouter from './routes/secondPartyRouter';
+
 import bankRouter from './routes/BankRoutes';
 import superAdminRoutes from './routes/superAdminRoutes';
+import secondPartyRouter from './routes/secondPartyRoutes';
+import path from 'path';
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
+app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 app.use('/', superAdminRoutes); 
 
 app.use ('/super-admin',superAdminRoutes)
@@ -33,7 +36,7 @@ app.use('/second-party', secondPartyRouter)
 
 
 sequelize.sync({
-  force:true
+  // force:true
 }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
