@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import BankService from '../service/BankService';
-import path from "path";
-import fs from "fs";
+
 
 class BankController {
   async getAllBanks(req: Request, res: Response) {
@@ -11,47 +10,51 @@ class BankController {
     }catch(error:any){
       res.status(500).json({ message: error.message });
     }
-  }
-  async handleBulkUpload (req: Request, res: Response): Promise<void> {
+  } 
+  public async createBanks(req: Request, res: Response): Promise<void> {
     try {
-      if (!req.file) {
-        res.status(400).json({ message: "No file uploaded." });
-        return;
+      // Extracting the form data (banks array)
+      const banksData: { name: string; logo: Express.Multer.File }[] = [];
+      const logos:any = req.files// Ensure `req.files` is correctly typed
+      const banks = JSON.parse(req.body.banks);
+      // const loga = JSON.parse(req.body.logos);
+    console.log(logos)
+    // console.log (loga)
+      if (!banks || !logos) {
+        throw new Error('error1')
+        
       }
   
-      const filePath = path.resolve(req.file.path);
-  
-      const result = await BankService.uploadBulkBanks(filePath);
-  
-      // Delete the uploaded file after processing
-      fs.unlinkSync(filePath);
-  
-      res.status(201).json({
-        message: `Successfully uploaded ${result.count} banks.`,
+      if (banks.length !== logos.length) {
+        throw new Error('error2')
+      }
+     console.log(banks[0])
+      banks.forEach((b:any, index:number) => {
+        banksData.push({
+          name: banks[index],
+          logo: logos[index],
+        });
+        console.log(banksData)
       });
-    } catch (error:any) {
-      console.error("Bulk upload failed:", error);
-      res.status(500).json({ message: error.message });
-    }
-  };
-
-  async createBank(req: Request, res: Response): Promise<void> {
-    try {
-      const { name } = req.body;
-      const logo = req.file?.path; // Assume a file upload middleware like multer is used
   
-      if (!name || !logo) {
-        res.status(400).json({ message: 'Name and logo are required' });
+      if (!banksData || banksData.length === 0) {
+        res.status(400).json({ message: 'No valid banks data found in request.' });
         return;
       }
+    console.log('data',banksData)
+      // Call the service to process the bulk upload
+      const result = await BankService.createBanks(banksData);
   
-      const bank = await BankService.createBank({ name, logo });
-      res.status(201).json(bank);
+      res.status(200).json({
+        message: 'Banks uploaded successfully',
+        count: result.count,
+      });
     } catch (error) {
-      res.status(500).json({ message: 'An error occurred', error });
+      console.error('Error in bulk upload:', error);
+      res
+    .status(500).json({ message: 'An error occurred while processing the bulk upload.' });
     }
   }
-  
 
   async updateBank(req: Request, res: Response) {
     const { name } = req.body;

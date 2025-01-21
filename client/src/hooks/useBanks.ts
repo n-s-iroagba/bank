@@ -19,6 +19,8 @@ const useBanks = (): UseBanksResult => {
       setLoading(true);
       try {
         const data = await getAllBanks();
+
+        console.log(data)
         setBanks(data);
       } catch (err: any) {
         setbankError(err.message);
