@@ -3,14 +3,17 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 import AccountHolderLayout from "../../components/AccountHolderLayout";
 import UpdateAccountHolderModal from "../../components/UpdateAccountHolderModal";
-import useGetAccountHolder from "../../hooks/useGetAccountHolder";
+import useGetAccountHolderDetails from "../../hooks/useGetAccountHolderDetails";
+
 
 const AccountHolderDetails: React.FC<{}> = () => {
-  const id = useParams<{ id: string }>() as string;
+  const {id} = useParams<{ id: string }>() ;
+
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
-  const { accountHolder } = useGetAccountHolder(id);
+  const { accountHolder } = useGetAccountHolderDetails(id as string);
+  console.log(accountHolder)
 
   if (!accountHolder) {
     return <div>Account Holder not found</div>;

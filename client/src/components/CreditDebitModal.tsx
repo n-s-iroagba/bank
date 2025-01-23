@@ -6,12 +6,9 @@ import useSecondParty from '../hooks/useSecondParty';
 import { Bank } from '../types/Bank';
 import { SecondParty } from '../types/SecondParty';
 import { CreateTransaction, TransactionType } from '../types/Transaction';
+import useBanks from '../hooks/useBanks';
 
-const banks: Bank[] = [
-  { id: 1, name: 'Bank A', logo: 'path/to/logoA.png' },
-  { id: 2, name: 'Bank B', logo: 'path/to/logoB.png' },
-  { id: 3, name: 'Bank C', logo: 'path/to/logoC.png' },
-];
+
 interface CreditDebitModalProps {
   show: boolean;
   onHide: () => void;
@@ -23,6 +20,7 @@ interface CreditDebitModalProps {
 
 const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type, isTransferVisible,checkingAccountId }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const {banks} = useBanks()
   const [transferDetails, setTransferDetails] = useState<CreateTransaction>({
     amount: 0,
     date: new Date(),
@@ -32,10 +30,8 @@ const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type,
       id: 0,
       firstName: '',
       surname: '',
-      bank: { id: 0, name: 'BANK', logo: '' },
+      bank: { id: 0, name: 'BANK', logo: '',listerId:'' },
       accountNumber: '',
-      canReceive: false,
-      canSend: false
     },
   });
 
@@ -79,7 +75,7 @@ const CreditDebitModal: React.FC<CreditDebitModalProps> = ({ show, onHide, type,
 
   const filteredSenders = secondParties.filter(secondParty =>
     (secondParty.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    secondParty.surname.toLowerCase().includes(searchTerm.toLowerCase())) && secondParty.canSend
+    secondParty.surname.toLowerCase().includes(searchTerm.toLowerCase())) 
   );
 
   if(secondPartyLoading){

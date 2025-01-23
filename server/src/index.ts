@@ -22,7 +22,8 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
-app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
+app.use("/uploads/images", express.static(path.resolve(__dirname, "../uploads/images")));
+
 app.use('/', superAdminRoutes); 
 
 app.use ('/super-admin',superAdminRoutes)

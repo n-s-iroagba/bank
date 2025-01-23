@@ -1,54 +1,16 @@
 import React, { useState } from "react";
 import { Accordion, Button, Modal, Form } from "react-bootstrap";
-import { Transaction, TransactionType, TransactionOrigin } from "../../types/Transaction";
+import { Transaction, TransactionType} from "../../types/Transaction";
 import AccountHolderLayout from "../../components/AccountHolderLayout";
+import useGetTransactions from "../../hooks/useGetTransactions";
 
-
-// Mock Data
-const mockTransactions: Transaction[] = [
-  {
-    id: 1,
-    date: new Date("2025-01-01"),
-    description: "Grocery Store Purchase",
-    amount: -50.75,
-    transactionType: TransactionType.DEBIT,
-    origin: TransactionOrigin.CLIENT,
-    secondParty: {
-        id: 1, firstName: "SuperMart", surname: "SuperMart", accountNumber: "987654321",
-        bank: {
-            id: 0,
-            name: "",
-            logo: ""
-        },
-        canReceive: false,
-        canSend: false
-    },
-  },
-  {
-    id: 2,
-    date: new Date("2025-01-03"),
-    description: "Salary Deposit",
-    amount: 1500.0,
-    transactionType: TransactionType.CREDIT,
-    origin: TransactionOrigin.SYSTEM,
-    secondParty: {
-        id: 2, firstName: "Employer Inc.", surname: "SuperMart", accountNumber: "123456789",
-        bank: {
-            id: 0,
-            name: "",
-            logo: ""
-        },
-        canReceive: false,
-        canSend: false
-    },
-  },
-];
 
 const AdminTransactionList: React.FC = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>(mockTransactions);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+
+  const {transactions} = useGetTransactions(1)
 
   const handleEdit = (transaction: Transaction) => {
     setSelectedTransaction(transaction);
@@ -67,12 +29,12 @@ const AdminTransactionList: React.FC = () => {
 
   const confirmDelete = () => {
     // Logic to delete the transaction
-    setTransactions(transactions.filter((t) => t.id !== selectedTransaction?.id));
-    setShowDeleteModal(false);
+    // transactions && setSelectedTransaction(transactions.filter((t) => t.id !== selectedTransaction?.id));
+    // setShowDeleteModal(false);
   };
 
   return (
-    <AccountHolderLayout id={1}>
+    <AccountHolderLayout>
       <Accordion>
         {transactions.map((transaction) => (
           <Accordion.Item eventKey={String(transaction.id)} key={transaction.id}>
@@ -80,7 +42,7 @@ const AdminTransactionList: React.FC = () => {
               {transaction.description} - ${transaction.amount.toFixed(2)}
             </Accordion.Header>
             <Accordion.Body>
-              <p><strong>Date:</strong> {transaction.date.toDateString()}</p>
+              <p><strong>Date:</strong> {new Date (transaction.date).toDateString()}</p>
               <p><strong>Type:</strong> {transaction.transactionType}</p>
               <p><strong>Origin:</strong> {transaction.origin || "N/A"}</p>
               <p><strong>Second Party:</strong> {transaction.secondParty.firstName} {transaction.secondParty.surname}</p>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { getCheckingAccount } from "../services/checkingAccountService";
 import { CheckingAccount } from "../types/CheckingAccount";
+import { API_ENDPOINTS } from "../api/urls";
+import axios from "axios";
 
 
 const useCheckingAccount = (id: number) => {
@@ -9,11 +10,12 @@ const useCheckingAccount = (id: number) => {
     const [error, setError] = useState<string | null>(null);
   
     useEffect(() => {
-      const fetchAccountHolder = async () => {
+      const checkingAccount = async () => {
         setLoading(true);
         try {
-          const data = await getCheckingAccount(id);
-          setAccount(data as CheckingAccount);
+          alert('hi')
+          const response = await axios.get(`${API_ENDPOINTS.checkingAccount.get}/${id}`)
+          setAccount(response.data);
         } catch (err:any) {
           setError(err.message);
         } finally {
@@ -22,7 +24,7 @@ const useCheckingAccount = (id: number) => {
       };
   
       if (id) {
-        fetchAccountHolder();
+        checkingAccount();
       }
     }, [id]);
   

@@ -2,7 +2,6 @@
 import React, { useContext, } from 'react';
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../context/AuthContext';
@@ -33,7 +32,7 @@ const AdminLogin: React.FC<{isSuperAdmin?:boolean}> = ({isSuperAdmin}) => {
       <img style={{height:'2cm'}} src={image} alt='icon'/>
         <h5>Admin Login</h5>
     
-      <Form className=" " onSubmit={(e)=>handleLoginAdmin(e,navigate)}>
+      <Form className="w-100" onSubmit={(e)=>handleLoginAdmin(e,navigate)}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -99,7 +98,7 @@ const AdminLogin: React.FC<{isSuperAdmin?:boolean}> = ({isSuperAdmin}) => {
       {errorMessage&& <Alert className="w-100" variant="danger">
         {errorMessage}</Alert>}
       </Form>
-      <AuthOption dontShowLogo route={'/super-admin/signup'} title={'Do have a super admin account'} buttonText={'Signup'}/>
+      <AuthOption dontShowLogo route={'/super-admin/signup'} title={"Don't have an account?"} buttonText={'Signup'}/>
       </div>
     
    

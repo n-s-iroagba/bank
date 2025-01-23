@@ -16,7 +16,7 @@ export const createSecondParty = async (adminId: number, data: CreateSecondParty
 
 // Get all second parties for an ID
 export const getAllSecondParties = async (id: number) => {
-  const url = `${API_ENDPOINTS.secondParty.getAll}/${id}`;
+  const url = `${API_ENDPOINTS.secondParty.getAll}`;
   try {
     const response = await apiGet(url);
     return response.data;

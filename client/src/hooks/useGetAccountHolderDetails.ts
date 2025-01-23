@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { getAccountHolder } from "../services/accountHolderService";
 import { BaseAccountHolder } from "../types/AccountHolder";
+import { apiGet } from "../api/api";
+import axios from "axios";
+import { API_ENDPOINTS } from "../api/urls";
 
 interface UseGetAccountHolderResult {
   accountHolder: BaseAccountHolder | null;
@@ -8,7 +11,7 @@ interface UseGetAccountHolderResult {
   error: string | null;
 }
 
-const useGetAccountHolder = (id: string): UseGetAccountHolderResult => {
+const useGetAccountHolderDetails = (id: string): UseGetAccountHolderResult => {
   const [accountHolder, setAccountHolder] = useState<BaseAccountHolder | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,8 +20,8 @@ const useGetAccountHolder = (id: string): UseGetAccountHolderResult => {
     const fetchAccountHolder = async () => {
       try {
         setLoading(true);
-        const response = await getAccountHolder(id);
-        setAccountHolder(response);
+        const response = await axios.get(`${API_ENDPOINTS.accountHolder.getDetails}/${id}`)
+        setAccountHolder(response.data);
       } catch (err: any) {
         setError(err.message || "An error occurred while fetching the account holder.");
       } finally {
@@ -32,4 +35,4 @@ const useGetAccountHolder = (id: string): UseGetAccountHolderResult => {
   return { accountHolder, loading, error };
 };
 
-export default useGetAccountHolder;
+export default useGetAccountHolderDetails;

@@ -3,9 +3,10 @@ import { Router } from 'express';
 import { TransactionController } from '../controllers/TransactionController';
 
 
-const router = Router();
+const transactionRoutes = Router();
 
-router.get('/update/:id', TransactionController.updateTransfer);
-router.post('/')
+transactionRoutes.patch('/update/:id', TransactionController.updateTransfer);
+transactionRoutes.get('/delete/:id', TransactionController.delete);
+transactionRoutes.get('/get/:id',TransactionController.get)
 
-export default router;
+export default transactionRoutes;

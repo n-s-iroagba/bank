@@ -26,7 +26,7 @@ export const AuthOption: React.FC<{
             </div>
           )}
           
-            <div className={dontShowLogo?'w-100 d-flex mb-3  mt-3':'w-100 mb-3 d-flex justify-content-between m-0 align-items-center '}>
+            <div className={'  w-md-100 my-3 d-flex gap-4  align-items-center '}>
               <p className=' W-50'>{title}</p>
              
                 <button onClick={() => navigate(`${route}`)} className='button-radius bg-blue  py-3 text-light' style={{width:'4cm'}}>

@@ -1,4 +1,5 @@
 
+import { Admin } from '../models/Admin';
 import Bank from '../models/Bank';
 import { SecondParty } from '../models/SecondParty';
 import { CreateSecondParty } from '../types/SecondPartyTypes';
@@ -9,11 +10,11 @@ export class SecondPartyService {
     return await SecondParty.create({
       firstName: data.firstName,
       surname: data.surname,
-      accountNumber: Math.random()*10000000000,
+      accountNumber: Math.random()*10,
       bankId: data.bankId,
       adminId: adminId
     });
-  }static async bulkCreateSecondParties(data: { firstName: string; surname: string }[],adminId:number): Promise<SecondParty[]> {
+  }static async bulkCreateSecondParties(data: { firstname: string; surname: string }[],adminId:number): Promise<SecondParty[]> {
     // Fetch all banks
     const banks = await Bank.findAll();
     if (banks.length === 0) {
@@ -23,9 +24,11 @@ export class SecondPartyService {
     // Get bank IDs
     const bankIds = banks.map((bank) => bank.id);
   
-    // Map data to include random bank IDs
+    const admins = await Admin.findAll()
+    console.log('adminssss',admins)
     const secondParties = data.map((entry) => ({
       ...entry,
+      firstName:entry.firstname,
       bankId: bankIds[Math.floor(Math.random() * bankIds.length)], // Randomly assign bank
       accountNumber: Math.floor(100000000 + Math.random() * 900000000), // Random 9-digit account number
 

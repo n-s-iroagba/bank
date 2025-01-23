@@ -2,6 +2,10 @@ import React, { useState} from "react";
 import { Modal, Button, Form, Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
 import useBanks from "../hooks/useBanks";
+import * as xlsx  from 'xlsx';
+import { API_ENDPOINTS } from "../api/urls";
+import { apiPost } from "../api/api";
+
 
 interface SecondPartyUploadModalProps {
   show: boolean;
@@ -10,24 +14,31 @@ interface SecondPartyUploadModalProps {
 
 const SecondPartyUploadModal: React.FC<SecondPartyUploadModalProps> = ({ show, onHide }) => {
   const [mode, setMode] = useState<"single" | "bulk">("single");
-  const {banks} = useBanks();
+  const { banks } = useBanks();
   const [isLoading, setIsLoading] = useState(false);
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [surname, setSurname] = useState("");
   const [selectedBank, setSelectedBank] = useState<number | null>(null);
-  const [bulkFile, setBulkFile] = useState<File | null>(null);
+  const [bulkData, setBulkData] = useState<any[]>([]);
   const [successMessage, setSuccessMessage] = useState("");
 
-
   const handleSingleSubmit = async () => {
-    if (!firstName || !lastName || !selectedBank) {
+    if (!firstName || !surname || !selectedBank) {
       alert("Please fill in all fields.");
       return;
     }
 
     setIsLoading(true);
     try {
-      await axios.post("/api/second-parties", { firstName, lastName, bankId: selectedBank });
+      await apiPost(
+        `${API_ENDPOINTS.secondParty.create}/${1}`,
+        { firstName, surname, bankId: selectedBank },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setSuccessMessage("Second party successfully created!");
       clearForm();
     } catch (error) {
@@ -38,19 +49,35 @@ const SecondPartyUploadModal: React.FC<SecondPartyUploadModalProps> = ({ show, o
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = e.target?.result;
+      const workbook = xlsx.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const parsedData = xlsx.utils.sheet_to_json(worksheet);
+      setBulkData(parsedData); // Set parsed data to state
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
   const handleBulkUpload = async () => {
-    if (!bulkFile) {
-      alert("Please select a file.");
+    if (bulkData.length === 0) {
+      alert("Please upload a valid file.");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("file", bulkFile);
 
     setIsLoading(true);
     try {
-      await axios.post("/api/second-parties/bulk-upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      await axios.post(`${API_ENDPOINTS.secondParty.bulkCreate}/${2}`, {data:bulkData}, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       setSuccessMessage("Bulk upload successfully completed!");
       clearForm();
@@ -64,10 +91,10 @@ const SecondPartyUploadModal: React.FC<SecondPartyUploadModalProps> = ({ show, o
 
   const clearForm = () => {
     setFirstName("");
-    setLastName("");
+    setSurname("");
     setSelectedBank(null);
-    setBulkFile(null);
     setMode("single");
+    setBulkData([]);
   };
 
   return (
@@ -101,8 +128,8 @@ const SecondPartyUploadModal: React.FC<SecondPartyUploadModalProps> = ({ show, o
                 <Form.Control
                   type="text"
                   placeholder="Enter last name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={surname}
+                  onChange={(e) => setSurname(e.target.value)}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -127,12 +154,7 @@ const SecondPartyUploadModal: React.FC<SecondPartyUploadModalProps> = ({ show, o
             <>
               <Form.Group className="mb-3">
                 <Form.Label>Excel File</Form.Label>
-                <Form.Control
-  type="file"
-  accept=".xlsx,.xls"
-  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBulkFile(e.target.files?.[0] || null)}
-/>
-
+                <Form.Control type="file" accept=".xlsx,.xls" onChange={handleFileChange} />
               </Form.Group>
               <Button variant="primary" onClick={handleBulkUpload} disabled={isLoading}>
                 {isLoading ? <Spinner animation="border" size="sm" /> : "Upload"}

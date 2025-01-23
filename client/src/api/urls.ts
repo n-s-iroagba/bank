@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
         update: `${BASE_URL}/account-holder/update`,
         create: `${BASE_URL}/account-holder/create`,
         get: `${BASE_URL}/account-holder/get`,
+        getDetails:`${BASE_URL}/account-holder/details`,
         delete: `${BASE_URL}/account-holder/delete`,
     },
     bank: {
@@ -34,7 +35,7 @@ export const API_ENDPOINTS = {
         delete: `${BASE_URL}/bank/delete`,
     },
     checkingAccount: {
-        get: `${BASE_URL}/checking-account/:id`,
+        get: `${BASE_URL}/checking-account/get`,
         noTransaction: `${BASE_URL}/checking-account/no-transaction`,
         withTransaction: `${BASE_URL}/checking-account/with-transaction`,
         update: `${BASE_URL}/checking-account/update`,
@@ -42,6 +43,7 @@ export const API_ENDPOINTS = {
     },
     termDepositAccount: {
         update: `${BASE_URL}/term-deposit-account/update`,
+        get: `${BASE_URL}/term-deposit-account/get`,
     },
     secondParty: {
         create: `${BASE_URL}/second-party/create`,
@@ -53,5 +55,6 @@ export const API_ENDPOINTS = {
     transaction: {
         update: `${BASE_URL}/transaction/update`,
         delete: `${BASE_URL}/transaction/delete`,
+        get: `${BASE_URL}/transaction/get`
     },
 };

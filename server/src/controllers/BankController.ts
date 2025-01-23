@@ -12,14 +12,15 @@ class BankController {
     }
   } 
   public async createBanks(req: Request, res: Response): Promise<void> {
+    const listerId = req.params.id
     try {
-      // Extracting the form data (banks array)
-      const banksData: { name: string; logo: Express.Multer.File }[] = [];
-      const logos:any = req.files// Ensure `req.files` is correctly typed
+     
+      const banksData: { name: string; logo: any }[] = [];
+      const logos:any = req.files
       const banks = JSON.parse(req.body.banks);
-      // const loga = JSON.parse(req.body.logos);
+  
     console.log(logos)
-    // console.log (loga)
+
       if (!banks || !logos) {
         throw new Error('error1')
         
@@ -43,7 +44,7 @@ class BankController {
       }
     console.log('data',banksData)
       // Call the service to process the bulk upload
-      const result = await BankService.createBanks(banksData);
+      const result = await BankService.createBanks(banksData,listerId);
   
       res.status(200).json({
         message: 'Banks uploaded successfully',
@@ -58,7 +59,9 @@ class BankController {
 
   async updateBank(req: Request, res: Response) {
     const { name } = req.body;
-    const logo = req.file?.path;
+    const logo = req.file;
+    console.log(name)
+    console.log(logo)
     const bank = await BankService.updateBank(Number(req.params.id), { name, logo });
 
     if (bank) {

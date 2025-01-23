@@ -7,30 +7,29 @@ interface Bank {
   logo: File | null;
 }
 
-const BankUploadModal: React.FC<{ show: boolean; onClose: () => void }> = ({ show, onClose }) => {
+const BankUploadModal: React.FC<{ show: boolean; onClose: () => void }> = ({
+  show,
+  onClose,
+}) => {
   const [banks, setBanks] = useState<Bank[]>([{ name: "", logo: null }]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  // Function to handle form field changes
   const handleInputChange = (index: number, field: keyof Bank, value: any) => {
     const updatedBanks = [...banks];
     updatedBanks[index][field] = value;
     setBanks(updatedBanks);
   };
 
-  // Add a new empty bank form
   const handleAddBank = () => {
     setBanks([...banks, { name: "", logo: null }]);
   };
 
-  // Remove a bank form at a specific index
   const handleRemoveBank = (index: number) => {
     const updatedBanks = banks.filter((_, i) => i !== index);
     setBanks(updatedBanks);
   };
 
-  // Handle file input change
   const handleFileChange = (index: number, event: any) => {
     const file = event.target.files ? event.target.files[0] : null;
     const updatedBanks = [...banks];
@@ -38,24 +37,20 @@ const BankUploadModal: React.FC<{ show: boolean; onClose: () => void }> = ({ sho
     setBanks(updatedBanks);
   };
 
-  // Submit the form to the backend
   const handleSubmit = async () => {
     setLoading(true);
     setError("");
 
     const formData = new FormData();
-    
-    let bankY: string[] = []
-    banks.forEach((bank:any) => {
-      formData.append('logos', bank.logo)
-        bankY.push(bank.name)
-      
+
+    let tempBanks: string[] = [];
+    banks.forEach((bank: any) => {
+      formData.append("logos", bank.logo);
+      tempBanks.push(bank.name);
     });
-    
-   
-    console.log(bankY)
-    formData.append('banks',JSON.stringify(bankY))
-console.log('form',formData.values)
+
+    formData.append("banks", JSON.stringify(tempBanks));
+
     try {
       const response = await fetch(`${API_ENDPOINTS.bank.create}/${1}`, {
         method: "POST",
@@ -64,7 +59,8 @@ console.log('form',formData.values)
 
       if (response.ok) {
         alert("Banks uploaded successfully!");
-        onClose(); // Close the modal on successful upload
+        window.location.reload();
+        onClose();
       } else {
         setError("Failed to upload banks.");
       }
@@ -88,11 +84,13 @@ console.log('form',formData.values)
               <Form.Control
                 type="text"
                 value={bank.name}
-                onChange={(e) => handleInputChange(index, "name", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(index, "name", e.target.value)
+                }
                 placeholder="Enter bank name"
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mt-2">
               <Form.Label>Bank Logo</Form.Label>
               <Form.Control
                 type="file"
@@ -100,16 +98,22 @@ console.log('form',formData.values)
                 accept="image/*"
               />
             </Form.Group>
-            {index > 0 && (
-              <Button variant="danger" onClick={() => handleRemoveBank(index)}>
-                Remove Bank
+            <div className="d-flex gap-3 mt-3">
+              <Button variant="primary" onClick={handleAddBank}>
+                New Entry
               </Button>
-            )}
+              {index > 0 && (
+                <Button
+                  variant="danger"
+                  onClick={() => handleRemoveBank(index)}
+                >
+                  <small>Remove Entry</small>
+                </Button>
+              )}
+            </div>
           </div>
         ))}
-        <Button variant="primary" onClick={handleAddBank}>
-          Add Bank
-        </Button>
+
         {error && <p className="text-danger mt-2">{error}</p>}
       </Modal.Body>
       <Modal.Footer>

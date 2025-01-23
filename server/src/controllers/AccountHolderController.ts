@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AccountHolderService } from '../service/AccountHolderService';
 import { CreateAccountHolder, UpdateAccountHolder } from '../types/AccountHolderTypes';
+import { AccountHolder } from '../models/AccountHolder';
 
 
 export class AccountHolderController {
@@ -20,10 +21,23 @@ export class AccountHolderController {
   }
 
   static async getByAdminId(req: Request, res: Response) {
-    const adminId = parseInt(req.params.id);
+    const adminId = req.params.id;
+    console.log('admin Id is',adminId)
 
     try {
-      const accountHolders = await AccountHolderService.getByAdminId(adminId);
+      const accountHolders = await AccountHolderService.getByAdminId(Number(adminId));
+      res.status(200).json(accountHolders);
+    } catch (error: any) {
+      console.error(error)
+      res.status(500).json({ message: error.message });
+    }
+  }
+  static async getDetails(req: Request, res: Response) {
+    const id = req.params.id;
+    console.log(' Id is',id)
+
+    try {
+      const accountHolders = await AccountHolder.findByPk(id);
       res.status(200).json(accountHolders);
     } catch (error: any) {
       console.error(error)
