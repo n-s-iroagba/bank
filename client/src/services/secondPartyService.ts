@@ -1,9 +1,8 @@
 import { apiPost, apiGet, apiPatch, apiDelete } from '../api/api';
 import { API_ENDPOINTS } from '../api/urls';
-
 import { CreateSecondParty, UpdateSecondParty } from '../types/SecondParty';
 
-// Create second party
+
 export const createSecondParty = async (adminId: number, data: CreateSecondParty) => {
   const url = `${API_ENDPOINTS.secondParty.create}/${adminId}`;
   try {
@@ -14,7 +13,7 @@ export const createSecondParty = async (adminId: number, data: CreateSecondParty
   }
 };
 
-// Get all second parties for an ID
+
 export const getAllSecondParties = async (id: number) => {
   const url = `${API_ENDPOINTS.secondParty.getAll}`;
   try {
@@ -25,7 +24,7 @@ export const getAllSecondParties = async (id: number) => {
   }
 };
 
-// Update second party
+
 export const updateSecondParty = async (id: number, data: UpdateSecondParty) => {
   const url = `${API_ENDPOINTS.secondParty.update}/${id}`;
   try {
@@ -36,7 +35,6 @@ export const updateSecondParty = async (id: number, data: UpdateSecondParty) => 
   }
 };
 
-// Delete second party
 export const deleteSecondParty = async (id: number) => {
   const url = `${API_ENDPOINTS.secondParty.delete}/${id}`;
   try {

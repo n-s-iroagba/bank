@@ -1,7 +1,7 @@
 
 import { apiGet, apiPatch, apiPost } from '../api/api';
 import { API_ENDPOINTS } from '../api/urls';
-import { CheckingAccount, CreateCheckingAccount, UpdateCheckingAccount } from '../types/CheckingAccount';
+import { CheckingAccount,  UpdateCheckingAccount } from '../types/CheckingAccount';
 import { CreateTransaction } from '../types/Transaction';
 
 // Update balance without transaction
