@@ -15,9 +15,9 @@ const AdminCheckingAccountDetails: React.FC =()  => {
   const [isTransferVisible, setIsTransferVisible] = useState(false);
   const [showOperationModal, setShowOperationModal] = useState(false);
   const navigate = useNavigate()
-  const id = 0
+  const accountHolderId =1
 
-  const {account} = useCheckingAccount(1)
+  const {account} = useCheckingAccount(accountHolderId)
 
   const handleUpdateCheckingAccount = () => {
     setShowUpdateCheckingAccountModal(true);
@@ -38,7 +38,7 @@ const AdminCheckingAccountDetails: React.FC =()  => {
 
   return (
     <>
-    <AccountHolderLayout  id={0}>
+    <AccountHolderLayout >
    
           <div>Checking Account ID: {account?.id}</div>
          

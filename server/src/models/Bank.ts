@@ -7,6 +7,9 @@ export interface BankAttributes {
   id: number;
   name: string;
   logo: string;
+  listerId:string;
+
+
 }
 
 export type CreateBankAttributes = Optional<BankAttributes, 'id'>;
@@ -15,6 +18,7 @@ class Bank extends Model<BankAttributes, CreateBankAttributes> implements BankAt
   public id!: number;
   public name!: string;
   public logo!: string;
+  public listerId!: string;
 }
 
 Bank.init(
@@ -32,6 +36,10 @@ Bank.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    listerId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   },
   {
     sequelize,

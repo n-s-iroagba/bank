@@ -6,23 +6,23 @@ export type SecondParty = {
     surname: string;
     accountNumber: string;
     bank: Bank;
-    canReceive: boolean; 
-    canSend: boolean;
 };
 
 export type CreateSecondParty = {
- 
     firstName: string;
     surname: string;
     accountNumber: string;
     bank: Bank;
-    canReceive: boolean; 
+   
 };
 export type UpdateSecondParty = {
     firstName: string;
     surname: string;
     accountNumber: string;
     bank: Bank;
-    canReceive: boolean; 
-    canSend: boolean;
+}
+
+export type CreateBulkSecondParty ={
+    firstName: string;
+    surname: string;
 }

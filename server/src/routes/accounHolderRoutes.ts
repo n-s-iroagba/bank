@@ -6,6 +6,7 @@ accountHolderRoutes.post('/create/:id',AccountHolderController.createAccountHold
 
 
 accountHolderRoutes.get('/get/:id', AccountHolderController.getByAdminId);
+accountHolderRoutes.get('/details/:id', AccountHolderController.getDetails);
 
 accountHolderRoutes.patch('/update/:id', AccountHolderController.update);
 

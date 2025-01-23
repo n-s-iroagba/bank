@@ -1,58 +1,42 @@
-import { TransactionOrigin, TransactionType } from "../types/Transaction";
+import { useEffect, useState } from "react";
+import { Transaction } from "../types/Transaction";
+import { API_ENDPOINTS } from "../api/urls";
+import axios from "axios";
 
-const useGetTransactions = (id:number) =>{
-    return  [
-        {
-          date: new Date('2024-10-10'),
-          description: 'Payment for Invoice #1234',
-          amount: 500,
-          transactionType: TransactionType.CREDIT,
-          id: 0,
-          secondParty: {
-            firstName: 'Kennedy',
-            surname: 'Ogbongedonoo',
-            accountNumber: '22222',
-            bank: { id: 0, name: 'aa', logo: '' },
-            id: 0,
-            canReceive: false,
-            canSend: false
-          },
-          origin: TransactionOrigin.ADMIN
-        },
-        {
-          date: new Date('2024-10-11'),
-          description: 'Refund for Order #5678',
-          amount: 100,
-          transactionType: TransactionType.DEBIT,
-          id: 1,
-          secondParty: {
-            firstName: 'Kennedy',
-            surname: 'Ogbongedonoo',
-            accountNumber: '222222',
-            bank: { id: 0, name: 'aa', logo: '' },
-            id: 0,
-            canReceive: false,
-            canSend: false
-          },
-          origin: TransactionOrigin.ADMIN
-        },
-        {
-          date: new Date('2024-10-12'),
-          description: 'Payment for Invoice #9101',
-          amount: 250,
-          transactionType: TransactionType.CREDIT,
-          id: 2,
-          secondParty: {
-            firstName: 'Kennedy',
-            surname: 'Ogbongedonoo',
-            accountNumber: '222222',
-            bank: { id: 0, name: 'aa', logo: '' },
-            id: 0,
-            canReceive: false,
-            canSend: false
-          },
-          origin: TransactionOrigin.ADMIN
-        },
-      ];
-}
-export default useGetTransactions
+const useGetTransactions = (id: number) => {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const fetchTransactions = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`${API_ENDPOINTS.transaction.get}/${id}`, {
+          signal: controller.signal,
+        });
+        console.log(response)
+        setTransactions(response.data);
+      } catch (err: any) {
+        if (err.name !== "CanceledError") {
+          setError(err.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchTransactions();
+    }
+
+    return () => {
+      controller.abort();
+    };
+  }, [id]);
+
+  return { transactions, loading, error };
+};
+
+export default useGetTransactions;

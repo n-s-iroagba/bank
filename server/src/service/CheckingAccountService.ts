@@ -42,6 +42,7 @@ export class CheckingAccountService {
   
     static async getCheckingAccount(id: number) {
       const checkingAccount = await CheckingAccount.findByPk(id);
+      console.log('checkingAccount', checkingAccount)
       return checkingAccount;
     }
   

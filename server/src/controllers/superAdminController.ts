@@ -62,7 +62,7 @@ export const requestNewCode = async (req: Request, res: Response) => {
     });
 
     // Respond with the generated token
-    res.status(200).json({ token }); // It’s better to wrap the token in an object for clarity
+    res.status(200).json(token); // It’s better to wrap the token in an object for clarity
   } catch (error: any) {
     // Error handling
     console.error(error);

@@ -11,7 +11,7 @@ const EmailVerification = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [canResend, setCanResend] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(0); 
+  const [timeLeft, setTimeLeft] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const EmailVerification = () => {
     try {
       const token = JWTService.getEmailVerificationToken();
       const id = JWTService.decodeToken<any>(token).id;
-      const loginToken = await verifySuperAdminEmail(id, {code});
+      const loginToken = await verifySuperAdminEmail(id, { code });
       JWTService.saveLoginToken(loginToken);
       JWTService.removeEmailVerificationToken();
       alert('Verification successful');
@@ -56,7 +56,9 @@ const EmailVerification = () => {
       const emailToken = JWTService.getEmailVerificationToken();
       const id = JWTService.decodeToken<any>(emailToken).id;
       const token = await requestNewVerificationCode(id);
+
       JWTService.saveEmailVerificationToken(token);
+
       alert('Kindly check your email for a new code.');
     } catch (error) {
       console.error(error);
@@ -74,12 +76,12 @@ const EmailVerification = () => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          setCanResend(true); 
+          setCanResend(true);
           return 0;
         }
         return prevTime - 1;
       });
-    }, 1000); 
+    }, 1000);
   };
 
   useEffect(() => {

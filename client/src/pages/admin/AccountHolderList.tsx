@@ -11,7 +11,7 @@ import useBanks from "../../hooks/useBanks";
 const AccountHolderList: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
-  const adminId = 1
+  const adminId = 2
   const {accountHolders} = useAccountHolders(adminId)
   const {banks} = useBanks()
 

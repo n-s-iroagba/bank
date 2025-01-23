@@ -1,35 +1,63 @@
-import React, { useState } from 'react';
-import { Form, Button, Modal, ModalProps } from 'react-bootstrap';
-import { Bank } from '../types/Bank';
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { apiPatch } from "../api/api";
+import { API_ENDPOINTS } from "../api/urls";
 
-
-interface UpdateBankModalProps extends ModalProps {
-  onHide:()=>void;
-  bankToBeUpdated:Bank
-  show:boolean
+interface UpdateBankModalProps {
+  bankName: string;
+  existingLogoUrl: string;
+  show: boolean;
+  handleClose: () => void;
 }
 
-const UpdateBankModal: React.FC<UpdateBankModalProps> = ({ bankToBeUpdated, show, onHide }) => {
-  const [bankDetails, setBankDetails] = useState<Bank>(bankToBeUpdated);
+const UpdateBankModal: React.FC<UpdateBankModalProps> = ({
+  bankName,
+  existingLogoUrl,
+  show,
+  handleClose,
+}) => {
+  const [name, setName] = useState(bankName);
+  const [logo, setLogo] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState(existingLogoUrl);
+  const [isLogoChanged, setIsLogoChanged] = useState(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setBankDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      setLogo(file);
+      setPreviewUrl(URL.createObjectURL(file));
+      setIsLogoChanged(true);
+    }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
- 
-    onHide?.();
+
+    const formData = new FormData();
+    formData.append("name", name);
+    if (isLogoChanged && logo) {
+      formData.append("logo", logo);
+    }
+
+    try {
+      await apiPatch(`${API_ENDPOINTS.bank.update}/${1}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("Bank updated successfully!");
+      window.location.reload()
+      handleClose();
+    } catch (error) {
+      console.error("Error updating bank:", error);
+      alert("Failed to update bank.");
+    }
   };
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Bank Details</Modal.Title>
+        <Modal.Title>Update Bank</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -37,38 +65,37 @@ const UpdateBankModal: React.FC<UpdateBankModalProps> = ({ bankToBeUpdated, show
             <Form.Label>Bank Name</Form.Label>
             <Form.Control
               type="text"
-              name="name"
-              value={bankDetails.name}
-              onChange={handleChange}
-              placeholder="Enter bank name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group controlId="bankLogo" className="mt-3">
-            <Form.Label>Bank Logo</Form.Label>
+          <Form.Group>
+            <Form.Label>Logo</Form.Label>
+            <div className="mb-3">
+              {previewUrl && (
+                <img
+                  src={previewUrl}
+                  alt="Bank Logo"
+                  style={{ width: "150px", height: "150px" }}
+                />
+              )}
+            </div>
             <Form.Control
-              type="text"
-              name="logo"
-              value={bankDetails.logo}
-              onChange={handleChange}
-              placeholder="Enter logo URL"
-              required
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
             />
           </Form.Group>
 
-          <div className="d-flex justify-content-end mt-4">
-            <Button variant="secondary" className="me-2" onClick={onHide}>
-              Cancel
-            </Button>
-            <Button variant="primary" type="submit">
-              Create Bank
-            </Button>
-          </div>
+          <Button variant="primary" type="submit" className="mt-3">
+            Save
+          </Button>
         </Form>
       </Modal.Body>
     </Modal>
   );
 };
 
-export default UpdateBankModal
+export default UpdateBankModal;

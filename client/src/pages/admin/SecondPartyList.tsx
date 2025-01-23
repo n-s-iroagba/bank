@@ -8,13 +8,15 @@ import AdminDashboardLayout from "../../components/AdminDashboardLayout";
 import SecondPartyUploadModal from "../../components/SecondPartyUploadModal";
 import UpdateSecondPartyModal from "../../components/UpdateSecondPartyModal";
 
+
 const SecondPartyList: React.FC = () => {
   const [selectedSecondParty, setSelectedSecondParty] =
     useState<SecondParty | null>(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const { banks, bankLoading } = useBanks();
+   const { banks, bankLoading } = useBanks();
+
   const adminId = 1
   const {secondParties} = useSecondParty(adminId);
 
@@ -27,16 +29,24 @@ const SecondPartyList: React.FC = () => {
     const selected = secondParties.find((sp) => sp.id !== secondPartyId);
     selected && setSelectedSecondParty(selected);
   };
+  if (!banks.length &&!bankLoading)
+    return <AdminDashboardLayout adminId={adminId}>
+      <div className="d-flex justify-content-center">
+      <Alert className="text-center" variant="danger">Add Banks first</Alert>
+      </div>
+    </AdminDashboardLayout>
 
   return (
     <AdminDashboardLayout adminId={adminId}>
+      <div className="d-flex justify-content-center">
       <Button
-        variant="primary"
+        
         onClick={() => setShowCreateModal(true)}
-        className="mb-3"
+        className="mb-3 button-radius bg-blue"
       >
         Add Second Party
       </Button>
+      </div>
       <Accordion>
         {secondParties.map((secondParty, index) => (
           <Accordion.Item eventKey={index.toString()} key={secondParty.id}>

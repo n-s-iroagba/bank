@@ -14,24 +14,21 @@ export class SecondPartyController {
       const newSecondParty = await SecondPartyService.createSecondParty(adminId,data);
       res.status(201).json(newSecondParty);
     } catch (error: any) {
+
+      console.error(error)
       res.status(500).json({ message: error.message });
     }
   }
 
   static async uploadBulkSecondParties(req: Request, res: Response): Promise<void> {
     const id = parseInt(req.params.id);
-
-    if (!req.file) {
-      res.status(400).json({ message: "No file uploaded." });
-      return; // Ensure void is returned here
-    }
+    const {data} = req.body
+    console.log(id)
 
     try {
-      const workbook = xlsx.readFile(req.file.path);
-      const sheetName = workbook.SheetNames[0];
-      const sheetData: any[] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+   
 
-      const result = await SecondPartyService.bulkCreateSecondParties(sheetData, id);
+      const result = await SecondPartyService.bulkCreateSecondParties(data, id);
 
       res.status(201).json({ message: `Successfully uploaded ${result.length} second parties.` });
     } catch (error: any) {

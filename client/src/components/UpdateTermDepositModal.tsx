@@ -41,7 +41,7 @@ const UpdateTermDepositModal: React.FC<{
             <Form.Label>Start Date</Form.Label>
             <Form.Control
               type="date"
-              value={depositDate ? depositDate.toISOString().split("T")[0] : ""}
+              value={depositDate ? new Date(depositDate).toISOString().split("T")[0] : ""}
               onChange={(e) => setdepositDate(new Date(e.target.value))}
             />
           </Form.Group>
@@ -49,7 +49,7 @@ const UpdateTermDepositModal: React.FC<{
             <Form.Label>Duration (Days)</Form.Label>
             <Form.Control
               type="date"
-              value={payoutDate ? payoutDate.toISOString().split("T")[0] : ""}
+              value={payoutDate ? new Date(payoutDate).toISOString().split("T")[0] : ""}
               onChange={(e) => setPayoutDate(new Date(e.target.value))}
             />
           </Form.Group>
