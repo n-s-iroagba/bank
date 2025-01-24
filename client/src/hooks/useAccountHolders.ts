@@ -18,7 +18,7 @@ const useAccountHolders = (adminId: number | null): UseAccountHoldersResult => {
     if (adminId !== null) {
       const fetchAccountHolders = async () => {
         setLoading(true);
-        alert(adminId)
+  
         try {
           const data = await getAccountHoldersByAdminId(adminId);
           setAccountHolders(data);

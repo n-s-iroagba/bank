@@ -17,7 +17,7 @@ interface NavItem {
 }
 
 
-const SideBarLayout :React.FC<{navItems:NavItem[],children:React.ReactNode,superAdminId?:number}> =({
+const SideBarLayout :React.FC<{navItems:NavItem[],children:React.ReactNode,superAdminId:number|null}> =({
   children,
   navItems,
   superAdminId
@@ -43,26 +43,16 @@ const SideBarLayout :React.FC<{navItems:NavItem[],children:React.ReactNode,super
         <Offcanvas.Body>
           <Nav className="flex-column">
             {
-              superAdminId && (
-                <>
+              superAdminId && 
                <Nav.Link
                 as={Link}
                 to={`/super-admin/admins/${superAdminId}`}
                >
                 <FontAwesomeIcon icon ={faUsersRectangle} className="me-2" />
                   My Admins
-               </Nav.Link>
-                <Nav.Link
-                 as={Link}
-                 to={'/super-admin/banks'}
-                >
-                <FontAwesomeIcon icon ={faUsersRectangle} className="me-2" />
-                  Banks
-               </Nav.Link>
-               </>
-               
-              )
+               </Nav.Link>   
             }
+               
             {navItems.map((item) => (
               <Nav.Link
                 as={Link}
@@ -74,6 +64,7 @@ const SideBarLayout :React.FC<{navItems:NavItem[],children:React.ReactNode,super
                 {item.label}
               </Nav.Link>
             ))}
+            
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>

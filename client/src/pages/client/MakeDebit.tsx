@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { Form, Dropdown, ListGroup, Button, Col, Row } from 'react-bootstrap';
 import AccountBox from '../../components/AccountBox';
-import { Bank } from '../../types/Bank';
+
 import { SecondParty } from '../../types/SecondParty';
 import { CreateTransaction, TransactionType } from '../../types/Transaction';
 import logo from '../../assets/images/greater-texas-cu-icon.svg'
+import useSecondParty from '../../hooks/useSecondParty';
+import useBanks from '../../hooks/useBanks';
 
 
 
@@ -16,11 +18,7 @@ type AccountDetails={
 }
 
 
-const banks:Bank[] = [
-  { id: 1, name: 'Bank A', logo: 'path/to/logoA.png' },
-  { id: 2, name: 'Bank B', logo: 'path/to/logoB.png' },
-  { id: 3, name: 'Bank C', logo: 'path/to/logoC.png' },
-];
+
 
 const MakeDebit: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -33,17 +31,18 @@ const MakeDebit: React.FC = () => {
       id: 0,
       firstName: '',
       surname:'',
-      bank:{ id: 0, name: 'BANK', logo: '' },
+      bank:{ id: 0, name: 'BANK', logo: '',listerId:'' },
       accountNumber: '',
-      canReceive: true,
-      canSend: false,
     },
   });
+  const {secondParties} = useSecondParty(1);
+  const {banks} = useBanks()
   const accountDetails:AccountDetails = {
     accountName:'Fred Mecury',
     accountNumber: 1234567890,
   }
-  const receivers:SecondParty[]=[]
+
+ 
   // const { banks, loading, error } = useBanks();
   const handlereceiverClick = (receiver: SecondParty) => {
     setTransferDetails(prevDetails => ({
@@ -86,8 +85,8 @@ const MakeDebit: React.FC = () => {
     }));
   };
   
-  const filteredReceivers = receivers.filter(receiver =>
-    (receiver.firstName.toLowerCase().includes(searchTerm.toLowerCase())|| receiver.surname.toLowerCase().includes(searchTerm.toLowerCase())) && receiver.canReceive
+  const filteredsecondParties = secondParties.filter(receiver =>
+    (receiver.firstName.toLowerCase().includes(searchTerm.toLowerCase())|| receiver.surname.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -121,7 +120,7 @@ const MakeDebit: React.FC = () => {
         />
         {searchTerm && (
           <ListGroup className="dropdown-list">
-            {filteredReceivers.map((receiver) => (
+            {filteredsecondParties.map((receiver) => (
               <ListGroup.Item
                 key={receiver.id}
                 onClick={() => handlereceiverClick(receiver)}

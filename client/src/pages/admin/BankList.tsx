@@ -7,15 +7,16 @@ import UpdateBankModal from "../../components/UpdateBankModal";
 import BankUploadModal from "../../components/BankUploadModal";
 import { API_ENDPOINTS } from "../../api/urls";
 import { apiDelete } from "../../api/api";
+import useAuth from "../../hooks/useAuth";
 
 const BankList = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
-  const adminId = '1';
+  const {superAdminId, adminId}= useAuth()
   const { banks } = useBanks();
 
   const handleEditClick = (bank: Bank) => {
-    if (adminId === bank.listerId) {
+    if (adminId === Number(bank.listerId)) {
       setSelectedBank(bank);
       setShowModal(true);
     } else {
@@ -24,7 +25,7 @@ const BankList = () => {
   };
 
   const handleDeleteClick = async (bank: Bank) => {
-    if (adminId === bank.listerId) {
+    if (adminId === Number(bank.listerId)) {
       if (window.confirm("Are you sure you want to delete this bank?")) {
         try {
           await apiDelete(`${API_ENDPOINTS.bank.delete}/${bank.id}`)
@@ -41,7 +42,7 @@ const BankList = () => {
   }
     return (
       <>
-        <AdminDashboardLayout adminId={adminId}>
+        <AdminDashboardLayout superAdminId={superAdminId} >
           <div className="d-flex justify-content-center mb-3">
             <Button className="button-radius bg-blue button-width" onClick={() => setShowModal(true)}>
               Add Bank

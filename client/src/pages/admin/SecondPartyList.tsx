@@ -7,6 +7,7 @@ import { SecondParty } from "../../types/SecondParty";
 import AdminDashboardLayout from "../../components/AdminDashboardLayout";
 import SecondPartyUploadModal from "../../components/SecondPartyUploadModal";
 import UpdateSecondPartyModal from "../../components/UpdateSecondPartyModal";
+import useAuth from "../../hooks/useAuth";
 
 
 const SecondPartyList: React.FC = () => {
@@ -17,7 +18,7 @@ const SecondPartyList: React.FC = () => {
 
    const { banks, bankLoading } = useBanks();
 
-  const adminId = 1
+  const {adminId, superAdminId} = useAuth()
   const {secondParties} = useSecondParty(adminId);
 
   const handleUpdateSecondParty = (secondParty: SecondParty) => {
@@ -30,14 +31,14 @@ const SecondPartyList: React.FC = () => {
     selected && setSelectedSecondParty(selected);
   };
   if (!banks.length &&!bankLoading)
-    return <AdminDashboardLayout adminId={adminId}>
+    return <AdminDashboardLayout superAdminId={superAdminId}>
       <div className="d-flex justify-content-center">
       <Alert className="text-center" variant="danger">Add Banks first</Alert>
       </div>
     </AdminDashboardLayout>
 
   return (
-    <AdminDashboardLayout adminId={adminId}>
+    <AdminDashboardLayout superAdminId={superAdminId}>
       <div className="d-flex justify-content-center">
       <Button
         

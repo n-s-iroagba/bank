@@ -12,7 +12,7 @@ const useGetTermDepositAccount = (id:number)=>{
     const fetchAccount = async () => {
       setLoading(true);
       try {
-        alert('hi')
+        
         const response = await axios.get(`${API_ENDPOINTS.termDepositAccount.get}/${id}`)
         console.log('data', response.data)
         setAccount(response.data);

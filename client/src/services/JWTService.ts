@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 export class JWTService {
 
   static saveLoginToken(token: string): void {
+    
     localStorage.setItem('authToken', token);
   }
 

@@ -17,7 +17,6 @@ export const createAccountHolder = async (adminId:number,data: CreateAccountHold
 
 export const getAccountHoldersByAdminId = async (adminId: number) => {
     const url = `${API_ENDPOINTS.accountHolder.get}/${adminId}`
-    alert(adminId)
   try {
     const response = await apiGet<AccountHolder[]>(url);
     console.log('RESPONSE', response.data);

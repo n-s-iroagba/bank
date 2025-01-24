@@ -3,7 +3,7 @@ import { Transaction } from "../types/Transaction";
 import { API_ENDPOINTS } from "../api/urls";
 import axios from "axios";
 
-const useGetTransactions = (id: number) => {
+const useGetTransactions = (id: string) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

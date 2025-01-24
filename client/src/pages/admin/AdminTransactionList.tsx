@@ -3,14 +3,15 @@ import { Accordion, Button, Modal, Form } from "react-bootstrap";
 import { Transaction, TransactionType} from "../../types/Transaction";
 import AccountHolderLayout from "../../components/AccountHolderLayout";
 import useGetTransactions from "../../hooks/useGetTransactions";
+import { useParams } from "react-router-dom";
 
 
 const AdminTransactionList: React.FC = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
-
-  const {transactions} = useGetTransactions(1)
+  const {id} = useParams<{id:string}>()
+  const {transactions} = useGetTransactions(id as string)
 
   const handleEdit = (transaction: Transaction) => {
     setSelectedTransaction(transaction);
@@ -34,7 +35,7 @@ const AdminTransactionList: React.FC = () => {
   };
 
   return (
-    <AccountHolderLayout>
+    <AccountHolderLayout accountHolderId={id as string}>
       <Accordion>
         {transactions.map((transaction) => (
           <Accordion.Item eventKey={String(transaction.id)} key={transaction.id}>
@@ -42,11 +43,11 @@ const AdminTransactionList: React.FC = () => {
               {transaction.description} - ${transaction.amount.toFixed(2)}
             </Accordion.Header>
             <Accordion.Body>
-              <p><strong>Date:</strong> {new Date (transaction.date).toDateString()}</p>
+              {/* <p><strong>Date:</strong> {new Date (transaction.date).toDateString()}</p>
               <p><strong>Type:</strong> {transaction.transactionType}</p>
               <p><strong>Origin:</strong> {transaction.origin || "N/A"}</p>
               <p><strong>Second Party:</strong> {transaction.secondParty.firstName} {transaction.secondParty.surname}</p>
-              <p><strong>Account Number:</strong> {transaction.secondParty.accountNumber}</p>
+              <p><strong>Account Number:</strong> {transaction.secondParty.accountNumber}</p> */}
               <Button variant="primary" onClick={() => handleEdit(transaction)}>
                 Edit
               </Button>{" "}

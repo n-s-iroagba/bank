@@ -5,6 +5,8 @@ import { Request, Response } from 'express';
 import { TransactionService } from '../service/TransactionService';
 import { CreateTransactionSystem } from '../types/TransactionType';
 import { Transaction } from '../models/Transaction';
+import { AccountHolder } from '../models/AccountHolder';
+import { CheckingAccount } from '../models/CheckingAccount';
 
 export class TransactionController {
   static async updateTransfer(req: Request, res: Response) {
@@ -50,8 +52,12 @@ export class TransactionController {
          throw new Error('Id is required');
         
       }
-
-      const transactions = await Transaction.findAll({ where: { accountId: id } });
+  
+     const accountHolder = await AccountHolder.findByPk(id)
+     const checkingAccount = await CheckingAccount.findOne({where:{
+        accountHolderId:accountHolder?.id
+     }})
+      const transactions = await Transaction.findAll({ where: { accountId: checkingAccount?.id} });
       res.status(200).json(transactions);
     } catch (error: any) {
       console.error(error);

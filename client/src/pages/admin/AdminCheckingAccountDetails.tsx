@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CreditDebitModal from "../../components/CreditDebitModal";
 import UpdateCheckingAccountModal from "../../components/UpdateCheckingAccountModal";
 import {UpdateCheckingAccount } from "../../types/CheckingAccount";
@@ -15,9 +15,9 @@ const AdminCheckingAccountDetails: React.FC =()  => {
   const [isTransferVisible, setIsTransferVisible] = useState(false);
   const [showOperationModal, setShowOperationModal] = useState(false);
   const navigate = useNavigate()
-  const accountHolderId =1
+  const {id} = useParams<{id:string}>()
 
-  const {account} = useCheckingAccount(accountHolderId)
+  const {account} = useCheckingAccount(id as string)
 
   const handleUpdateCheckingAccount = () => {
     setShowUpdateCheckingAccountModal(true);
@@ -38,7 +38,7 @@ const AdminCheckingAccountDetails: React.FC =()  => {
 
   return (
     <>
-    <AccountHolderLayout >
+    <AccountHolderLayout accountHolderId = {id as string} >
    
           <div>Checking Account ID: {account?.id}</div>
          
