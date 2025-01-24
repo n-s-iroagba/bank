@@ -14,6 +14,7 @@ const BankList = () => {
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const {superAdminId, adminId}= useAuth()
   const { banks } = useBanks();
+  console.log(adminId)
 
   const handleEditClick = (bank: Bank) => {
     if (adminId === Number(bank.listerId)) {
@@ -98,7 +99,9 @@ const BankList = () => {
           )}
           {showModal && !selectedBank && (
             <BankUploadModal
-              show={showModal} onClose={() => setShowModal(false)}
+              show={showModal} 
+              listerId={adminId}
+              onClose={() => setShowModal(false)}
             />
           )}
         </AdminDashboardLayout>

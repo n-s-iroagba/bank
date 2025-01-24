@@ -7,9 +7,11 @@ interface Bank {
   logo: File | null;
 }
 
-const BankUploadModal: React.FC<{ show: boolean; onClose: () => void }> = ({
+const BankUploadModal: React.FC<{ show: boolean; onClose: () => void,
+  listerId:number }> = ({
   show,
   onClose,
+  listerId
 }) => {
   const [banks, setBanks] = useState<Bank[]>([{ name: "", logo: null }]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,7 +54,7 @@ const BankUploadModal: React.FC<{ show: boolean; onClose: () => void }> = ({
     formData.append("banks", JSON.stringify(tempBanks));
 
     try {
-      const response = await fetch(`${API_ENDPOINTS.bank.create}/${1}`, {
+      const response = await fetch(`${API_ENDPOINTS.bank.create}/${listerId}`, {
         method: "POST",
         body: formData,
       });
