@@ -116,7 +116,7 @@ const SideBarLayout :React.FC<{navItems:NavItem[],children:React.ReactNode,super
 
         {/* Main content */}
         <Col lg={8} className="p-4">
-        <div className="d-flex d-lg-none mb-2">
+        <div className="d-flex d-lg-none align-items-center mb-2">
         <Button
         variant="light"
         className="d-lg-none me-2  "
@@ -124,7 +124,7 @@ const SideBarLayout :React.FC<{navItems:NavItem[],children:React.ReactNode,super
       >
         <FontAwesomeIcon icon={sidebarOpen ? faTimes : faBars} />
       </Button>
-        <h4 className="d-lg-none w-100 text-center">Admin Dashoboard</h4>
+        <h4 className="text-center w-100 position-absolute">Admin Dashboard</h4>
         </div>
           {children}
         </Col>
