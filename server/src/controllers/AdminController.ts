@@ -10,8 +10,8 @@ export class AdminController {
     const { username, password } = req.body;
 
     try {
-      const { token } = await AdminService.loginAdmin(username, password);
-      res.status(200).json({ token });
+      const token  = await AdminService.loginAdmin(username, password);
+      res.status(200).json(token);
     } catch (error: any) {
       console.error(error)
       res.status(401).json({ message: error.message });

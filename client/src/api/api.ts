@@ -23,7 +23,7 @@ export async function apiPost<T, U>(url: string, data: U, config?: AxiosRequestC
 
 // PATCH request
 export async function apiPatch<T, U>(url: string, data: U, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
-  alert(data)
+
   const response = await axiosClient.patch<T>(url, data, config);
   return { data: response.data, status: response.status };
 }

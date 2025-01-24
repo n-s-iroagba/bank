@@ -25,7 +25,7 @@ const UpdateSecondPartyModal: React.FC<{adminId:number, show:boolean, secondPart
     const selectedBank = banks.find((bank) => bank.name === event.target.value);
     setSecondPartyDetails((prevDetails) => ({
       ...prevDetails,
-      bank: selectedBank || { id: 0, name: '', logo: '' },
+      bank: selectedBank || { id: 0, name: '', logo: '',listerId:"" },
     }));
   };
 
@@ -97,27 +97,7 @@ const UpdateSecondPartyModal: React.FC<{adminId:number, show:boolean, secondPart
 
   
 
-          <Form.Group controlId="canReceive" className="mt-3">
-            <Form.Label>Can Receive</Form.Label>
-            <div>
-              <Form.Check
-                inline
-                type="radio"
-                label="Yes"
-                name="canReceive"
-                checked={secondPartyDetails.canReceive === true}
-                onChange={() => setSecondPartyDetails({ ...secondPartyDetails, canReceive: true })}
-              />
-              <Form.Check
-                inline
-                type="radio"
-                label="No"
-                name="canReceive"
-                checked={secondPartyDetails.canReceive === false}
-                onChange={() => setSecondPartyDetails({ ...secondPartyDetails, canReceive: false })}
-              />
-            </div>
-          </Form.Group>
+      
 
           <div className="d-flex justify-content-end mt-4">
             <Button variant="secondary" className="me-2" onClick={() =>onHide()}>

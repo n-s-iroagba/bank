@@ -4,7 +4,7 @@ import { API_ENDPOINTS } from "../api/urls";
 import axios from "axios";
 
 
-const useCheckingAccount = (id: number) => {
+const useCheckingAccount = (id: string) => {
     const [account, setAccount] = useState<CheckingAccount | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -13,7 +13,7 @@ const useCheckingAccount = (id: number) => {
       const checkingAccount = async () => {
         setLoading(true);
         try {
-          alert('hi')
+          
           const response = await axios.get(`${API_ENDPOINTS.checkingAccount.get}/${id}`)
           setAccount(response.data);
         } catch (err:any) {

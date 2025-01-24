@@ -8,7 +8,7 @@ const TransactionList: React.FC<{
   checkingAccountId:number
 }> = ({checkingAccountId}) => {
   const navigate = useNavigate();
-  const transactions = useGetTransactions(checkingAccountId)
+  const {transactions} = useGetTransactions(String(checkingAccountId))
 
   const handleNavigateToDetail = (transactionId: number) => {
     navigate(`/transaction-detail/${transactionId}`);

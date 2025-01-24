@@ -98,8 +98,8 @@ static deleteAdminBySuperAdmin = async (adminId: number) => {
     }
 
     // If credentials are valid, generate a JWT
-    const token = JWTService.generateToken({ id: admin.id, username: admin.username });
+    const token = JWTService.generateToken({ adminId: admin.id, username: admin.username });
 
-    return { token };
+    return  token ;
   }
 }

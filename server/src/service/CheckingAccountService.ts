@@ -41,7 +41,9 @@ export class CheckingAccountService {
     }
   
     static async getCheckingAccount(id: number) {
-      const checkingAccount = await CheckingAccount.findByPk(id);
+      const checkingAccount = await CheckingAccount.findOne({where:{
+        accountHolderId:id
+      }});
       console.log('checkingAccount', checkingAccount)
       return checkingAccount;
     }

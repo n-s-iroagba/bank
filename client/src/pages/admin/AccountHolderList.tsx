@@ -5,13 +5,14 @@ import useAccountHolders from "../../hooks/useAccountHolders";
 import AccountHolderModal from "../../components/AccountHolderModal";
 import { useState } from "react";
 import useBanks from "../../hooks/useBanks";
+import useAuth from "../../hooks/useAuth";
 
 
 
 const AccountHolderList: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
-  const adminId = 2
+  const {adminId, superAdminId} = useAuth()
   const {accountHolders} = useAccountHolders(adminId)
   const {banks} = useBanks()
 
@@ -26,9 +27,8 @@ const AccountHolderList: React.FC = () => {
    
     }
   }
-
   return (
-    <AdminDashboardLayout  adminId={adminId} >
+    <AdminDashboardLayout superAdminId={superAdminId}>
     <div>
       <div className="d-flex justify-content-center mb-2">
         <button onClick={handleShowCreateModal}>Add Account Holders</button>

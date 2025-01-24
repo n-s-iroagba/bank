@@ -30,7 +30,7 @@ const AccountHolderDetails: React.FC<{}> = () => {
   };
 
   return (
-    <AccountHolderLayout id={0}>
+    <AccountHolderLayout accountHolderId={id as string}>
       <div>
         <h5>Account Holder Details</h5>
         <div>

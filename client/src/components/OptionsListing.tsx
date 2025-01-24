@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/OptionsListing.css'
 import { Alert } from 'react-bootstrap';
-import TransactionList from '../pages/common/TransactionList';
+import TransactionList from '../pages/client/TransactionList';
 import TermDepositDetails from './TermDepositDetails';
 
 

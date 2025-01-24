@@ -28,11 +28,10 @@ const AppRoutes: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path='/admin/account-holders/:id' element={<AccountHolderList/>}/>
-        <Route path='/super-admin/account-holders/:id' element={<AccountHolderList/>}/>
-        <Route path='/admin/second-parties/:id' element={<SecondPartyList />}/>
-        <Route path='/super-admin/banks' element={<BankList/>}/>
-        <Route path='/super-admin/admins/:id' element={<AdminList/>}/>
+        <Route path='/admin/account-holders' element={<AccountHolderList/>}/>
+        <Route path='/admin/second-parties/' element={<SecondPartyList />}/>
+        <Route path='/admin/banks' element={<BankList/>}/>
+        <Route path='/super-admin/admins/' element={<AdminList/>}/>
 
         <Route path='/admin/account-holder-details/:id' element={<AccountHolderDetails/>}/>
         <Route path='/admin/checking-account/:id' element={<AdminCheckingAccountDetails/>}/>

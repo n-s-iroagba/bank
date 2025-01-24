@@ -183,10 +183,11 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
     setSubmitting(true);
     try {
-      localStorage.setItem("loginToken", await loginAdmin(loginData));
+    JWTService.saveLoginToken(await loginAdmin(loginData));
+    console.log(JWTService.getLoginToken())
       isSuperAdmin
-        ? navigate("/super-admin/dashboard")
-        : navigate("/admin/dashboard");
+        ? navigate("/super-admin/account-holders")
+        : navigate("/admin/account-holders");
     } catch (error: any) {
       setErrorMessage("Sorry we can not log you in at this moment");
       console.error(error);

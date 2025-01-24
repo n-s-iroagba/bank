@@ -1,24 +1,25 @@
 import React from "react";
 import { faUser, faBank, faMoneyBillTransfer } from "@fortawesome/free-solid-svg-icons";
-import SadminIdeBarLayout from "./SideBarLayout";
+import SideBarLayout from "./SideBarLayout";
 
 interface AccountHolderLayoutProps {
   children: React.ReactNode;
+  accountHolderId:string
 }
 
-const AccountHolderLayout: React.FC<AccountHolderLayoutProps> = ({ children }) => {
-  const adminId = 2
+const AccountHolderLayout: React.FC<AccountHolderLayoutProps> = ({ children,accountHolderId }) => {
+  
   const accountHolderNavItems = [
-    { icon: faUser, label: "Account Holder Details", path: `/admin/account-holder-details/${adminId}` },
-    { icon: faBank, label: "Checking Account", path: `/admin/checking-account/${adminId}` },
-    { icon: faBank, label: "TermDeposit Account", path: `/admin/term-deposit-account/${adminId}` },
-    { icon: faMoneyBillTransfer, label: "Transactions", path: `/admin/transactions/${adminId}` },
+    { icon: faUser, label: "Account Holder Details", path: `/admin/account-holder-details/${accountHolderId}` },
+    { icon: faBank, label: "Checking Account", path: `/admin/checking-account/${accountHolderId}` },
+    { icon: faBank, label: "TermDeposit Account", path: `/admin/term-deposit-account/${accountHolderId}` },
+    { icon: faMoneyBillTransfer, label: "Transactions", path: `/admin/transactions/${accountHolderId}` },
   ];
 
   return (
-    <SadminIdeBarLayout navItems={accountHolderNavItems}>
+    <SideBarLayout superAdminId={null} navItems={accountHolderNavItems}>
       {children}
-    </SadminIdeBarLayout>
+    </SideBarLayout>
   );
 };
 
