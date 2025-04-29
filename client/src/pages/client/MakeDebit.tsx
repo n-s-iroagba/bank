@@ -133,16 +133,19 @@ const MakeDebit: React.FC = () => {
         )}
       </Form.Group>
       <br/>
-      <Form.Group controlId="bank">
-      <Dropdown>
-    <Dropdown.Toggle variant="light" id="dropdown-basic" className="sharp-input custom-dropdown-toggle">
+      <Form.Group  className='w-100 bg-danger' controlId="bank">
+      <Dropdown className='w-100'>
+    <Dropdown.Toggle    variant="light" id="dropdown-basic" style={{width:'100%'}}className="'w-100 bg-danger sharp-input custom-dropdown-toggle">
       {transferDetails.secondParty.bank?.name || 'BANK'}
     </Dropdown.Toggle>
-    <Dropdown.Menu>
+    <Dropdown.Menu
+    style={{width:'100%'}}
+    >
       {banks.map((bank) => (
         <Dropdown.Item
           key={bank.id}
           onClick={() => handleBankChange(bank.name)}
+          style={{width:'100%'}}
         >
           <img src={bank.logo} alt={bank.name} style={{ width: '20px', height: '20px', marginRight: '8px' }} />
           {bank.name}
