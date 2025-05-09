@@ -1,24 +1,47 @@
-import { ListGroup, Button } from "react-bootstrap";
-
+import { ListGroup, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import {  TransactionType } from "../../types/Transaction";
+import { TransactionType } from "../../types/Transaction";
 import useGetTransactions from "../../hooks/useGetTransactions";
+import { useState } from 'react';
 
-const TransactionList: React.FC<{
-  checkingAccountId:number
-}> = ({checkingAccountId}) => {
+const TransactionList: React.FC<{ checkingAccountId: number }> = ({ checkingAccountId }) => {
   const navigate = useNavigate();
-  const {transactions} = useGetTransactions(String(checkingAccountId))
+  const [filterType, setFilterType] = useState("");
+  const [filterDate, setFilterDate] = useState("");
+  const { transactions } = useGetTransactions(String(checkingAccountId));
 
   const handleNavigateToDetail = (transactionId: number) => {
     navigate(`/transaction-detail/${transactionId}`);
   };
 
- 
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilterType(event.target.value);
+  };
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterDate(event.target.value);
+  };
+
 
   return (
     <div>
-      <h5>Transactions</h5>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h4>Transaction History</h4>
+        <div>
+          <Form.Select className="me-2 d-inline-block w-auto" value={filterType} onChange={handleFilterChange}>
+            <option value="">All Types</option>
+            <option value="CREDIT">Credit</option>
+            <option value="DEBIT">Debit</option>
+          </Form.Select>
+          <Form.Control
+            type="date"
+            className="me-2 d-inline-block w-auto"
+            value={filterDate}
+            onChange={handleDateChange}
+            placeholder="Filter by date"
+          />
+        </div>
+      </div>
       <ListGroup>
         {transactions.map((transaction, index) => (
           <ListGroup.Item key={index} className="d-flex justify-content-between align-items-start">

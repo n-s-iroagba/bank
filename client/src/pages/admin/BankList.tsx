@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion, Button, Image } from "react-bootstrap";
 import useBanks from "../../hooks/useBanks";
 import AdminDashboardLayout from "../../components/AdminDashboardLayout";
@@ -8,9 +8,11 @@ import BankUploadModal from "../../components/BankUploadModal";
 import { API_ENDPOINTS } from "../../api/urls";
 import { apiDelete } from "../../api/api";
 import useAuth from "../../hooks/useAuth";
+import FixedDepositTermsModal from "../../components/FixedDepositTermsModal";
 
 const BankList = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const {superAdminId, adminId}= useAuth()
   const { banks } = useBanks();
@@ -44,9 +46,12 @@ const BankList = () => {
     return (
       <>
         <AdminDashboardLayout superAdminId={superAdminId} >
-          <div className="d-flex justify-content-center mb-3">
+          <div className="d-flex justify-content-center gap-3 mb-3">
             <Button className="button-radius bg-blue button-width" onClick={() => setShowModal(true)}>
               Add Bank
+            </Button>
+            <Button className="button-radius bg-blue button-width" onClick={() => setShowTermsModal(true)}>
+              Manage FD Terms
             </Button>
           </div>
 
@@ -104,6 +109,10 @@ const BankList = () => {
               onClose={() => setShowModal(false)}
             />
           )}
+          <FixedDepositTermsModal 
+            show={showTermsModal} 
+            onClose={() => setShowTermsModal(false)}
+          />
         </AdminDashboardLayout>
       </>
     );

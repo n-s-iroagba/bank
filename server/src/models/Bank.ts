@@ -8,7 +8,7 @@ export interface BankAttributes {
   name: string;
   logo: string;
   listerId:string;
-
+  themeColor: string;
 
 }
 
@@ -18,6 +18,7 @@ class Bank extends Model<BankAttributes, CreateBankAttributes> implements BankAt
   public id!: number;
   public name!: string;
   public logo!: string;
+  public themeColor!: string;
   public listerId!: string;
 }
 
@@ -39,6 +40,10 @@ Bank.init(
     listerId: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    themeColor: {
+      type: DataTypes.STRING,
+      allowNull: true, // Allow themeColor to be null
     }
   },
   {
