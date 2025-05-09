@@ -30,6 +30,7 @@ export class SuperAdmin extends Model<TSuperAdmin,CreationTSuperAdmin> {
   public adminIdentification?:number
   public verificationCode!: number|null ;
   public admins!: Admin[];  
+  public spyOnAdminId: number | null = null;
 }
 
 SuperAdmin.init(

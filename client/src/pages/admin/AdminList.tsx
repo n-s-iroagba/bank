@@ -6,12 +6,42 @@ import useAdmins from "../../hooks/useAdmins";
 import AdminDashboardLayout from "../../components/AdminDashboardLayout";
 import useAuth from "../../hooks/useAuth";
 
+const SpyControl = ({ superAdminId, adminId, isSpying, onSpyChange }) => {
+  const handleSpyChange = (event) => {
+    onSpyChange(event.target.checked);
+  };
+
+  return (
+    <div>
+      <label>
+        Spy on {adminId}:
+        <input
+          type="checkbox"
+          checked={isSpying}
+          onChange={handleSpyChange}
+          disabled={!superAdminId}
+        />
+      </label>
+    </div>
+  );
+};
+
+
 const AdminList = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState<BaseAdmin | null>(null);
+  const [admins, setAdmins] = useState([]); //Added state to manage admins locally.
 
   const { adminId, superAdminId } = useAuth();
-  const { admins } = useAdmins(adminId);
+  const { fetchAdmins } = useAdmins(adminId); //Assuming useAdmins now returns a function to fetch
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedAdmins = await fetchAdmins();
+      setAdmins(fetchedAdmins);
+    }
+    fetchData();
+  }, [fetchAdmins]);
 
   const handleEditClick = (admin: BaseAdmin) => {
     setSelectedAdmin(admin);
@@ -20,6 +50,7 @@ const AdminList = () => {
 
   const handleDeleteClick = (adminId: number) => {
     if (window.confirm("Are you sure you want to delete this admin?")) {
+      //Implementation to delete admin
     }
   };
 
@@ -54,6 +85,21 @@ const AdminList = () => {
                   >
                     Delete
                   </Button>
+                  {superAdminId && (
+                    <SpyControl
+                      superAdminId={superAdminId}
+                      adminId={admin.id}
+                      isSpying={admin.isBeingSpiedOn || false} // Provide default value
+                      onSpyChange={(isSpying) => {
+                        // Update local state, assuming server-side update happens concurrently
+                        setAdmins(admins.map((a) =>
+                          a.id === admin.id
+                            ? { ...a, isBeingSpiedOn: isSpying }
+                            : a
+                        ));
+                      }}
+                    />
+                  )}
                 </div>
               </Accordion.Body>
             </Accordion.Item>

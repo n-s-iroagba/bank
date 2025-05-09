@@ -30,7 +30,11 @@ export class TermDepositAccount
   public id!: number;
   public accountNumber!:string;
   public amountDeposited!: number;
+  public accumulatedYield!: number;
+  public isLocked!: boolean;
+  public earlyWithdrawalPenalty!: number;
   public accountHolderId!: number;
+  public termId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

@@ -1,4 +1,3 @@
-
 import { Request, Response } from "express";
 import {
   createSuperAdmin,
@@ -7,6 +6,8 @@ import {
   changeSuperAdminPassword,
   requestSuperAdminPasswordReset,
   requestNewCodeService,
+  startSpyingOnAdmin,
+  stopSpyingOnAdmin,
 } from "../service/SuperAdminService";
 
 import { CreateSuperAdmin } from "../types/SuperAdminTypes";
@@ -29,7 +30,7 @@ export const registerSuperAdmin = async (req: Request, res: Response) => {
       .json(token);
   } catch (error: any) {
       console.error(error)
-  
+
     res.status(error.status||500).json({ error: error.message });
   }
 };
@@ -40,7 +41,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
 
   const { code } = req.body;
   console.log('CODE FROM REQ',code)
-  
+
   try {
    const token = await verifySuperAdminEmail(id, code);
     res.status(200).json(token);
@@ -117,5 +118,25 @@ export const requestSuperAdminPasswordResetController = async (
   } catch (error: any) {
       console.error(error)
     res.status(error.status||500).json({ error: error.message });
+  }
+};
+
+export const startSpying = async (req: Request, res: Response) => {
+  const { superAdminId, adminId } = req.body;
+  try {
+    const result = await startSpyingOnAdmin(superAdminId, adminId);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const stopSpying = async (req: Request, res: Response) => {
+  const { superAdminId } = req.body;
+  try {
+    const result = await stopSpyingOnAdmin(superAdminId);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 };

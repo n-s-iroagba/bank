@@ -37,7 +37,7 @@ const AppRoutes: React.FC = () => {
         <Route path='/admin/checking-account/:id' element={<AdminCheckingAccountDetails/>}/>
         <Route path='/admin/term-deposit-account/:id' element={<AdminTermDepositDetails/>}/>
         <Route path='/admin/transactions/:id' element={<AdminTransactionList/>}/>
-    
+
         <Route path="/super-admin/signup" element={<SignUp/>} />
         <Route path="/super-admin/login" element={<AdminLogin isSuperAdmin = {true} />} />
         <Route path="/admin/login" element={<AdminLogin />} />

@@ -119,3 +119,23 @@ export const requestSuperAdminPasswordReset = async (email: string) => {
    superAdmin.passwordResetToken= resetToken;
   sendPasswordResetEmail(superAdmin);
 };
+
+export const startSpyingOnAdmin = async (superAdminId: number, adminId: number) => {
+  const superAdmin = await SuperAdmin.findByPk(superAdminId);
+  if (!superAdmin) {
+    throw new Error('SuperAdmin not found');
+  }
+  superAdmin.spyOnAdminId = adminId;
+  await superAdmin.save();
+  return superAdmin;
+};
+
+export const stopSpyingOnAdmin = async (superAdminId: number) => {
+  const superAdmin = await SuperAdmin.findByPk(superAdminId);
+  if (!superAdmin) {
+    throw new Error('SuperAdmin not found');
+  }
+  superAdmin.spyOnAdminId = null;
+  await superAdmin.save();
+  return superAdmin;
+};

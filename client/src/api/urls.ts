@@ -45,6 +45,10 @@ export const API_ENDPOINTS = {
         update: `${BASE_URL}/term-deposit-account/update`,
         get: `${BASE_URL}/term-deposit-account/get`,
     },
+    fixedDeposit: {
+        getTerms: `${BASE_URL}/fixed-deposit/terms`,
+        createTerm: `${BASE_URL}/fixed-deposit/terms/create`
+    },
     secondParty: {
         create: `${BASE_URL}/second-party/create`,
         bulkCreate: `${BASE_URL}/second-party/bulk-create`,

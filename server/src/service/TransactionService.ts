@@ -25,11 +25,11 @@ export class TransactionService {
             const randomIndex = Math.floor(Math.random() * secondParties.length);
             const secondParty = secondParties[randomIndex];
 
-           
+
             const randomTime = startTime + Math.random() * (endTime - startTime);
             const randomDate = new Date(randomTime);
 
-            await Transaction.create({
+            const transaction = await Transaction.create({
                 accountId: checkingAccountId,
                 date: randomDate,
                 description: `Transfer #${i + 1}`,
@@ -37,9 +37,18 @@ export class TransactionService {
                 origin: TransactionOrigin.SYSTEM,
                 amount: randomAmount,
                 transactionType: TransactionType.CREDIT,
+                status: 'pending' // Added status
             });
+
+            // Simulate transaction processing
+            setTimeout(async () => {
+                const statuses = ['completed', 'failed'];
+                const randomStatus = Math.random() > 0.2 ? statuses[0] : statuses[1];
+                transaction.status = randomStatus;
+                await transaction.save();
+            }, Math.random() * 5000 + 2000);
         }
-        
+
         return true;
     }
 
@@ -49,7 +58,7 @@ export class TransactionService {
             throw new Error('CheckingAccount not found')
         }
         checkingAccount.balance -= data.amount
-        await Transaction.create({
+        const transaction = await Transaction.create({
             accountId: checkingAccount.id,
             date: data.date,
             description: data.description,
@@ -57,8 +66,17 @@ export class TransactionService {
             origin: TransactionOrigin.CLIENT,
             amount: data.amount,
             transactionType: TransactionType.DEBIT,
-        })
+            status: 'pending' // Added status
+        });
+
+        // Simulate transaction processing
+        setTimeout(async () => {
+            const statuses = ['completed', 'failed'];
+            const randomStatus = Math.random() > 0.2 ? statuses[0] : statuses[1];
+            transaction.status = randomStatus;
+            await transaction.save();
+        }, Math.random() * 5000 + 2000);
+
         await checkingAccount.save()
     }
 }
-
