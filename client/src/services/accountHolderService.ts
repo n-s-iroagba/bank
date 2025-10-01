@@ -1,63 +1,86 @@
-import { apiDelete, apiGet, apiPatch, apiPost } from '../api/api';
-import { API_ENDPOINTS } from '../api/urls';
-import {  AccountHolder, CreateAccountHolder, UpdateAccountHolder } from '../types/AccountHolder';
+import { api } from './api';
+import { API_ROUTES } from '../config/apiRoutes';
+import { 
+  AccountHoldersResponse, 
+  AccountHolderResponse, 
+  CreateAccountHolderResponse, 
+  UpdateAccountHolderResponse,
+  AccountHolderDashboardResponse
+} from '../types/api';
+import { AccountHoldersQueryParams, CreateAccountHolderRequest, UpdateAccountHolderRequest } from '../types';
 
-export const createAccountHolder = async (adminId:number,data: CreateAccountHolder) => {
-  const url = `${API_ENDPOINTS.accountHolder.create}/${adminId}`
-    try {
-      const response = await apiPost<AccountHolder,CreateAccountHolder>(url, data);
-      console.log(response)
-      return response.data;
-    } catch (error: any) {
-      console.error(error)
-      throw new Error(error.response?.data?.message || 'Failed to update account holder');
-    }
-  };
-  
-
-export const getAccountHoldersByAdminId = async (adminId: number) => {
-    const url = `${API_ENDPOINTS.accountHolder.get}/${adminId}`
-  try {
-    const response = await apiGet<AccountHolder[]>(url);
-    console.log('RESPONSE', response.data);
+export const accountHoldersService = {
+  getAccountHolders: async (params: AccountHoldersQueryParams): Promise<AccountHoldersResponse> => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page) queryParams.append('page', params.page.toString());
+    if (params.limit) queryParams.append('limit', params.limit.toString());
+    if (params.search) queryParams.append('search', params.search);
+    if (params.firstName) queryParams.append('firstName', params.firstName);
+    if (params.lastName) queryParams.append('lastName', params.lastName);
+    if (params.email) queryParams.append('email', params.email);
+    
+    const response = await api.get(`${API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BASE}?${queryParams}`);
     return response.data;
-  } catch (error: any) {
-    console.error(error)
-    throw new Error(error.response?.data?.message || 'Failed to fetch account holders for admin');
+  },
+
+  getAccountHolder: async (id: number): Promise<AccountHolderResponse> => {
+    const response = await api.get(API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BY_ID(id));
+    return response.data;
+  },
+
+  createAccountHolder: async (data: CreateAccountHolderRequest): Promise<CreateAccountHolderResponse> => {
+    const response = await api.post(API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BASE, data);
+    return response.data;
+  },
+
+  updateAccountHolder: async (id: number, data: UpdateAccountHolderRequest): Promise<UpdateAccountHolderResponse> => {
+    const response = await api.put(API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BY_ID(id), data);
+    return response.data;
+  },
+
+  deleteAccountHolder: async (id: number): Promise<void> => {
+    await api.delete(API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BY_ID(id));
+  },
+
+  searchAccountHolders: async (query: string, page: number = 1, limit: number = 10): Promise<AccountHoldersResponse> => {
+    const queryParams = new URLSearchParams();
+    queryParams.append('search', query);
+    queryParams.append('page', page.toString());
+    queryParams.append('limit', limit.toString());
+    
+    const response = await api.get(`${API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BASE}?${queryParams}`);
+    return response.data;
+  },
+
+  getAccountHolderByUserId: async (userId: number): Promise<AccountHolderResponse> => {
+    const response = await api.get(`${API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BASE}/user/${userId}`);
+    return response.data;
+  },
+
+  getAccountHoldersWithAccounts: async (): Promise<AccountHoldersResponse> => {
+    const response = await api.get(`${API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BASE}/with-accounts`);
+    return response.data;
+  },
+
+  getAccountHolderDashboard: async (accountHolderId: number): Promise<AccountHolderDashboardResponse> => {
+    const response = await api.get(`${API_ROUTES.ACCOUNT_HOLDER.PROFILE.BASE}/dashboard/${accountHolderId}`);
+    return response.data;
+  },
+
+  // Account holder specific methods (for when they are logged in)
+  getMyProfile: async (): Promise<AccountHolderResponse> => {
+    const response = await api.get(API_ROUTES.ACCOUNT_HOLDER.PROFILE.BASE);
+    return response.data;
+  },
+
+  updateMyProfile: async (data: UpdateAccountHolderRequest): Promise<UpdateAccountHolderResponse> => {
+    const response = await api.put(API_ROUTES.ACCOUNT_HOLDER.PROFILE.BASE, data);
+    return response.data;
+  },
+
+  getMyAccounts: async (): Promise<AccountHoldersResponse> => {
+    const response = await api.get(API_ROUTES.ACCOUNT_HOLDER.ACCOUNTS.BASE);
+    return response.data;
   }
 };
-
-export const getAccountHolder = async (id:string)=>{
-  const url = `${API_ENDPOINTS.accountHolder.getDetails}/${id}`
-  console.log(id)
-  try {
-    const response = await apiGet<AccountHolder>(url);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to fetch account holder');
-  }
-}
-
-
-export const updateAccountHolder = async (accountHolderId:number,data: UpdateAccountHolder) => {
-    const url = `${API_ENDPOINTS.accountHolder.update}/${accountHolderId}`
-  try {
-    const response = await apiPatch<AccountHolder,UpdateAccountHolder>(url, data);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update account holder');
-  }
-};
-
-
-export const deleteAccountHolder = async (accountHolderId: number) => {
-      const url = `${API_ENDPOINTS.accountHolder.delete}/${accountHolderId}`
-  try {
-    const response = await apiDelete<string>(url);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to delete account holder');
-  }
-};
-
-

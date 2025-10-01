@@ -1,0 +1,507 @@
+/* ============================================
+   Account Holder Form Modal - Slate & Red Theme
+   ============================================ */
+
+/* Theme Variables */
+:root {
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
+}
+
+/* ============================================
+   Modal Customization
+   ============================================ */
+
+.account-holder-modal .modal-content {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.account-holder-modal .modal-dialog {
+  max-width: 800px;
+}
+
+/* ============================================
+   Modal Header
+   ============================================ */
+
+.modal-header-custom {
+  background: linear-gradient(135deg, var(--slate-800), var(--slate-700), var(--red-900));
+  color: white;
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: none;
+}
+
+.modal-header-custom .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.modal-header-custom .btn-close:hover {
+  opacity: 1;
+}
+
+.modal-title-custom h4 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.modal-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.modal-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   Modal Body
+   ============================================ */
+
+.modal-body-custom {
+  padding: 2rem;
+  background: var(--slate-50);
+}
+
+/* ============================================
+   Form Sections
+   ============================================ */
+
+.form-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--slate-200);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--slate-100);
+}
+
+.section-icon {
+  color: var(--red-600);
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin: 0;
+}
+
+/* ============================================
+   Form Groups & Labels
+   ============================================ */
+
+.custom-form-group {
+  position: relative;
+}
+
+.custom-label {
+  font-weight: 600;
+  color: var(--slate-700);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.required-asterisk {
+  color: var(--red-600);
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
+/* ============================================
+   Input Styling
+   ============================================ */
+
+.input-icon-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--slate-400);
+  z-index: 2;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.textarea-icon {
+  top: 16px;
+  transform: none;
+}
+
+.custom-input {
+  padding-left: 44px;
+  padding-right: 14px;
+  height: 48px;
+  border: 2px solid var(--slate-200);
+  border-radius: 10px;
+  background-color: var(--slate-50);
+  color: var(--slate-900);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.custom-input:focus {
+  background-color: white;
+  border-color: var(--red-600);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+  outline: none;
+}
+
+.custom-input:focus + .input-icon,
+.input-icon-wrapper:focus-within .input-icon {
+  color: var(--red-600);
+}
+
+.custom-input.is-invalid {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.custom-input.is-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.1);
+  border-color: #dc3545;
+}
+
+.custom-textarea {
+  padding-top: 14px;
+  padding-left: 44px;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.custom-input:disabled {
+  background-color: var(--slate-100);
+  color: var(--slate-500);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.custom-input::placeholder {
+  color: var(--slate-400);
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   Feedback Messages
+   ============================================ */
+
+.custom-feedback {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.custom-hint {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--slate-500);
+  font-style: italic;
+}
+
+/* ============================================
+   Alert Customization
+   ============================================ */
+
+.custom-alert-danger {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border: 2px solid var(--red-200);
+  border-radius: 12px;
+  color: var(--red-800);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.1);
+}
+
+.custom-alert-danger .alert-heading {
+  color: var(--red-900);
+  font-weight: 700;
+}
+
+/* ============================================
+   Modal Footer
+   ============================================ */
+
+.modal-footer-custom {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-top: 2px solid var(--slate-100);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* ============================================
+   Button Customization
+   ============================================ */
+
+.btn-cancel-custom,
+.btn-submit-custom {
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+
+.btn-cancel-custom {
+  background-color: var(--slate-200);
+  color: var(--slate-700);
+  border: 2px solid var(--slate-300);
+}
+
+.btn-cancel-custom:hover:not(:disabled) {
+  background-color: var(--slate-300);
+  color: var(--slate-800);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit-custom {
+  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);
+}
+
+.btn-submit-custom:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--red-700), var(--red-800));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px -2px rgba(220, 38, 38, 0.4);
+}
+
+.btn-cancel-custom:disabled,
+.btn-submit-custom:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit-custom .spinner-border {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  .account-holder-modal .modal-dialog {
+    margin: 0.5rem;
+  }
+
+  .modal-header-custom {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .modal-title-custom h4 {
+    font-size: 1.5rem;
+  }
+
+  .modal-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    margin-right: 0.75rem;
+  }
+
+  .modal-body-custom {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-section {
+    padding: 1.25rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .modal-footer-custom {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .btn-cancel-custom,
+  .btn-submit-custom {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-title-custom h4 {
+    font-size: 1.25rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .custom-input {
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  .section-header {
+    flex-wrap: wrap;
+  }
+
+  .section-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+/* ============================================
+   Smooth Animations
+   ============================================ */
+
+.account-holder-modal .modal-content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Focus States Enhancement
+   ============================================ */
+
+.custom-input:focus-visible {
+  outline: none;
+}
+
+.btn-cancel-custom:focus-visible,
+.btn-submit-custom:focus-visible {
+  outline: 3px solid var(--red-600);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   Input Hover States
+   ============================================ */
+
+.custom-input:not(:disabled):not(.is-invalid):hover {
+  border-color: var(--slate-300);
+  background-color: white;
+}
+
+/* ============================================
+   Validation States Enhancement
+   ============================================ */
+
+.was-validated .custom-input:valid,
+.custom-input.is-valid {
+  border-color: #198754;
+  background-color: #f0fdf4;
+}
+
+.was-validated .custom-input:valid:focus,
+.custom-input.is-valid:focus {
+  box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.1);
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.btn-submit-custom:disabled .spinner-border {
+  margin-right: 0.5rem;
+}
+
+/* ============================================
+   Backdrop Enhancement
+   ============================================ */
+
+.account-holder-modal .modal-backdrop {
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+.modal-body-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body-custom::-webkit-scrollbar-track {
+  background: var(--slate-100);
+  border-radius: 10px;
+}
+
+.modal-body-custom::-webkit-scrollbar-thumb {
+  background: var(--slate-400);
+  border-radius: 10px;
+}
+
+.modal-body-custom::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-500);
+}

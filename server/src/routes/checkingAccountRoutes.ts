@@ -1,16 +1,28 @@
-import express from 'express';
-import { CheckingAccountController } from '../controllers/CheckingAccountController';
+import { Router } from 'express';
+import {
+  createCheckingAccount,
+  getCheckingAccount,
+  getCheckingAccountsByAccountHolder,
+  getAllCheckingAccounts,
+  updateCheckingAccount,
+  deleteCheckingAccount,
+} from '../controllers/checkingAccountController';
+import {
+  createCheckingAccountSchema,
+  updateCheckingAccountSchema,
+  checkingAccountIdSchema,
+  checkingAccountQuerySchema,
+  accountHolderIdParamSchema,
+} from '../validations/checkingAccountValidation';
+import { validate } from '../middleware/validation';
 
+const router = Router();
 
-const checkingAccountRoutes = express.Router();
+router.post('/', validate(createCheckingAccountSchema), createCheckingAccount);
+router.get('/', validate(checkingAccountQuerySchema), getAllCheckingAccounts);
+router.get('/account-holder/:accountHolderId', validate(accountHolderIdParamSchema), getCheckingAccountsByAccountHolder);
+router.get('/:id', validate(checkingAccountIdSchema), getCheckingAccount);
+router.put('/:id', validate(updateCheckingAccountSchema), updateCheckingAccount);
+router.delete('/:id', validate(checkingAccountIdSchema), deleteCheckingAccount);
 
-checkingAccountRoutes.patch('/no-transaction/:id', CheckingAccountController.editBalanceAccountWithoutTransaction);
-
-checkingAccountRoutes.patch('/with-transaction/:id', CheckingAccountController.editBalanceAccountWithTransaction);
-
-checkingAccountRoutes.get('/get/:id', CheckingAccountController.getCheckingAccount);
-
-checkingAccountRoutes.patch('/debit/:id', CheckingAccountController.debitAccount);
-checkingAccountRoutes.post('/update/:id', CheckingAccountController.updateCheckingAccount)
-
-export default checkingAccountRoutes;
+export default router;

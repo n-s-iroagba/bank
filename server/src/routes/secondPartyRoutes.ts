@@ -1,14 +1,19 @@
-
 import { Router } from 'express';
-import { SecondPartyController } from '../controllers/SecondPartyController';
-import { upload } from '../config/multer';
+import { createSecondParty, getAllSecondParties, getSecondPartiesByBank, getSecondParty, updateSecondParty, deleteSecondParty, bulkCreateSecondPartiesFromForm, bulkCreateSecondPartiesFromExcel } from '../controllers/secondPartyController';
+import { upload } from '../middleware/upload';
+import { validate } from '../middleware/validation';
+import { createSecondPartySchema, secondPartyQuerySchema, secondPartyIdSchema, updateSecondPartySchema, bulkCreateSecondPartiesSchema } from '../validations/secondPartyValidation';
 
-const secondPartyRouter = Router();
-secondPartyRouter.get('/', SecondPartyController.getAllSecondParties);
-secondPartyRouter.post('/create/:id', SecondPartyController.createSecondParty);
-secondPartyRouter.post("/bulk-create/:id" , SecondPartyController.uploadBulkSecondParties);
 
-secondPartyRouter.put('/update/:id', SecondPartyController.updateSecondParty);
-secondPartyRouter.delete('/delete/:id', SecondPartyController.deleteSecondParty);
+const router = Router();
 
-export default secondPartyRouter;
+router.post('/', validate(createSecondPartySchema), createSecondParty);
+router.get('/', validate(secondPartyQuerySchema), getAllSecondParties);
+router.get('/bank/:bankId',  getSecondPartiesByBank);
+router.get('/:id', validate(secondPartyIdSchema), getSecondParty);
+router.put('/:id', validate(updateSecondPartySchema), updateSecondParty);
+router.delete('/:id', validate(secondPartyIdSchema), deleteSecondParty);
+router.post('/bulk-form', validate(bulkCreateSecondPartiesSchema), bulkCreateSecondPartiesFromForm);
+router.post('/bulk-excel', upload.single('file'), bulkCreateSecondPartiesFromExcel);
+
+export default router;

@@ -1,84 +1,82 @@
-import { Request, Response } from 'express';
-import BankService from '../service/BankService';
+// controllers/bankController.ts
+import { Request, Response, NextFunction } from "express";
+import { bankService } from "../services";
 
 
-class BankController {
-  async getAllBanks(req: Request, res: Response) {
-    try{
-    const banks = await BankService.getAllBanks();
-    res.status(200).json(banks);
-    }catch(error:any){
-      res.status(500).json({ message: error.message });
-    }
-  } 
-  public async createBanks(req: Request, res: Response): Promise<void> {
-    const listerId = req.params.id
+
+export class BankController {
+  async createBank(req: Request, res: Response, next: NextFunction) {
     try {
-     
-      const banksData: { name: string; logo: any }[] = [];
-      const logos:any = req.files
-      const banks = JSON.parse(req.body.banks);
-  
-    console.log(logos)
-
-      if (!banks || !logos) {
-        throw new Error('error1')
-        
-      }
-  
-      if (banks.length !== logos.length) {
-        throw new Error('error2')
-      }
-     console.log(banks[0])
-      banks.forEach((b:any, index:number) => {
-        banksData.push({
-          name: banks[index],
-          logo: logos[index],
-        });
-        console.log(banksData)
-      });
-  
-      if (!banksData || banksData.length === 0) {
-        res.status(400).json({ message: 'No valid banks data found in request.' });
-        return;
-      }
-    console.log('data',banksData)
-      // Call the service to process the bulk upload
-      const result = await BankService.createBanks(banksData,listerId);
-  
-      res.status(200).json({
-        message: 'Banks uploaded successfully',
-        count: result.count,
-      });
+      const bank = await bankService.createBank(req.body);
+      res.status(201).json(bank);
     } catch (error) {
-      console.error('Error in bulk upload:', error);
-      res
-    .status(500).json({ message: 'An error occurred while processing the bulk upload.' });
+      console.error(error)
+       next(error);
     }
   }
 
-  async updateBank(req: Request, res: Response) {
-    const { name } = req.body;
-    const logo = req.file;
-    console.log(name)
-    console.log(logo)
-    const bank = await BankService.updateBank(Number(req.params.id), { name, logo });
-
-    if (bank) {
+  async getBankById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const bank = await bankService.getBankById(Number(req.params.id));
       res.json(bank);
-    } else {
-      res.status(404).json({ message: 'Bank not found' });
+    } catch (error) {
+      console.error(error)
+       next(error);
     }
   }
 
-  async deleteBank(req: Request, res: Response) {
-    const success = await BankService.deleteBank(Number(req.params.id));
-    if (success) {
-      res.status(204).send();
-    } else {
-      res.status(404).json({ message: 'Bank not found' });
+  async getAllBanks(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { page = 1, limit = 10 } = req.query;
+      const result = await bankService.getAllBanks(Number(page), Number(limit));
+      res.json(result);
+    } catch (error) {
+      console.error(error)
+       next(error);
+    }
+  }
+
+  async updateBank(req: Request, res: Response, next: NextFunction) {
+    try {
+      const bank = await bankService.updateBank(Number(req.params.id), req.body);
+      res.json(bank);
+    } catch (error) {
+      console.error(error)
+       next(error);
+    }
+  }
+
+  async deleteBank(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await bankService.deleteBank(Number(req.params.id));
+      res.json(result);
+    } catch (error) {
+      console.error(error)
+       next(error);
+    }
+  }
+
+  async bulkCreateBanksFromForm(req: Request, res: Response, next: NextFunction) {
+    try {
+      const banks = await bankService.bulkCreateBanksFromForm(req.body);
+      res.status(201).json(banks);
+    } catch (error) {
+      console.error(error)
+       next(error);
+    }
+  }
+
+  async bulkCreateBanksFromExcel(req: Request, res: Response, next: NextFunction) {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Excel file is required" });
+      }
+
+      const banks = await bankService.bulkCreateBanksFromExcel(req.file.buffer);
+      res.status(201).json(banks);
+    } catch (error) {
+      console.error(error)
+       next(error);
     }
   }
 }
-
-export default new BankController();

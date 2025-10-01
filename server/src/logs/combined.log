@@ -1,0 +1,65 @@
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:48:14.391Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:48:19.981Z"}
+{"level":"error","message":"Unable to connect to the database: connect ECONNREFUSED 127.0.0.1:5432","name":"SequelizeConnectionRefusedError","original":{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"port":5432,"syscall":"connect"},"parent":{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"port":5432,"syscall":"connect"},"service":"greater-texas-fcu-api","stack":"SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432\n    at Client._connectionCallback (/home/udorakpuenyi/bank/server/node_modules/sequelize/src/dialects/postgres/connection-manager.js:184:24)\n    at Client._handleErrorWhileConnecting (/home/udorakpuenyi/bank/server/node_modules/pg/lib/client.js:336:19)\n    at Client._handleErrorEvent (/home/udorakpuenyi/bank/server/node_modules/pg/lib/client.js:346:19)\n    at Connection.emit (node:events:518:28)\n    at Connection.emit (node:domain:489:12)\n    at Socket.reportStreamError (/home/udorakpuenyi/bank/server/node_modules/pg/lib/connection.js:57:12)\n    at Socket.emit (node:events:518:28)\n    at Socket.emit (node:domain:489:12)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)","timestamp":"2025-09-29T23:48:20.042Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:52:18.541Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:52:23.277Z"}
+{"level":"info","message":"Database connection established successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:52:23.622Z"}
+{"level":"info","message":"Database synchronized","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:52:38.027Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:52:38.032Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:55:37.869Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:55:42.726Z"}
+{"level":"info","message":"Database connection established successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:55:42.825Z"}
+{"level":"info","message":"Database synchronized","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:55:42.945Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:55:42.951Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:56:06.486Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:56:11.989Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:56:12.093Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:58:55.034Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:58:59.618Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-29T23:58:59.694Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:09:21.194Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:09:25.293Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:09:25.516Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:11:46.913Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:11:51.646Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:11:51.723Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:12:47.751Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:12:52.319Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:12:52.414Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:13:59.749Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:14:03.450Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:14:03.537Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:15:26.631Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:15:30.236Z"}
+{"level":"info","message":"Database connection established successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:15:30.339Z"}
+{"level":"info","message":"Database synchronized","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:15:53.007Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:15:53.016Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:16:59.321Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:17:02.839Z"}
+{"level":"info","message":"Database connection established successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:17:02.959Z"}
+{"level":"info","message":"Database synchronized","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:17:22.986Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:17:22.994Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:30:04.393Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:30:08.542Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:30:08.613Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:30:20.354Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:30:24.214Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T00:30:24.317Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:35:50.550Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:35:57.015Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:35:57.097Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:48:09.334Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:48:13.826Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:48:13.910Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:51:34.626Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:51:38.716Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:51:38.802Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:54:52.111Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:54:56.402Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:54:56.506Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:57:12.108Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:57:15.876Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:57:16.042Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:59:10.291Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:59:14.470Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-09-30T02:59:14.552Z"}
