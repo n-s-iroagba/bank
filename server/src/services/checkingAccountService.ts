@@ -14,6 +14,7 @@ export class CheckingAccountService {
 
       return await checkingAccountRepository.create(data);
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to create checking account');
     }
@@ -27,6 +28,7 @@ export class CheckingAccountService {
       }
       return checkingAccount;
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to fetch checking account');
     }
@@ -60,6 +62,7 @@ export class CheckingAccountService {
         },
       };
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to fetch checking accounts');
     }
@@ -76,7 +79,6 @@ export class CheckingAccountService {
           association: 'accountHolder',
           include: [{
             association: 'user',
-            attributes: ['firstName', 'lastName', 'email'],
           }],
         }],
       });
@@ -91,6 +93,7 @@ export class CheckingAccountService {
         },
       };
     } catch (error) {
+      console.error(error)
       throw new InternalServerError('Failed to fetch checking accounts');
     }
   }
@@ -117,6 +120,7 @@ export class CheckingAccountService {
 
       return updatedCheckingAccounts[0];
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to update checking account');
     }
@@ -137,6 +141,7 @@ export class CheckingAccountService {
 
       return { message: 'Checking account deleted successfully' };
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to delete checking account');
     }

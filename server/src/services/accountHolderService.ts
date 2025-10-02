@@ -1,19 +1,20 @@
 import { AccountHolderCreationAttributes } from "../models/accountHolder";
-import { userRepository, accountHolderRepository } from "../repositories";
+import { accountHolderRepository } from "../repositories";
 import { NotFoundError, ConflictError, AppError, InternalServerError } from "../utils/errors";
+import { userService } from ".";
 
 
 export class AccountHolderService {
   async createAccountHolder(data: AccountHolderCreationAttributes) {
     try {
-
-      return await accountHolderRepository.create(data);
+       const user = await userService.createUser({...data})
+      return await accountHolderRepository.create({...data,userId:user.id});
     } catch (error) {
       console.error(error)
       if (error instanceof AppError) throw error;
-      
+
       throw new InternalServerError('Failed to create account holder');
-    
+
     }
   }
 
@@ -27,9 +28,9 @@ export class AccountHolderService {
     } catch (error) {
       console.error(error)
       if (error instanceof AppError) throw error;
-      
+
       throw new InternalServerError('Failed to fetch account holder');
-    
+
     }
   }
 
@@ -56,8 +57,8 @@ export class AccountHolderService {
     } catch (error) {
       console.error(error)
       throw new InternalServerError('Failed to fetch account holders');
-    
-      }
+
+    }
   }
 
   async updateAccountHolder(id: number, data: Partial<AccountHolderCreationAttributes>) {
@@ -84,9 +85,9 @@ export class AccountHolderService {
     } catch (error) {
       console.error(error)
       if (error instanceof AppError) throw error;
-      
+
       throw new InternalServerError('Failed to update account holder');
-    
+
     }
   }
 
@@ -106,9 +107,9 @@ export class AccountHolderService {
     } catch (error) {
       console.error(error)
       if (error instanceof AppError) throw error;
-      
+
       throw new InternalServerError('Failed to delete account holder');
-    
+
     }
   }
 }

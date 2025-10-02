@@ -16,13 +16,13 @@ export const API_ROUTES = {
   // Add to API_ROUTES in client/src/config/apiRoutes.ts
 ACCOUNT_HOLDERS: {
   BASE: '/account-holders',
-  BY_ID: (id: number) => `/api/account-holders/${id}`,
+  BY_ID: (id: number) => `/account-holders/${id}`,
 },
 
 SECOND_PARTIES: {
   BASE: '/second-parties',
-  BY_ID: (id: number) => `/api/second-parties/${id}`,
-  BY_BANK: (bankId: number) => `/api/second-parties/bank/${bankId}`,
+  BY_ID: (id: number) => `/second-parties/${id}`,
+  BY_BANK: (bankId: number) => `/second-parties/bank/${bankId}`,
   BULK_FORM: '/second-parties/bulk-form',
   BULK_EXCEL: '/second-parties/bulk-excel',
 },
@@ -78,31 +78,31 @@ ACCOUNT_HOLDER: {
     
     ACCOUNT_HOLDERS: {
       BASE: '/account-holders',
-      BY_ID: (id: number) => `/api/account-holders/${id}`,
+      BY_ID: (id: number) => `/account-holders/${id}`,
     },
     
     CHECKING_ACCOUNTS: {
       BASE: '/checking-accounts',
-      BY_ID: (id: number) => `/api/checking-accounts/${id}`,
+      BY_ID: (id: number) => `/checking-accounts/${id}`,
       BY_ACCOUNT_HOLDER: (accountHolderId: number) => 
-        `/api/checking-accounts/account-holder/${accountHolderId}`,
+        `/checking-accounts/account-holder/${accountHolderId}`,
     },
     
     FIXED_DEPOSITS: {
       BASE: '/fixed-deposits',
-      BY_ID: (id: number) => `/api/fixed-deposits/${id}`,
+      BY_ID: (id: number) => `/fixed-deposits/${id}`,
       BY_ACCOUNT_HOLDER: (accountHolderId: number) => 
-        `/api/fixed-deposits/account-holder/${accountHolderId}`,
+        `/fixed-deposits/account-holder/${accountHolderId}`,
       MATURE_DEPOSITS: '/fixed-deposits/mature/deposits',
     },
     
     TRANSACTIONS: {
       BASE: '/transactions',
-      BY_ID: (id: number) => `/api/transactions/${id}`,
+      BY_ID: (id: number) => `/transactions/${id}`,
       BY_CHECKING_ACCOUNT: (checkingAccountId: number) => 
-        `/api/transactions/checking-account/${checkingAccountId}`,
+        `/transactions/checking-account/${checkingAccountId}`,
       STATEMENT: (checkingAccountId: number) => 
-        `/api/transactions/statement/${checkingAccountId}`,
+        `/transactions/statement/${checkingAccountId}`,
        BY_SECOND_PARTY:(id:number|string)=>``
     },
   },

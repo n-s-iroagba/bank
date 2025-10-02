@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button, Alert, Spinner, Row, Col } from 'react-bootstrap';
-import { Transaction, CreateTransactionRequest, UpdateTransactionRequest, SecondParty, SecondPartyWithBank, CheckingAccountWithDetails } from '../../../types';
-import { useCheckingAccounts } from '../../../hooks/useCheckingAccount';
+import { Transaction, CreateTransactionRequest, UpdateTransactionRequest, SecondPartyWithBank } from '../../../types';
 import { useSecondParties } from '../../../hooks/useSecondParty';
 import { useCreateTransaction, useUpdateTransaction } from '../../../hooks/useTransaction';
-
+import '../../../styles/TransactionForm.css'
 
 interface TransactionFormModalProps {
   show: boolean;
+  accountId: string;
   transaction: Transaction | null;
   onClose: () => void;
   onSuccess: () => void;
@@ -17,20 +17,20 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
   show,
   transaction,
   onClose,
-  onSuccess
+  onSuccess,
+  accountId
 }) => {
   const [formData, setFormData] = useState({
     type: 'debit' as 'debit' | 'credit',
     amount: '',
     description: '',
-    checkingAccountId: '',
+    checkingAccountId: accountId,
     secondPartyId: ''
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const createTransactionMutation = useCreateTransaction();
   const updateTransactionMutation = useUpdateTransaction();
-  const { data: checkingAccountsResponse } = useCheckingAccounts({ page: 1, limit: 100 });
   const { data: secondPartiesResponse } = useSecondParties({ page: 1, limit: 100 });
 
   useEffect(() => {
@@ -47,12 +47,12 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
         type: 'debit',
         amount: '',
         description: '',
-        checkingAccountId: '',
+        checkingAccountId: accountId,
         secondPartyId: ''
       });
     }
     setErrors({});
-  }, [transaction, show]);
+  }, [transaction, show, accountId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -61,7 +61,6 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
       [name]: value
     }));
 
-    // Clear error when field is updated
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -86,10 +85,6 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
 
     if (!formData.description.trim()) {
       newErrors.description = 'Description is required';
-    }
-
-    if (!formData.checkingAccountId) {
-      newErrors.checkingAccountId = 'Checking account is required';
     }
 
     if (!formData.secondPartyId) {
@@ -137,12 +132,13 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
   const isLoading = createTransactionMutation.isPending || updateTransactionMutation.isPending;
 
   return (
-    <Modal show={show} onHide={onClose} size="lg">
+    <Modal show={show} onHide={onClose} size="lg" className="transaction-modal">
       <Modal.Header closeButton>
         <Modal.Title>
           {transaction ? 'Edit Transaction' : 'Create New Transaction'}
         </Modal.Title>
       </Modal.Header>
+      
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
           {(createTransactionMutation.isError || updateTransactionMutation.isError) && (
@@ -166,8 +162,8 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                   onChange={handleChange}
                   isInvalid={!!errors.type}
                 >
-                  <option value="debit">Debit (Withdrawal)</option>
-                  <option value="credit">Credit (Deposit)</option>
+                  <option value="debit">💸 Debit (Withdrawal)</option>
+                  <option value="credit">💰 Credit (Deposit)</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.type}
@@ -211,28 +207,7 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
           </Form.Group>
 
           <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Checking Account *</Form.Label>
-                <Form.Select
-                  name="checkingAccountId"
-                  value={formData.checkingAccountId}
-                  onChange={handleChange}
-                  isInvalid={!!errors.checkingAccountId}
-                >
-                  <option value="">Select a checking account</option>
-                  {checkingAccountsResponse?.data?.data?.map((account:CheckingAccountWithDetails) => (
-                    <option key={account.id} value={account.id}>
-                      {account.accountNumber} - {account.accountHolder?.firstName} {account.accountHolder?.lastName}
-                    </option>
-                  ))}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  {errors.checkingAccountId}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md={6}>
+            <Col md={12}>
               <Form.Group className="mb-3">
                 <Form.Label>Second Party *</Form.Label>
                 <Form.Select
@@ -242,7 +217,7 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                   isInvalid={!!errors.secondPartyId}
                 >
                   <option value="">Select a second party</option>
-                  {secondPartiesResponse?.data?.data.map((party:SecondPartyWithBank) => (
+                  {secondPartiesResponse?.data?.map((party: SecondPartyWithBank) => (
                     <option key={party.id} value={party.id}>
                       {party.name} - {party.bank?.name}
                     </option>
@@ -255,8 +230,9 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
             </Col>
           </Row>
         </Modal.Body>
+        
         <Modal.Footer>
-          <Button variant="secondary" onClick={onClose} disabled={isLoading}>
+          <Button variant="outline-secondary" onClick={onClose} disabled={isLoading}>
             Cancel
           </Button>
           <Button variant="primary" type="submit" disabled={isLoading}>

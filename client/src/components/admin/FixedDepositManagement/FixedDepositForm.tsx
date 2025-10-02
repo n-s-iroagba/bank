@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button, Alert, Spinner, Row, Col } from 'react-bootstrap';
-import { FixedTermDeposit, CreateFixedDepositRequest, UpdateFixedDepositRequest } from '../../../types';
+import { Calendar, Clock, Percent, DollarSign, User, Shield, Plus, Edit, TrendingUp } from 'lucide-react';
+import { FixedTermDeposit, CreateFixedDepositRequest, UpdateFixedDepositRequest, AccountHolder } from '../../../types';
 import { useAccountHolders } from '../../../hooks/useAccountHolder';
 import { useCreateFixedDeposit, useUpdateFixedDeposit } from '../../../hooks/useFixedDeposit';
-
-
+import '../../../styles/FixedDepositForm.css';
 interface FixedDepositFormModalProps {
   show: boolean;
   deposit: FixedTermDeposit | null;
@@ -51,8 +51,9 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
     }
     setErrors({});
   }, [deposit, show]);
+  type FormControlElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<FormControlElement>) => {
     const { name, value, type } = e.target;
     const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
     
@@ -71,6 +72,7 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
     }
   };
 
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
@@ -84,6 +86,8 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
       newErrors.balance = 'Deposit cannot be negative';
     } else if (parseFloat(formData.balance) < 100) {
       newErrors.balance = 'Minimum deposit is $100';
+    } else if (parseFloat(formData.balance) > 1000000) {
+      newErrors.balance = 'Maximum deposit is $1,000,000';
     }
 
     if (!formData.term) {
@@ -96,6 +100,8 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
       newErrors.interestRate = 'Interest rate is required';
     } else if (parseFloat(formData.interestRate) <= 0) {
       newErrors.interestRate = 'Interest rate must be positive';
+    } else if (parseFloat(formData.interestRate) > 25) {
+      newErrors.interestRate = 'Interest rate cannot exceed 25%';
     }
 
     setErrors(newErrors);
@@ -106,6 +112,17 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
     const maturityDate = new Date();
     maturityDate.setMonth(maturityDate.getMonth() + term);
     return maturityDate;
+  };
+
+  const calculateInterestEarned = () => {
+    if (!formData.balance || !formData.term || !formData.interestRate) return 0;
+    
+    const principal = parseFloat(formData.balance);
+    const termMonths = parseInt(formData.term);
+    const annualRate = parseFloat(formData.interestRate) / 100;
+    
+    // Simple interest calculation for the term
+    return principal * annualRate * (termMonths / 12);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -137,27 +154,56 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
 
       onSuccess();
     } catch (error) {
-      // Error handling is done in the mutation
       console.error('Error saving fixed deposit:', error);
     }
   };
 
-  const isLoading = createDepositMutation.isPending
- || updateDepositMutation.isPending
-;
+  const isLoading = createDepositMutation.isPending || updateDepositMutation.isPending;
+  const isEditMode = !!deposit;
   const maturityDate = formData.term ? calculateMaturityDate(parseInt(formData.term)) : null;
+  const interestEarned = calculateInterestEarned();
+  const totalValue = formData.balance ? parseFloat(formData.balance) + interestEarned : 0;
+  const accountHolders = accountHoldersResponse?.data || [];
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount);
+  };
 
   return (
-    <Modal show={show} onHide={onClose} size="lg">
-      <Modal.Header closeButton>
-        <Modal.Title>
-          {deposit ? 'Edit Fixed Term Deposit' : 'Create New Fixed Term Deposit'}
+    <Modal 
+      show={show} 
+      onHide={onClose} 
+      size="lg" 
+      backdrop="static"
+      className="fixed-deposit-form-modal fixed-deposit-modal"
+    >
+      <Modal.Header closeButton className="fixed-deposit-modal-header">
+        <Modal.Title className="fixed-deposit-modal-title">
+          {isEditMode ? (
+            <>
+              <Edit size={24} />
+              Edit Fixed Term Deposit
+            </>
+          ) : (
+            <>
+              <Plus size={24} />
+              Create New Fixed Term Deposit
+            </>
+          )}
         </Modal.Title>
       </Modal.Header>
+      
       <Form onSubmit={handleSubmit}>
-        <Modal.Body>
+        <Modal.Body className="fixed-deposit-modal-body">
+          {/* Error Alert */}
           {(createDepositMutation.isError || updateDepositMutation.isError) && (
-            <Alert variant="danger">
+            <Alert variant="danger" className="alert-fixed-deposit">
+              <div className="alert-heading-fixed-deposit">
+                ❌ {isEditMode ? 'Update Failed' : 'Creation Failed'}
+              </div>
               {createDepositMutation.error instanceof Error 
                 ? createDepositMutation.error.message 
                 : updateDepositMutation.error instanceof Error
@@ -167,138 +213,254 @@ const FixedDepositFormModal: React.FC<FixedDepositFormModalProps> = ({
             </Alert>
           )}
 
-          <Form.Group className="mb-3">
-            <Form.Label>Account Holder *</Form.Label>
+          {/* Account Holder Field */}
+          <Form.Group className="form-group-fixed-deposit">
+            <Form.Label className="form-label-fixed-deposit">
+              <User size={16} className="me-2" />
+              Account Holder
+            </Form.Label>
             <Form.Select
               name="accountHolderId"
               value={formData.accountHolderId}
               onChange={handleChange}
               isInvalid={!!errors.accountHolderId}
-              disabled={!!deposit} // Can't change account holder after creation
+              disabled={isEditMode}
+              className="form-control-fixed-deposit select-fixed-deposit"
             >
               <option value="">Select an account holder</option>
-              {accountHoldersResponse?.data?.data.map((holder) => (
-                <option key={holder.id} value={holder.id}>
-                  {holder.firstName} {holder.lastName} ({holder.user?.email})
+              {accountHolders.map((holder:AccountHolder) => (
+                <option key={holder.id} value={holder.id} className="account-holder-option-fixed">
+                  {holder.firstName} {holder.lastName} ({holder.email})
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" className="invalid-feedback-fixed-deposit">
               {errors.accountHolderId}
             </Form.Control.Feedback>
+            {isEditMode && (
+              <div className="disabled-field-info">
+                <Shield size={12} />
+                Account holder cannot be changed after creation
+              </div>
+            )}
+            {accountHolders.length === 0 && (
+              <div className="text-muted mt-1" style={{ fontSize: '0.875rem' }}>
+                No account holders available. Please create an account holder first.
+              </div>
+            )}
           </Form.Group>
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Initial Deposit *</Form.Label>
+              {/* Initial Deposit Field */}
+              <Form.Group className="form-group-fixed-deposit">
+                <Form.Label className="form-label-fixed-deposit">
+                  <DollarSign size={16} className="me-2" />
+                  Initial Deposit
+                </Form.Label>
                 <Form.Control
                   type="number"
                   step="0.01"
                   min="100"
+                  max="1000000"
                   name="balance"
                   value={formData.balance}
-                //   onChange={handleChange}
+                  onChange={handleChange}
                   isInvalid={!!errors.balance}
-                  placeholder="Enter initial deposit"
-                  disabled={!!deposit} // Can't change deposit amount after creation
+                  placeholder="100.00"
+                  disabled={isEditMode}
+                  className="form-control-fixed-deposit number-input-fixed-deposit"
                 />
-                <Form.Control.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid" className="invalid-feedback-fixed-deposit">
                   {errors.balance}
                 </Form.Control.Feedback>
-                <Form.Text className="text-muted">
-                  Minimum deposit: $100
-                </Form.Text>
+                <div className="text-muted mt-1" style={{ fontSize: '0.875rem' }}>
+                  Minimum: $100.00 • Maximum: $1,000,000.00
+                </div>
+                {isEditMode && (
+                  <div className="disabled-field-info">
+                    <Shield size={12} />
+                    Deposit amount cannot be changed after creation
+                  </div>
+                )}
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Term (months) *</Form.Label>
+              {/* Term Field */}
+              <Form.Group className="form-group-fixed-deposit">
+                <Form.Label className="form-label-fixed-deposit">
+                  <Clock size={16} className="me-2" />
+                  Term Duration
+                </Form.Label>
                 <Form.Select
                   name="term"
                   value={formData.term}
                   onChange={handleChange}
                   isInvalid={!!errors.term}
-                  disabled={!!deposit} // Can't change term after creation
+                  disabled={isEditMode}
+                  className="form-control-fixed-deposit select-fixed-deposit"
                 >
                   <option value="">Select term</option>
-                  <option value="3">3 months</option>
-                  <option value="6">6 months</option>
-                  <option value="12">12 months</option>
-                  <option value="24">24 months</option>
-                  <option value="36">36 months</option>
-                  <option value="60">60 months</option>
+                  <option value="3" className="term-option">3 months</option>
+                  <option value="6" className="term-option">6 months</option>
+                  <option value="12" className="term-option">12 months (1 year)</option>
+                  <option value="24" className="term-option">24 months (2 years)</option>
+                  <option value="36" className="term-option">36 months (3 years)</option>
+                  <option value="60" className="term-option">60 months (5 years)</option>
                 </Form.Select>
-                <Form.Control.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid" className="invalid-feedback-fixed-deposit">
                   {errors.term}
                 </Form.Control.Feedback>
+                {isEditMode && (
+                  <div className="disabled-field-info">
+                    <Shield size={12} />
+                    Term cannot be changed after creation
+                  </div>
+                )}
               </Form.Group>
             </Col>
           </Row>
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Interest Rate (%) *</Form.Label>
+              {/* Interest Rate Field */}
+              <Form.Group className="form-group-fixed-deposit">
+                <Form.Label className="form-label-fixed-deposit">
+                  <Percent size={16} className="me-2" />
+                  Annual Interest Rate
+                </Form.Label>
                 <Form.Control
                   type="number"
                   step="0.01"
                   min="0.01"
+                  max="25"
                   name="interestRate"
                   value={formData.interestRate}
-                //   onChange={handleChange}
+                  onChange={handleChange}
                   isInvalid={!!errors.interestRate}
-                  placeholder="Enter interest rate"
+                  placeholder="5.00"
+                  className="form-control-fixed-deposit number-input-fixed-deposit"
                 />
-                <Form.Control.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid" className="invalid-feedback-fixed-deposit">
                   {errors.interestRate}
                 </Form.Control.Feedback>
+                <div className="text-muted mt-1" style={{ fontSize: '0.875rem' }}>
+                  Enter annual percentage rate (0.01% - 25%)
+                </div>
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Estimated Maturity Date</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={maturityDate ? maturityDate.toLocaleDateString() : 'N/A'}
-                  disabled
-                  readOnly
-                />
-                <Form.Text className="text-muted">
-                  Calculated based on term
-                </Form.Text>
+              {/* Maturity Date Display */}
+              <Form.Group className="form-group-fixed-deposit">
+                <Form.Label className="form-label-fixed-deposit">
+                  <Calendar size={16} className="me-2" />
+                  Estimated Maturity Date
+                </Form.Label>
+                <div className="maturity-date-display">
+                  {maturityDate ? maturityDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  }) : 'Select term to calculate'}
+                </div>
+                <div className="text-muted mt-1" style={{ fontSize: '0.875rem' }}>
+                  Calculated automatically based on selected term
+                </div>
               </Form.Group>
             </Col>
           </Row>
 
-          {deposit && (
-            <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                name="isActive"
-                label="Account is active"
-                checked={formData.isActive}
-                onChange={handleChange}
-              />
+          {/* Interest Calculation Preview */}
+          {formData.balance && formData.term && formData.interestRate && (
+            <div className="calculation-preview">
+              <div className="calculation-title">
+                <TrendingUp size={14} className="me-2" />
+                Projected Returns
+              </div>
+              <Row>
+                <Col md={4}>
+                  <div className="text-center">
+                    <div className="calculation-value" style={{ color: '#059669' }}>
+                      {formatCurrency(interestEarned)}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                      Interest Earned
+                    </div>
+                  </div>
+                </Col>
+                <Col md={4}>
+                  <div className="text-center">
+                    <div className="calculation-value">
+                      {formatCurrency(totalValue)}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                      Total Value at Maturity
+                    </div>
+                  </div>
+                </Col>
+                <Col md={4}>
+                  <div className="text-center">
+                    <div className="calculation-value" style={{ color: '#dc2626' }}>
+                      {formData.interestRate}%
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                      Annual Rate
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          )}
+
+          {/* Active Status Field (Edit Mode Only) */}
+          {isEditMode && (
+            <Form.Group className="form-group-fixed-deposit">
+              <div className="form-check-fixed-deposit">
+                <Form.Check
+                  type="checkbox"
+                  name="isActive"
+                  label="Fixed deposit account is active"
+                  checked={formData.isActive}
+                  onChange={handleChange}
+                  className="form-check-input-fixed-deposit"
+                  
+                />
+              </div>
+              <div className="text-muted mt-1" style={{ fontSize: '0.875rem' }}>
+                {formData.isActive 
+                  ? '✓ Account is active and earning interest'
+                  : '✗ Account is closed and not earning interest'
+                }
+              </div>
             </Form.Group>
           )}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={onClose} disabled={isLoading}>
+
+        <Modal.Footer className="fixed-deposit-modal-footer">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            disabled={isLoading}
+            className="btn-cancel-fixed-deposit"
+          >
             Cancel
           </Button>
-          <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading && (
-              <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                className="me-2"
-              />
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={isLoading}
+            className="btn-submit-fixed-deposit"
+          >
+            {isLoading ? (
+              <>
+                <Spinner animation="border" size="sm" className="loading-spinner-fixed-deposit me-2" />
+                {isEditMode ? 'Updating...' : 'Creating...'}
+              </>
+            ) : (
+              <>
+                {isEditMode ? 'Update Deposit' : 'Create Deposit'}
+              </>
             )}
-            {deposit ? 'Update Deposit' : 'Create Deposit'}
           </Button>
         </Modal.Footer>
       </Form>

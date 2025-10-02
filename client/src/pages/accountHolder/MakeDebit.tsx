@@ -4,7 +4,9 @@ import logo from '../../assets/images/greater-texas-cu-icon.svg';
 import AccountBox from '../../components/accountHolder/AccountBox';
 import { useBanks } from '../../hooks/useBank';
 import { useSecondParties } from '../../hooks/useSecondParty';
-import {  SecondPartyWithBank } from '../../types';
+import {  Bank, SecondPartyWithBank } from '../../types';
+import { useParams } from 'react-router-dom';
+import { useCheckingAccount } from '../../hooks/useCheckingAccount';
 
 export interface TransactionAttributes {
   id: number;
@@ -24,33 +26,35 @@ type AccountDetails = {
 };
 
 const MakeDebit: React.FC = () => {
+   const { accountId } = useParams<{ accountId: string }>()
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [show,setShow]= useState(false)
   const [transaction, setTransaction] = useState<TransactionAttributes>({
     id: 0,
     type: 'debit',
     amount: 0,
     description: '',
-    checkingAccountId: 1, // default (you might want to pass this as a prop)
+    checkingAccountId: Number(accountId), // default (you might want to pass this as a prop)
     secondPartyId: 0,
     balanceAfter: 0,
   });
 
   const secondResponse = useSecondParties({});
   const banksResponse = useBanks();
-  const banks = banksResponse.data?.data?.data || [];
-  const secondParties = secondResponse.data?.data?.data || [];
+  console.log(secondResponse,banksResponse)
+  const banks:Bank[] = banksResponse.data?.data || [];
+  const secondParties:SecondPartyWithBank[] = secondResponse.data?.data|| [];
 
-  const accountDetails: AccountDetails = {
-    accountName: 'Fred Mecury',
-    accountNumber: 1234567890,
-  };
+ const accountResponse = useCheckingAccount(Number(accountId))
+ const accountDetails = accountResponse.data?.data
 
   const handlereceiverClick = (receiver: SecondPartyWithBank) => {
     setTransaction((prev) => ({
       ...prev,
       secondPartyId: receiver.id,
     }));
-    setSearchTerm(receiver.name );
+    setSearchTerm(receiver.name);
+    setShow(false)
   };
 
   const handleChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,11 +110,14 @@ const MakeDebit: React.FC = () => {
             <Form.Control
               type="text"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value)
+                setShow(true)
+              }}
               placeholder="BENEFICIARY"
               className="sharp-input"
             />
-            {searchTerm && (
+            {searchTerm && show&& (
               <ListGroup className="dropdown-list">
                 {filteredsecondParties.map((receiver) => (
                   <ListGroup.Item

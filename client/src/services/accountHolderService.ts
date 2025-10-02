@@ -24,7 +24,7 @@ export const accountHoldersService = {
     return response.data;
   },
 
-  getAccountHolder: async (id: number): Promise<AccountHolderResponse> => {
+  getAccountHolder: async (id: number): Promise<{data:AccountHolderResponse}> => {
     const response = await api.get(API_ROUTES.ADMIN.ACCOUNT_HOLDERS.BY_ID(id));
     return response.data;
   },

@@ -20,7 +20,14 @@ const models = {
 };
 
 // ---------------- Associations ---------------- //
-
+models.User.hasOne(models.AccountHolder,{
+  foreignKey:'userId',
+  as:'accountHolder'
+})
+models.AccountHolder.belongsTo(models.User,{
+  foreignKey:'userId',
+  as:'user'
+})
 // AccountHolder → FixedTermDeposit (1:N)
 models.AccountHolder.hasMany(models.FixedTermDeposit, {
   foreignKey: 'accountHolderId',

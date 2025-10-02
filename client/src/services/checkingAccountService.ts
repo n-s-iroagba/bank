@@ -22,7 +22,7 @@ export const checkingAccountsService = {
     return response.data;
   },
 
-  getCheckingAccount: async (id: number): Promise<CheckingAccountResponse> => {
+  getCheckingAccount: async (id: number): Promise<{data:CheckingAccountResponse}> => {
     const response = await api.get(API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BY_ID(id));
     return response.data;
   },

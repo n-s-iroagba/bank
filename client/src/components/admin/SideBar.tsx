@@ -4,9 +4,6 @@ import {
   faBank,
   faUsers,
   faUserCheck,
-  faCreditCard,
-  faChartPie,
-  faArrowsLeftRight,
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
@@ -24,9 +21,7 @@ const navItems: NavItem[] = [
   { icon: faBank, label: "Banks", path: "/admin/banks" },
   { icon: faUsers, label: "Second Parties", path: "/admin/second-parties" },
   { icon: faUserCheck, label: "Account Holders", path: "/admin/account-holders" },
-  { icon: faCreditCard, label: "Checking Accounts", path: "/admin/checking-accounts" },
-  { icon: faChartPie, label: "Fixed Deposits", path: "/admin/fixed-deposits" },
-  { icon: faArrowsLeftRight, label: "Transactions", path: "/admin/transactions" },
+
 ];
 
 const AdminSidebar: React.FC = () => {

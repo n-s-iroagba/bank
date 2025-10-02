@@ -3,10 +3,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { TransactionsQueryParams, CreateTransactionRequest, UpdateTransactionRequest } from '../types';
 import { transactionsService } from '../services/transactionService';
 
-export const useTransactions = (params: TransactionsQueryParams) => {
+export const useTransactions = (checkingAccountId:string|number,params: TransactionsQueryParams) => {
   return useQuery({
     queryKey: ['transactions', params],
-    queryFn: () => transactionsService.getTransactions(params),
+    queryFn: () => transactionsService.getTransactionsByCheckingAccount(checkingAccountId as number,params),
   });
 };
 

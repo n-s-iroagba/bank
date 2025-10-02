@@ -24,6 +24,7 @@ export class FixedDepositService {
 
       return await fixedDepositRepository.create(fixedDepositData);
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to create fixed deposit');
     }
@@ -37,6 +38,7 @@ export class FixedDepositService {
       }
       return fixedDeposit;
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to fetch fixed deposit');
     }
@@ -70,6 +72,7 @@ export class FixedDepositService {
         },
       };
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to fetch fixed deposits');
     }
@@ -86,7 +89,6 @@ export class FixedDepositService {
           association: 'accountHolder',
           include: [{
             association: 'user',
-            attributes: ['firstName', 'lastName', 'email'],
           }],
         }],
       });
@@ -101,6 +103,7 @@ export class FixedDepositService {
         },
       };
     } catch (error) {
+      console.error(error)
       throw new InternalServerError('Failed to fetch fixed deposits');
     }
   }
@@ -134,6 +137,7 @@ export class FixedDepositService {
 
       return updatedFixedDeposits[0];
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to update fixed deposit');
     }
@@ -158,6 +162,7 @@ export class FixedDepositService {
 
       return { message: 'Fixed deposit deleted successfully' };
     } catch (error) {
+      console.error(error)
       if (error instanceof AppError) throw error;
       throw new InternalServerError('Failed to delete fixed deposit');
     }
@@ -167,6 +172,7 @@ export class FixedDepositService {
     try {
       return await fixedDepositRepository.findMatureDeposits();
     } catch (error) {
+      console.error(error)
       throw new InternalServerError('Failed to fetch mature deposits');
     }
   }

@@ -21,6 +21,8 @@ import Register from "../pages/auth/Register";
 import ProtectedRoute from "../components/ui/ProtectedRoute";
 import Home from "../pages/accountHolder/Home";
 import AdminSidebar from "../components/admin/SideBar";
+import AccountHolderTransactionList from "../pages/accountHolder/AccountHolderTransactionList";
+import TransactionDetails from "../pages/accountHolder/TransactionDetails";
 
 // App router component
 const AppRouter: React.FC = () => {
@@ -40,14 +42,14 @@ const AppRouter: React.FC = () => {
           <Route path="second-parties" element={<SecondParties />} />
           <Route path="account-holders" element={<AccountHolders />} />
           <Route path="account-holder/:id" element={<AccountHolderDetailsPage />} />
-          <Route path="account-holder/:id/checking" element={<CheckingAccounts />} />
-          <Route path="account-holder/:id/fixed" element={<FixedDeposits />} />
+          <Route path="account-holders/checking/:id" element={<CheckingAccounts />} />
+          <Route path="account-holders/fixed/:id" element={<FixedDeposits />} />
           <Route
-            path="account-holder/:id/checking/:accountId"
+            path="account-details/checking/:accountId"
             element={<CheckingAccountDetailsPage />}
           />
           <Route
-            path="account-holder/:id/fixed/:accountId"
+            path="account-details/fixed/:accountId"
             element={<FixedTermDepositDetailsPage />}
           />
           <Route path="transactions/:accountId" element={<Transactions />} />
@@ -61,8 +63,10 @@ const AppRouter: React.FC = () => {
       >
         <Route path="/account-holder">
           <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path='transactions/:accountId' element ={<AccountHolderTransactionList/>}/>
+          <Route path= 'transaction-details/:id' element ={<TransactionDetails/>}/>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="transfer" element={<MakeDebit />} />
+          <Route path="transfer/:accountId" element={<MakeDebit />} />
         </Route>
       </Route>
 

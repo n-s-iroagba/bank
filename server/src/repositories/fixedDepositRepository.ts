@@ -41,7 +41,6 @@ export class FixedDepositRepository extends BaseRepository<FixedTermDeposit> {
         association: 'accountHolder',
         include: [{
           association: 'user',
-          attributes: ['email', 'firstName', 'lastName'],
         }],
       },
     ];

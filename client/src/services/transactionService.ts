@@ -54,7 +54,7 @@ export const transactionsService = {
     return response.data;
   },
 
-  getTransactionsByCheckingAccount: async (checkingAccountId: number, params: TransactionsQueryParams): Promise<TransactionsResponse> => {
+  getTransactionsByCheckingAccount: async (checkingAccountId: number, params: TransactionsQueryParams): Promise<{data:TransactionsResponse}> => {
     const queryParams = new URLSearchParams();
     
     if (params.page) queryParams.append('page', params.page.toString());

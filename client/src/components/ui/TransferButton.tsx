@@ -3,12 +3,12 @@ import {  Row, Col } from 'react-bootstrap';
 import '../../styles/TransferButton.css'
 import { useNavigate } from 'react-router-dom';
 
-const TransferButton: React.FC = () => {
+const TransferButton = ({accountId}:{accountId:string|number}) => {
     const navigate = useNavigate()
     
 
   return (
-    <button onClick={()=>navigate('/transfer')} className="outer-background" >
+    <button onClick={()=>navigate(`/account-holder/transfer/${accountId}`)} className="outer-background" >
       <Row className="inner-background align-items-center">
         <Col className="text-center">
           <h1 className="text-blue">

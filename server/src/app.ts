@@ -76,7 +76,7 @@ const startServer = async () => {
     // logger.info('Database connection established successfully');
 
     // // Sync database (use { force: true } only in development to reset database)
-    // await sequelize.sync({ force: true });
+    // await sequelize.sync({ alter: true });
     // logger.info('Database synchronized');
 
     app.listen(PORT, () => {

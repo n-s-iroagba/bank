@@ -7,7 +7,7 @@ import CheckingAccountFormModal from '../../components/admin/CheckingAccountMana
 
 import { CheckingAccount } from '../../types';
 import { useCheckingAccounts } from '../../hooks/useCheckingAccount';
-import { QueryType } from './AccountHolders';
+
 import { useParams } from 'react-router-dom';
 
 const CheckingAccounts: React.FC = () => {
@@ -15,7 +15,7 @@ const CheckingAccounts: React.FC = () => {
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingAccount, setEditingAccount] = useState<CheckingAccount | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-   const [params,setParams] =useState<QueryType>({ page: 1, limit: 10})
+   const [params,setParams] =useState({ page: 1, limit: 10})
   
   const { 
     data: checkingAccountsResponse, 
@@ -25,7 +25,7 @@ const CheckingAccounts: React.FC = () => {
     refetch 
   } = useCheckingAccounts(params 
 );
-
+console.log(checkingAccountsResponse)
   const handleCreateAccount = () => {
     setEditingAccount(null);
     setShowFormModal(true);
@@ -50,7 +50,8 @@ const CheckingAccounts: React.FC = () => {
     e.preventDefault();
     refetch();
   };
-
+const checkingAccounts = checkingAccountsResponse?.data ?? []
+const pagination = checkingAccountsResponse?.pagination ?? { page: 1, totalPages: 1 }
   return (
     <div>
       <Row className="mb-4">
@@ -96,14 +97,14 @@ const CheckingAccounts: React.FC = () => {
 
       <Card>
         <Card.Body>
-          <CheckingAccountList
-            setParams={setParams}
-            accounts={checkingAccountsResponse?.data?.data || []}
-            pagination={checkingAccountsResponse?.pagination}
-            isLoading={isLoading}
-            onEdit={handleEditAccount}
-            onRefetch={refetch}
-          />
+       <CheckingAccountList
+  setParams={setParams}
+  accounts={checkingAccounts}   // ensure always array
+  pagination={pagination}
+  isLoading={isLoading}
+  onEdit={handleEditAccount}
+  onRefetch={refetch}
+/>
         </Card.Body>
       </Card>
 

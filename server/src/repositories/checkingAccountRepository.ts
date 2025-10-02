@@ -24,7 +24,6 @@ export class CheckingAccountRepository extends BaseRepository<CheckingAccount> {
         association: 'accountHolder',
         include: [{
           association: 'user',
-          attributes: ['email', 'firstName', 'lastName'],
         }],
       },
       {

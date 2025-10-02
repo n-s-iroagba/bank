@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import { Row, Col, Card, Button, Alert, Form, InputGroup } from 'react-bootstrap';
-import { Plus, Search } from 'lucide-react';
-
+import { Row, Col, Card, Button, Alert} from 'react-bootstrap';
+import { Plus, ArrowLeft, TrendingUp, TrendingDown, DollarSign, Calendar, Filter } from 'lucide-react';
 
 import TransactionFormModal from '../../components/admin/TransactionManagement/TransactionForm';
 import TransactionList from '../../components/admin/TransactionManagement/TransactionList';
-import { Transaction } from '../../types';
-import { useTransactions } from '../../hooks/useTransaction';
-import { QueryType } from './AccountHolders';
-import { useParams } from 'react-router-dom';
 
+
+import { useParams, useNavigate } from 'react-router-dom';
+import { QueryType } from '../../components/admin/FixedDepositManagement/FixedDepositList';
+import '../../styles/Transaction.css';
+import { useTransactions } from '../../hooks/useTransaction';
+import { Transaction } from '../../types';
 
 const Transactions: React.FC = () => {
-   const { accountId } = useParams<{ accountId: string }>()
+  const { accountId } = useParams<{ accountId: string }>()
+  const navigate = useNavigate();
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-   const [params,setParams] =useState<QueryType>({ page: 1, limit: 10})
+  const [params, setParams] = useState<QueryType>({ page: 1, limit: 10 })
+
   
   const { 
     data: transactionsResponse, 
@@ -24,18 +27,13 @@ const Transactions: React.FC = () => {
     isError, 
     error,
     refetch 
-  } = useTransactions(params
-);
+  } = useTransactions(Number(accountId),params);
 
   const handleCreateTransaction = () => {
     setEditingTransaction(null);
     setShowFormModal(true);
   };
 
-  const handleEditTransaction = (transaction: Transaction) => {
-    setEditingTransaction(transaction);
-    setShowFormModal(true);
-  };
 
   const handleCloseFormModal = () => {
     setShowFormModal(false);
@@ -52,63 +50,149 @@ const Transactions: React.FC = () => {
     refetch();
   };
 
+  const clearSearch = () => {
+    setSearchTerm('');
+    refetch();
+  };
+
+  // Calculate statistics
+  const transactions = transactionsResponse?.data?.data || [];
+  const totalTransactions = transactionsResponse?.data.pagination?.total || 0;
+  const creditTransactions = transactions.filter((t:Transaction) => t.type ==='credit').length;
+  const debitTransactions = transactions.filter((t:Transaction) => t.type === 'debit').length;
+  
+  const totalCreditAmount = transactions
+    .filter((t:Transaction) => t.type === 'credit')
+    .reduce((sum:number, t:Transaction) => sum + t.amount, 0);
+  
+  const totalDebitAmount = transactions
+    .filter((t:Transaction) => t.type === 'debit')
+    .reduce((sum:number, t:Transaction) => sum + t.amount, 0);
+
+  const netFlow = totalCreditAmount - totalDebitAmount;
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount);
+  };
+
   return (
-    <div>
-      <Row className="mb-4">
-        <Col>
-          <h1>Transaction Management</h1>
-          <p>Manage all financial transactions</p>
-        </Col>
-        <Col xs="auto" className="d-flex align-items-center">
-          <Button variant="primary" onClick={handleCreateTransaction}>
-            <Plus size={18} className="me-2" />
-            Create Transaction
+    <div className="transactions-page">
+      {/* Stats Grid */}
+      {totalTransactions > 0 && (
+        <div className="stats-grid-transactions">
+          <div className="stat-card-transactions">
+            <div className="stat-value-transactions">{totalTransactions}</div>
+            <div className="stat-label-transactions">Total Transactions</div>
+            <Calendar size={24} className="stat-icon-transactions" />
+          </div>
+          <div className="stat-card-transactions">
+            <div className="stat-value-transactions credit">{creditTransactions}</div>
+            <div className="stat-label-transactions">Credit Transactions</div>
+            <TrendingUp size={24} className="stat-icon-transactions" />
+          </div>
+          <div className="stat-card-transactions">
+            <div className="stat-value-transactions debit">{debitTransactions}</div>
+            <div className="stat-label-transactions">Debit Transactions</div>
+            <TrendingDown size={24} className="stat-icon-transactions" />
+          </div>
+          <div className="stat-card-transactions">
+            <div className="stat-value-transactions" style={{ 
+              color: netFlow >= 0 ? '#059669' : '#dc2626' 
+            }}>
+              {formatCurrency(Math.abs(netFlow))}
+            </div>
+            <div className="stat-label-transactions">
+              Net {netFlow >= 0 ? 'Inflow' : 'Outflow'}
+            </div>
+            <DollarSign size={24} className="stat-icon-transactions" />
+          </div>
+        </div>
+      )}
+
+      {/* Page Header */}
+      <div className="page-header-transactions">
+        <Row className="align-items-center">
+          <Col lg={6}>
+            <h1 className="page-title-transactions">
+              <div className="page-title-icon">
+                <DollarSign size={24} className="text-white" />
+              </div>
+              Transaction Management
+            </h1>
+            <p className="page-subtitle-transactions">
+              Monitor and manage all financial transactions across accounts
+            </p>
+          </Col>
+          <Col lg={6}>
+            <div className="action-buttons-transactions">
+              {accountId && (
+                <Button 
+                  onClick={() => navigate(-1)}
+                  className="btn-outline-secondary-transactions"
+                >
+                  <ArrowLeft size={16} className="me-2" />
+                  Back to Account
+                </Button>
+              )}
+              <Button 
+                className="btn-primary-transactions"
+                onClick={handleCreateTransaction}
+              >
+                <Plus size={18} className="btn-icon-transactions" />
+                Create Transaction
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="quick-actions-transactions">
+        <div className="quick-actions-title">
+          <Filter size={18} />
+          Quick Actions
+        </div>
+        <div className="quick-actions-buttons">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="btn-outline-primary-transactions"
+            onClick={handleCreateTransaction}
+          >
+            <Plus size={14} className="me-1" />
+            New Transaction
           </Button>
-        </Col>
-      </Row>
+  
+        </div>
+      </div>
 
-      <Card className="mb-4">
-        <Card.Body>
-          <Form onSubmit={handleSearch}>
-            <Row>
-              <Col md={6}>
-                <InputGroup>
-                  <Form.Control
-                    type="text"
-                    placeholder="Search by description, account number, or second party..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                  <Button variant="outline-secondary" type="submit">
-                    <Search size={18} />
-                  </Button>
-                </InputGroup>
-              </Col>
-            </Row>
-          </Form>
-        </Card.Body>
-      </Card>
 
+
+      {/* Error State */}
       {isError && (
-        <Alert variant="danger" className="mb-4">
+        <Alert variant="danger" className="alert-custom-transactions alert-danger-transactions">
+          <Alert.Heading className="h6 fw-bold mb-2">
+            ⚠️ Loading Error
+          </Alert.Heading>
           Error loading transactions: {error instanceof Error ? error.message : 'Unknown error'}
         </Alert>
       )}
 
-      <Card>
-        <Card.Body>
+      {/* Transaction List */}
+      <Card className="main-content-card-transactions">
+        <Card.Body className="card-body-transactions">
           <TransactionList
-                      transactions={transactionsResponse?.data?.data || []}
-                      pagination={transactionsResponse?.pagination}
-                      isLoading={isLoading}
-                      onEdit={handleEditTransaction}
-                      onRefetch={refetch} onView={function (transaction: Transaction): void {
-                          throw new Error('Function not implemented.');
-                      } }          />
+           checkingAccountId={accountId as unknown as number}
+          />
         </Card.Body>
       </Card>
 
+      {/* Modals */}
       <TransactionFormModal
+        accountId={accountId as string}
         show={showFormModal}
         transaction={editingTransaction}
         onClose={handleCloseFormModal}

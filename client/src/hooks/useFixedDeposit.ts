@@ -11,10 +11,10 @@ export const useFixedDeposits = (params: FixedDepositsQueryParams) => {
   });
 };
 
-export const useFixedDeposit = (id: number) => {
+export const useFixedDeposit = (id: string) => {
   return useQuery({
     queryKey: ['fixedDeposit', id],
-    queryFn: () => fixedDepositsService.getFixedDeposit(id),
+    queryFn: () => fixedDepositsService.getFixedDeposit(Number(id)),
     enabled: !!id,
   });
 };

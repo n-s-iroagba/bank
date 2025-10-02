@@ -14,7 +14,10 @@ const Dashboard: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState('Accounts');
   const [accountType, setAccountType] = useState('')
 
-
+const user = {
+  id:1,
+  username:''
+}
   // Drawer options
   const checkingOptions = ['Accounts','Statements', 'Transfers', 'Deposit Check', 'Pay a Member','Bill Pay A2A/P2P', 'Money Manager'];
   const termOptions =['Accounts','Term Deposit',]
@@ -59,7 +62,7 @@ const Dashboard: React.FC = () => {
   )
 )}
         <div>
-          {selectedOption==='Accounts'?<AccountList  setAccountType={setAccountType} setDrawerVisible={setDrawerVisible} />:
+          {selectedOption==='Accounts'?<AccountList  setAccountType={setAccountType} setDrawerVisible={setDrawerVisible} accountHolderId={user.id} accountName={user.username} />:
           <OptionListing  setDrawerVisible={setDrawerVisible} selectedOption={selectedOption}   />
 }
         </div>

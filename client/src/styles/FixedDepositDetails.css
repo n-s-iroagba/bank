@@ -1,0 +1,510 @@
+/* Fixed Term Deposit Details Page Styles */
+.fixed-deposit-details-page {
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-300: #fca5a5;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Page Container */
+.fixed-deposit-details-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+/* Header Section */
+.fixed-deposit-details-header {
+  background: linear-gradient(135deg, var(--slate-800) 0%, var(--slate-900) 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.fixed-deposit-details-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 0%, var(--red-600) 150%);
+  opacity: 0.1;
+}
+
+.fixed-deposit-page-title {
+  color: white;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.fixed-deposit-page-subtitle {
+  color: var(--slate-300);
+  font-size: 1rem;
+  margin-bottom: 0;
+  font-weight: 400;
+  position: relative;
+  z-index: 2;
+}
+
+/* Main Content Card */
+.fixed-deposit-details-card {
+  background: white;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.fixed-deposit-card-header-custom {
+  background: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-100) 100%);
+  border-bottom: 3px solid var(--red-500);
+  padding: 1.5rem 2rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--slate-800);
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fixed-deposit-card-body-custom {
+  padding: 2rem;
+}
+
+/* Account Overview */
+.fixed-deposit-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.fixed-deposit-overview-card {
+  background: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-100) 100%);
+  border: 1px solid var(--slate-200);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.fixed-deposit-overview-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+}
+
+.fixed-deposit-overview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.fixed-deposit-overview-label {
+  color: var(--slate-600);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.fixed-deposit-overview-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  line-height: 1.2;
+}
+
+.fixed-deposit-overview-value.balance {
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--slate-800) 0%, var(--slate-900) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fixed-deposit-overview-value.interest {
+  color: #059669;
+  font-size: 2rem;
+}
+
+/* Info Grid */
+.fixed-deposit-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.fixed-deposit-info-section {
+  background: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-100) 100%);
+  border: 1px solid var(--slate-200);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.fixed-deposit-section-title {
+  color: var(--slate-700);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--red-500);
+  padding-bottom: 0.5rem;
+}
+
+/* Info Items */
+.fixed-deposit-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.fixed-deposit-info-item:hover {
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.fixed-deposit-info-label {
+  color: var(--slate-600);
+  font-weight: 600;
+  font-size: 0.875rem;
+  min-width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fixed-deposit-info-value {
+  color: var(--slate-800);
+  font-weight: 500;
+  flex: 1;
+  word-break: break-word;
+  text-align: right;
+}
+
+.fixed-deposit-status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fixed-deposit-status-active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.fixed-deposit-status-inactive {
+  background: linear-gradient(135deg, var(--slate-400), var(--slate-500));
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Maturity Progress */
+.maturity-progress {
+  background: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-100) 100%);
+  border: 1px solid var(--slate-200);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.maturity-progress-title {
+  color: var(--slate-700);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-container {
+  background: var(--slate-200);
+  border-radius: 1rem;
+  height: 8px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-maturity {
+  height: 100%;
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+  border-radius: 1rem;
+  transition: width 0.5s ease-in-out;
+}
+
+.maturity-stats {
+  display: flex;
+  justify-content: space-between;
+  color: var(--slate-600);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Interest Calculation */
+.interest-calculation {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.interest-calculation-title {
+  color: #059669;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.interest-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+
+.interest-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #059669;
+  margin-bottom: 0.25rem;
+}
+
+.interest-label {
+  color: #047857;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Action Buttons */
+.fixed-deposit-action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--slate-200);
+}
+
+.btn-primary-fixed-deposit {
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-primary-fixed-deposit:hover {
+  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-outline-fixed-deposit {
+  background: transparent;
+  border: 2px solid var(--slate-400);
+  color: var(--slate-700);
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-outline-fixed-deposit:hover {
+  background: var(--slate-600);
+  border-color: var(--slate-600);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+/* Loading State */
+.fixed-deposit-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fixed-deposit-loading-spinner {
+  color: var(--red-500);
+  width: 3rem;
+  height: 3rem;
+}
+
+.fixed-deposit-loading-text {
+  color: var(--slate-600);
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+/* Not Found State */
+.fixed-deposit-not-found-container {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.fixed-deposit-not-found-icon {
+  font-size: 4rem;
+  color: var(--slate-300);
+  margin-bottom: 1rem;
+}
+
+.fixed-deposit-not-found-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  margin-bottom: 0.5rem;
+}
+
+.fixed-deposit-not-found-subtext {
+  color: var(--slate-500);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .fixed-deposit-details-container {
+    padding: 1rem 0;
+  }
+  
+  .fixed-deposit-details-header {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .fixed-deposit-page-title {
+    font-size: 1.5rem;
+  }
+  
+  .fixed-deposit-overview {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .fixed-deposit-info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .fixed-deposit-card-body-custom {
+    padding: 1.5rem;
+  }
+  
+  .fixed-deposit-action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-primary-fixed-deposit,
+  .btn-outline-fixed-deposit {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .fixed-deposit-info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .fixed-deposit-info-value {
+    text-align: left;
+  }
+  
+  .interest-breakdown {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fixed-deposit-details-card,
+.fixed-deposit-overview {
+  animation: fadeInUp 0.6s ease-out;
+}

@@ -2,8 +2,8 @@ import React from 'react';
 import '../../styles/OptionsListing.css'
 import { Alert } from 'react-bootstrap';
 
-import TransactionList from '../../pages/accountHolder/TransactionList';
 import TermDepositDashboard from '../accountHolder/TermDepositDashboard';
+import AccTransactionList from '../accountHolder/AccTransactionList';
 
 
 
@@ -22,7 +22,7 @@ const OptionListing: React.FC<OptionListingProps> = ({ selectedOption,   setDraw
     switch (selectedOption) {
      
       case 'Transfers':
-        return <TransactionList checkingAccountId={0} />;
+        return <AccTransactionList accountId={2} accountHolderId={1} name='string' />;
       case 'Term Deposit':
           return <TermDepositDashboard />;
       default:

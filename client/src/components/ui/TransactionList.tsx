@@ -11,7 +11,7 @@ const TransactionList: React.FC<{ checkingAccountId: number }> = ({ checkingAcco
 const transactions:TransactionWithDetails[] = []
 
   const handleNavigateToDetail = (transactionId: number) => {
-    navigate(`/transaction-detail/${transactionId}`);
+    navigate(`/account-holder/transaction-details/${transactionId}`);
   };
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
