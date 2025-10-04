@@ -12,6 +12,7 @@ const DB_PASS = isProduction ? process.env.DB_PASS : '97chocho';
 const DB_HOST = isProduction ? process.env.DB_HOST : 'localhost';
 const DB_PORT = isProduction ? parseInt(process.env.DB_PORT || '3306') : 3306;
 
+
 const sequelize = new Sequelize(DB_NAME as string, DB_USER as string, DB_PASS as string, {
   host: DB_HOST,
   port: DB_PORT,
