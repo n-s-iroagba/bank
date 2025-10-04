@@ -13,4 +13,21 @@
   .content-col {
     transition: width 0.3s ease;
   }
-  
+  .dashboard-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-column {
+  border-right: 1px solid #ddd;
+  background: #f8f9fa;
+  height: calc(100vh - 1.5cm); /* full height minus header */
+  position: sticky;
+  top: 1.5cm; /* sticks below header */
+}
+
+.content-column {
+  height: calc(100vh - 1.5cm);
+  overflow-y: auto;
+}

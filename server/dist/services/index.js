@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sequelize = exports.TransactionService = exports.FixedDepositService = exports.CheckingAccountService = exports.AccountHolderService = exports.SecondPartyService = exports.BankService = exports.userService = exports.transactionService = exports.fixedDepositService = exports.checkingAccountService = exports.accountHolderService = exports.secondPartyService = exports.bankService = void 0;
+const models_1 = require("../models");
+Object.defineProperty(exports, "sequelize", { enumerable: true, get: function () { return models_1.sequelize; } });
+const accountHolderService_1 = require("./accountHolderService");
+Object.defineProperty(exports, "AccountHolderService", { enumerable: true, get: function () { return accountHolderService_1.AccountHolderService; } });
+const bankService_1 = require("./bankService");
+Object.defineProperty(exports, "BankService", { enumerable: true, get: function () { return bankService_1.BankService; } });
+const checkingAccountService_1 = require("./checkingAccountService");
+Object.defineProperty(exports, "CheckingAccountService", { enumerable: true, get: function () { return checkingAccountService_1.CheckingAccountService; } });
+const fixedDepositService_1 = require("./fixedDepositService");
+Object.defineProperty(exports, "FixedDepositService", { enumerable: true, get: function () { return fixedDepositService_1.FixedDepositService; } });
+const secondPartyService_1 = require("./secondPartyService");
+Object.defineProperty(exports, "SecondPartyService", { enumerable: true, get: function () { return secondPartyService_1.SecondPartyService; } });
+const transactionService_1 = require("./transactionService");
+Object.defineProperty(exports, "TransactionService", { enumerable: true, get: function () { return transactionService_1.TransactionService; } });
+const UserService_1 = require("./UserService");
+// Initialize all services
+exports.bankService = new bankService_1.BankService();
+exports.secondPartyService = new secondPartyService_1.SecondPartyService();
+exports.accountHolderService = new accountHolderService_1.AccountHolderService();
+exports.checkingAccountService = new checkingAccountService_1.CheckingAccountService();
+exports.fixedDepositService = new fixedDepositService_1.FixedDepositService();
+exports.transactionService = new transactionService_1.TransactionService();
+exports.userService = new UserService_1.UserService();

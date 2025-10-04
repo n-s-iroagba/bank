@@ -1,58 +1,53 @@
+import { api } from './api';
+import { API_ROUTES } from '../config/apiRoutes';
+import { 
+  CheckingAccountsResponse, 
+  CheckingAccountResponse, 
+  CreateCheckingAccountResponse, 
+  UpdateCheckingAccountResponse
+} from '../types/api';
+import { CheckingAccountsQueryParams, CreateCheckingAccountRequest, UpdateCheckingAccountRequest } from '../types';
 
-import { apiGet, apiPatch, apiPost } from '../api/api';
-import { API_ENDPOINTS } from '../api/urls';
-import { CheckingAccount,  UpdateCheckingAccount } from '../types/CheckingAccount';
-import { CreateTransaction } from '../types/Transaction';
+export const checkingAccountsService = {
+  getCheckingAccounts: async (params: CheckingAccountsQueryParams): Promise<CheckingAccountsResponse> => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page) queryParams.append('page', params.page.toString());
+    if (params.limit) queryParams.append('limit', params.limit.toString());
+    if (params.search) queryParams.append('search', params.search);
+    if (params.accountHolderId) queryParams.append('accountHolderId', params.accountHolderId.toString());
+    if (params.isActive !== undefined) queryParams.append('isActive', params.isActive.toString());
+    
+    const response = await api.get(`${API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BASE}?${queryParams}`);
+    return response.data;
+  },
 
-// Update balance without transaction
-export const editBalanceWithoutTransaction = async (adminId: number, data: UpdateCheckingAccount) => {
-  const url = `${API_ENDPOINTS.checkingAccount.noTransaction}/${adminId}`;
-  try {
-    const response = await apiPatch( url,data);
+  getCheckingAccount: async (id: number): Promise<CheckingAccountResponse> => {
+    const response = await api.get(API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BY_ID(id));
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to edit balance without transaction');
-  }
-};
+  },
 
-// Update balance with transaction
-export const editBalanceWithTransaction = async (adminId: number, data: UpdateCheckingAccount) => {
-  const url = `${API_ENDPOINTS.checkingAccount.withTransaction}/${adminId}`;
-  try {
-    const response = await apiPatch( url,data);
+  createCheckingAccount: async (data: CreateCheckingAccountRequest): Promise<CreateCheckingAccountResponse> => {
+    const response = await api.post(API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BASE, data);
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to edit balance with transaction');
-  }
-};
+  },
 
-// Update checking account
-export const updateCheckingAccount = async (id: number, data: CheckingAccount) => {
-  const url = `${API_ENDPOINTS.checkingAccount.update}/${id}`;
-  try {
-    const response = await apiPatch( url,data);
+  updateCheckingAccount: async (id: number, data: UpdateCheckingAccountRequest): Promise<UpdateCheckingAccountResponse> => {
+    const response = await api.put(API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BY_ID(id), data);
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update checking account');
-  }
-};
+  },
 
-export const getCheckingAccount = async (id:number)=>{
-  const url = `${API_ENDPOINTS.checkingAccount.get}/${id}`;
-  try {
-    const response = await apiGet(url);
+  deleteCheckingAccount: async (id: number): Promise<void> => {
+    await api.delete(API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BY_ID(id));
+  },
+
+  getCheckingAccountsByAccountHolder: async (accountHolderId: number, params: CheckingAccountsQueryParams): Promise<CheckingAccountsResponse> => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page) queryParams.append('page', params.page.toString());
+    if (params.limit) queryParams.append('limit', params.limit.toString());
+    
+    const response = await api.get(`${API_ROUTES.ADMIN.CHECKING_ACCOUNTS.BY_ACCOUNT_HOLDER(accountHolderId)}?${queryParams}`);
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update checking account');
-  }
-}
-// Client debit
-export const clientDebit = async (accountHolderId: number, data: CreateTransaction) => {
-  const url = `${API_ENDPOINTS.checkingAccount.debit}/${accountHolderId}`;
-  try {
-    const response = await apiPost( url,data);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to process client debit');
-  }
+  },
 };

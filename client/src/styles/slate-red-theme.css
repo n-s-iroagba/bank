@@ -1,0 +1,133 @@
+/* Custom Slate and Red Theme */
+.slate-red-theme {
+  --slate-dark: #2d3748;
+  --slate-darker: #1a202c;
+  --slate-light: #4a5568;
+  --red-primary: #e53e3e;
+  --red-hover: #c53030;
+  --red-light: #fed7d7;
+  --text-light: #f7fafc;
+  --text-muted: #a0aec0;
+}
+
+.slate-red-theme .auth-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--slate-darker) 0%, var(--slate-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.slate-red-theme .auth-card {
+  background: rgba(45, 55, 72, 0.95);
+  border: 1px solid var(--slate-light);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 400px;
+}
+
+.slate-red-theme .auth-header {
+  text-align: center;
+  padding: 2rem 2rem 1rem;
+  border-bottom: 1px solid var(--slate-light);
+}
+
+.slate-red-theme .auth-title {
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.slate-red-theme .auth-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.slate-red-theme .auth-body {
+  padding: 2rem;
+}
+
+.slate-red-theme .form-label {
+  color: var(--text-light);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.slate-red-theme .form-control {
+  background-color: rgba(26, 32, 44, 0.8);
+  border: 1px solid var(--slate-light);
+  color: var(--text-light);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.slate-red-theme .form-control:focus {
+  background-color: rgba(26, 32, 44, 0.9);
+  border-color: var(--red-primary);
+  color: var(--text-light);
+  box-shadow: 0 0 0 0.2rem rgba(229, 62, 62, 0.25);
+}
+
+.slate-red-theme .form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.slate-red-theme .btn-primary {
+  background-color: var(--red-primary);
+  border-color: var(--red-primary);
+  color: white;
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.slate-red-theme .btn-primary:hover {
+  background-color: var(--red-hover);
+  border-color: var(--red-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+}
+
+.slate-red-theme .btn-outline-primary {
+  border-color: var(--red-primary);
+  color: var(--red-primary);
+  background: transparent;
+}
+
+.slate-red-theme .btn-outline-primary:hover {
+  background-color: var(--red-primary);
+  border-color: var(--red-primary);
+  color: white;
+}
+
+.slate-red-theme .auth-footer {
+  padding: 1rem 2rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--slate-light);
+}
+
+.slate-red-theme .auth-link {
+  color: var(--red-primary);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.slate-red-theme .auth-link:hover {
+  color: var(--red-hover);
+  text-decoration: underline;
+}
+
+.slate-red-theme .alert-info {
+  background-color: var(--red-light);
+  border-color: var(--red-primary);
+  color: var(--slate-dark);
+}
+
+.slate-red-theme .text-muted {
+  color: var(--text-muted) !important;
+}

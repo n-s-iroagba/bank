@@ -1,66 +1,60 @@
-import { apiGet, apiPost, apiPatch, apiDelete } from '../api/api';
-import { API_ENDPOINTS } from '../api/urls';
+import { api } from './api';
+import { API_ROUTES } from '../config/apiRoutes';
+import { 
+  BanksResponse, 
+  BankResponse, 
+  CreateBankResponse, 
+  UpdateBankResponse,
+  BulkCreateBanksExcelResponse 
+} from '../types/api';
+import { BanksQueryParams, CreateBankRequest, UpdateBankRequest } from '../types';
 
-import { CreateBank, UpdateBank, Bank } from '../types/Bank';
-
-// Get all banks
-export const getAllBanks = async (): Promise<Bank[]> => {
-  const url = API_ENDPOINTS.bank.getAll;
-  try {
-    const response = await apiGet<Bank[]>(url);
+export const banksService = {
+  getBanks: async (params: BanksQueryParams): Promise<BanksResponse> => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page) queryParams.append('page', params.page.toString());
+    if (params.limit) queryParams.append('limit', params.limit.toString());
+    if (params.name) queryParams.append('name', params.name);
+    
+    const response = await api.get(`${API_ROUTES.ADMIN.BANKS.BASE}?${queryParams}`);
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to fetch banks');
-  }
-};
+  },
 
-// Create a new bank
-export const createBank = async (data: CreateBank): Promise<Bank> => {
-  const url = API_ENDPOINTS.bank.create;
-  try {
+  getBank: async (id: number): Promise<BankResponse> => {
+    const response = await api.get(API_ROUTES.ADMIN.BANKS.BY_ID(id));
+    return response.data;
+  },
+
+  createBank: async (data: CreateBankRequest): Promise<CreateBankResponse> => {
+    const response = await api.post(API_ROUTES.ADMIN.BANKS.BASE, data);
+    return response.data;
+  },
+
+  updateBank: async (id: number, data: UpdateBankRequest): Promise<UpdateBankResponse> => {
+    const response = await api.put(API_ROUTES.ADMIN.BANKS.BY_ID(id), data);
+    return response.data;
+  },
+
+  deleteBank: async (id: number): Promise<void> => {
+    await api.delete(API_ROUTES.ADMIN.BANKS.BY_ID(id));
+  },
+
+  bulkCreateBanks: async (file: File): Promise<BulkCreateBanksExcelResponse> => {
     const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('logo', data.logo);
-
-    const response = await apiPost<Bank, FormData>(url, formData, {
+    formData.append('file', file);
+    
+    const response = await api.post(API_ROUTES.ADMIN.BANKS.BULK_EXCEL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to create bank');
-  }
-};
+  },
 
-// Update a bank
-export const updateBank = async (id: number, data: UpdateBank): Promise<Bank> => {
-  const url = `${API_ENDPOINTS.bank.update}/${id}`;
-  try {
-    const formData = new FormData();
-    formData.append('name', data.name);
-    if (data.logo) {
-      formData.append('logo', data.logo);
-    }
-
-    const response = await apiPatch<Bank, FormData>(url, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+  bulkCreateBanksFromForm: async (banks: CreateBankRequest[]): Promise<CreateBankResponse> => {
+    const response = await api.post(API_ROUTES.ADMIN.BANKS.BULK_FORM, { banks });
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to update bank');
-  }
-};
-
-// Delete a bank
-export const deleteBank = async (id: number): Promise<boolean> => {
-  const url = `${API_ENDPOINTS.bank.delete}/${id}`;
-  try {
-    const response = await apiDelete<string>(url);
-    return response.status === 204;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to delete bank');
-  }
+  },
 };

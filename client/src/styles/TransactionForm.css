@@ -1,0 +1,232 @@
+/* Transaction Form Modal - Slate & Red Theme */
+.transaction-modal .modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.transaction-modal .modal-header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-bottom: 4px solid #dc2626;
+  padding: 1.5rem 2rem;
+}
+
+.transaction-modal .modal-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #f8fafc;
+}
+
+.transaction-modal .btn-close {
+  filter: invert(1) brightness(2);
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.transaction-modal .btn-close:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.transaction-modal .modal-body {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 2rem;
+}
+
+.transaction-modal .form-label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Form Control Styling */
+.transaction-modal .form-control,
+.transaction-modal .form-select {
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.transaction-modal .form-control:focus,
+.transaction-modal .form-select:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.15);
+  background: #ffffff;
+}
+
+/* Transaction Type Specific Styling */
+.transaction-modal .form-select[value="debit"] {
+  border-left: 4px solid #dc2626;
+}
+
+.transaction-modal .form-select[value="credit"] {
+  border-left: 4px solid #16a34a;
+}
+
+/* Amount Input Styling */
+.transaction-modal input[type="number"] {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Textarea Styling */
+.transaction-modal textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* Error States */
+.transaction-modal .is-invalid {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.transaction-modal .invalid-feedback {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  color: #dc2626;
+}
+
+/* Alert Styling */
+.transaction-modal .alert-danger {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #fecaca;
+  border-radius: 8px;
+  color: #991b1b;
+  font-weight: 500;
+}
+
+/* Button Styling */
+.transaction-modal .modal-footer {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-top: 1px solid #cbd5e1;
+  padding: 1.5rem 2rem;
+}
+
+.transaction-modal .btn-outline-secondary {
+  border: 2px solid #94a3b8;
+  color: #475569;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.transaction-modal .btn-outline-secondary:hover {
+  background: #f8fafc;
+  border-color: #64748b;
+  color: #334155;
+  transform: translateY(-1px);
+}
+
+.transaction-modal .btn-primary {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.transaction-modal .btn-primary:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.transaction-modal .btn-primary:active {
+  transform: translateY(0);
+}
+
+.transaction-modal .btn-primary:disabled {
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Spinner Styling */
+.transaction-modal .spinner-border {
+  border-color: currentColor transparent currentColor transparent;
+}
+
+/* Option Styling */
+.transaction-modal .form-select option {
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.transaction-modal .form-select option[value="debit"] {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.transaction-modal .form-select option[value="credit"] {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .transaction-modal .modal-dialog {
+    margin: 1rem;
+  }
+  
+  .transaction-modal .modal-body {
+    padding: 1.5rem;
+  }
+  
+  .transaction-modal .modal-header,
+  .transaction-modal .modal-footer {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* Loading State Animation */
+.transaction-modal .btn-primary:disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Custom Scrollbar for Select */
+.transaction-modal .form-select::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transaction-modal .form-select::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.transaction-modal .form-select::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.transaction-modal .form-select::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

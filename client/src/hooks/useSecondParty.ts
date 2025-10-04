@@ -1,35 +1,64 @@
-import { useState, useEffect } from 'react';
-import { getAllSecondParties } from '../services/secondPartyService';
-import { SecondParty } from '../types/SecondParty';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-interface UseSecondPartyResult {
-  secondParties: SecondParty[];
-  secondPartyError: string | null;
-  secondPartyLoading: boolean;
-}
+import { SecondPartiesQueryParams, CreateSecondPartyRequest, UpdateSecondPartyRequest } from '../types';
+import { secondPartiesService } from '../services/secondPartyService';
 
-const useSecondParty = (id:number): UseSecondPartyResult => {
-  const [secondParties, setSecondParties] = useState<SecondParty[]>([]);
-  const [secondPartyError, setSecondPartyError] = useState<string | null>(null);
-  const [secondPartyLoading, setsecondPartyLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchSecondParties = async () => {
-      setsecondPartyLoading(true);
-      try {
-        const data = await getAllSecondParties(id);
-        setSecondParties(data as unknown as SecondParty[]);
-      } catch (err: any) {
-        setSecondPartyError(err.message);
-      } finally {
-        setsecondPartyLoading(false);
-      }
-    };
-
-    fetchSecondParties();
-  }, [id]);
-
-  return { secondParties, secondPartyError, secondPartyLoading };
+export const useSecondParties = (params: SecondPartiesQueryParams) => {
+  return useQuery({
+    queryKey: ['secondParties', params],
+    queryFn: () => secondPartiesService.getSecondParties(params),
+  });
 };
 
-export default useSecondParty;
+export const useSecondParty = (id: number) => {
+  return useQuery({
+    queryKey: ['secondParty', id],
+    queryFn: () => secondPartiesService.getSecondParty(id),
+    enabled: !!id,
+  });
+};
+
+export const useCreateSecondParty = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: CreateSecondPartyRequest) => secondPartiesService.createSecondParty(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['secondParties'] });
+    },
+  });
+};
+
+export const useUpdateSecondParty = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: UpdateSecondPartyRequest }) =>
+      secondPartiesService.updateSecondParty(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['secondParties'] });
+    },
+  });
+};
+
+export const useDeleteSecondParty = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: number) => secondPartiesService.deleteSecondParty(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['secondParties'] });
+    },
+  });
+};
+
+export const useBulkCreateSecondParties = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (file: File) => secondPartiesService.bulkCreateSecondParties(file),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['secondParties'] });
+    },
+  });
+};

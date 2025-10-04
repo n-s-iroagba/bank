@@ -1,0 +1,531 @@
+/* ============================================
+   Account Holder List - Slate & Red Theme
+   ============================================ */
+
+/* Theme Variables */
+:root {
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
+  --crimson: #dc2626;
+}
+
+/* ============================================
+   Container & Cards
+   ============================================ */
+
+.account-holder-list-container {
+  width: 100%;
+}
+
+.table-card,
+.mobile-card,
+.pagination-card,
+.loading-card,
+.empty-state-card {
+  border: 1px solid var(--slate-200);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  background: white;
+}
+
+.table-card {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   Table Styling
+   ============================================ */
+
+.account-holder-table {
+  margin-bottom: 0 !important;
+}
+
+.table-header {
+  background: linear-gradient(135deg, var(--slate-800), var(--slate-700));
+  color: white;
+}
+
+.table-header th {
+  padding: 1.25rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  color: white;
+}
+
+.account-row {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.account-row td {
+  padding: 1.5rem 1.5rem;
+  vertical-align: middle;
+  border: none;
+}
+
+.account-row:hover,
+.account-row.hovered {
+  background: linear-gradient(135deg, var(--red-50) 0%, var(--slate-50) 100%);
+  transform: scale(1.01);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Avatar
+   ============================================ */
+
+.avatar-gradient {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--red-600), var(--red-700), var(--slate-700));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.avatar-text {
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.025em;
+}
+
+/* ============================================
+   Holder Information
+   ============================================ */
+
+.holder-name {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--slate-900);
+  margin-bottom: 0.25rem;
+  transition: color 0.2s;
+}
+
+.account-row:hover .holder-name,
+.account-row.hovered .holder-name {
+  color: var(--red-700);
+}
+
+.holder-id {
+  display: flex;
+  align-items: center;
+  color: var(--slate-500);
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   Contact Information
+   ============================================ */
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-icon {
+  color: var(--red-600);
+  flex-shrink: 0;
+}
+
+.contact-text {
+  color: var(--slate-900);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.email-text {
+  color: var(--slate-600);
+  font-size: 0.875rem;
+  margin-left: 1.5rem;
+}
+
+/* ============================================
+   SSN Badge
+   ============================================ */
+
+.ssn-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--slate-100);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+.ssn-icon {
+  color: var(--red-600);
+  flex-shrink: 0;
+}
+
+.ssn-text {
+  color: var(--slate-900);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   Status Badges
+   ============================================ */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.status-badge.bg-success {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 1px solid #a7f3d0;
+}
+
+.status-badge.bg-warning {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border: 1px solid #fde68a;
+}
+
+.status-badge.bg-danger {
+  background-color: var(--red-50) !important;
+  color: var(--red-800) !important;
+  border: 1px solid var(--red-100);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.status-badge.bg-success .status-dot {
+  background-color: #10b981;
+}
+
+.status-badge.bg-warning .status-dot {
+  background-color: #f59e0b;
+}
+
+.status-badge.bg-danger .status-dot {
+  background-color: var(--red-500);
+}
+
+/* ============================================
+   Action Buttons
+   ============================================ */
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-view {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+}
+
+.action-btn-view:hover {
+  background-color: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.action-btn-edit {
+  background-color: var(--red-50);
+  color: var(--red-700);
+  border: 1px solid var(--red-100);
+}
+
+.action-btn-edit:hover {
+  background-color: var(--red-100);
+  color: var(--red-800);
+}
+
+.action-btn-delete {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.action-btn-delete:hover {
+  background-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* ============================================
+   Mobile Cards
+   ============================================ */
+
+.mobile-cards {
+  padding: 0;
+}
+
+.mobile-card {
+  transition: all 0.2s ease;
+  border: 1px solid var(--slate-200);
+  border-radius: 12px;
+}
+
+.mobile-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: var(--red-200);
+}
+
+.mobile-info {
+  padding-left: 0;
+}
+
+/* ============================================
+   Pagination
+   ============================================ */
+
+.pagination-card {
+  background: white;
+  border: 1px solid var(--slate-200);
+}
+
+.pagination-info {
+  color: var(--slate-700);
+  font-size: 0.875rem;
+}
+
+.text-crimson {
+  color: var(--crimson);
+  font-weight: 700;
+}
+
+.text-slate-900 {
+  color: var(--slate-900);
+  font-weight: 700;
+}
+
+.custom-pagination .page-link {
+  border: 1px solid var(--slate-300);
+  color: var(--slate-700);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+  background-color: white;
+  margin: 0 0.125rem;
+  border-radius: 8px !important;
+}
+
+.custom-pagination .page-link:hover {
+  background-color: var(--slate-50);
+  border-color: var(--slate-400);
+  color: var(--slate-900);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.custom-pagination .page-item.active .page-link {
+  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  border-color: var(--red-600);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.4);
+  transform: scale(1.05);
+  z-index: 3;
+}
+
+.custom-pagination .page-item.disabled .page-link {
+  background-color: var(--slate-100);
+  border-color: var(--slate-200);
+  color: var(--slate-400);
+  cursor: not-allowed;
+}
+
+.custom-pagination .page-item:first-child .page-link,
+.custom-pagination .page-item:last-child .page-link {
+  border-radius: 8px !important;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.loading-card,
+.empty-state-card {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.dual-ring-spinner {
+  width: 4rem;
+  height: 4rem;
+  border: 4px solid var(--slate-200);
+  border-top: 4px solid var(--red-600);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.text-slate-700 {
+  color: var(--slate-700);
+}
+
+.text-slate-600 {
+  color: var(--slate-600);
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+
+.empty-icon-wrapper {
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(135deg, var(--slate-100), var(--slate-200));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.text-slate-800 {
+  color: var(--slate-800);
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 991px) {
+  .mobile-card .avatar-gradient {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .mobile-card .avatar-text {
+    font-size: 1rem;
+  }
+  
+  .mobile-card .holder-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-pagination {
+    justify-content: center !important;
+    margin-top: 1rem;
+  }
+  
+  .pagination-info {
+    text-align: center;
+  }
+  
+  .action-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.813rem;
+  }
+}
+
+/* ============================================
+   Table Responsiveness
+   ============================================ */
+
+.table-responsive {
+  border-radius: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Remove default Bootstrap table borders */
+.account-holder-table,
+.account-holder-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================
+   Additional Enhancements
+   ============================================ */
+
+.account-holder-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.account-holder-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Smooth scrolling for table */
+.table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: var(--slate-100);
+  border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: var(--slate-400);
+  border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-500);
+}

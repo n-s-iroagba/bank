@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const secondPartyController_1 = require("../controllers/secondPartyController");
+const upload_1 = require("../middleware/upload");
+const validation_1 = require("../middleware/validation");
+const secondPartyValidation_1 = require("../validations/secondPartyValidation");
+const router = (0, express_1.Router)();
+router.post('/', (0, validation_1.validate)(secondPartyValidation_1.createSecondPartySchema), secondPartyController_1.createSecondParty);
+router.get('/', (0, validation_1.validate)(secondPartyValidation_1.secondPartyQuerySchema), secondPartyController_1.getAllSecondParties);
+router.get('/bank/:bankId', secondPartyController_1.getSecondPartiesByBank);
+router.get('/:id', (0, validation_1.validate)(secondPartyValidation_1.secondPartyIdSchema), secondPartyController_1.getSecondParty);
+router.put('/:id', (0, validation_1.validate)(secondPartyValidation_1.updateSecondPartySchema), secondPartyController_1.updateSecondParty);
+router.delete('/:id', (0, validation_1.validate)(secondPartyValidation_1.secondPartyIdSchema), secondPartyController_1.deleteSecondParty);
+router.post('/bulk-form', (0, validation_1.validate)(secondPartyValidation_1.bulkCreateSecondPartiesSchema), secondPartyController_1.bulkCreateSecondPartiesFromForm);
+router.post('/bulk-excel', upload_1.upload.single('file'), secondPartyController_1.bulkCreateSecondPartiesFromExcel);
+exports.default = router;

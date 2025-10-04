@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const upload_1 = require("../middleware/upload");
+const validation_1 = require("../middleware/validation");
+const bankValidation_1 = require("../validations/bankValidation");
+const BankController_1 = require("../controllers/BankController");
+const bankController = new BankController_1.BankController();
+const router = (0, express_1.Router)();
+router.post('/', (0, validation_1.validate)(bankValidation_1.createBankSchema), bankController.createBank);
+router.get('/', bankController.getAllBanks);
+router.get('/:id', bankController.getBankById);
+router.put('/:id', bankController.updateBank);
+router.delete('/:id', bankController.deleteBank);
+router.post('/bulk-form', (0, validation_1.validate)(bankValidation_1.bulkCreateBanksSchema), bankController.bulkCreateBanksFromForm);
+router.post('/bulk-excel', upload_1.upload.single('file'), bankController.bulkCreateBanksFromExcel);
+exports.default = router;

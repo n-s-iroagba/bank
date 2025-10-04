@@ -1,4 +1,4 @@
 /node_modules
-/.env.test
+.env
 /.env.production
-/upload
+/uploads
