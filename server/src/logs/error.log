@@ -61,3 +61,10 @@
 {"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:12:44.813Z"}
 {"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:08:03.060Z"}
 {"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:36:05.971Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T14:16:08.453Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T14:21:16.229Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T14:24:16.670Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T14:24:45.503Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T15:51:28.558Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T16:07:19.398Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-04T16:07:51.992Z"}

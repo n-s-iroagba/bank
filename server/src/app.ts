@@ -1,3 +1,4 @@
+
 process.on('uncaughtException', (err) => {
   console.error('💥 Uncaught Exception:', err);
 });
@@ -72,11 +73,14 @@ app.use(notFound);
 app.use(errorHandler);
 
 // Database connection and server start
+
 const PORT = process.env.NODE_ENV==='production'?3000 : 5000;
+
 
 const startServer = async () => {
   try {
     // await sequelize.authenticate();
+
     // console.log('Database connection established successfully');
     // console.log(sequelize.config.host)
 
@@ -91,6 +95,8 @@ const startServer = async () => {
     });
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+
+
     process.exit(1);
   }
 };
