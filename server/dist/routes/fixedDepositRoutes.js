@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const fixedDepositController_1 = require("../controllers/fixedDepositController");
+const validation_1 = require("../middleware/validation");
+const fixedDepositValidation_1 = require("../validations/fixedDepositValidation");
+const router = (0, express_1.Router)();
+router.post('/', (0, validation_1.validate)(fixedDepositValidation_1.createFixedDepositSchema), fixedDepositController_1.createFixedDeposit);
+router.get('/', (0, validation_1.validate)(fixedDepositValidation_1.fixedDepositQuerySchema), fixedDepositController_1.getAllFixedDeposits);
+router.get('/account-holder/:accountHolderId', fixedDepositController_1.getFixedDepositsByAccountHolder);
+router.get('/:id', fixedDepositController_1.getFixedDeposit);
+router.put('/:id', (0, validation_1.validate)(fixedDepositValidation_1.updateFixedDepositSchema), fixedDepositController_1.updateFixedDeposit);
+router.delete('/:id', fixedDepositController_1.deleteFixedDeposit);
+router.get('/mature/deposits', fixedDepositController_1.getMatureDeposits);
+exports.default = router;

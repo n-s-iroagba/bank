@@ -5,13 +5,12 @@ import { Plus, Search } from 'lucide-react';
 import CheckingAccountList from '../../components/admin/CheckingAccountManagement/CheckingAccountList';
 import CheckingAccountFormModal from '../../components/admin/CheckingAccountManagement/CheckingAccountForm';
 
-import { CheckingAccount } from '../../types';
+import { CheckingAccount, PaginationInfo } from '../../types';
 import { useCheckingAccounts } from '../../hooks/useCheckingAccount';
 
-import { useParams } from 'react-router-dom';
 
 const CheckingAccounts: React.FC = () => {
-  const { id } = useParams<{ id: string }>()
+  // const { id } = useParams<{ id: string }>()
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingAccount, setEditingAccount] = useState<CheckingAccount | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,7 +22,7 @@ const CheckingAccounts: React.FC = () => {
     isError, 
     error,
     refetch 
-  } = useCheckingAccounts(params 
+  } = useCheckingAccounts({...params}
 );
 console.log(checkingAccountsResponse)
   const handleCreateAccount = () => {
@@ -100,7 +99,7 @@ const pagination = checkingAccountsResponse?.pagination ?? { page: 1, totalPages
        <CheckingAccountList
   setParams={setParams}
   accounts={checkingAccounts}   // ensure always array
-  pagination={pagination}
+  pagination={pagination as PaginationInfo}
   isLoading={isLoading}
   onEdit={handleEditAccount}
   onRefetch={refetch}

@@ -1,14 +1,14 @@
 import logger from "../config/logger";
-import User, { AuthUser, UserCreationAttributes } from "../models/user";
+import User, { AuthUser, Role, UserCreationAttributes } from "../models/user";
 import { SignUpResponseDto, LoginRequestDto, AuthServiceLoginResponse, VerifyEmailRequestDto, ResetPasswordRequestDto } from "../types/auth.types";
 import { NotFoundError, BadRequestError } from "../utils/errors";
 import { PasswordService } from "./PasswordService";
 import { UserService } from "./UserService";
 import { tokenService, VerificationService } from "./VerificationService";
 import EmailService from './emailService'
+import { AccountHolderService } from ".";
 
-
-
+const accountHolderService = new AccountHolderService()
 const userService = new UserService()
 const verificationService = new VerificationService()
 export class AuthService {
@@ -36,7 +36,46 @@ export class AuthService {
       logger.info('Sign up completed successfully', { userId: user.id })
       return { result, user }
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Sign up', { email: data.email }, error)
+    }
+  }
+
+  /**
+   * Logs a user in by validating credentials and returning tokens.
+   * @param data - Login DTO containing email and password.
+   * @returns LoginAuthServiceReturn or SignUpResponseDto for unverified users.
+   */
+  async loginAccountHolder(data: {username:string,password:string}): Promise<any> {
+    try {
+      logger.info('Login attempt started', { email: data.username })
+
+      const user = await User.findOne({
+        where:{
+          username:data.username
+        }
+      })
+      console.log('PASSWORD', user?.password)
+      // await this.validatePassword(user, data.password)
+      if (!user) {
+        throw new NotFoundError('user not found')
+      }
+      if(data.password !== user.password){
+        throw new BadRequestError('invalid credentials')
+      }
+        const accHolder = await accountHolderService.getAccountHolderById(user.id)
+        if(!accHolder ){
+          throw new NotFoundError('account holder not found')
+        }
+      const { accessToken, refreshToken } = this.generateTokenPair(user)
+      logger.info('Login successful', { userId: user?.id })
+      const returnUser = {username:accHolder.firstName,role:Role.ACCOUNT_HOLDER,id:accHolder.id}
+      user.refreshToken = refreshToken
+      await user.save()
+      return { user: returnUser, accessToken, refreshToken }
+    } catch (error) {
+      console.error(error)
+      return this.handleAuthError('Login', { email: data.username }, error)
     }
   }
 
@@ -53,17 +92,19 @@ export class AuthService {
 
       const user = await userService.findUserByEmail(data.email, true)
       console.log('PASSWORD', user?.password)
-      await this.validatePassword(user, data.password)
+      // await this.validatePassword(user, data.password)
       if (!user) {
         throw new NotFoundError('user not found')
       }
-
-      if (!user.isEmailVerified) {
-        logger.warn('Login attempted by unverified user', { userId: user.id })
-        const { verificationToken } =
-          await verificationService.generateVerificationDetails(user)
-        return { id: user.id, verificationToken }
+      if(data.password !== user.password){
+        throw new BadRequestError('invalid credentials')
       }
+      // if (!user.isEmailVerified) {
+      //   logger.warn('Login attempted by unverified user', { userId: user.id })
+      //   const { verificationToken } =
+      //     await verificationService.generateVerificationDetails(user)
+      //   return { id: user.id, verificationToken }
+      // }
      
       const { accessToken, refreshToken } = this.generateTokenPair(user)
       logger.info('Login successful', { userId: user?.id })
@@ -72,6 +113,7 @@ export class AuthService {
       await user.save()
       return { user: returnUser, accessToken, refreshToken }
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Login', { email: data.email }, error)
     }
   }
@@ -98,6 +140,7 @@ export class AuthService {
       logger.info('Token refreshed successfully', { userId: user.id })
       return { accessToken: newAccessToken }
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Token refresh', {}, error)
     }
   }
@@ -136,6 +179,7 @@ export class AuthService {
       await user.save()
       return { user: returnUser, accessToken, refreshToken }
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Email verification', {}, error)
     }
   }
@@ -150,6 +194,7 @@ export class AuthService {
       logger.info('New verification code generation requested')
       return await verificationService.regenerateVerificationCode(id, token)
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('New code generation', {}, error)
     }
   }
@@ -174,6 +219,7 @@ export class AuthService {
 
       logger.info('Password reset email sent', { userId: user.id })
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Password reset', { email }, error)
     }
   }
@@ -196,6 +242,7 @@ export class AuthService {
      
       return this.saveRefreshTokenAndReturn(user, accessToken, refreshToken)
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Password reset', {}, error)
     }
   }
@@ -214,6 +261,7 @@ export class AuthService {
 
       return user
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Get user by ID', { userId }, error)
     }
   }
@@ -228,10 +276,28 @@ export class AuthService {
       logger.info('Get current user requested', { userId })
 
       const user = await userService.findUserById(userId)
+      let authUser ={
+        id:0,
+        username:'',
+        role:user.role
+      }
+      if(user.role === Role.ACCOUNT_HOLDER){
+      
+        const accHolder = await accountHolderService.getAccountHolderById(user.id)
+        if(!accHolder ){
+          throw new NotFoundError('account holder not found')
+        }
+
+        authUser.id = accHolder.id
+        authUser.username = accHolder.firstName
+      }else{
+        authUser = user
+      }
       logger.info('Current user retrieved successfully', { userId })
 
-      return user as unknown as AuthUser
+      return authUser as unknown as AuthUser
     } catch (error) {
+      console.error(error)
       return this.handleAuthError('Get current user', { userId }, error)
     }
   }

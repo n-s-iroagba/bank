@@ -162,7 +162,7 @@ const BankList: React.FC<BankListProps> = ({
           </button>
 
           {Array.from({ length: Math.min(pagination.totalPages, 7) }, (_, i) => {
-            let page;
+            let page:number;
             if (pagination.totalPages <= 7) {
               page = i + 1;
             } else if (pagination.currentPage <= 4) {

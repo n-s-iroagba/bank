@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col, Card, Button, Alert } from 'react-bootstrap';
-import { Plus, Upload, Download, Users, BarChart3, TrendingUp, UserCheck } from 'lucide-react';
+import { Plus, Upload,Users, BarChart3,UserCheck } from 'lucide-react';
 
 import SecondPartyList from '../../components/admin/SecondPartyManagement/SecondPartyList';
 import { SecondParty } from '../../types';
@@ -47,7 +47,7 @@ const SecondParties: React.FC = () => {
     handleCloseBulkUploadModal();
   };
  console.log(secondPartiesResponse)
-  const totalSecondParties = secondPartiesResponse?.pagination?.total || 0;
+  const totalSecondParties = secondPartiesResponse?.pagination?.totalItems || 0;
   const activeSecondParties = secondPartiesResponse?.data?.length || 0;
 
   return (

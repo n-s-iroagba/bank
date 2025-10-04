@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Row, Col, Button, Spinner } from "react-bootstrap";
-import { ArrowLeft, TrendingUp, TrendingDown, Calendar, DollarSign } from "lucide-react";
+import { ArrowLeft, TrendingUp, TrendingDown, Calendar} from "lucide-react";
 import { TransactionWithDetails } from "../../types";
 import { useTransaction } from "../../hooks/useTransaction";
 
@@ -11,7 +11,7 @@ const TransactionDetails: React.FC = () => {
 
   // Fetch transaction by ID
   const { data, isLoading, isError } = useTransaction(Number(id));
-  const transaction: TransactionWithDetails | undefined = data?.data;
+  const transaction: TransactionWithDetails | undefined = data;
 
   const formatCurrency = (amount: number) =>
     new Intl.NumberFormat("en-US", {

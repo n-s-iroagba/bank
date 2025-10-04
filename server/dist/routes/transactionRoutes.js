@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const validation_1 = require("../middleware/validation");
+const transactionValidation_1 = require("../validations/transactionValidation");
+const transactionController_1 = require("../controllers/transactionController");
+const transactionController_2 = require("../controllers/transactionController");
+const router = (0, express_1.Router)();
+router.post('/', (0, validation_1.validate)(transactionValidation_1.createTransactionSchema), transactionController_2.createTransaction);
+router.get('/', (0, validation_1.validate)(transactionValidation_1.transactionQuerySchema), transactionController_1.getAllTransactions);
+router.get('/checking-account/:checkingAccountId', (0, validation_1.validate)(transactionValidation_1.checkingAccountIdParamSchema), transactionController_1.getTransactionsByCheckingAccount);
+router.get('/:id', (0, validation_1.validate)(transactionValidation_1.transactionIdSchema), transactionController_1.getTransaction);
+router.put('/:id', (0, validation_1.validate)(transactionValidation_1.updateTransactionSchema), transactionController_1.updateTransaction);
+router.delete('/:id', (0, validation_1.validate)(transactionValidation_1.transactionIdSchema), transactionController_1.deleteTransaction);
+router.get('/statement/:checkingAccountId', (0, validation_1.validate)(transactionValidation_1.accountStatementSchema), transactionController_2.getAccountStatement);
+exports.default = router;

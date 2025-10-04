@@ -111,3 +111,725 @@
 {"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T18:54:34.397Z"}
 {"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-02T18:54:46.082Z"}
 {"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-02T18:54:46.250Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:21:53.113Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:22:00.254Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:22:00.630Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:25:56.203Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:25:56.365Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:25:56.370Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:25:56.371Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:25:56.373Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:26:51.965Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:26:52.003Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:26:52.011Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:26:52.012Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:26:52.014Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:27:01.149Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:27:01.162Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:27:01.164Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:27:01.165Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T22:27:01.166Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:30.794Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:30.841Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:30.843Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:30.843Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:30.844Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:38.481Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:38.490Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:38.492Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:38.496Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:38.496Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:45.980Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:45.990Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:45.991Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:45.992Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:01:45.992Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:05.488Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:05.537Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:05.538Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:05.539Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:05.539Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:20.004Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:20.024Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:20.028Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:20.028Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:20.029Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:40.331Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:40.372Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:40.373Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:40.374Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:40.374Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:52.031Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:52.076Z","userId":1}
+{"isMatch":false,"level":"info","message":"Password comparison completed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:52.077Z"}
+{"level":"warn","message":"Password validation failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:52.078Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:02:52.078Z"}
+{"email":"gracehill95x@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:04:12.217Z"}
+{"email":"gracehill95x@gmail.com","level":"warn","message":"User not found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:04:12.346Z"}
+{"email":"gracehill95x@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:04:12.347Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:09:54.402Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:09:58.699Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:09:58.774Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:10:13.382Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:10:13.491Z","userId":1}
+{"level":"warn","message":"Login attempted by unverified user","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:10:13.492Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"24h","level":"info","message":"Email verification token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:10:13.502Z","tokenLength":380,"userId":1,"verificationCode":null}
+{"level":"info","message":"User verification details updated","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:10:14.616Z","userId":1}
+{"level":"info","message":"Verification details generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:10:14.620Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:11:13.687Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"User found by email","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:11:13.712Z","userId":1}
+{"level":"warn","message":"Login attempted by unverified user","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:11:13.714Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"24h","level":"info","message":"Email verification token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:11:13.717Z","tokenLength":385,"userId":1,"verificationCode":"123456"}
+{"level":"info","message":"User verification details updated","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:11:14.136Z","userId":1}
+{"level":"info","message":"Verification details generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-02T23:11:14.136Z","userId":1}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T09:53:48.821Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T09:54:13.144Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T09:54:15.051Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:09:02.044Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:09:08.229Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:09:08.492Z"}
+{"email":"gracehill95x@gmail.cm","level":"info","message":"User created successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:39:55.114Z","userId":2}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:44:05.707Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:44:11.040Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:44:11.119Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:47:27.588Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:47:33.340Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:47:33.500Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:47:53.650Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:47:59.024Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:47:59.159Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:48:38.896Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:48:45.780Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:48:45.907Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:53:35.767Z"}
+{"email":"nnamdisolomon1@gmail.com","error":{"isOperational":true,"statusCode":400},"level":"error","message":"Login failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:53:35.908Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:54:54.276Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:54:58.523Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:54:58.600Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:55:05.030Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:55:05.545Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:55:05.552Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:55:05.553Z","userId":1}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:41.790Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:45.742Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:45.841Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:58.108Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:58.500Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:58.503Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:56:58.504Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:05.570Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:06.108Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:06.116Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:06.118Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:14.175Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:14.252Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:14.254Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:58:14.255Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:59:18.786Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:59:19.028Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:59:19.032Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T10:59:19.033Z","userId":1}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:01:55.586Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:01:59.109Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:01:59.189Z"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:02:03.544Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:02:04.284Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:02:04.291Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:02:04.292Z","userId":1}
+{"expiresAt":"2025-10-03T11:17:04.000Z","expiresIn":893,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:02:11.515Z","tokenType":"access"}
+{"expiresAt":"2025-10-03T11:17:04.000Z","expiresIn":893,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:02:11.557Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:03:17.932Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:03:18.309Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:03:18.315Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:03:18.316Z","userId":1}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":732,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:06:06.642Z","tokenType":"access"}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":732,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:06:06.799Z","tokenType":"access"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:07:20.796Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:07:24.161Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:07:24.240Z"}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":578,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:40.980Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.429Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.431Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.446Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.524Z","userId":1}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":577,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.541Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.548Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.549Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.558Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:08:41.566Z","userId":1}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":544,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.592Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.715Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.719Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.749Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.759Z","userId":1}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":544,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.774Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.889Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.893Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.906Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:09:14.927Z","userId":1}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:11:53.566Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:11:57.849Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:11:57.928Z"}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:12:41.054Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:12:44.741Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:12:44.813Z"}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":182,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.582Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.688Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.693Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.727Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.767Z","userId":1}
+{"expiresAt":"2025-10-03T11:18:18.000Z","expiresIn":182,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.783Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.810Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.823Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.836Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T11:15:16.845Z","userId":1}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:07:54.408Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:08:02.966Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:08:03.060Z"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:26:00.863Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:26:03.285Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:00.368Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:16.993Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:19.018Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:19.150Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:32.076Z"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:33.801Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:33.876Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:47.301Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:47.350Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:40:47.351Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:41:33.506Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:41:33.523Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:41:36.798Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:41:37.231Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:41:37.236Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:41:37.237Z","userId":1}
+{"expiresAt":"2025-10-03T12:56:37.000Z","expiresIn":745,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:12.997Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.316Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.347Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.712Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.735Z","userId":1}
+{"expiresAt":"2025-10-03T12:56:37.000Z","expiresIn":744,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.747Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.761Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.762Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:13.944Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:44:14.203Z","userId":1}
+{"expiresAt":"2025-10-03T12:56:37.000Z","expiresIn":543,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:34.624Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:34.846Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:34.848Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:34.986Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:34.990Z","userId":1}
+{"expiresAt":"2025-10-03T12:56:37.000Z","expiresIn":543,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:34.998Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:35.050Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:35.054Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:35.066Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:35.270Z","userId":1}
+{"expiresAt":"2025-10-03T12:56:37.000Z","expiresIn":530,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:47.721Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:47.926Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:47.927Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:48.129Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:48.176Z","userId":1}
+{"expiresAt":"2025-10-03T12:56:37.000Z","expiresIn":529,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:48.298Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:48.439Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:48.440Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:48.885Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:49.123Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:58.472Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:58.549Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:58.552Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:47:58.552Z","userId":1}
+{"expiresAt":"2025-10-03T13:02:58.000Z","expiresIn":894,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.645Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.659Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.659Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.674Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.717Z","userId":1}
+{"expiresAt":"2025-10-03T13:02:58.000Z","expiresIn":894,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.734Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.742Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.742Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.749Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:04.767Z","userId":1}
+{"expiresAt":"2025-10-03T13:02:58.000Z","expiresIn":888,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.134Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.220Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.226Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.237Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.247Z","userId":1}
+{"expiresAt":"2025-10-03T13:02:58.000Z","expiresIn":888,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.257Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.262Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.263Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.272Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:10.286Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:13.611Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:13.621Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:13.623Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:48:13.624Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:53:41.582Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:53:41.773Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:53:41.857Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T12:53:41.858Z","userId":1}
+{"expiresAt":"2025-10-03T13:08:41.000Z","expiresIn":442,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.280Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.292Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.293Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.306Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.316Z","userId":1}
+{"expiresAt":"2025-10-03T13:08:41.000Z","expiresIn":442,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.329Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.334Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.335Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.342Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:01:19.349Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:11:54.758Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:11:54.787Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:11:58.752Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:11:59.080Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:11:59.084Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:11:59.085Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:34:12.527Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:34:12.549Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:34:21.158Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:34:21.712Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:34:21.716Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:34:21.717Z","userId":1}
+{"expiresAt":"2025-10-03T13:49:21.000Z","expiresIn":845,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.249Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.439Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.440Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.451Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.456Z","userId":1}
+{"expiresAt":"2025-10-03T13:49:21.000Z","expiresIn":845,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.467Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.474Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.475Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.486Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:35:16.491Z","userId":1}
+{"expiresAt":"2025-10-03T13:49:21.000Z","expiresIn":778,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.641Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.776Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.776Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.783Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.790Z","userId":1}
+{"expiresAt":"2025-10-03T13:49:21.000Z","expiresIn":778,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.802Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.810Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.811Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.818Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T13:36:23.823Z","userId":1}
+{"hasEmailVerificationSecret":false,"hasRefreshSecret":false,"hasResetPasswordSecret":false,"level":"info","message":"TokenService initialized successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:35:52.853Z"}
+{"level":"info","message":"Server running on port 5000","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:36:05.725Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:465","level":"error","message":"SMTP connection failed","port":465,"service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:36:05.971Z"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:39:57.245Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:39:57.374Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:40:05.313Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:40:16.613Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:40:16.619Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:40:16.620Z","userId":1}
+{"expiresAt":"2025-10-03T17:55:16.000Z","expiresIn":819,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.206Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.329Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.331Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.338Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.343Z","userId":1}
+{"expiresAt":"2025-10-03T17:55:16.000Z","expiresIn":819,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.353Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.358Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.359Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.365Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:41:37.369Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:55:33.935Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:55:33.958Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:55:37.620Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:55:37.951Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:55:37.956Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:55:37.957Z","userId":1}
+{"expiresAt":"2025-10-03T18:10:37.000Z","expiresIn":851,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.399Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.733Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.734Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.741Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.745Z","userId":1}
+{"expiresAt":"2025-10-03T18:10:37.000Z","expiresIn":851,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.754Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.782Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.783Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.788Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:56:26.796Z","userId":1}
+{"expiresAt":"2025-10-03T18:10:37.000Z","expiresIn":803,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.182Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.191Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.192Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.204Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.215Z","userId":1}
+{"expiresAt":"2025-10-03T18:10:37.000Z","expiresIn":803,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.234Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.250Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.253Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.329Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T17:57:14.349Z","userId":1}
+{"expiresAt":"2025-10-03T18:10:37.000Z","expiresIn":1,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.588Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.859Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.860Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.865Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.868Z","userId":1}
+{"expiresAt":"2025-10-03T18:10:37.000Z","expiresIn":1,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.875Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.880Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.881Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.885Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:10:36.889Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:12:33.366Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:12:33.387Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:12:38.679Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:12:38.908Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:12:38.912Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:12:38.913Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":708,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.347Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.550Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.551Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.559Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.566Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":708,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.592Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.603Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.606Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.617Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:15:50.632Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":621,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.150Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.385Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.386Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.400Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.413Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":621,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.432Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.443Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.444Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.455Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:17:17.459Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":383,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.229Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.410Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.411Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.414Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.419Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":383,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.426Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.432Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.433Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.436Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:21:15.439Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":281,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.436Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.597Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.598Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.604Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.609Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":281,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.616Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.621Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.621Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.625Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:22:57.631Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":120,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.706Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.830Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.830Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.838Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.857Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":120,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.865Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.870Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.870Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.875Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:25:38.879Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":53,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.166Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.267Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.267Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.274Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.289Z","userId":1}
+{"expiresAt":"2025-10-03T18:27:38.000Z","expiresIn":53,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.298Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.304Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.305Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.313Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:26:45.318Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:29:49.410Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:29:49.434Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:29:52.899Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:29:53.071Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:29:53.075Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T18:29:53.076Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:43:37.948Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:43:37.978Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:43:42.187Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:43:42.223Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:43:42.227Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:43:42.227Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":832,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.540Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.547Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.548Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.553Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.557Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":832,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.578Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.588Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.591Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.605Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:44:50.612Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":736,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.000Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.021Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.021Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.030Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.040Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":736,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.056Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.067Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.068Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.076Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:46:26.082Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":575,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.064Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.087Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.092Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.103Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.110Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":575,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.128Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.135Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.136Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.141Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:49:07.155Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":83,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:19.588Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:19.603Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:19.607Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:19.612Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:19.664Z","userId":1}
+{"expiresAt":"2025-10-03T22:58:42.000Z","expiresIn":83,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:19.686Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:20.058Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:20.067Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:20.304Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T22:57:20.344Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:18:40.263Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:18:40.303Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:20:15.438Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:20:15.675Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:20:15.679Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:20:15.679Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:01.211Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:01.389Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:01.391Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:01.391Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:18.392Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:19.151Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:19.155Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:21:19.156Z","userId":1}
+{"expiresAt":"2025-10-03T23:36:19.000Z","expiresIn":764,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.425Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.513Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.514Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.529Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.536Z","userId":1}
+{"expiresAt":"2025-10-03T23:36:19.000Z","expiresIn":764,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.557Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.562Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.564Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.572Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:35.585Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:51.963Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:52.046Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:52.050Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:23:52.050Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:01.101Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:01.114Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:01.131Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:01.134Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":846,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.820Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.831Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.832Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.839Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.844Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":846,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.878Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.885Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.887Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.899Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:24:55.906Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":749,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.583Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.709Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.711Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.733Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.737Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":749,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.744Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.748Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.749Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.764Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:32.766Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":722,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.555Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.961Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.962Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.964Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.980Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":722,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.987Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.995Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:26:59.996Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:00.004Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:00.014Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":711,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.332Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.336Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.340Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.346Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.351Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":711,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.357Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.364Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.364Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.368Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:27:10.372Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":441,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:40.999Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.112Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.113Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.120Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.131Z","userId":1}
+{"expiresAt":"2025-10-03T23:39:01.000Z","expiresIn":440,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.156Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.163Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.165Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.176Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:41.179Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:44.889Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:44.899Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:44.936Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:31:44.956Z","userId":1}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:32:06.286Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:32:06.635Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:32:06.640Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:32:06.640Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":700,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.212Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.250Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.250Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.253Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.258Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":700,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.271Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.280Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.280Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.309Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:35:26.318Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":656,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.080Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.149Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.150Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.155Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.167Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":656,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.182Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.193Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.193Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.239Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:36:10.290Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":604,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.225Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.342Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.344Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.360Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.474Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":604,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.481Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.486Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.487Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.492Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:37:02.497Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":497,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:49.919Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:49.970Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:49.970Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:49.975Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:49.990Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":496,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:50.003Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:50.008Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:50.008Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:50.013Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:38:50.024Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":453,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.502Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.605Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.606Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.612Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.617Z","userId":1}
+{"expiresAt":"2025-10-03T23:47:06.000Z","expiresIn":453,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.629Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.634Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.635Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.640Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:39:33.649Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:06.372Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:06.411Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:11.212Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:11.350Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:11.353Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:11.354Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":875,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.512Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.623Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.624Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.629Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.633Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":875,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.643Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.649Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.650Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.655Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:47:36.659Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":702,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.568Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.575Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.576Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.586Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.594Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":702,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.609Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.621Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.623Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.631Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:50:29.635Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":598,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.550Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.558Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.561Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.570Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.592Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":598,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.601Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.610Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.610Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.613Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:52:13.624Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":518,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.029Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.041Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.048Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.055Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.062Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":518,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.075Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.080Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.084Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.095Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:53:33.101Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":489,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.662Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.670Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.673Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.723Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.731Z","userId":1}
+{"expiresAt":"2025-10-04T00:02:11.000Z","expiresIn":489,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.746Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.753Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.758Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.761Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-03T23:54:02.765Z","userId":1}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:37:44.999Z","tokenType":"access"}
+{"error":"jwt expired","level":"warn","message":"JWT verification failed","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:37:45.027Z","tokenType":"access"}
+{"email":"nnamdisolomon1@gmail.com","level":"info","message":"Login attempt started","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:37:47.513Z"}
+{"email":"nnamdisolomon1@gmail.com","expiresIn":"15m","hasPermissions":false,"level":"info","message":"Access token generated successfully","role":"ACCOUNT_HOLDER","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:37:47.522Z","tokenLength":317,"userId":1}
+{"level":"info","message":"Refresh token generated successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:37:47.525Z","tokenLength":305}
+{"level":"info","message":"Login successful","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:37:47.525Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":819,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.578Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.596Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.601Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.612Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.619Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":819,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.628Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.634Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.636Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.698Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:39:08.706Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":714,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.738Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.750Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.752Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.755Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.768Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":714,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.778Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.782Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.783Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.787Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:40:53.794Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":631,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.035Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.049Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.050Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.056Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.067Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":631,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.081Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.097Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.101Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.107Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:16.115Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":625,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.938Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.943Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.947Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.954Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.958Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":625,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.970Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.980Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.982Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.993Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:42:22.996Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":581,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.421Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.433Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.434Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.438Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.446Z","userId":1}
+{"expiresAt":"2025-10-04T00:52:47.000Z","expiresIn":581,"level":"info","message":"Token verified successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.464Z","tokenType":"access"}
+{"level":"info","message":"Authenticated user: nnamdisolomon1@gmail.com (ID: 1)","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.472Z"}
+{"level":"info","message":"Get current user requested","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.479Z","userId":1}
+{"level":"info","message":"User found by ID","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.487Z","userId":1}
+{"level":"info","message":"Current user retrieved successfully","service":"greater-texas-fcu-api","timestamp":"2025-10-04T00:43:06.496Z","userId":1}

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const checkingAccountController_1 = require("../controllers/checkingAccountController");
+const checkingAccountValidation_1 = require("../validations/checkingAccountValidation");
+const validation_1 = require("../middleware/validation");
+const router = (0, express_1.Router)();
+router.post('/', (0, validation_1.validate)(checkingAccountValidation_1.createCheckingAccountSchema), checkingAccountController_1.createCheckingAccount);
+router.get('/', (0, validation_1.validate)(checkingAccountValidation_1.checkingAccountQuerySchema), checkingAccountController_1.getAllCheckingAccounts);
+router.get('/account-holder/:accountHolderId', (0, validation_1.validate)(checkingAccountValidation_1.accountHolderIdParamSchema), checkingAccountController_1.getCheckingAccountsByAccountHolder);
+router.get('/:id', (0, validation_1.validate)(checkingAccountValidation_1.checkingAccountIdSchema), checkingAccountController_1.getCheckingAccount);
+router.put('/:id', (0, validation_1.validate)(checkingAccountValidation_1.updateCheckingAccountSchema), checkingAccountController_1.updateCheckingAccount);
+router.delete('/:id', (0, validation_1.validate)(checkingAccountValidation_1.checkingAccountIdSchema), checkingAccountController_1.deleteCheckingAccount);
+exports.default = router;

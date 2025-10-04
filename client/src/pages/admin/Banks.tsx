@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Card, Button, Alert } from "react-bootstrap";
-import { Plus, Upload, Download, Banknote, TrendingUp } from "lucide-react";
+import { Plus, Upload, Banknote, TrendingUp } from "lucide-react";
 
 import BankList from "../../components/admin/BankManagement/BankList";
 import BankFormModal from "../../components/admin/BankManagement/BankForm";

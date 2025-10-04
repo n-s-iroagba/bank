@@ -30,14 +30,10 @@ export class AuthController {
         logger.error('User ID not found in signup result', { result })
         throw new BadRequestError('Failed to create user')
       }
-
-    
-
-
-   
       res.status(201).json(result)
       return
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -57,6 +53,7 @@ export class AuthController {
       const newToken = await this.authService.generateNewCode(token, id)
       res.json({ verificationToken: newToken, id } as ResendVerificationRespnseDto)
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -78,6 +75,7 @@ export class AuthController {
       await this.authService.forgotPassword(email)
       res.status(200).end()
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -101,6 +99,43 @@ export class AuthController {
       console.log('AUTH USER', user)
       res.status(200).json(user as AuthUser)
     } catch (error) {
+      console.error(error)
+      next(error)
+    }
+  }
+
+
+  loginAccountHolder = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { username, password } = req.body
+
+      if (!username || !password) {
+        res.status(400).json({ message: 'Email and password are required' })
+        return
+      }
+
+      const result = await this.authService.loginAccountHolder({ username, password })
+
+      // Check if result has refreshToken property (verified user)
+      if ('refreshToken' in result && 'accessToken' in result) {
+        // User is verified
+        const verified = result as AuthServiceLoginResponse
+
+        const cookieOptions = getCookieOptions()
+        console.log('Setting refresh token cookie with options:', cookieOptions)
+
+        res.cookie('refreshToken', verified.refreshToken, cookieOptions)
+        res.status(200).json({
+          user: verified.user,
+          accessToken: verified.accessToken,
+        })
+      } else {
+        // User not verified
+        const unverified = result as SignUpResponseDto
+        res.status(200).json(unverified)
+      }
+    } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -135,6 +170,7 @@ export class AuthController {
         res.status(200).json(unverified)
       }
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -159,6 +195,7 @@ export class AuthController {
         accessToken: result.accessToken,
       })
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -185,6 +222,7 @@ export class AuthController {
         accessToken: result.accessToken,
       })
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -220,6 +258,7 @@ export class AuthController {
       const accessToken = await this.authService.refreshToken(refreshToken)
       res.status(200).json(accessToken)
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }
@@ -244,6 +283,7 @@ export class AuthController {
 
       res.status(200).json({ message: 'Logged out successfully' })
     } catch (error) {
+      console.error(error)
       next(error)
     }
   }

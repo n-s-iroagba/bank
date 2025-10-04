@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Plus, Search, Download, Users, RefreshCw } from "lucide-react";
+import { Plus, Search,  Users, RefreshCw } from "lucide-react";
 import { accountHolderManagemntStyles } from "../../styles/AdminAccountHolderStyles";
 import AccountHolderList from "../../components/admin/AccountHolderManagement/AccountHolderList";
 import { AccountHolder } from "../../types";
@@ -16,8 +16,7 @@ const AccountHolders: React.FC = () => {
   const {
     data: accountHoldersResponse,
     isLoading,
-    isError,
-    error,
+ 
     refetch,
   } = useAccountHolders({ page: 1, limit: 10 });
 

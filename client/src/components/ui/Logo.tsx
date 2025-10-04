@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
-const Logo = () => {
+const Logo = ({shouldNotDisplay=false}:{shouldNotDisplay?:boolean}) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
 
@@ -43,7 +43,7 @@ const Logo = () => {
                         <FontAwesomeIcon icon={faSearch}/>
                     </div>
                     {isScrolled ? <img className="scroll-logo" src={scrolledLogo} alt="Scrolled Logo" /> : <img className="logo" src={logo} alt="Default Logo" />}
-                    <button className='button-radius button-width bg-blue text-light'>join</button>
+                    {!shouldNotDisplay&&<button className='button-radius button-width bg-blue text-light'>join</button>}
                 </div>
 
             ) : (

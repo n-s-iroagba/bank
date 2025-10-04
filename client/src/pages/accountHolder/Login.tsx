@@ -4,6 +4,9 @@ import "../../styles/AuthForm.css";
 import { useNavigate } from "react-router-dom";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { authService } from "../../services/authService";
+import { useAuth } from "../../hooks/useAuth";
+import Logo from "../../components/ui/Logo";
 
 
 interface LoginData {
@@ -23,7 +26,7 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-
+const {setUser} = useAuth()
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
@@ -45,13 +48,9 @@ const Login: React.FC = () => {
     setErrorMessage("");
 
     try {
-      // Using the login method from AuthContext
-      // Note: The AuthContext expects email, but your form uses username
-      // You might need to adjust this based on your backend requirements
-      // await login(loginData.username, loginData.password);
-      
-      // Navigate to dashboard or home page after successful login
-      navigate("/dashboard");
+const response = await authService.loginAcountHolder(loginData)
+setUser(response.user)
+      navigate("/account-holder/dashboard");
     } catch (error: any) {
       setErrorMessage(error.message || "Login failed. Please check your credentials.");
     } finally {
@@ -61,6 +60,7 @@ const Login: React.FC = () => {
 
   return (
     <div className='px-md-5 py-sm-3 py-lg-0 h-100 px-lg-0 bg-light'>
+      <Logo shouldNotDisplay/>
       <div className="py-3 px-5 bg-red text-light">
         <h5>Your Feedback Matters</h5>
         <p className="small-font">Questions? Comments?</p>

@@ -54,7 +54,7 @@ const AdminSidebar: React.FC = () => {
       <Offcanvas
         show={sidebarOpen}
         onHide={() => setSidebarOpen(false)}
-        className="offcanvas-custom d-lg-none"
+        className="offcanvas-custom d-lg-block"
       >
         <Offcanvas.Header className="offcanvas-header-custom">
           <Offcanvas.Title className="offcanvas-title-custom">

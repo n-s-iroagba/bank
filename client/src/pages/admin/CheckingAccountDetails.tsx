@@ -1,28 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Button, Spinner, Container, Row, Col, Badge, Form, Alert } from "react-bootstrap"
-import { CreditCard, ArrowLeft, DollarSign, Calendar, Activity, User, Shield, Plus, Minus, TrendingUp, TrendingDown } from "lucide-react"
+import { Card, Button, Spinner, Container, Row, Col, Badge, } from "react-bootstrap"
+import { CreditCard, ArrowLeft, DollarSign, Activity, User, Shield  } from "lucide-react"
 import { useCheckingAccount } from "../../hooks/useCheckingAccount";
-import { useState } from "react";
+
 import "../../styles/CheckingAccountDetails.css"
+
 
 export default function CheckingAccountDetailsPage() {
   const { accountId } = useParams<{ accountId: string }>()
   const navigate = useNavigate()
   const accountResponse = useCheckingAccount(Number(accountId))
-  const account = accountResponse?.data?.data
+  const account = accountResponse?.data
   console.log(account)
   const loading = accountResponse.isLoading
 
-  // Credit/Debit form states
-  const [creditAmount, setCreditAmount] = useState("")
-  const [debitAmount, setDebitAmount] = useState("")
-  const [creditDescription, setCreditDescription] = useState("")
-  const [debitDescription, setDebitDescription] = useState("")
-  const [creditErrors, setCreditErrors] = useState<Record<string, string>>({})
-  const [debitErrors, setDebitErrors] = useState<Record<string, string>>({})
-  const [isProcessingCredit, setIsProcessingCredit] = useState(false)
-  const [isProcessingDebit, setIsProcessingDebit] = useState(false)
-  const [successMessage, setSuccessMessage] = useState("")
 
   if (loading) {
     return (
@@ -81,116 +72,7 @@ export default function CheckingAccountDetailsPage() {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   }
 
-  // Credit form validation
-  const validateCreditForm = () => {
-    const errors: Record<string, string> = {}
-    
-    if (!creditAmount || parseFloat(creditAmount) <= 0) {
-      errors.amount = 'Please enter a valid credit amount'
-    } else if (parseFloat(creditAmount) > 1000000) {
-      errors.amount = 'Credit amount cannot exceed $1,000,000'
-    }
-    
-    if (!creditDescription.trim()) {
-      errors.description = 'Description is required'
-    }
-    
-    setCreditErrors(errors)
-    return Object.keys(errors).length === 0
-  }
 
-  // Debit form validation
-  const validateDebitForm = () => {
-    const errors: Record<string, string> = {}
-    
-    if (!debitAmount || parseFloat(debitAmount) <= 0) {
-      errors.amount = 'Please enter a valid debit amount'
-    } else if (parseFloat(debitAmount) > account.balance) {
-      errors.amount = 'Insufficient funds for this transaction'
-    } else if (parseFloat(debitAmount) > 1000000) {
-      errors.amount = 'Debit amount cannot exceed $1,000,000'
-    }
-    
-    if (!debitDescription.trim()) {
-      errors.description = 'Description is required'
-    }
-    
-    setDebitErrors(errors)
-    return Object.keys(errors).length === 0
-  }
-
-  // Handle credit transaction
-  const handleCreditSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!validateCreditForm()) return
-    
-    setIsProcessingCredit(true)
-    try {
-      // Simulate API call - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Here you would call your actual API
-      // await creditAccount(account.id, parseFloat(creditAmount), creditDescription)
-      
-      setSuccessMessage(`Successfully credited ${formatCurrency(parseFloat(creditAmount))} to account`)
-      setCreditAmount("")
-      setCreditDescription("")
-      
-      // Refresh account data
-      accountResponse.refetch()
-      
-      // Clear success message after 5 seconds
-      setTimeout(() => setSuccessMessage(""), 5000)
-    } catch (error) {
-      console.error('Error processing credit:', error)
-      setCreditErrors({ submit: 'Failed to process credit transaction' })
-    } finally {
-      setIsProcessingCredit(false)
-    }
-  }
-
-  // Handle debit transaction
-  const handleDebitSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!validateDebitForm()) return
-    
-    setIsProcessingDebit(true)
-    try {
-      // Simulate API call - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Here you would call your actual API
-      // await debitAccount(account.id, parseFloat(debitAmount), debitDescription)
-      
-      setSuccessMessage(`Successfully debited ${formatCurrency(parseFloat(debitAmount))} from account`)
-      setDebitAmount("")
-      setDebitDescription("")
-      
-      // Refresh account data
-      accountResponse.refetch()
-      
-      // Clear success message after 5 seconds
-      setTimeout(() => setSuccessMessage(""), 5000)
-    } catch (error) {
-      console.error('Error processing debit:', error)
-      setDebitErrors({ submit: 'Failed to process debit transaction' })
-    } finally {
-      setIsProcessingDebit(false)
-    }
-  }
-
-  // Calculate new balance previews
-  const getCreditPreviewBalance = () => {
-    if (!creditAmount || parseFloat(creditAmount) <= 0) return account.balance
-    return account.balance + parseFloat(creditAmount)
-  }
-
-  const getDebitPreviewBalance = () => {
-    if (!debitAmount || parseFloat(debitAmount) <= 0) return account.balance
-    return account.balance - parseFloat(debitAmount)
-  }
 
   return (
     <Container className="checking-details-container checking-account-details-page">
@@ -209,14 +91,7 @@ export default function CheckingAccountDetailsPage() {
         </Row>
       </div>
 
-      {/* Success Message */}
-      {successMessage && (
-        <Alert variant="success" className="success-message">
-          <TrendingUp size={20} />
-          {successMessage}
-        </Alert>
-      )}
-
+   
       {/* Quick Stats */}
       <div className="quick-stats-checking">
         <div className="stat-card-checking">
@@ -268,188 +143,6 @@ export default function CheckingAccountDetailsPage() {
         </div>
       </div>
 
-      {/* Credit/Debit Forms */}
-      <div className="transaction-forms">
-        {/* Credit Form */}
-        <Card className="transaction-form-card">
-          <Card.Header className="transaction-form-header credit-form-header">
-            <TrendingUp size={20} />
-            Credit Account
-          </Card.Header>
-          <Card.Body className="transaction-form-body">
-            <Form onSubmit={handleCreditSubmit}>
-              <Form.Group className="form-group-transaction">
-                <Form.Label className="form-label-transaction">
-                  <Plus size={16} />
-                  Amount to Credit
-                </Form.Label>
-                <Form.Control
-                  type="number"
-                  step="0.01"
-                  min="0.01"
-                  max="1000000"
-                  value={creditAmount}
-                  onChange={(e) => setCreditAmount(e.target.value)}
-                  isInvalid={!!creditErrors.amount}
-                  placeholder="0.00"
-                  className="form-control-transaction"
-                  disabled={!account.isActive || isProcessingCredit}
-                />
-                {creditErrors.amount && (
-                  <div className="invalid-feedback-transaction">
-                    {creditErrors.amount}
-                  </div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="form-group-transaction">
-                <Form.Label className="form-label-transaction">
-                  Description
-                </Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={2}
-                  value={creditDescription}
-                  onChange={(e) => setCreditDescription(e.target.value)}
-                  isInvalid={!!creditErrors.description}
-                  placeholder="Enter transaction description..."
-                  className="form-control-transaction"
-                  disabled={!account.isActive || isProcessingCredit}
-                />
-                {creditErrors.description && (
-                  <div className="invalid-feedback-transaction">
-                    {creditErrors.description}
-                  </div>
-                )}
-              </Form.Group>
-
-              {creditAmount && parseFloat(creditAmount) > 0 && (
-                <div className="balance-preview">
-                  <div className="balance-preview-label">New Balance After Credit</div>
-                  <div className="balance-preview-value balance-preview-positive">
-                    {formatCurrency(getCreditPreviewBalance())}
-                  </div>
-                </div>
-              )}
-
-              <Button
-                type="submit"
-                className="btn-credit"
-                disabled={!account.isActive || isProcessingCredit || !creditAmount}
-              >
-                {isProcessingCredit ? (
-                  <>
-                    <Spinner animation="border" size="sm" className="loading-spinner-transaction me-2" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <Plus size={18} />
-                    Credit Account
-                  </>
-                )}
-              </Button>
-
-              {!account.isActive && (
-                <div className="text-muted text-center mt-2" style={{ fontSize: '0.875rem' }}>
-                  Account must be active to process transactions
-                </div>
-              )}
-            </Form>
-          </Card.Body>
-        </Card>
-
-        {/* Debit Form */}
-        <Card className="transaction-form-card">
-          <Card.Header className="transaction-form-header debit-form-header">
-            <TrendingDown size={20} />
-            Debit Account
-          </Card.Header>
-          <Card.Body className="transaction-form-body">
-            <Form onSubmit={handleDebitSubmit}>
-              <Form.Group className="form-group-transaction">
-                <Form.Label className="form-label-transaction">
-                  <Minus size={16} />
-                  Amount to Debit
-                </Form.Label>
-                <Form.Control
-                  type="number"
-                  step="0.01"
-                  min="0.01"
-                  max={account.balance}
-                  value={debitAmount}
-                  onChange={(e) => setDebitAmount(e.target.value)}
-                  isInvalid={!!debitErrors.amount}
-                  placeholder="0.00"
-                  className="form-control-transaction"
-                  disabled={!account.isActive || isProcessingDebit}
-                />
-                {debitErrors.amount && (
-                  <div className="invalid-feedback-transaction">
-                    {debitErrors.amount}
-                  </div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="form-group-transaction">
-                <Form.Label className="form-label-transaction">
-                  Description
-                </Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={2}
-                  value={debitDescription}
-                  onChange={(e) => setDebitDescription(e.target.value)}
-                  isInvalid={!!debitErrors.description}
-                  placeholder="Enter transaction description..."
-                  className="form-control-transaction"
-                  disabled={!account.isActive || isProcessingDebit}
-                />
-                {debitErrors.description && (
-                  <div className="invalid-feedback-transaction">
-                    {debitErrors.description}
-                  </div>
-                )}
-              </Form.Group>
-
-              {debitAmount && parseFloat(debitAmount) > 0 && (
-                <div className="balance-preview">
-                  <div className="balance-preview-label">New Balance After Debit</div>
-                  <div className={`balance-preview-value ${
-                    getDebitPreviewBalance() >= 0 ? 'balance-preview-positive' : 'balance-preview-negative'
-                  }`}>
-                    {formatCurrency(getDebitPreviewBalance())}
-                  </div>
-                </div>
-              )}
-
-              <Button
-                type="submit"
-                className="btn-debit"
-                disabled={!account.isActive || isProcessingDebit || !debitAmount}
-              >
-                {isProcessingDebit ? (
-                  <>
-                    <Spinner animation="border" size="sm" className="loading-spinner-transaction me-2" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <Minus size={18} />
-                    Debit Account
-                  </>
-                )}
-              </Button>
-
-              {!account.isActive && (
-                <div className="text-muted text-center mt-2" style={{ fontSize: '0.875rem' }}>
-                  Account must be active to process transactions
-                </div>
-              )}
-            </Form>
-          </Card.Body>
-        </Card>
-      </div>
 
       {/* Main Details Card */}
       <Card className="checking-details-card">

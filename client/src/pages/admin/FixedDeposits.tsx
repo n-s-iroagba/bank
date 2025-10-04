@@ -6,13 +6,13 @@ import FixedDepositList from '../../components/admin/FixedDepositManagement/Fixe
 import FixedDepositFormModal from '../../components/admin/FixedDepositManagement/FixedDepositForm';
 import '../../styles/FixedDeposit.css'
 
-import { useParams } from 'react-router-dom';
-<s></s>
+
+
 import { useFixedDeposits } from '../../hooks/useFixedDeposit';
 import { FixedTermDeposit } from '../../types';
 
 const FixedDeposits: React.FC = () => {
-  const { id } = useParams<{ id: string }>()
+  // const { id } = useParams<{ id: string }>()
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingDeposit, setEditingDeposit] = useState<FixedTermDeposit | null>(null);
   const [searchTerm, setSearchTerm] = useState('');

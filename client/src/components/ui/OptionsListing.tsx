@@ -11,22 +11,25 @@ import AccTransactionList from '../accountHolder/AccTransactionList';
 
 interface OptionListingProps {
   selectedOption: string;
-  setDrawerVisible:(state:boolean)=>void
+  name:string
+  accountId:number
+  accountHolderId:number
+
 }
 
 
 
 
-const OptionListing: React.FC<OptionListingProps> = ({ selectedOption,   setDrawerVisible }) => {
+const OptionListing: React.FC<OptionListingProps> = ({ selectedOption, name, accountId, accountHolderId }) => {
   const renderContent = () => {
     switch (selectedOption) {
      
       case 'Transfers':
-        return <AccTransactionList accountId={2} accountHolderId={1} name='string' />;
+        return <AccTransactionList accountId={accountId} accountHolderId={accountHolderId} name={name} />;
       case 'Term Deposit':
-          return <TermDepositDashboard />;
+          return <TermDepositDashboard accountHolderId={accountHolderId}/>;
       default:
-        return <Alert variant='danger' className='mx-2 mt-5'>Access to this action has been restricted by the credit union, kindly contact the support team.</Alert>
+        return <Alert variant='danger' className='mx-2 mt-5 text-center'>Access denied. Please contact support to regain access.</Alert>
     }
   };
 

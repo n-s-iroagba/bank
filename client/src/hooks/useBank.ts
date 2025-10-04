@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { Bank, BanksQueryParams, CreateBankRequest, PaginatedResponse, UpdateBankRequest } from '../types';
+import {BanksQueryParams, CreateBankRequest, UpdateBankRequest } from '../types';
 import { banksService } from '../services/bankService';
 
 export const useBanks = (params?: BanksQueryParams) => {

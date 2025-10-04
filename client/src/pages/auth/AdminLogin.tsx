@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Card, Form, Button } from 'react-bootstrap';
 import '../../styles/slate-red-theme.css';
+import { authService } from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormData {
   email: string;
@@ -8,6 +10,7 @@ interface LoginFormData {
 }
 
 const AdminLoginForm: React.FC = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: ''
@@ -23,8 +26,8 @@ const AdminLoginForm: React.FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Login attempt:', formData);
-    // Add your login API call here
+    authService.login(formData)
+    navigate('/admin/dashboard')
   };
 
   return (

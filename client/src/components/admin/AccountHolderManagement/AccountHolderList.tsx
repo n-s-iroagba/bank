@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Table, Button, Badge, Pagination, Spinner, Card, Row, Col } from 'react-bootstrap';
+import { Table, Button, Pagination, Card, Row, Col } from 'react-bootstrap';
 import { Edit, Trash2, Eye, Phone, User, Hash, Shield, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import '../../../styles/AccountHolderList.css'
 import { useDeleteAccountHolder } from '../../../hooks/useAccountHolder';

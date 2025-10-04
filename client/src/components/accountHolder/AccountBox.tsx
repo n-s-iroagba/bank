@@ -5,7 +5,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 interface AccountBoxProps {
-  accountNumber: number;
+  accountNumber: string;
   accountName:string;
 }
 

@@ -7,7 +7,7 @@ import {
   UpdateSecondPartyResponse,
   BulkCreateSecondPartiesExcelResponse, 
 } from '../types/api';
-import { SecondPartiesQueryParams, CreateSecondPartyRequest, UpdateSecondPartyRequest, PaginatedResponse, SecondPartyWithBank } from '../types';
+import { SecondPartiesQueryParams, CreateSecondPartyRequest, UpdateSecondPartyRequest } from '../types';
 
 export const secondPartiesService = {
   getSecondParties: async (params: SecondPartiesQueryParams): Promise<SecondPartiesResponse> => {

@@ -1,42 +1,49 @@
 import { useCheckingAccounts } from '../../hooks/useCheckingAccount';
 import { useTransactions } from '../../hooks/useTransaction';
-import { CheckingAccount } from '../../types';
+import { CheckingAccount, Transaction } from '../../types';
+
 import TransferButton from '../ui/TransferButton';
 
-interface Transaction {
-  id: number;
-  type: 'debit' | 'credit';
-  amount: number;
-  description: string;
-  checkingAccountId: number;
-  secondPartyId: number;
-  balanceAfter: number;
-  date: Date;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
-const AccTransactionList= ({accountHolderId,accountId,name}:{accountHolderId:number,accountId:string|number,name:string}) => {
-const checkingAccountResponse = useCheckingAccounts({accountHolderId})
-const transactionsResponse = useTransactions(accountId,{})
-const accounts:CheckingAccount[] = checkingAccountResponse.data.data||[]
-const transactions:Transaction[] = transactionsResponse.data?.data||[]
+
+const AccTransactionList = ({ accountHolderId, accountId, name }: { accountHolderId: number, accountId: string | number, name: string }) => {
+  const checkingAccountResponse = useCheckingAccounts({ accountHolderId });
+  const transactionsResponse = useTransactions(accountId, {});
+  const accounts: CheckingAccount[] = checkingAccountResponse?.data?.data || [];
+  const transactions: Transaction[] = transactionsResponse.data?.data || [];
+
   const formatCurrency = (amount: number) => {
     return `$${amount}`;
   };
 
-const formatDate = (date: string | Date) => {
-  const d = new Date(date);
-  return d.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-};
+  const formatDate = (date: string | Date) => {
+    const d = new Date(date);
+    return d.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+  };
 
+  // Function to clip description to first few words
+  const clipDescription = (description: string, maxWords: number = 10) => {
+    if (!description) return 'Transaction';
+    
+    const words = description
+    if (words.length <= maxWords) return description;
+    
+    return words.slice(0, maxWords)+ '...';
+  };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', fontFamily: 'Arial, sans-serif', background: '#f5f5f5' }}>
+    <div style={{ 
+      width: '100%', 
+      maxWidth: '100vw', 
+      margin: '0 auto', 
+      fontFamily: 'Arial, sans-serif', 
+      background: '#f5f5f5',
+      minHeight: '100vh'
+    }}>
       <style>{`
         * {
           box-sizing: border-box;
@@ -114,39 +121,40 @@ const formatDate = (date: string | Date) => {
           font-weight: bold;
           color: #333;
         }
+
+        /* Improved Transaction Styles */
         .transaction-item {
           padding: 12px 15px;
           border-bottom: 1px solid #e0e0e0;
           background: white;
           display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .transaction-header {
+          display: flex;
           justify-content: space-between;
           align-items: flex-start;
-        }
-        .transaction-left {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
+          width: 100%;
         }
         .transaction-description {
-          font-size: 13px;
+          font-size: 14px;
           font-weight: bold;
-          margin: 0 0 4px 0;
           color: #333;
-          white-space: pre-line;
-          line-height: 1.4;
-        }
-        .transaction-date {
-          font-size: 12px;
-          color: #666;
-          margin: 0;
+          flex: 1;
+          margin-right: 15px;
+          /* Ensure text doesn't wrap and shows ellipsis */
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
         }
         .transaction-amount {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: bold;
           text-align: right;
-          margin: 0;
           white-space: nowrap;
-          padding-left: 15px;
+          min-width: 80px;
         }
         .debit-amount {
           color: #dc3545;
@@ -154,58 +162,109 @@ const formatDate = (date: string | Date) => {
         .credit-amount {
           color: #28a745;
         }
+        .transaction-date {
+          font-size: 12px;
+          color: #666;
+          margin: 0;
+          width: 100%;
+        }
         .card-container {
           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
           border: none;
           margin-bottom: 20px;
           background: white;
         }
+
+        /* Responsive container */
+        .responsive-container {
+          width: 100%;
+          margin: 0 auto;
+          padding: 0;
+        }
+
+        /* Tablet and larger screens */
+        @media (min-width: 768px) {
+          .responsive-container {
+            width: 100%;
+            max-width: 600px;
+          }
+          .transaction-item {
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+          }
+          .transaction-header {
+            flex: 1;
+            align-items: center;
+          }
+          .transaction-date {
+            width: auto;
+            min-width: 100px;
+            text-align: left;
+          }
+          .transaction-description {
+            max-width: 300px;
+          }
+        }
+
+        /* Small mobile screens */
+        @media (max-width: 380px) {
+          .transaction-item {
+            padding: 10px 12px;
+          }
+          .transaction-description {
+            font-size: 13px;
+            max-width: 150px;
+          }
+          .transaction-amount {
+            font-size: 15px;
+            min-width: 70px;
+          }
+        }
       `}</style>
 
-      {/* Header */}
-      <div className="texas-header">
-        <div className="texas-flag"></div>
-        <h1 className="accounts-title">Accounts</h1>
-      </div>
-
-      {/* Balances Section */}
-      <div className="card-container">
-        <div className="section-header">Balances</div>
-        <div>
-          {accounts.map((account) => (
-            <div key={account.id} className="account-item">
-              <div>
-                <div className="account-name">{name}</div>
-                <div className="account-number">{account.accountNumber}</div>
+      <div className="responsive-container">
+      
+        {/* Balances Section */}
+        <div className="card-container">
+          <div className="section-header">Balances</div>
+          <div>
+            {accounts.map((account) => (
+              <div key={account.id} className="account-item">
+                <div>
+                  <div className="account-name">{name}</div>
+                  <div className="account-number">{account.accountNumber}</div>
+                </div>
+                <div className="account-balance">
+                  {formatCurrency(account.balance)} ›
+                </div>
               </div>
-              <div className="account-balance">
-                {formatCurrency(account.balance)} ›
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-      <TransferButton accountId={accountId}/>
 
-      {/* Transactions Section */}
-      <div className="card-container">
-        <div className="section-header">Transactions</div>
-        <div>
-          {transactions.map((transaction) => (
-            <div key={transaction.id} className="transaction-item">
-              <div className="transaction-left">
-                <div className="transaction-description">
-                  {transaction.description || 'Transaction'}
+        <TransferButton accountId={accountId} />
+
+        {/* Transactions Section */}
+        <div className="card-container">
+          <div className="section-header">Transactions</div>
+          <div>
+            {transactions.map((transaction) => (
+              <div key={transaction.id} className="transaction-item">
+                <div className="transaction-header">
+                  <div className="transaction-description" title={transaction.description}>
+                    {clipDescription(transaction.description)}
+                  </div>
+                  <div className={`transaction-amount ${transaction.type === 'debit' ? 'debit-amount' : 'credit-amount'}`}>
+                    {formatCurrency(transaction.amount)}
+                  </div>
                 </div>
                 <div className="transaction-date">
                   {formatDate(transaction.createdAt)}
                 </div>
               </div>
-              <div className={`transaction-amount ${transaction.type === 'debit' ? 'debit-amount' : 'credit-amount'}`}>
-                {formatCurrency(transaction.amount)}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

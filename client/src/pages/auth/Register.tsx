@@ -1,14 +1,17 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Container, Card, Form, Button } from 'react-bootstrap';
 import '../../styles/slate-red-theme.css';
+import { authService, RegisterData } from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const SignupForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegisterData>({
     username: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
+  const navigate = useNavigate()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -19,8 +22,8 @@ const SignupForm = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Signup attempt:', formData);
-    // Add your signup API call here
+    authService.register(formData)
+    navigate(`/admin/dashboard`)
   };
 
   return (

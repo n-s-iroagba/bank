@@ -18,7 +18,6 @@ import CheckingAccountDetailsPage from "../pages/admin/CheckingAccountDetails";
 import Login from "../pages/accountHolder/Login";
 import AdminLoginForm from "../pages/auth/AdminLogin";
 import Register from "../pages/auth/Register";
-import ProtectedRoute from "../components/ui/ProtectedRoute";
 import Home from "../pages/accountHolder/Home";
 import AdminSidebar from "../components/admin/SideBar";
 import AccountHolderTransactionList from "../pages/accountHolder/AccountHolderTransactionList";
@@ -31,7 +30,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<Login />} />
       <Route path="/admin/login" element={<AdminLoginForm />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/signup" element={<Register />} />
       <Route 
       // element={<ProtectedRoute allowedRoles={["admin"]} />}
       >

@@ -7,7 +7,6 @@ import TransactionList from '../../components/admin/TransactionManagement/Transa
 
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { QueryType } from '../../components/admin/FixedDepositManagement/FixedDepositList';
 import '../../styles/Transaction.css';
 import { useTransactions } from '../../hooks/useTransaction';
 import { Transaction } from '../../types';
@@ -17,17 +16,15 @@ const Transactions: React.FC = () => {
   const navigate = useNavigate();
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [params, setParams] = useState<QueryType>({ page: 1, limit: 10 })
+
 
   
   const { 
     data: transactionsResponse, 
-    isLoading, 
     isError, 
     error,
     refetch 
-  } = useTransactions(Number(accountId),params);
+  } = useTransactions(Number(accountId),{ page: 1, limit: 100 });
 
   const handleCreateTransaction = () => {
     setEditingTransaction(null);
@@ -45,19 +42,11 @@ const Transactions: React.FC = () => {
     handleCloseFormModal();
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    refetch();
-  };
 
-  const clearSearch = () => {
-    setSearchTerm('');
-    refetch();
-  };
 
   // Calculate statistics
-  const transactions = transactionsResponse?.data?.data || [];
-  const totalTransactions = transactionsResponse?.data.pagination?.total || 0;
+  const transactions = transactionsResponse?.data || [];
+  const totalTransactions = transactionsResponse?.pagination?.totalItems || 0;
   const creditTransactions = transactions.filter((t:Transaction) => t.type ==='credit').length;
   const debitTransactions = transactions.filter((t:Transaction) => t.type === 'debit').length;
   

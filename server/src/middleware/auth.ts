@@ -41,10 +41,7 @@ export const authenticateToken = async (
       throw new UnauthorizedError('User not found')
     }
 
-    // Check if email is verified
-    if (!user.isEmailVerified) {
-      throw new ForbiddenError('Please verify your email address')
-    }
+ 
 
     req.user = user as unknown as AuthUser
     logger.info(`Authenticated user: ${user.email} (ID: ${user.id})`)

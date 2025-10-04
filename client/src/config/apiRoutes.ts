@@ -3,8 +3,8 @@ export const API_ROUTES = {
   // Authentication routes
   AUTH: {
     LOGIN: '/auth/login',
-    APPLICANT_SIGNUP: '/auth/applicant/signup',
-    SIGNUP_SUPER_ADMIN: '/auth/signup/super-admin',
+    ACC_LOGIN:'/auth/login/account-holder',
+    SIGNUP_ADMIN: '/auth/signup/admin',
     VERIFY_EMAIL: '/auth/verify-email',
     RESEND_VERIFICATION_CODE: '/auth/resend-verification-code',
     LOGOUT: '/auth/logout',
@@ -53,7 +53,8 @@ ACCOUNT_HOLDER: {
     FIXED_DEPOSITS: '/account-holder/accounts/fixed-deposits',
   },
   TRANSACTIONS: {
-    BASE: '/account-holder/transactions',
+    
+    BASE: '/transactions',
     STATEMENT: (checkingAccountId: number) => 
       `/account-holder/transactions/statement/${checkingAccountId}`,
   

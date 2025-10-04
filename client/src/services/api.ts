@@ -14,14 +14,14 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 
 // Single axios instance
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000/api',
+  baseURL: process.env.NODE_ENV==='production'? process.env.REACT_APP_API_BASE : 'http://localhost:5000/api',
   timeout: 30000,
   withCredentials: true
 })
 
 // Separate axios instance for refresh token requests to avoid interceptor loops
 const refreshApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000/api',
+  baseURL: process.env.NODE_ENV==='production'? process.env.REACT_APP_API_BASE :'http://localhost:5000/api',
   timeout: 10000,
   withCredentials: true
 })

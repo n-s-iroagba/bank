@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEventHandler } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Modal, Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { CreditCard, User, DollarSign, Shield, Edit, Plus } from 'lucide-react';
 import { AccountHolder, CheckingAccount, CreateCheckingAccountRequest, UpdateCheckingAccountRequest } from '../../../types';
